@@ -39,10 +39,12 @@
 
 .banner-user-interface {
     position: relative;
+    right: 5%;
 }
 
 .user-interface-popout {
     box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+    padding: 15px;
     background-color: white;
     border-radius: 10px;
     position: absolute;
@@ -53,4 +55,17 @@
 
 .hidden {
     display: none;
+}
+
+.font {
+    font-family: "CerealBd";
+}
+
+.popout-item {
+    cursor: pointer;
+    padding: 1px;
+}
+
+.popout-item:hover{
+    background-color: #eeeeee;
 }

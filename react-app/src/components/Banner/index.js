@@ -38,19 +38,19 @@ export const Banner = () => {
                         <img src={require('./style/images/user-image.png').default}></img>
                     </div>
                 </div>
-                    <div className={visible ? 'user-interface-popout' : 'hidden'}>
+                    <div className={visible ? 'user-interface-popout font' : 'hidden'}>
                         <div>
-                            <p>Log in</p>
+                            <p className='popout-item'>Log in</p>
                         </div>
                         <div>
-                            <p>Sign up</p>
+                            <p className='popout-item'>Sign up</p>
                         </div>
                         <div style={{borderTop: "1px solid #DEDEDE"}}>
                             <div>
-                                <p>Host your home</p>
+                                <p className='popout-item'>Host your home</p>
                             </div>
                             <div>
-                                <p>Help</p>
+                                <p className='popout-item'>Help</p>
                             </div>
                         </div>
                     </div>
