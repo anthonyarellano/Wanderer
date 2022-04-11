@@ -6,20 +6,25 @@ export const Banner = () => {
             <div className="banner-logo-container">
                 <div>
                 <img
-                    style={{height: "28px", width: "16px"}}
+                    style={{height: "32px", width: "20px"}}
                     src={require("./style/wanderer-logo.png").default} alt=""></img>
                 </div>
                 <div className='banner-logo-text-container'>
                     <p className='banner-logo-text'>wanderer</p>
                 </div>
             </div>
-
             <div>
                 {/* Search */}
+                <input
+                    style={{width: "500px"}}
+                    className='banner-search-bar'
+                    type="text">
+                </input>
             </div>
 
-            <div>
+            <div className='login'>
                 {/* Login + other buttons */}
+                <div>Login</div>
             </div>
         </div>
     )
