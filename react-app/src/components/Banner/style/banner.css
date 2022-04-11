@@ -1,0 +1,15 @@
+.banner-container {
+    border-bottom: 1px solid #EBEBEB;
+}
+
+.banner-logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.banner-logo-text {
+    font-family: "CerealBd";
+    font-size: 25px;
+    color: #FF385C;
+    margin-left: 5%;
+}
