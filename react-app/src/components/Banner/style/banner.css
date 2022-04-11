@@ -1,0 +1,71 @@
+.banner-container {
+    border-bottom: 1px solid #EBEBEB;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.banner-logo-container {
+    display: flex;
+    align-items: center;
+    margin-left: 2%;
+}
+
+.banner-logo-text {
+    font-family: "CerealBd";
+    font-size: 30px;
+    color: #FF385C;
+    margin-left: 5%;
+}
+
+.banner-search-bar {
+    border: 1px solid #DEDEDE;
+    font-family: "CerealBd";
+    outline: none;
+    height: 20px;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.banner-user-interface-container {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid #DEDEDE;
+    border-radius: 27px;
+    padding: 6px 7px 6px 7px;
+}
+
+.banner-user-interface {
+    position: relative;
+    right: 5%;
+}
+
+.user-interface-popout {
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    position: absolute;
+    right: 50px;
+    top: 60px;
+    width: 200px;
+}
+
+.hidden {
+    display: none;
+}
+
+.font {
+    font-family: "CerealBd";
+}
+
+.popout-item {
+    cursor: pointer;
+    padding: 1px;
+}
+
+.popout-item:hover{
+    background-color: #eeeeee;
+}
