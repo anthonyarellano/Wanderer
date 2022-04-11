@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import './style/banner.css';
 
 export const Banner = () => {
+    const [visible, setVisible] = useState(false);
+
     return (
         <div className="banner-container">
             <div className="banner-logo-container">
@@ -22,8 +25,9 @@ export const Banner = () => {
                 </input>
             </div>
 
-            <div className='banner-user-interface'>
-                {/* Login + other buttons */}
+            <div
+                className='banner-user-interface'
+                onClick={() => setVisible(!visible)}>
                 <div className='banner-user-interface-container'>
                     <div>
                         <img
@@ -34,6 +38,22 @@ export const Banner = () => {
                         <img src={require('./style/images/user-image.png').default}></img>
                     </div>
                 </div>
+                    <div className={visible ? 'user-interface-popout' : 'hidden'}>
+                        <div>
+                            <p>Log in</p>
+                        </div>
+                        <div>
+                            <p>Sign up</p>
+                        </div>
+                        <div style={{borderTop: "1px solid #DEDEDE"}}>
+                            <div>
+                                <p>Host your home</p>
+                            </div>
+                            <div>
+                                <p>Help</p>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     )
