@@ -5,6 +5,13 @@
     src: url('./fonts/AirbnbCereal_W_Bd.otf') format('woff');
     }
 
+    @font-face {
+        font-family: 'CerealLight';
+        font-style: normal;
+        font-weight: normal;
+        src: url('./fonts/AirbnbCereal_W_Lt.otf') format('woff');
+        }
+
 body {
     margin: 0px;
 }
