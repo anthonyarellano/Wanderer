@@ -1,10 +1,41 @@
+import Modal from 'react-modal';
+import LoginForm from '../auth/LoginForm';
+import SignUpForm from '../auth/SignUpForm';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../store/session';
 import './style/banner.css';
 
 export const Banner = () => {
     const [visible, setVisible] = useState(false);
-    const user = useSelector((state) => state.session.user)
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const [form, setForm] = useState(null);
+    const user = useSelector((state) => state.session.user);
+    const dispatch = useDispatch();
+
+    const openModal = () => {
+        setIsOpen(true);
+        return;
+    }
+
+    const closeModal = () => {
+        setIsOpen(false);
+        return
+    }
+
+    const loginModal = () => {
+        openModal();
+        setForm('login');
+    }
+
+    const signUpModal = () => {
+        openModal();
+        setForm('signup');
+    }
+
+    const onLogout = async (e) => {
+        await dispatch(logout());
+    };
 
     let links;
     if (user) {
@@ -29,7 +60,9 @@ export const Banner = () => {
                         <p className='popout-item'>Help</p>
                     </div>
                     <div>
-                        <p className='popout-item'>Log out</p>
+                        <p
+                            className='popout-item'
+                            onClick={onLogout}>Log out</p>
                     </div>
                 </div>
             </>
@@ -38,10 +71,14 @@ export const Banner = () => {
         links = (
             <>
                 <div>
-                    <p className='popout-item'>Log in</p>
+                    <p
+                        className='popout-item'
+                        onClick={loginModal}>Log in</p>
                 </div>
                 <div>
-                    <p className='popout-item'>Sign up</p>
+                    <p
+                        className='popout-item'
+                        onClick={signUpModal}>Sign up</p>
                 </div>
                 <div style={{ borderTop: "1px solid #DEDEDE" }}>
                     <div>
@@ -93,6 +130,18 @@ export const Banner = () => {
                     {links}
                 </div>
             </div>
+            <Modal
+                className='form-modal'
+                ariaHideApp={false}
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+            >
+                <div>
+                    <div>x</div>
+                    <p>Log in or Sign Up</p>
+                </div>
+                {form === 'login' ? <LoginForm setIsOpen={setIsOpen}/> : form === 'signup' ? <SignUpForm /> : null}
+            </Modal>
         </div>
     )
 }
