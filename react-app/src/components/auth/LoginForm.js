@@ -10,13 +10,19 @@ const LoginForm = ({setIsOpen}) => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+
+  const demoLogin = async () => {
+    await dispatch(login('demo@aa.io', 'password'));
+    setIsOpen(false);
+  };
+
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
     }
-    if (!data) setIsOpen(false)
+    if (!data) setIsOpen(false);
   };
 
   const updateEmail = (e) => {
@@ -39,9 +45,6 @@ const LoginForm = ({setIsOpen}) => {
         ))}
       </div>
       <div>
-        <p>Welcome to Wanderer</p>
-      </div>
-      <div>
         {/* <label htmlFor='email'>Email</label> */}
         <input
           name='email'
@@ -62,6 +65,7 @@ const LoginForm = ({setIsOpen}) => {
         />
       </div>
       <button type='submit'>Login</button>
+      <div onClick={demoLogin}>Demo</div>
     </form>
   );
 };

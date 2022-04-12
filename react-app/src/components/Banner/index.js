@@ -140,7 +140,10 @@ export const Banner = () => {
                     <div>x</div>
                     <p>Log in or Sign Up</p>
                 </div>
-                {form === 'login' ? <LoginForm setIsOpen={setIsOpen}/> : form === 'signup' ? <SignUpForm /> : null}
+                <div>
+                    <p>Welcome to Wanderer</p>
+                </div>
+                {form === 'login' ? <LoginForm setIsOpen={setIsOpen} /> : form === 'signup' ? <SignUpForm /> : null}
             </Modal>
         </div>
     )
