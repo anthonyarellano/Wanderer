@@ -24,6 +24,34 @@ const ListingNavBar = () => {
     const [city, setCity] = useState(null);
     const [address, setAddress] = useState(null);
 
+    const [wifi, setWifi] = useState(false);
+    const [tv, setTv] = useState(false);
+    const [kitchen, setKitchen] = useState(false);
+    const [ac, setAc] = useState(false);
+    const [pool, setPool] = useState(false);
+    const [washer, setWasher] = useState(false);
+    const [dryer, setDryer] = useState(false);
+    const [hairDryer, setHairDryer] = useState(false);
+    const [parking, setParking] = useState(false);
+    const [fridge, setFridge] = useState(false);
+    const [bbq, setBbq] = useState(false);
+    const [stove, setStove] = useState(false);
+
+    const amenitiesFuncs = {
+        wifi, setWifi,
+        tv, setTv,
+        kitchen, setKitchen,
+        ac, setAc,
+        pool, setPool,
+        washer, setWasher,
+        dryer, setDryer,
+        hairDryer, setHairDryer,
+        parking, setParking,
+        fridge, setFridge,
+        bbq, setBbq,
+        stove, setStove
+    }
+
     const locationFuncs = {
         lat, setLat,
         long, setLong,
@@ -76,7 +104,7 @@ const ListingNavBar = () => {
                 active === "Location" ?
                     <Location locationFuncs={locationFuncs}/> :
                     active === "Amenities" ?
-                        <Amenities /> :
+                        <Amenities amenitiesFuncs={amenitiesFuncs}/> :
                         active === "Images" ?
                             <Images /> : null}
         </>
