@@ -1,8 +1,45 @@
 import { useState } from 'react';
-import './style/listing-navbar.css'; 
+import About from './About';
+import './style/listing-navbar.css';
 
 const ListingNavBar = () => {
-    const [active, setActive] = useState('About')
+    const [active, setActive] = useState('About');
+    const [title, setTitle] = useState("");
+    const [beds, setBeds] = useState("");
+    const [baths, setBaths] = useState("");
+    const [bedrooms, setBedrooms] = useState("");
+    const [guests, setGuests] = useState("");
+    const [price, setPrice] = useState("");
+    const [description, setDescription] = useState("");
+    const [checkIn, setCheckIn] = useState("");
+    const [checkOut, setCheckOut] = useState("");
+    const [type, setType] = useState("");
+
+    const aboutFuncs = {
+        active,
+        setActive,
+        title,
+        setTitle,
+        beds,
+        setBeds,
+        baths,
+        setBaths,
+        bedrooms,
+        setBedrooms,
+        guests,
+        setGuests,
+        price,
+        setPrice,
+        description,
+        setDescription,
+        checkIn,
+        setCheckIn,
+        checkOut,
+        setCheckOut,
+        type,
+        setType
+    }
+
     return (
         <>
             <div className="link-container">
@@ -30,7 +67,7 @@ const ListingNavBar = () => {
                 </div>
             </div>
             {active === "About" ?
-            <p>About</p> :
+            <About aboutFuncs={aboutFuncs}/> :
             active === "Location" ?
             <p>Location</p> :
             active === "Amenities" ?

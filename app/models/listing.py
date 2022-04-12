@@ -26,10 +26,11 @@ class Listing(db.Model):
     pool_avail = db.Column(db.Boolean, nullable=False)
     check_in = db.Column(db.String(255), nullable=False)
     check_out = db.Column(db.String(255), nullable=False)
-    room_type = db.Column(db.String(255), nullable=False)
+    room_type_id = db.Column(db.Integer, db.ForeignKey('room_types.id'), nullable=False)
     created_at = db.Column(DateTime, default=datetime.utcnow())
 
     user = db.relationship("User", back_populates="listings", cascade="all, delete")
     reviews = db.relationship("Review", back_populates="listing", cascade="all, delete")
     images = db.relationship("Image", back_populates="listing", cascade="all, delete")
     reservations = db.relationship("Reservation", back_populates="listing", cascade="all, delete")
+    room_type = db.relationship("RoomType", back_populates="listings")

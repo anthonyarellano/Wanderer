@@ -9,7 +9,7 @@ const ListingForm = () => {
             <div>
                 {/* insert image or slide images */}
             </div>
-            <ListingNavBar />
+            <ListingNavBar/>
         </div>
     )
 };

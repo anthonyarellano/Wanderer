@@ -14,3 +14,7 @@
     margin: 0% 3% 0% .5%;
     cursor: pointer;
 }
+
+.selected {
+    border-bottom: 1px solid #FF385C;
+}

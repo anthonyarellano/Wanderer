@@ -46,9 +46,10 @@ def upgrade():
     sa.Column('pool_avail', sa.Boolean(), nullable=False),
     sa.Column('check_in', sa.String(length=255), nullable=False),
     sa.Column('check_out', sa.String(length=255), nullable=False),
-    sa.Column('room_type', sa.String(length=255), nullable=False),
+    sa.Column('room_type_id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['room_type_id'], ['room_types.id']),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('images',

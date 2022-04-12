@@ -5,3 +5,5 @@ class RoomType(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(255), nullable=False, unique=True)
+
+    listings = db.relationship("Listing", back_populates="room_type")
