@@ -67,13 +67,13 @@ const ListingNavBar = () => {
                 </div>
             </div>
             {active === "About" ?
-            <About aboutFuncs={aboutFuncs}/> :
-            active === "Location" ?
-            <p>Location</p> :
-            active === "Amenities" ?
-            <p>Amenities</p> :
-            active === "Images" ?
-            <p>Images</p> : null}
+                <About aboutFuncs={aboutFuncs} /> :
+                active === "Location" ?
+                    <p>Location</p> :
+                    active === "Amenities" ?
+                        <p>Amenities</p> :
+                        active === "Images" ?
+                            <p>Images</p> : null}
         </>
     )
 };
