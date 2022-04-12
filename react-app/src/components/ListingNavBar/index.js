@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import About from './About';
+import Location from './Location';
 import './style/listing-navbar.css';
 
 const ListingNavBar = () => {
@@ -69,7 +70,7 @@ const ListingNavBar = () => {
             {active === "About" ?
                 <About aboutFuncs={aboutFuncs} /> :
                 active === "Location" ?
-                    <p>Location</p> :
+                    <Location /> :
                     active === "Amenities" ?
                         <p>Amenities</p> :
                         active === "Images" ?
