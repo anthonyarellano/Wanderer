@@ -21,15 +21,78 @@ const initMapScript = () => {
     return loadAsyncScript(src);
 }
 
-const Location = () => {
+const Location = ({locationFuncs}) => {
+
+    const {
+        lat, setLat,
+        long, setLong,
+        city, setCity,
+        address, setAddress
+    } = locationFuncs;
 
     const searchInput = useRef(null)
 
+    const pullAddress = (place) => {
+        const address ={
+            city: "",
+            state: "",
+            zip: "",
+            country: "",
+            lat: "",
+            long: "",
+            streetNumber: "",
+            street: ""
+        }
+
+        if (!Array.isArray(place?.address_components)) {
+            return address;
+        }
+
+        address.lat = place?.geometry.location.lat();
+        address.long = place?.geometry.location.lng();
+
+        place.address_components.forEach(component => {
+            const types = component.types;
+            const value = component.long_name;
+
+            if (types.includes("locality")) {
+                address.city = value;
+            };
+
+            if (types.includes("administrative_area_level_1")) {
+                address.state = value;
+            };
+
+            if (types.includes("postal_code")) {
+                address.zip = value;
+            };
+
+            if (types.includes("country")) {
+                address.country = value;
+            };
+
+            if (types.includes("street_number")) {
+                address.streetNumber = value;
+            };
+
+            if (types.includes("route")) {
+                address.street = value;
+            };
+        })
+        return address;
+    }
+
     const onChangeAddress = (autocomplete) => {
         const location = autocomplete.getPlace();
+        const locationInfo = pullAddress(location);
         console.log(location);
-        console.log(location.geometry.location.lat());
-        console.log(location.geometry.location.long());
+        if (locationInfo) {
+            console.log(locationInfo);
+            setLat(locationInfo.lat);
+            setLong(locationInfo.long);
+            setCity(locationInfo.city);
+            setAddress(`${locationInfo.streetNumber}-${locationInfo.street}-${locationInfo.zip}`)
+        }
     }
 
     const initAutoComplete = () => {
@@ -47,7 +110,7 @@ const Location = () => {
 
     return (
         <div>
-            <input ref={searchInput} type="text" ></input>
+            <input ref={searchInput} type="text" value={address} ></input>
         </div>
     )
 };

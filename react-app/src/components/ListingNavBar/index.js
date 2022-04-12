@@ -4,6 +4,7 @@ import Location from './Location';
 import './style/listing-navbar.css';
 
 const ListingNavBar = () => {
+
     const [active, setActive] = useState('About');
     const [title, setTitle] = useState("");
     const [beds, setBeds] = useState("");
@@ -16,29 +17,30 @@ const ListingNavBar = () => {
     const [checkOut, setCheckOut] = useState("");
     const [type, setType] = useState("");
 
+    const [lat, setLat] = useState(null);
+    const [long, setLong] = useState(null);
+    const [city, setCity] = useState(null);
+    const [address, setAddress] = useState(null);
+
+    const locationFuncs = {
+        lat, setLat,
+        long, setLong,
+        city, setCity,
+        address, setAddress
+    }
+
     const aboutFuncs = {
-        active,
-        setActive,
-        title,
-        setTitle,
-        beds,
-        setBeds,
-        baths,
-        setBaths,
-        bedrooms,
-        setBedrooms,
-        guests,
-        setGuests,
-        price,
-        setPrice,
-        description,
-        setDescription,
-        checkIn,
-        setCheckIn,
-        checkOut,
-        setCheckOut,
-        type,
-        setType
+        active, setActive,
+        title, setTitle,
+        beds, setBeds,
+        baths, setBaths,
+        bedrooms, setBedrooms,
+        guests, setGuests,
+        price, setPrice,
+        description, setDescription,
+        checkIn, setCheckIn,
+        checkOut, setCheckOut,
+        type, setType
     }
 
     return (
@@ -70,7 +72,7 @@ const ListingNavBar = () => {
             {active === "About" ?
                 <About aboutFuncs={aboutFuncs} /> :
                 active === "Location" ?
-                    <Location /> :
+                    <Location locationFuncs={locationFuncs}/> :
                     active === "Amenities" ?
                         <p>Amenities</p> :
                         active === "Images" ?
