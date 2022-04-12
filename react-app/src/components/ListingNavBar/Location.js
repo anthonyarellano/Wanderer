@@ -24,9 +24,9 @@ const initMapScript = () => {
 const Location = ({locationFuncs}) => {
 
     const {
-        lat, setLat,
-        long, setLong,
-        city, setCity,
+        setLat,
+        setLong,
+        setCity,
         address, setAddress
     } = locationFuncs;
 
@@ -110,7 +110,7 @@ const Location = ({locationFuncs}) => {
 
     return (
         <div>
-            <input ref={searchInput} type="text" value={address} ></input>
+            <input ref={searchInput} type="text" ></input>
         </div>
     )
 };
