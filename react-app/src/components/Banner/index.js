@@ -129,7 +129,9 @@ export const Banner = () => {
                             src={require('./style/images/three-lines.png').default} alt="threelines"></img>
                     </div>
                     <div>
-                        <img src={require('./style/images/user-image.png').default} alt="userpic"></img>
+                        <img
+                            style={{width: "32px", height: "32px", borderRadius: "100%"}}
+                            src={user?.picture ? user?.picture : require('./style/images/user-image.png').default} alt="userpic"></img>
                     </div>
                 </div>
                 <div className={visible ? 'user-interface-popout font' : 'hidden'}>
