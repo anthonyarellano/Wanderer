@@ -4,7 +4,9 @@ import SignUpForm from '../auth/SignUpForm';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
+import { useHistory } from 'react-router-dom';
 import './style/banner.css';
+
 
 export const Banner = () => {
     const [visible, setVisible] = useState(false);
@@ -12,6 +14,7 @@ export const Banner = () => {
     const [form, setForm] = useState(null);
     const user = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const openModal = () => {
         setIsOpen(true);
@@ -100,7 +103,10 @@ export const Banner = () => {
                         style={{ height: "32px", width: "20px" }}
                         src={require("./style/images/wanderer-logo.png").default} alt="logo"></img>
                 </div>
-                <div className='banner-logo-text-container'>
+                <div
+                    style={{cursor: "pointer"}}
+                    className='banner-logo-text-container'
+                    onClick={() => history.push('/')}>
                     <p className='banner-logo-text'>wanderer</p>
                 </div>
             </div>
