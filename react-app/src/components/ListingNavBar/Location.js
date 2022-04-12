@@ -27,6 +27,7 @@ const Location = ({locationFuncs}) => {
         setLat,
         setLong,
         setCity,
+        // eslint-disable-next-line
         address, setAddress
     } = locationFuncs;
 
