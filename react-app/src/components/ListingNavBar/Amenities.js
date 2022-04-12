@@ -1,3 +1,5 @@
+import './style/amenities.css';
+
 const Amenities = () => {
     return (
         <div>
@@ -5,53 +7,53 @@ const Amenities = () => {
                 <p>Please select all amenities present in your location:</p>
             </div>
             <div className="amenities-grid-container">
-                <div>
+                <div className="amenities-input">
                     <input type="checkbox"></input>
-                    <img src={require('./style/images/ac.png').default}></img>
+                    <img src={require('./style/images/ac.png').default} alt="ac"></img>
                 </div>
-                <div>
+                <div className="amenities-input">
                     <input type="checkbox"></input>
-                    <img src={require('./style/images/bbq.png').default}></img>
+                    <img src={require('./style/images/bbq.png').default} alt="bbq"></img>
                 </div>
-                <div>
+                <div className="amenities-input">
                     <input type="checkbox"></input>
-                    <img src={require('./style/images/dryer.png').default}></img>
+                    <img src={require('./style/images/dryer.png').default} alt="dryer"></img>
                 </div>
-                <div>
+                <div className="amenities-input">
                     <input type="checkbox"></input>
-                    <img src={require('./style/images/washer.png').default}></img>
+                    <img src={require('./style/images/washer.png').default} alt="washer"></img>
                 </div>
-                <div>
+                <div className="amenities-input">
                     <input type="checkbox"></input>
-                    <img src={require('./style/images/fridge.png').default}></img>
+                    <img src={require('./style/images/fridge.png').default} alt="fridge"></img>
                 </div>
-                <div>
+                <div className="amenities-input">
                     <input type="checkbox"></input>
-                    <img src={require('./style/images/hairdryer.png').default}></img>
+                    <img src={require('./style/images/hairdryer.png').default} alt="hairdryer"></img>
                 </div>
-                <div>
+                <div className="amenities-input">
                     <input type="checkbox"></input>
-                    <img src={require('./style/images/kitchen.png').default}></img>
+                    <img src={require('./style/images/kitchen.png').default} alt="kitchen"></img>
                 </div>
-                <div>
+                <div className="amenities-input">
                     <input type="checkbox"></input>
-                    <img src={require('./style/images/parking.png').default}></img>
+                    <img src={require('./style/images/parking.png').default} alt="parking"></img>
                 </div>
-                <div>
+                <div className="amenities-input">
                     <input type="checkbox"></input>
-                    <img src={require('./style/images/pool.png').default}></img>
+                    <img src={require('./style/images/pool.png').default} alt="pool"></img>
                 </div>
-                <div>
+                <div className="amenities-input">
                     <input type="checkbox"></input>
-                    <img src={require('./style/images/stove.png').default}></img>
+                    <img src={require('./style/images/stove.png').default} alt="stove"></img>
                 </div>
-                <div>
+                <div className="amenities-input">
                     <input type="checkbox"></input>
-                    <img src={require('./style/images/tv.png').default}></img>
+                    <img src={require('./style/images/tv.png').default} alt="tv"></img>
                 </div>
-                <div>
+                <div className="amenities-input">
                     <input type="checkbox"></input>
-                    <img src={require('./style/images/wifi.png').default}></img>
+                    <img src={require('./style/images/wifi.png').default} alt="wifi"></img>
                 </div>
             </div>
         </div>
