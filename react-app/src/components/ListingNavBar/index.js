@@ -21,6 +21,7 @@ const myBucket = new AWS.S3({
 })
 
 const ListingNavBar = () => {
+    const [progress, setProgress] = useState(null);
 
     // States for about form
     const [active, setActive] = useState('About');
@@ -98,6 +99,27 @@ const ListingNavBar = () => {
         type, setType
     }
 
+    const testAWS = () => {
+        console.log(files);
+        if (files.length > 0) {
+            files.forEach((file) => {
+                const params = {
+                    Body: file,
+                    Bucket: S3_BUCKET,
+                    Key: file.name
+                  };
+                  myBucket.upload(params)
+                    .on('httpUploadProgress', (evt) => {
+                        setProgress(Math.round((evt.loaded / evt.total) * 100))
+                    })
+                    .send((err, data) => {
+                        if (err) return console.log((err));;
+                        if (data) return (console.log(data));
+                    })
+            })
+        }
+    }
+
     return (
         <>
             <div className="link-container">
@@ -122,6 +144,7 @@ const ListingNavBar = () => {
                         onClick={() => setActive('Images')}>
                         Images
                     </div>
+                    <div onClick={testAWS}>Submit</div>
                 </div>
             </div>
             <div style={{ marginLeft: "10%" }}>
