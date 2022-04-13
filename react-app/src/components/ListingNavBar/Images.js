@@ -19,10 +19,9 @@ const Images = ({ imagesFuncs }) => {
 
     console.log(files);
 
-    useEffect(() => {
-        files?.forEach(file => URL.createObjectURL(file))
-
-    }, [files]);
+    // useEffect(() => {
+    //     files?.forEach(file => URL.createObjectURL(file))
+    // }, [files]);
 
     const onSortEnd = ({ oldIndex, newIndex }) => {
         setFiles(arrayMoveImmutable(files, oldIndex, newIndex));
@@ -74,7 +73,7 @@ const Images = ({ imagesFuncs }) => {
             </div>
             <aside style={thumbsContainer}>
                 <div>
-                    <SortableGallery style={{width: "500px"}} items={photos} onSortEnd={onSortEnd} axis={"xy"} />
+                    <SortableGallery items={photos} onSortEnd={onSortEnd} axis={"xy"} />
                 </div>
             </aside>
         </section>
