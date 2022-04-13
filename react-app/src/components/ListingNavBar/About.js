@@ -1,25 +1,18 @@
+import './style/about.css';
+
 const About = ({aboutFuncs}) => {
+
     const {
-        title,
-        setTitle,
-        beds,
-        setBeds,
-        baths,
-        setBaths,
-        bedrooms,
-        setBedrooms,
-        guests,
-        setGuests,
-        price,
-        setPrice,
-        description,
-        setDescription,
-        checkIn,
-        setCheckIn,
-        checkOut,
-        setCheckOut,
-        type,
-        setType
+        title, setTitle,
+        beds, setBeds,
+        baths, setBaths,
+        bedrooms, setBedrooms,
+        guests, setGuests,
+        price, setPrice,
+        description, setDescription,
+        checkIn, setCheckIn,
+        checkOut, setCheckOut,
+        type, setType
     } = aboutFuncs;
 
     return (
@@ -28,54 +21,72 @@ const About = ({aboutFuncs}) => {
                 <input
                     type="text"
                     value={title}
+                    className="input-field"
+                    placeholder='Listing Title'
                     onChange={(e) => setTitle(e.target.value)}/>
             </div>
             <div>
                 <input
                     type="number"
                     value={beds}
+                    className="input-field"
+                    placeholder='Number of beds'
                     onChange={(e) => setBeds(e.target.value)}/>
             </div>
             <div>
                 <input
                     type="number"
                     value={baths}
+                    className="input-field"
+                    placeholder='Number of baths'
                     onChange={(e) => setBaths(e.target.value)}/>
             </div>
             <div>
                 <input
                     type="number"
                     value={bedrooms}
+                    className="input-field"
+                    placeholder='Number of bedrooms'
                     onChange={(e) => setBedrooms(e.target.value)}/>
             </div>
             <div>
                 <input
                     type="number"
                     value={guests}
+                    className="input-field"
+                    placeholder='Maximum number of guests'
                     onChange={(e) => setGuests(e.target.value)}/>
             </div>
             <div>
                 <input
                     type="number"
                     value={price}
+                    className="input-field"
+                    placeholder='Cost per night'
                     onChange={(e) => setPrice(e.target.value)}/>
             </div>
             <div>
                 <textarea
                     value={description}
+
+                    placeholder='Description'
                     onChange={(e) => setDescription(e.target.value)}/>
             </div>
-            <div>
-                <input
-                    type="time"
-                    value={checkIn}
-                    onChange={(e) => setCheckIn(e.target.value)}/>
-            </div>
-            <div>
-                <input
-                    type="time"
-                    value={checkOut}
-                    onChange={(e) => setCheckOut(e.target.value)}/>
+            <div className='checkin-container'>
+                <div>
+                    <input
+                        type="time"
+                        value={checkIn}
+                        className='checkin-field'
+                        onChange={(e) => setCheckIn(e.target.value)}/>
+                </div>
+                <div>
+                    <input
+                        type="time"
+                        value={checkOut}
+                        className='checkin-field'
+                        onChange={(e) => setCheckOut(e.target.value)}/>
+                </div>
             </div>
             <div>
                 <select
