@@ -31,15 +31,17 @@ const Images = ({ imagesFuncs }) => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: '20px',
+        padding: '75px',
         borderWidth: 2,
         borderRadius: 2,
         borderColor: '#eeeeee',
         borderStyle: 'dashed',
         backgroundColor: '#fafafa',
         color: '#bdbdbd',
+        fontFamily: 'CerealLight',
         outline: 'none',
-        transition: 'border .24s ease-in-out'
+        transition: 'border .24s ease-in-out',
+        margin: "2% 10% 0% 0%"
     };
 
     const thumbsContainer = {
