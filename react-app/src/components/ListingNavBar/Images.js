@@ -1,5 +1,4 @@
 import { useDropzone } from 'react-dropzone';
-import { useEffect } from 'react';
 import {arrayMoveImmutable} from "array-move";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import Photo from './Photo';
