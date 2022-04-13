@@ -1,15 +1,14 @@
 import { useDropzone } from 'react-dropzone';
 import { useEffect } from 'react';
-import Photo from './Photo';
-import './style/images.css';
-import Gallery from "react-photo-gallery";
 import {arrayMoveImmutable} from "array-move";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import Photo from './Photo';
+import Gallery from "react-photo-gallery";
+import './style/images.css';
 
 const SortablePhoto = SortableElement(item => <Photo {...item} />);
 const SortableGallery = SortableContainer(({ items }) => (
     <Gallery photos={items} renderImage={props => <SortablePhoto {...props} />} />
-
 ));
 
 const Images = ({ imagesFuncs }) => {
@@ -17,10 +16,10 @@ const Images = ({ imagesFuncs }) => {
     const {
         files, setFiles
     } = imagesFuncs;
+
     console.log(files);
+
     useEffect(() => {
-        // Make sure to revoke the data uris to avoid memory leaks
-        // files.forEach(file => URL.revokeObjectURL(file.preview));
         files?.forEach(file => URL.createObjectURL(file))
 
     }, [files]);
@@ -62,7 +61,7 @@ const Images = ({ imagesFuncs }) => {
     });
 
     const photos = []
-    const thumbs = files?.map(file => (
+    files?.forEach(file => (
         photos.push({ src: file.preview, width: 3, height: 3})
     ));
 
