@@ -37,6 +37,12 @@ const ListingNavBar = () => {
     const [bbq, setBbq] = useState(false);
     const [stove, setStove] = useState(false);
 
+    const [files, setFiles] = useState([]);
+
+    const imagesFuncs = {
+        files, setFiles
+    }
+
     const amenitiesFuncs = {
         wifi, setWifi,
         tv, setTv,
@@ -107,7 +113,7 @@ const ListingNavBar = () => {
                         active === "Amenities" ?
                             <Amenities amenitiesFuncs={amenitiesFuncs}/> :
                             active === "Images" ?
-                                <Images /> : null}
+                                <Images imagesFuncs={imagesFuncs}/> : null}
             </div>
         </>
     )

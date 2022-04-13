@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.dropzone {
+    border: 1px solid black;
+    width: 50%;
+}
