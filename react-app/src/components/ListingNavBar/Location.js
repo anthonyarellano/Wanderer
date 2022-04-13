@@ -1,4 +1,5 @@
 import './style/location.css';
+import Map from '../Map';
 import { useRef, useEffect } from 'react';
 
 const loadAsyncScript = (src) => {
@@ -22,11 +23,12 @@ const initMapScript = () => {
     return loadAsyncScript(src);
 }
 
+
 const Location = ({locationFuncs}) => {
 
     const {
-        setLat,
-        setLong,
+        lat, setLat,
+        long, setLong,
         setCity,
         // eslint-disable-next-line
         address, setAddress
@@ -112,8 +114,13 @@ const Location = ({locationFuncs}) => {
 
     return (
         <div className='maps-input-container'>
-            <input className="maps-input" placeholder='Begin searching...' type="text" ></input>
-            {/* ref={searchInput} */}
+            <div>
+                <input className="maps-input" ref={searchInput} placeholder='Begin searching...' type="text" ></input>
+            </div>
+            <div style={{marginTop: "3%"}}>
+                {lat && long ?
+                <Map lat={lat ? parseFloat(lat) : null} lng={long ? parseFloat(long) : null}/> : null}
+            </div>
         </div>
     )
 };

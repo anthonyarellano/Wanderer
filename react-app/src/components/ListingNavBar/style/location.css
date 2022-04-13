@@ -3,6 +3,7 @@
     margin-top: 3%;
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .maps-input {
@@ -10,4 +11,5 @@
     width: 600px;
     font-size: 40px;
     font-family: "CerealLight";
+    justify-self: center;
 }
