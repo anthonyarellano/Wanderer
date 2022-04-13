@@ -31,7 +31,8 @@ const Location = ({locationFuncs}) => {
         long, setLong,
         setCity,
         // eslint-disable-next-line
-        address, setAddress
+        address, setAddress,
+        country, setCountry
     } = locationFuncs;
 
     const searchInput = useRef(null)
@@ -95,6 +96,7 @@ const Location = ({locationFuncs}) => {
             setLat(locationInfo.lat);
             setLong(locationInfo.long);
             setCity(locationInfo.city);
+            setCountry(locationInfo.country); 
             setAddress(`${locationInfo.streetNumber}-${locationInfo.street}-${locationInfo.zip}`)
         }
     }

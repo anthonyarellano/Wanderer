@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AWS from 'aws-sdk';
 import About from './About';
 import Location from './Location';
@@ -22,9 +22,17 @@ const myBucket = new AWS.S3({
 
 const ListingNavBar = () => {
     const [progress, setProgress] = useState(null);
+    const [active, setActive] = useState('About');
+    const [aboutErrors, setAboutErrors] = useState([]);
+    const [locationErrors, setLocationErrors] = useState([]);
+    const [imageErrors, setImageErrors] = useState([]);
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+
+    const validated = {
+        color: "green"
+    };
 
     // States for about form
-    const [active, setActive] = useState('About');
     const [title, setTitle] = useState("");
     const [beds, setBeds] = useState("");
     const [baths, setBaths] = useState("");
@@ -40,6 +48,7 @@ const ListingNavBar = () => {
     const [lat, setLat] = useState(null);
     const [long, setLong] = useState(null);
     const [city, setCity] = useState(null);
+    const [country, setCountry] = useState(null);
     const [address, setAddress] = useState(null);
 
     // States for amenity form
@@ -58,6 +67,77 @@ const ListingNavBar = () => {
 
     // State for image form
     const [files, setFiles] = useState([]);
+
+    // form validations
+    useEffect(() => {
+        let errors = [];
+        if (title) {
+            if (title.length > 255) errors.push('Please enter a title shorter than 255 characters.');
+        } if (!title) errors.push('Please enter a value for title.');
+
+        if (beds) {
+            if (beds < 1) errors.push('Please enter a value for number of beds.');
+            if (beds > 2147483646) errors.push('Please enter smaller value for number of beds.');
+        } if (!beds) errors.push('Please enter a value for number of beds.');
+
+        if (baths) {
+            if (baths < 1) errors.push('Please enter a value for number of baths.');
+            if (baths > 2147483646) errors.push('Please enter smaller value for number of baths.');
+        } if (!baths) errors.push('Please enter a value for number of baths.');
+
+        if (bedrooms) {
+            if (bedrooms < 1) errors.push('Please enter a value for number of bedrooms.');
+            if (bedrooms > 2147483646) errors.push('Please enter smaller value for number of bedrooms.');
+        } if (!bedrooms) errors.push('Please enter a value for number of bedrooms.');
+
+        if (guests) {
+            if (guests < 1) errors.push('Please enter a value for number of guests.');
+            if (guests > 2147483646) errors.push('Please enter smaller value for number of guests.');
+        } if (!guests) errors.push('Please enter a value for number of guests.');
+
+        if (price) {
+            if (price < 1) errors.push('Please enter a value for nightly price greater than 0.');
+            if (price > 2147483646) errors.push('Please enter smaller value for nightly price.');
+        } if (!price) errors.push('Please enter a value for nightly price.');
+
+        if (!description) errors.push('Please enter a value for description.');
+
+        if (!checkIn) errors.push('Please enter a check-in time.');
+
+        if (!checkOut) errors.push('Please enter a check-out time.');
+
+        if (!type) errors.push('Please select an accomodation type.');
+
+        setAboutErrors(errors);
+    }, [title, beds, baths, bedrooms,
+        guests, price, description,
+        checkIn, checkOut, type])
+
+    // location form validations
+    useEffect(() => {
+        let errors = [];
+        if (!lat) errors.push('Please select a location.');
+
+        if (!long) errors.push('Please select a location.');
+
+        if (!city) errors.push('Please select a location.');
+
+        if (!address) errors.push('Please select a location.');
+
+        if (country) {
+            if (country !== "United States") errors.push('We apologize, wanderer is only currently available in the United States.')
+        } if (!country) errors.push('Please select a location.');
+
+        setLocationErrors(errors);
+    }, [lat, long, city, address])
+
+    useEffect(() => {
+        let errors = [];
+        console.log(files);
+        if (!files.length) errors.push('Please upload at least one image.')
+
+        setImageErrors(errors);
+    }, [files])
 
     const imagesFuncs = {
         files, setFiles
@@ -82,7 +162,8 @@ const ListingNavBar = () => {
         lat, setLat,
         long, setLong,
         city, setCity,
-        address, setAddress
+        address, setAddress,
+        country, setCountry
     }
 
     const aboutFuncs = {
@@ -120,16 +201,21 @@ const ListingNavBar = () => {
         }
     }
 
+    let submitReady = false;
+    if (!locationErrors.length && !aboutErrors?.length && !imageErrors?.length) submitReady = true;
+
     return (
         <>
             <div className="link-container">
                 <div className="links-list">
                     <div
+                        style={aboutErrors?.length === 0 ? validated : null}
                         className={active === 'About' ? 'listing-nav-button selected' : 'listing-nav-button'}
                         onClick={() => setActive('About')}>
                         About the property
                     </div>
                     <div
+                        style={locationErrors?.length === 0 ? validated : null}
                         className={active === 'Location' ? 'listing-nav-button selected' : 'listing-nav-button'}
                         onClick={() => setActive('Location')}>
                         Location
@@ -140,18 +226,21 @@ const ListingNavBar = () => {
                         Amenities
                     </div>
                     <div
+                        style={imageErrors?.length === 0 ? validated : null}
                         className={active === 'Images' ? 'listing-nav-button selected' : 'listing-nav-button'}
                         onClick={() => setActive('Images')}>
                         Images
                     </div>
-                    <div onClick={testAWS}>Submit</div>
+                    <div
+                        style={submitReady ? {color: 'green', cursor: "pointer"} : {color: 'gray'}}
+                        onClick={() => setHasSubmitted(true)}>Submit</div>
                 </div>
             </div>
             <div style={{ marginLeft: "10%" }}>
                 {active === "About" ?
-                    <About aboutFuncs={aboutFuncs} /> :
+                    <About aboutErrors={aboutErrors} aboutFuncs={aboutFuncs} /> :
                     active === "Location" ?
-                        <Location locationFuncs={locationFuncs} /> :
+                        <Location locationErrors={locationErrors} locationFuncs={locationFuncs} /> :
                         active === "Amenities" ?
                             <Amenities amenitiesFuncs={amenitiesFuncs} /> :
                             active === "Images" ?
