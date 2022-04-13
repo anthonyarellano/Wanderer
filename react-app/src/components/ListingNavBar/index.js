@@ -1,9 +1,24 @@
 import { useState } from 'react';
+import AWS from 'aws-sdk';
 import About from './About';
 import Location from './Location';
 import Amenities from './Amenities';
 import Images from './Images';
 import './style/listing-navbar.css';
+
+
+const S3_BUCKET = process.env.REACT_APP_BUCKET;
+const REGION = process.env.REACT_APP_REGION;
+
+AWS.config.update({
+    accessKeyId: process.env.REACT_APP_ACCESS_KEY,
+    secretAccessKey: process.env.REACT_APP_SECRET_ACCESS
+});
+
+const myBucket = new AWS.S3({
+    params: { Bucket: S3_BUCKET },
+    region: REGION,
+})
 
 const ListingNavBar = () => {
 
@@ -109,15 +124,15 @@ const ListingNavBar = () => {
                     </div>
                 </div>
             </div>
-            <div style={{marginLeft: "10%"}}>
+            <div style={{ marginLeft: "10%" }}>
                 {active === "About" ?
                     <About aboutFuncs={aboutFuncs} /> :
                     active === "Location" ?
-                        <Location locationFuncs={locationFuncs}/> :
+                        <Location locationFuncs={locationFuncs} /> :
                         active === "Amenities" ?
-                            <Amenities amenitiesFuncs={amenitiesFuncs}/> :
+                            <Amenities amenitiesFuncs={amenitiesFuncs} /> :
                             active === "Images" ?
-                                <Images imagesFuncs={imagesFuncs}/> : null}
+                                <Images imagesFuncs={imagesFuncs} /> : null}
             </div>
         </>
     )
