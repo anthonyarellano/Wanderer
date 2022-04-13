@@ -1,3 +1,4 @@
+import './style/location.css';
 import { useRef, useEffect } from 'react';
 
 const loadAsyncScript = (src) => {
@@ -110,8 +111,9 @@ const Location = ({locationFuncs}) => {
     }, [])
 
     return (
-        <div>
-            <input ref={searchInput} type="text" ></input>
+        <div className='maps-input-container'>
+            <input className="maps-input" placeholder='Begin searching...' type="text" ></input>
+            {/* ref={searchInput} */}
         </div>
     )
 };

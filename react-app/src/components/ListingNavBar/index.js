@@ -7,6 +7,7 @@ import './style/listing-navbar.css';
 
 const ListingNavBar = () => {
 
+    // States for about form
     const [active, setActive] = useState('About');
     const [title, setTitle] = useState("");
     const [beds, setBeds] = useState("");
@@ -19,11 +20,13 @@ const ListingNavBar = () => {
     const [checkOut, setCheckOut] = useState("");
     const [type, setType] = useState("");
 
+    // States for location form
     const [lat, setLat] = useState(null);
     const [long, setLong] = useState(null);
     const [city, setCity] = useState(null);
     const [address, setAddress] = useState(null);
 
+    // States for amenity form
     const [wifi, setWifi] = useState(false);
     const [tv, setTv] = useState(false);
     const [kitchen, setKitchen] = useState(false);
@@ -37,6 +40,7 @@ const ListingNavBar = () => {
     const [bbq, setBbq] = useState(false);
     const [stove, setStove] = useState(false);
 
+    // State for image form
     const [files, setFiles] = useState([]);
 
     const imagesFuncs = {
