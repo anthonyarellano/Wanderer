@@ -33,6 +33,10 @@ const ListingNavBar = () => {
         color: "green"
     };
 
+    const notValid = {
+        color: "red"
+    };
+
     // States for about form
     const [title, setTitle] = useState("");
     const [beds, setBeds] = useState("");
@@ -238,25 +242,25 @@ const ListingNavBar = () => {
             <div className="link-container">
                 <div className="links-list">
                     <div
-                        style={aboutErrors?.length === 0 ? validated : null}
+                        style={aboutErrors?.length === 0 ? validated : hasSubmitted && aboutErrors?.length ? notValid : null}
                         className={active === 'About' ? 'listing-nav-button selected' : 'listing-nav-button'}
                         onClick={() => setActive('About')}>
                         About the property
                     </div>
                     <div
-                        style={locationErrors?.length === 0 ? validated : null}
+                        style={locationErrors?.length === 0 ? validated : hasSubmitted && locationErrors?.length ? notValid : null}
                         className={active === 'Location' ? 'listing-nav-button selected' : 'listing-nav-button'}
                         onClick={() => setActive('Location')}>
                         Location
                     </div>
                     <div
-                        style={amenityErrors?.length === 0 ? validated : null}
+                        style={amenityErrors?.length === 0 ? validated : hasSubmitted && amenityErrors?.length ? notValid : null}
                         className={active === 'Amenities' ? 'listing-nav-button selected' : 'listing-nav-button'}
                         onClick={() => setActive('Amenities')}>
                         Amenities
                     </div>
                     <div
-                        style={imageErrors?.length === 0 ? validated : null}
+                        style={imageErrors?.length === 0 ? validated : hasSubmitted && imageErrors?.length ? notValid : null}
                         className={active === 'Images' ? 'listing-nav-button selected' : 'listing-nav-button'}
                         onClick={() => setActive('Images')}>
                         Images
