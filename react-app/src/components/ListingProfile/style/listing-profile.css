@@ -3,8 +3,8 @@
     display: flex;
     /* align-items: center; */
     flex-direction: column;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 .listing-profile-main-image {
@@ -13,10 +13,11 @@
 
 .listing-profile-image-container {
     display: flex;
-    width: 60vw;
-    height: 60vh;
+    width: 1000px;
+    height: 600px;
     overflow: hidden;
-    align-self: center;
+    min-width: 700px;
+    max-width: 1000px;
 }
 
 .listing-profile-secondary-images {

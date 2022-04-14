@@ -8,7 +8,7 @@ const ListingProfile = () => {
     const listing = useSelector((state) => Object.values(state.listings.selected)[0])
     const images = useSelector((state) => Object.values(state.listings.images))
     const secondaryImages = images.slice(1)
-
+    console.log(listing);
     const { listingId } = useParams();
     const dispatch = useDispatch();
 
@@ -32,16 +32,30 @@ const ListingProfile = () => {
     return (
         <div className='listing-profile-container'>
             <div>
-                {listing?.title}
+                <p style={{fontFamily: 'CerealBd', fontSize: "35px"}}>{listing?.title}</p>
             </div>
             <div className='listing-profile-image-container'>
                 <div className='listing-profile-main-image'>
-                    <img style={{width: '100%', height: '100%', borderRadius: "10px 0px 0px 10px"}} src={images[0]}></img>
+                    <img style={{width: '100%', height: '100%', borderRadius: "10px 0px 0px 10px", objectFit: 'cover'}} src={images[0]}></img>
                 </div>
                 <div className='listing-profile-secondary-images'>
                     {secondaryImages?.map((url, i) => (
                         <img className='image' style={i == 1 ? style2 : i == 3 ? style3 : style1} src={url}></img>
                     ))}
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <p>{listing?.room_type} hosted by {listing?.username}</p>
+                    </div>
+                    <div>
+                        <p>{listing?.maximum_guests} guests &middot; {listing?.bedroom_number} bedroom(s)
+                        &middot; {listing?.bed_number} 	bed(s) &middot; {listing?.bath_number} bath(s)</p>
+                    </div>
+                </div>
+                <div>
+
                 </div>
             </div>
 
