@@ -10,7 +10,7 @@ const SortableGallery = SortableContainer(({ items }) => (
     <Gallery photos={items} renderImage={props => <SortablePhoto {...props} />} />
 ));
 
-const Images = ({ imagesFuncs }) => {
+const Images = ({ imagesFuncs, hasSubmitted, imageErrors }) => {
 
     const {
         files, setFiles
@@ -68,6 +68,9 @@ const Images = ({ imagesFuncs }) => {
 
     return (
         <section className="container">
+            {hasSubmitted && imageErrors?.map((error) => (
+                <p style={{fontFamily: 'CerealLight', color: 'red'}}>{error}</p>
+            ))}
             <div {...getRootProps({ style: baseStyle })}>
                 <input {...getInputProps()} />
                 <p>Drag 'n' drop for multiple files here, or click to select one file</p>

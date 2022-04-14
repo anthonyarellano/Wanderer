@@ -213,10 +213,11 @@ const ListingNavBar = () => {
         type, setType
     }
 
-    const testAWS = () => {
-        console.log(files);
+    const submitAWS = (files) => {
+        let fileUrls = [];
+
         if (files.length > 0) {
-            files.forEach((file) => {
+            files.forEach((file, i) => {
                 const params = {
                     Body: file,
                     Bucket: S3_BUCKET,
@@ -228,14 +229,26 @@ const ListingNavBar = () => {
                     })
                     .send((err, data) => {
                         if (err) return console.log((err));;
-                        if (data) return (console.log(data));
+                        if (data) {
+                            fileUrls.push(`${data.Location}` + "=index?" + i);
+                        };
                     })
             })
         }
+        return fileUrls;
     }
 
+
     let submitReady = false;
-    if (!locationErrors.length && !aboutErrors?.length && !imageErrors?.length) submitReady = true;
+    if (![...locationErrors].length && !aboutErrors?.length && !imageErrors?.length && !amenityErrors?.length) submitReady = true;
+
+    const handleSubmit = () => {
+        setHasSubmitted(true);
+        if (!submitReady) {
+            const fileUrls = submitAWS(files);
+            console.log(fileUrls);
+        }
+    }
 
     return (
         <>
@@ -248,7 +261,7 @@ const ListingNavBar = () => {
                         About the property
                     </div>
                     <div
-                        style={locationErrors?.length === 0 ? validated : hasSubmitted && [...locationErrors]?.length ? notValid : null}
+                        style={[...locationErrors]?.length === 0 ? validated : hasSubmitted && [...locationErrors]?.length ? notValid : null}
                         className={active === 'Location' ? 'listing-nav-button selected' : 'listing-nav-button'}
                         onClick={() => setActive('Location')}>
                         Location
@@ -267,7 +280,7 @@ const ListingNavBar = () => {
                     </div>
                     <div
                         style={submitReady ? {color: 'green', cursor: "pointer"} : {color: 'gray'}}
-                        onClick={() => setHasSubmitted(true)}>Submit</div>
+                        onClick={handleSubmit}>Submit</div>
                 </div>
             </div>
             <div style={{ marginLeft: "10%" }}>
@@ -278,7 +291,7 @@ const ListingNavBar = () => {
                         active === "Amenities" ?
                             <Amenities amenityErrors={amenityErrors} hasSubmitted={hasSubmitted} amenitiesFuncs={amenitiesFuncs} /> :
                             active === "Images" ?
-                                <Images imagesFuncs={imagesFuncs} /> : null}
+                                <Images imageErrors={imageErrors} hasSubmitted={hasSubmitted} imagesFuncs={imagesFuncs} /> : null}
             </div>
         </>
     )
