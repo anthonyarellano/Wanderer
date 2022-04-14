@@ -8,3 +8,11 @@ class Image(db.Model):
     url = db.Column(db.String(255), nullable=False)
 
     listing = db.relationship("Listing", back_populates="images")
+
+    def to_dict(self):
+        return {
+            id: self.id,
+            listing_id: self.listing_id,
+            url: self.url
+        }
+

@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import db, Listing
+from app.models import db, Listing, Image
 
 listing_routes = Blueprint('listings', __name__)
 
@@ -38,3 +38,18 @@ def create_listing():
     db.session.add(new_listing)
     db.session.commit()
     return new_listing.to_dict()
+
+@listing_routes.route('/create/images', methods=["POST"])
+def create_listing_images():
+    images = request.get_json()
+    id = images['x'].pop(0)
+    for image in images['x']:
+        newImage = Image(
+            listing_id=id,
+            url=image
+        )
+        db.session.add(newImage)
+        db.session.commit()
+
+    listing = Listing.query.get(id)
+    return listing.to_dict()

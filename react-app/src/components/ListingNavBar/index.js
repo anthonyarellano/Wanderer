@@ -217,9 +217,9 @@ const ListingNavBar = () => {
         checkOut, setCheckOut,
         type, setType
     }
-    
+
     // eslint-disable-next-line
-    const submitAWS = (files) => {
+    const submitAWS = async (listing, files) => {
         let fileUrls = [];
 
         if (files.length > 0) {
@@ -241,14 +241,16 @@ const ListingNavBar = () => {
                     })
             })
         }
-        return fileUrls;
+        const newListing = await dispatch(createListing(listing, fileUrls));
+        // console.log(newListing, '---------- in FRONTEND!');
+        // return fileUrls;
     }
 
 
     let submitReady = false;
     if (![...locationErrors].length && !aboutErrors?.length && !imageErrors?.length && !amenityErrors?.length) submitReady = true;
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         setHasSubmitted(true);
         if (submitReady) {
             const listing = {
@@ -280,8 +282,9 @@ const ListingNavBar = () => {
                 check_out: checkOut,
                 room_type_id: type,
             };
-            const newListing = await dispatch(createListing(listing));
-            console.log(newListing, '---------- in FRONTEND!');
+            submitAWS(listing, files);
+            // const newListing = await dispatch(createListing(listing));
+            // console.log(newListing, '---------- in FRONTEND!');
             // const fileUrls = submitAWS(files);
 
         }

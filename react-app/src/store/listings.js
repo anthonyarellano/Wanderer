@@ -7,7 +7,7 @@ const addOne = (listing) => {
     }
 }
 
-export const createListing = (listing) => async (dispatch) => {
+export const createListing = (listing, images) => async (dispatch) => {
     const response = await fetch('/api/listings/create', {
         method: "POST",
         headers: {
@@ -17,9 +17,21 @@ export const createListing = (listing) => async (dispatch) => {
     });
     if (response.ok) {
         const newListing = await response.json();
-        console.log(newListing);
-        dispatch(addOne(newListing))
-        return newListing
+        images.unshift(newListing.id)
+        console.log(images);
+        const response2 = await fetch('/api/listings/create/images', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"x": [...images]})
+        });
+        if (response2.ok) {
+            const listingWithImages = await response2.json();
+            dispatch(addOne(listingWithImages))
+            return listingWithImages
+
+        }
     }
 }
 
@@ -31,7 +43,7 @@ const listingReducer = (state = initialState, action) => {
         case ADD_ONE: {
             const newState = {...state};
             newState[action.listing.id] = action.listing;
-            return newState; 
+            return newState;
         }
         default:
             return state;

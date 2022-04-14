@@ -42,6 +42,11 @@ class Listing(db.Model):
     room_type = db.relationship("RoomType", back_populates="listings")
 
     def to_dict(self):
+        ret = []
+        for image in self.images:
+            ret.append(image.url)
+
+        print(ret, '--------------------------')
         return {
             'id': self.id,
             'owner_id': self.owner_id,
@@ -70,5 +75,6 @@ class Listing(db.Model):
             'pool_avail': self.pool_avail,
             'check_in': self.check_in,
             'check_out': self.check_out,
-            'room_type': self.room_type.type
+            'room_type': self.room_type.type,
+            'images': ret
         }
