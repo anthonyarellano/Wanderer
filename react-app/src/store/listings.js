@@ -1,11 +1,11 @@
+const ADD_ONE = 'listings/ADD_ONE';
 
-
-
-
-
-
-
-
+const addOne = (listing) => {
+    return {
+        type: ADD_ONE,
+        listing
+    }
+}
 
 export const createListing = (listing) => async (dispatch) => {
     const response = await fetch('/api/listings/create', {
@@ -16,10 +16,10 @@ export const createListing = (listing) => async (dispatch) => {
         body: JSON.stringify(listing)
     });
     if (response.ok) {
-        const listing = await response.json();
-        console.log(listing);
-        // dispatch
-        return listing
+        const newListing = await response.json();
+        console.log(newListing);
+        dispatch(addOne(newListing))
+        return newListing
     }
 }
 
@@ -28,6 +28,11 @@ const initialState = {}
 const listingReducer = (state = initialState, action) => {
 
     switch (action.type) {
+        case ADD_ONE: {
+            const newState = {...state};
+            newState[action.listing.id] = action.listing;
+            return newState; 
+        }
         default:
             return state;
     }
