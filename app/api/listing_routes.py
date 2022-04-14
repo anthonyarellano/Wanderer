@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from app.models import db, Listing, Image
 
 listing_routes = Blueprint('listings', __name__)
@@ -39,17 +39,15 @@ def create_listing():
     db.session.commit()
     return new_listing.to_dict()
 
-@listing_routes.route('/create/images', methods=["POST"])
-def create_listing_images():
-    images = request.get_json()
-    id = images['x'].pop(0)
-    for image in images['x']:
-        newImage = Image(
+@listing_routes.route('/create/images/<int:id>', methods=["POST"])
+def create_listing_images(id):
+    images = request.json
+    print(images)
+    newImage = Image(
             listing_id=id,
-            url=image
+            url=images['url']
         )
-        db.session.add(newImage)
-        db.session.commit()
+    db.session.add(newImage)
+    db.session.commit()
+    return newImage.to_dict()
 
-    listing = Listing.query.get(id)
-    return listing.to_dict()

@@ -142,6 +142,7 @@ export const Banner = () => {
                             src={user?.picture ? user?.picture : require('./style/images/user-image.png').default} alt="userpic"></img>
                     </div>
                 </div>
+                {/* user interface popout div */}
                 <div className={visible ? 'user-interface-popout font' : 'hidden'}>
                     {links}
                 </div>
