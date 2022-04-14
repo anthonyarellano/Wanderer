@@ -15,7 +15,7 @@ const ListingProfile = () => {
     useEffect(() => {
         dispatch(getListing(listingId))
         dispatch(getImages(listingId))
-    }, [])
+    }, [listingId, dispatch])
 
     const style1 = {
         height: '100%', width: '100%', objectFit: "cover"
@@ -36,11 +36,11 @@ const ListingProfile = () => {
             </div>
             <div className='listing-profile-image-container'>
                 <div className='listing-profile-main-image'>
-                    <img style={{width: '100%', height: '100%', borderRadius: "10px 0px 0px 10px", objectFit: 'cover'}} src={images[0]}></img>
+                    <img alt='main' style={{width: '100%', height: '100%', borderRadius: "10px 0px 0px 10px", objectFit: 'cover'}} src={images[0]}></img>
                 </div>
                 <div className='listing-profile-secondary-images'>
                     {secondaryImages?.map((url, i) => (
-                        <img className='image' style={i == 1 ? style2 : i == 3 ? style3 : style1} src={url}></img>
+                        <img alt={`url${i}`} className='image' style={i === 1 ? style2 : i === 3 ? style3 : style1} src={url}></img>
                     ))}
                 </div>
             </div>
