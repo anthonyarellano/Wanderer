@@ -217,7 +217,8 @@ const ListingNavBar = () => {
         checkOut, setCheckOut,
         type, setType
     }
-
+    
+    // eslint-disable-next-line
     const submitAWS = (files) => {
         let fileUrls = [];
 
@@ -281,7 +282,7 @@ const ListingNavBar = () => {
             };
             const newListing = await dispatch(createListing(listing));
             console.log(newListing, '---------- in FRONTEND!');
-            const fileUrls = submitAWS(files);
+            // const fileUrls = submitAWS(files);
 
         }
     }
