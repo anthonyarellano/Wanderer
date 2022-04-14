@@ -232,7 +232,7 @@ const ListingNavBar = () => {
                     .send((err, data) => {
                         if (err) return console.log((err));;
                         if (data) {
-                            fileUrls.push(`${data.Location}` + "=index?" + i);
+                            fileUrls.push(`${data.Location}=index?${i}`);
                         };
                     })
             })
@@ -311,7 +311,7 @@ const ListingNavBar = () => {
                     </div>
                     <div
                         style={submitReady ? {color: 'green', cursor: "pointer"} : {color: 'gray'}}
-                        onClick={handleSubmit}>Submit</div>
+                        onClick={handleSubmit}>Submit {progress}</div>
                 </div>
             </div>
             <div style={{ marginLeft: "10%" }}>

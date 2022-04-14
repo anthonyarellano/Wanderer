@@ -29,10 +29,8 @@ const Location = ({ locationFuncs, hasSubmitted, locationErrors }) => {
     const {
         lat, setLat,
         long, setLong,
-        setCity,
-        // eslint-disable-next-line
-        address, setAddress,
-        country, setCountry
+        setCity, setAddress,
+        setCountry
     } = locationFuncs;
 
     const searchInput = useRef(null)
