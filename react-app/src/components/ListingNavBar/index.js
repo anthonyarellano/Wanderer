@@ -129,18 +129,18 @@ const ListingNavBar = () => {
 
     // location form validations
     useEffect(() => {
-        let errors = [];
-        if (!lat) errors.push('Please select a location.');
+        let errors = new Set([]);
+        if (!lat) errors.add('Please select a location.');
 
-        if (!long) errors.push('Please select a location.');
+        if (!long) errors.add('Please select a location.');
 
-        if (!city) errors.push('Please select a location.');
+        if (!city) errors.add('Please select a location.');
 
-        if (!address) errors.push('Please select a location.');
+        if (!address) errors.add('Please select a location.');
 
         if (country) {
-            if (country !== "United States") errors.push('We apologize, wanderer is only currently available in the United States.')
-        } if (!country) errors.push('Please select a location.');
+            if (country !== "United States") errors.add('We apologize, wanderer is only currently available in the United States.')
+        } if (!country) errors.add('Please select a location.');
 
         setLocationErrors(errors);
     }, [lat, long, city, address, country])
@@ -248,7 +248,7 @@ const ListingNavBar = () => {
                         About the property
                     </div>
                     <div
-                        style={locationErrors?.length === 0 ? validated : hasSubmitted && locationErrors?.length ? notValid : null}
+                        style={locationErrors?.length === 0 ? validated : hasSubmitted && [...locationErrors]?.length ? notValid : null}
                         className={active === 'Location' ? 'listing-nav-button selected' : 'listing-nav-button'}
                         onClick={() => setActive('Location')}>
                         Location
@@ -272,9 +272,9 @@ const ListingNavBar = () => {
             </div>
             <div style={{ marginLeft: "10%" }}>
                 {active === "About" ?
-                    <About hasSubmitted={hasSubmitted} aboutErrors={aboutErrors} aboutFuncs={aboutFuncs} /> :
+                    <About aboutErrors={aboutErrors} hasSubmitted={hasSubmitted} aboutFuncs={aboutFuncs} /> :
                     active === "Location" ?
-                        <Location locationErrors={locationErrors} locationFuncs={locationFuncs} /> :
+                        <Location locationErrors={locationErrors} hasSubmitted={hasSubmitted} locationFuncs={locationFuncs} /> :
                         active === "Amenities" ?
                             <Amenities amenityErrors={amenityErrors} hasSubmitted={hasSubmitted} amenitiesFuncs={amenitiesFuncs} /> :
                             active === "Images" ?

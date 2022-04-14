@@ -24,7 +24,7 @@ const initMapScript = () => {
 }
 
 
-const Location = ({locationFuncs}) => {
+const Location = ({ locationFuncs, hasSubmitted, locationErrors }) => {
 
     const {
         lat, setLat,
@@ -96,7 +96,7 @@ const Location = ({locationFuncs}) => {
             setLat(locationInfo.lat);
             setLong(locationInfo.long);
             setCity(locationInfo.city);
-            setCountry(locationInfo.country); 
+            setCountry(locationInfo.country);
             setAddress(`${locationInfo.streetNumber}-${locationInfo.street}-${locationInfo.zip}`)
         }
     }
@@ -116,6 +116,9 @@ const Location = ({locationFuncs}) => {
 
     return (
         <div className='maps-input-container'>
+            {hasSubmitted && [...locationErrors]?.map((error) => (
+                <p style={{fontFamily: 'CerealLight', color: 'red'}}>{error}</p>
+            ))}
             <div>
                 <input className="maps-input" ref={searchInput} placeholder='Begin searching...' type="text" ></input>
             </div>
