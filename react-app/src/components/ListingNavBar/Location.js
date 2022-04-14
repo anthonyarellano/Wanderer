@@ -1,3 +1,5 @@
+import './style/location.css';
+import Map from '../Map';
 import { useRef, useEffect } from 'react';
 
 const loadAsyncScript = (src) => {
@@ -21,14 +23,14 @@ const initMapScript = () => {
     return loadAsyncScript(src);
 }
 
-const Location = ({locationFuncs}) => {
+
+const Location = ({ locationFuncs, hasSubmitted, locationErrors }) => {
 
     const {
-        setLat,
-        setLong,
-        setCity,
-        // eslint-disable-next-line
-        address, setAddress
+        lat, setLat,
+        long, setLong,
+        setCity, setAddress,
+        setCountry
     } = locationFuncs;
 
     const searchInput = useRef(null)
@@ -92,6 +94,7 @@ const Location = ({locationFuncs}) => {
             setLat(locationInfo.lat);
             setLong(locationInfo.long);
             setCity(locationInfo.city);
+            setCountry(locationInfo.country);
             setAddress(`${locationInfo.streetNumber}-${locationInfo.street}-${locationInfo.zip}`)
         }
     }
@@ -110,8 +113,17 @@ const Location = ({locationFuncs}) => {
     }, [])
 
     return (
-        <div>
-            <input ref={searchInput} type="text" ></input>
+        <div className='maps-input-container'>
+            {hasSubmitted && [...locationErrors]?.map((error) => (
+                <p style={{fontFamily: 'CerealLight', color: 'red'}}>{error}</p>
+            ))}
+            <div>
+                <input className="maps-input" ref={searchInput} placeholder='Begin searching...' type="text" ></input>
+            </div>
+            <div style={{marginTop: "3%"}}>
+                {lat && long ?
+                <Map lat={lat ? parseFloat(lat) : null} lng={long ? parseFloat(long) : null}/> : null}
+            </div>
         </div>
     )
 };

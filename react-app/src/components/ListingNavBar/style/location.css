@@ -1,0 +1,15 @@
+.maps-input-container {
+    margin-right: 10%;
+    margin-top: 3%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.maps-input {
+    height: 70px;
+    width: 600px;
+    font-size: 40px;
+    font-family: "CerealLight";
+    justify-self: center;
+}

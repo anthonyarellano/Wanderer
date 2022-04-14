@@ -18,3 +18,7 @@
 .selected {
     border-bottom: 1px solid #FF385C;
 }
+
+.validated {
+    color: green;
+}
