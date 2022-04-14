@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux'
 import AWS from 'aws-sdk';
 import About from './About';
 import Location from './Location';
@@ -21,6 +22,7 @@ const myBucket = new AWS.S3({
 })
 
 const ListingNavBar = () => {
+    const user = useSelector((state) => state.session.user);
     const [progress, setProgress] = useState(null);
     const [active, setActive] = useState('About');
     const [aboutErrors, setAboutErrors] = useState([]);
@@ -245,8 +247,37 @@ const ListingNavBar = () => {
     const handleSubmit = () => {
         setHasSubmitted(true);
         if (!submitReady) {
+            const listing = {
+                owner_id: user.id,
+                title,
+                bed_number: beds,
+                bath_number: baths,
+                bedroom_number: bedrooms,
+                maximum_guests: guests,
+                latitude: lat,
+                longitude: long,
+                city,
+                price,
+                address,
+                description,
+                wifi_avail: wifi,
+                tv_avail: tv,
+                kitchen_avail: kitchen,
+                ac_avail: ac,
+                washer_avail: washer,
+                dryer_avail: dryer,
+                hair_dryer_avail: hairDryer,
+                parking_avail: parking,
+                fridge_avail: fridge,
+                bbq_avail: bbq,
+                stove_avail: stove,
+                pool_avail: pool,
+                check_in: checkIn,
+                check_out: checkOut,
+                room_type_id: type,
+            };
             const fileUrls = submitAWS(files);
-            console.log(fileUrls);
+
         }
     }
 
