@@ -316,7 +316,7 @@ const ListingNavBar = () => {
                     </div>
                     <div
                         style={submitReady ? {color: 'green', cursor: "pointer"} : {color: 'gray'}}
-                        onClick={handleSubmit}>Submit {progress}</div>
+                        onClick={handleSubmit}>Submit {progress && `(${progress ? progress : ""})%`}</div>
                 </div>
             </div>
             <div style={{ marginLeft: "10%" }}>
