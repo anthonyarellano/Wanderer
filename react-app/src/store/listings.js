@@ -17,6 +17,7 @@ export const createListing = (listing) => async (dispatch) => {
     });
     if (response.ok) {
         const listing = await response.json();
+        console.log(listing);
         // dispatch
         return listing
     }

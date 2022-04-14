@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { createListing } from '../../store/listings';
 import AWS from 'aws-sdk';
 import About from './About';
 import Location from './Location';
@@ -22,6 +23,8 @@ const myBucket = new AWS.S3({
 })
 
 const ListingNavBar = () => {
+    const dispatch = useDispatch();
+
     const user = useSelector((state) => state.session.user);
     const [progress, setProgress] = useState(null);
     const [active, setActive] = useState('About');
@@ -244,9 +247,9 @@ const ListingNavBar = () => {
     let submitReady = false;
     if (![...locationErrors].length && !aboutErrors?.length && !imageErrors?.length && !amenityErrors?.length) submitReady = true;
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setHasSubmitted(true);
-        if (!submitReady) {
+        if (submitReady) {
             const listing = {
                 owner_id: user.id,
                 title,
@@ -276,6 +279,8 @@ const ListingNavBar = () => {
                 check_out: checkOut,
                 room_type_id: type,
             };
+            const newListing = await dispatch(createListing(listing));
+            console.log(newListing, '---------- in FRONTEND!');
             const fileUrls = submitAWS(files);
 
         }
