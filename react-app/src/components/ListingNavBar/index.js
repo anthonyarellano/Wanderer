@@ -72,31 +72,40 @@ const ListingNavBar = () => {
     // form validations
     useEffect(() => {
         let errors = [];
+        let badChars = "1234567890@#$%^&*()_-+=][}{|:;/?><"
         if (title) {
             if (title.length > 255) errors.push('Please enter a title shorter than 255 characters.');
+            title.split('').forEach((char) => {
+                if (badChars.includes(char)) errors.push('Title contains unusable character.')
+            })
         } if (!title) errors.push('Please enter a value for title.');
 
         if (beds) {
+            if (beds % 1 !== 0) errors.push('Bed number must be a whole number.');
             if (beds < 1) errors.push('Please enter a value for number of beds greater than 0.');
             if (beds > 2147483646) errors.push('Please enter smaller value for number of beds.');
         } if (!beds) errors.push('Please enter a value for number of beds.');
 
         if (baths) {
+            if (baths % 1 !== 0) errors.push('Bath number must be a whole number.');
             if (baths < 1) errors.push('Please enter a value for number of baths greater than 0.');
             if (baths > 2147483646) errors.push('Please enter smaller value for number of baths.');
         } if (!baths) errors.push('Please enter a value for number of baths.');
 
         if (bedrooms) {
+            if (bedrooms % 1 !== 0) errors.push('Bedroom number must be a whole number.');
             if (bedrooms < 1) errors.push('Please enter a value for number of bedrooms greater than 0.');
             if (bedrooms > 2147483646) errors.push('Please enter smaller value for number of bedrooms.');
         } if (!bedrooms) errors.push('Please enter a value for number of bedrooms.');
 
         if (guests) {
+            if (guests % 1 !== 0) errors.push('Guest number must be a whole number.');
             if (guests < 1) errors.push('Please enter a value for number of guests greater than 0.');
             if (guests > 2147483646) errors.push('Please enter smaller value for number of guests.');
         } if (!guests) errors.push('Please enter a value for number of guests.');
 
         if (price) {
+            if (price % 1 !== 0) errors.push('Price must be a whole number.');
             if (price < 1) errors.push('Please enter a value for nightly price greater than 0.');
             if (price > 2147483646) errors.push('Please enter smaller value for nightly price.');
         } if (!price) errors.push('Please enter a value for nightly price.');
