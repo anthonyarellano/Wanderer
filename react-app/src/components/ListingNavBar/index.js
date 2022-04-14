@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { createListing } from '../../store/listings';
+import { createImages, createListing } from '../../store/listings';
 import AWS from 'aws-sdk';
 import About from './About';
 import Location from './Location';
@@ -77,7 +77,7 @@ const ListingNavBar = () => {
 
     // State for image form
     const [files, setFiles] = useState([]);
-
+    console.log(files);
     // form validations
     useEffect(() => {
         let errors = [];
@@ -217,12 +217,13 @@ const ListingNavBar = () => {
         checkOut, setCheckOut,
         type, setType
     }
-    
+
     // eslint-disable-next-line
-    const submitAWS = (files) => {
-        let fileUrls = [];
+    const submitAWS = async (listingId, files) => {
+        let fileUrls = {};
 
         if (files.length > 0) {
+            console.log(files, "FLILES!");
             files.forEach((file, i) => {
                 const params = {
                     Body: file,
@@ -236,12 +237,12 @@ const ListingNavBar = () => {
                     .send((err, data) => {
                         if (err) return console.log((err));;
                         if (data) {
-                            fileUrls.push(`${data.Location}=index?${i}`);
+                            fileUrls[`url`] = `${data.Location}=index?${i}`;
+                            dispatch(createImages(fileUrls, listingId))
                         };
                     })
             })
         }
-        return fileUrls;
     }
 
 
@@ -281,9 +282,7 @@ const ListingNavBar = () => {
                 room_type_id: type,
             };
             const newListing = await dispatch(createListing(listing));
-            console.log(newListing, '---------- in FRONTEND!');
-            // const fileUrls = submitAWS(files);
-
+            submitAWS(newListing.id, files);
         }
     }
 

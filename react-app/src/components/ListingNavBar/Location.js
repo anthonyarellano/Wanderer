@@ -88,9 +88,8 @@ const Location = ({ locationFuncs, hasSubmitted, locationErrors }) => {
     const onChangeAddress = (autocomplete) => {
         const location = autocomplete.getPlace();
         const locationInfo = pullAddress(location);
-        console.log(location);
+
         if (locationInfo) {
-            console.log(locationInfo);
             setLat(locationInfo.lat);
             setLong(locationInfo.long);
             setCity(locationInfo.city);

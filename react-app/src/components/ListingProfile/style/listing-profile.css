@@ -1,0 +1,28 @@
+
+.listing-profile-container {
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.listing-profile-main-image {
+    object-fit: cover;
+}
+
+.listing-profile-image-container {
+    display: flex;
+    width: 1000px;
+    height: 600px;
+    overflow: hidden;
+    min-width: 700px;
+    max-width: 1000px;
+}
+
+.listing-profile-secondary-images {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    overflow: hidden;
+}

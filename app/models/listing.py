@@ -70,5 +70,6 @@ class Listing(db.Model):
             'pool_avail': self.pool_avail,
             'check_in': self.check_in,
             'check_out': self.check_out,
-            'room_type': self.room_type.type
+            'room_type': self.room_type.type,
+            'username': self.user.username
         }
