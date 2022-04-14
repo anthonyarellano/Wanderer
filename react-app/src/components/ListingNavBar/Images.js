@@ -52,7 +52,7 @@ const Images = ({ imagesFuncs, hasSubmitted, imageErrors }) => {
     };
 
     const { getRootProps, getInputProps } = useDropzone({
-        accept: 'image/png',
+        accept: ['image/jpeg', 'image/png'],
         onDrop: acceptedFiles => {
             setFiles(acceptedFiles.map(file => Object.assign(file, {
                 preview: URL.createObjectURL(file)

@@ -4,13 +4,22 @@ from app.models import db, Listing, Image
 listing_routes = Blueprint('listings', __name__)
 
 @listing_routes.route('/<int:id>')
-def create_listing(id):
+def get_listing(id):
     listing = Listing.query.get(id)
     return listing.to_dict()
 
 
+@listing_routes.route('/images/<int:id>')
+def get_listing_images(id):
+    images = Image.query.filter(Image.listing_id == id).all()
+    imageList = []
+    for image in images:
+        imageList.append(image.to_dict())
+    return jsonify(imageList)
+
+
 @listing_routes.route('/create', methods=["POST"])
-def get_listing():
+def create_listing():
     listing = dict(request.json)
     new_listing = Listing(
         owner_id=listing['owner_id'],

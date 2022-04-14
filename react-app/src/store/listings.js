@@ -16,12 +16,12 @@ const selectOne = (listing) => {
     };
 };
 
-// const loadImages = (images) => {
-//     return {
-//         type: LOAD_IMAGES,
-//         images
-//     }
-// }
+const loadImages = (images) => {
+    return {
+        type: LOAD_IMAGES,
+        images
+    }
+}
 
 export const createImages = (images, listingId) => async (dispatch) => {
     console.log(images, "IN THUNK!");
@@ -54,12 +54,21 @@ export const createListing = (listing) => async (dispatch) => {
     }
 }
 
-export const getListing = (id) => async(dispatch) => {
+export const getListing = (id) => async (dispatch) => {
     const response = await fetch(`/api/listings/${id}`);
     if (response.ok) {
         const listing = await response.json();
         dispatch(selectOne(listing));
-        return listing; 
+        return listing;
+    }
+}
+
+export const getImages = (id) => async (dispatch) => {
+    const response = await fetch(`/api/listings/images/${id}`);
+    if (response.ok) {
+        const images = await response.json();
+        dispatch(loadImages(images));
+        return images;
     }
 }
 
@@ -78,10 +87,10 @@ const listingReducer = (state = initialState, action) => {
             return newState;
         };
         case LOAD_IMAGES: {
-            const newState = {...state, images: {...state.images}};
+            const newState = {...state, images: {}, selected: {...state.selected}};
             action.images.forEach((image) => {
-                newState[image.id] = image
-                // newState.listings[image.listing_id].images[image.id] = image
+                const imgArr = image.url.split('=index?');
+                newState.images[imgArr[1]] = imgArr[0]
             });
             return newState;
         };
