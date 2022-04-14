@@ -6,7 +6,7 @@ def seed_users():
     demo = User(
         username='Demo', email='demo@aa.io', password='password', profile_picture="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg")
     marnie = User(
-        username='marnie', email='marnie@aa.io', password='password', profile_picture="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg")
+        username='Marnie Spagatelli', email='marnie@aa.io', password='password', profile_picture="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg")
     bobbie = User(
         username='bobbie', email='bobbie@aa.io', password='password', profile_picture="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg")
 

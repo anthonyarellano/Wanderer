@@ -8,7 +8,7 @@ const ListingProfile = () => {
     const listing = useSelector((state) => Object.values(state.listings.selected)[0])
     const images = useSelector((state) => Object.values(state.listings.images))
     const secondaryImages = images.slice(1)
-    console.log(listing);
+
     const { listingId } = useParams();
     const dispatch = useDispatch();
 
