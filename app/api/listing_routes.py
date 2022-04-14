@@ -35,3 +35,6 @@ def create_listing():
         check_out=listing['check_out'],
         room_type_id=listing['room_type_id'],
     )
+    db.session.add(new_listing)
+    db.session.commit()
+    return new_listing.to_dict()
