@@ -100,7 +100,9 @@ const About = ({ aboutFuncs, aboutErrors, hasSubmitted }) => {
                     <select
                         className="input-field"
                         value={type}
+                        placeholder="what"
                         onChange={(e) => setType(e.target.value)}>
+                        <option value="">- Select accomodation type -</option>
                         <option value="1">Entire condo</option>
                         <option value="2">Entire vacation home</option>
                         <option value="3">Entire home</option>
