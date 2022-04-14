@@ -3,8 +3,14 @@ from app.models import db, Listing, Image
 
 listing_routes = Blueprint('listings', __name__)
 
+@listing_routes.route('/<int:id>')
+def create_listing(id):
+    listing = Listing.query.get(id)
+    return listing.to_dict()
+
+
 @listing_routes.route('/create', methods=["POST"])
-def create_listing():
+def get_listing():
     listing = dict(request.json)
     new_listing = Listing(
         owner_id=listing['owner_id'],
@@ -39,6 +45,7 @@ def create_listing():
     db.session.commit()
     return new_listing.to_dict()
 
+
 @listing_routes.route('/create/images/<int:id>', methods=["POST"])
 def create_listing_images(id):
     images = request.json
@@ -50,4 +57,3 @@ def create_listing_images(id):
     db.session.add(newImage)
     db.session.commit()
     return newImage.to_dict()
-

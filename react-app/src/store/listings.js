@@ -1,12 +1,20 @@
 const ADD_ONE = 'listings/ADD_ONE';
 const LOAD_IMAGES = 'listings/LOAD_IMAGES';
+const SELECT_ONE = 'listings/SELECT_ONE';
 
 const addOne = (listing) => {
     return {
         type: ADD_ONE,
         listing
-    }
-}
+    };
+};
+
+const selectOne = (listing) => {
+    return {
+        type: SELECT_ONE,
+        listing
+    };
+};
 
 // const loadImages = (images) => {
 //     return {
@@ -46,9 +54,19 @@ export const createListing = (listing) => async (dispatch) => {
     }
 }
 
+export const getListing = (id) => async(dispatch) => {
+    const response = await fetch(`/api/listings/${id}`);
+    if (response.ok) {
+        const listing = await response.json();
+        dispatch(selectOne(listing));
+        return listing; 
+    }
+}
+
 
 const initialState = {
-    images: {}
+    images: {},
+    selected: {}
 }
 
 const listingReducer = (state = initialState, action) => {
@@ -67,6 +85,10 @@ const listingReducer = (state = initialState, action) => {
             });
             return newState;
         };
+        case SELECT_ONE: {
+            const newState = {...state, images: {...state.images}, selected: {[action.listing.id]: action.listing}};
+            return newState;
+        }
         default:
             return state;
     }
