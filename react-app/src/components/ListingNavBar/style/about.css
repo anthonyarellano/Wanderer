@@ -1,5 +1,6 @@
 .about-form-container {
     margin-top: 2%;
+    /* flex-direction: column; */
 }
 
 .input-field {

@@ -1,6 +1,6 @@
 import './style/amenities.css';
 
-const Amenities = ({amenitiesFuncs}) => {
+const Amenities = ({ amenitiesFuncs, amenityErrors, hasSubmitted }) => {
 
     const {
         wifi, setWifi,
@@ -20,9 +20,14 @@ const Amenities = ({amenitiesFuncs}) => {
     return (
         <div>
             <div>
+                {hasSubmitted && amenityErrors?.map((error) => (
+                        <p style={{fontFamily:"CerealLight", color: 'red'}}>{error}</p>
+                ))}
+            </div>
+            <div>
                 <p
                     style={{fontFamily: "CerealLight", fontSize: "20px"}}
-                    >Please select all amenities present in your location:</p>
+                    >Please select at least (2) amenities present in your location:</p>
             </div>
             <div className="amenities-grid-container">
                 <div className="amenities-input">

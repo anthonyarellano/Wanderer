@@ -26,6 +26,7 @@ const ListingNavBar = () => {
     const [aboutErrors, setAboutErrors] = useState([]);
     const [locationErrors, setLocationErrors] = useState([]);
     const [imageErrors, setImageErrors] = useState([]);
+    const [amenityErrors, setAmenityErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
     const validated = {
@@ -76,22 +77,22 @@ const ListingNavBar = () => {
         } if (!title) errors.push('Please enter a value for title.');
 
         if (beds) {
-            if (beds < 1) errors.push('Please enter a value for number of beds.');
+            if (beds < 1) errors.push('Please enter a value for number of beds greater than 0.');
             if (beds > 2147483646) errors.push('Please enter smaller value for number of beds.');
         } if (!beds) errors.push('Please enter a value for number of beds.');
 
         if (baths) {
-            if (baths < 1) errors.push('Please enter a value for number of baths.');
+            if (baths < 1) errors.push('Please enter a value for number of baths greater than 0.');
             if (baths > 2147483646) errors.push('Please enter smaller value for number of baths.');
         } if (!baths) errors.push('Please enter a value for number of baths.');
 
         if (bedrooms) {
-            if (bedrooms < 1) errors.push('Please enter a value for number of bedrooms.');
+            if (bedrooms < 1) errors.push('Please enter a value for number of bedrooms greater than 0.');
             if (bedrooms > 2147483646) errors.push('Please enter smaller value for number of bedrooms.');
         } if (!bedrooms) errors.push('Please enter a value for number of bedrooms.');
 
         if (guests) {
-            if (guests < 1) errors.push('Please enter a value for number of guests.');
+            if (guests < 1) errors.push('Please enter a value for number of guests greater than 0.');
             if (guests > 2147483646) errors.push('Please enter smaller value for number of guests.');
         } if (!guests) errors.push('Please enter a value for number of guests.');
 
@@ -129,7 +130,7 @@ const ListingNavBar = () => {
         } if (!country) errors.push('Please select a location.');
 
         setLocationErrors(errors);
-    }, [lat, long, city, address])
+    }, [lat, long, city, address, country])
 
     useEffect(() => {
         let errors = [];
@@ -138,6 +139,25 @@ const ListingNavBar = () => {
 
         setImageErrors(errors);
     }, [files])
+
+    // amenity validations
+    useEffect(() => {
+        let errors = [];
+        let count = 0;
+        let amenities = [wifi, tv, kitchen,
+            ac, pool, washer,
+            dryer, hairDryer, parking,
+            fridge, bbq, stove];
+        amenities.forEach((x) => {
+            if (x === true) count++
+        });
+        if (count < 2) errors.push('Please select at least two amenities.');
+
+        setAmenityErrors(errors);
+    }, [wifi, tv, kitchen,
+        ac, pool, washer,
+        dryer, hairDryer, parking,
+        fridge, bbq, stove])
 
     const imagesFuncs = {
         files, setFiles
@@ -221,6 +241,7 @@ const ListingNavBar = () => {
                         Location
                     </div>
                     <div
+                        style={amenityErrors?.length === 0 ? validated : null}
                         className={active === 'Amenities' ? 'listing-nav-button selected' : 'listing-nav-button'}
                         onClick={() => setActive('Amenities')}>
                         Amenities
@@ -238,11 +259,11 @@ const ListingNavBar = () => {
             </div>
             <div style={{ marginLeft: "10%" }}>
                 {active === "About" ?
-                    <About aboutErrors={aboutErrors} aboutFuncs={aboutFuncs} /> :
+                    <About hasSubmitted={hasSubmitted} aboutErrors={aboutErrors} aboutFuncs={aboutFuncs} /> :
                     active === "Location" ?
                         <Location locationErrors={locationErrors} locationFuncs={locationFuncs} /> :
                         active === "Amenities" ?
-                            <Amenities amenitiesFuncs={amenitiesFuncs} /> :
+                            <Amenities amenityErrors={amenityErrors} hasSubmitted={hasSubmitted} amenitiesFuncs={amenitiesFuncs} /> :
                             active === "Images" ?
                                 <Images imagesFuncs={imagesFuncs} /> : null}
             </div>
