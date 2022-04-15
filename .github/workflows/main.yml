@@ -17,6 +17,8 @@ jobs:
         cache-dependency-path: react-app/package-lock.json
     - name: Build React App
       working-directory: react-app
+      env: 
+        REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
       run: npm install && npm run build
 
     # https://github.com/actions/setup-python
