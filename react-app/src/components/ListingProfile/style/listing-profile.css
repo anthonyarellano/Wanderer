@@ -19,7 +19,7 @@
     overflow: hidden;
     min-width: 700px;
     max-width: 1000px;
-    
+
 }
 
 .listing-profile-secondary-images {
@@ -58,7 +58,8 @@
 }
 
 .listing-booking-container {
-   position: relative;
+   width: 32%;
+   border: 1px solid black;
 }
 
 .calendar-container {
