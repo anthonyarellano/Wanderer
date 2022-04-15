@@ -91,10 +91,14 @@ const ListingProfile = () => {
                     </div>
                 </div>
                 <div className='listing-booking-container'>
-                    <div>
-                        <p>{listing?.price} night</p>
+                    <div
+                        style={{fontSize: "23px"}}
+                        className='flex'
+                    >
+                        <p style={{margin: "0px"}} className='big-font'>${listing?.price}</p>
+                        <p style={{margin:"0px 0px 0px 3px", fontSize: "17px"}} className='small-font'>night</p>
                     </div>
-                    <div>
+                    <div className='flex small-font'>
                         <div>
                             checkin
                         </div>
@@ -102,10 +106,10 @@ const ListingProfile = () => {
                             checkout
                         </div>
                     </div>
-                    <div>
+                    <div className='small-font'>
                         Guests
                     </div>
-                    <div onClick={executeScroll}>
+                    <div className='small-font' onClick={executeScroll}>
                         check availability
                     </div>
                     {/* <Calendar minDate={new Date()} showDoubleView={true} selectRange={true}/> */}
