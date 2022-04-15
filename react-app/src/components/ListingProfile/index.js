@@ -2,7 +2,9 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListing, getImages } from '../../store/listings';
+import Calendar from 'react-calendar';
 import './style/listing-profile.css';
+import 'react-calendar/dist/Calendar.css';
 
 const ListingProfile = () => {
     const listing = useSelector((state) => Object.values(state.listings.selected)[0])
@@ -72,7 +74,7 @@ const ListingProfile = () => {
                     </div>
                 </div>
                 <div>
-                    CALENDAR GOES HERE
+                    <Calendar selectRange={true}/>
                 </div>
             </div>
         </div>
