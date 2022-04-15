@@ -47,27 +47,32 @@ const ListingProfile = () => {
                 </div>
             </div>
             {/* Initial details and check availability */}
-            <div className='listing-profile-section-one'>
-                <div className='listing-profile-details-one-container'>
-                    <div>
+            <div className='listing-profile-lower-half-container'>
+                <div className='listing-profile-section-one'>
+                    <div className='listing-profile-details-one-container'>
                         <div>
-                            <p style={{ fontSize: "22px" }} className='big-font'>
-                                {listing?.room_type} hosted by {listing?.username}
-                            </p>
+                            <div>
+                                <p style={{ fontSize: "22px" }} className='big-font'>
+                                    {listing?.room_type} hosted by {listing?.username}
+                                </p>
+                            </div>
+                            <div>
+                                <p className='small-font'>
+                                    {listing?.maximum_guests} guests &middot; {listing?.bedroom_number} bedroom(s)
+                                    &middot; {listing?.bed_number} 	bed(s) &middot; {listing?.bath_number} bath(s)
+                                </p>
+                            </div>
                         </div>
                         <div>
-                            <p className='small-font'>
-                                {listing?.maximum_guests} guests &middot; {listing?.bedroom_number} bedroom(s)
-                                &middot; {listing?.bed_number} 	bed(s) &middot; {listing?.bath_number} bath(s)
-                            </p>
+                            <img alt="profile" style={{ width: "56px", height: "56px", borderRadius: "100%" }} src={listing?.user_photo}></img>
                         </div>
                     </div>
                     <div>
-                        <img alt="profile" style={{ width: "56px", height: "56px", borderRadius: "100%" }} src={listing?.user_photo}></img>
+                        <p>SELF CHECK IN</p>
                     </div>
                 </div>
                 <div>
-                    <p>SELF CHECK IN</p>
+                    CALENDAR GOES HERE
                 </div>
             </div>
         </div>

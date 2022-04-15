@@ -33,7 +33,6 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #DDDDDD;
-    width: 60%
 }
 
 .big-font {
@@ -47,4 +46,12 @@
 .listing-profile-scheduling-container {
     height: 75%;
     border: 1px solid black;
+}
+
+.listing-profile-section-one {
+    width: 60%;
+}
+
+.listing-profile-lower-half-container {
+    display: flex;
 }

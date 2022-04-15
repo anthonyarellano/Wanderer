@@ -185,39 +185,26 @@ const ListingNavBar = () => {
     }
 
     const amenitiesFuncs = {
-        wifi, setWifi,
-        tv, setTv,
-        kitchen, setKitchen,
-        ac, setAc,
-        pool, setPool,
-        washer, setWasher,
-        dryer, setDryer,
-        hairDryer, setHairDryer,
-        parking, setParking,
-        fridge, setFridge,
-        bbq, setBbq,
-        stove, setStove
+        wifi, setWifi, tv, setTv,
+        kitchen, setKitchen, ac, setAc,
+        pool, setPool, washer, setWasher,
+        dryer, setDryer, hairDryer, setHairDryer,
+        parking, setParking, fridge, setFridge,
+        bbq, setBbq, stove, setStove
     }
 
     const locationFuncs = {
-        lat, setLat,
-        long, setLong,
-        city, setCity,
-        address, setAddress,
+        lat, setLat, long, setLong,
+        city, setCity, address, setAddress,
         country, setCountry
     }
 
     const aboutFuncs = {
-        active, setActive,
-        title, setTitle,
-        beds, setBeds,
-        baths, setBaths,
-        bedrooms, setBedrooms,
-        guests, setGuests,
-        price, setPrice,
-        description, setDescription,
-        checkIn, setCheckIn,
-        checkOut, setCheckOut,
+        active, setActive, title, setTitle,
+        beds, setBeds, baths, setBaths,
+        bedrooms, setBedrooms, guests, setGuests,
+        price, setPrice, description, setDescription,
+        checkIn, setCheckIn, checkOut, setCheckOut,
         type, setType
     }
 
