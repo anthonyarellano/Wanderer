@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { getListing, getImages } from '../../store/listings';
 import './style/listing-profile.css';
 
