@@ -33,7 +33,8 @@ const ListingProfile = () => {
         <div className='listing-profile-container'>
             {/* Top images */}
             <div>
-                <p style={{fontFamily: 'CerealBd', fontSize: "35px"}}>{listing?.title}</p>
+                <p style={{fontFamily: 'CerealBd', fontSize: "35px", margin: "0px 0px 5px 0px"}}>{listing?.title}</p>
+                <p style={{fontFamily: 'CerealLight', fontSize: "20px", margin: "0px 0px 15px 0px"}}>{listing?.city}, United States</p>
             </div>
             <div className='listing-profile-image-container'>
                 <div className='listing-profile-main-image'>
@@ -49,7 +50,9 @@ const ListingProfile = () => {
             <div className='listing-profile-details-one-container'>
                 <div>
                     <div>
-                        <p style={{fontSize: "22px"}} className='big-font'>{listing?.room_type} hosted by {listing?.username}</p>
+                        <p style={{fontSize: "22px"}} className='big-font'>
+                            {listing?.room_type} hosted by {listing?.username}
+                        </p>
                     </div>
                     <div>
                         <p className='small-font'>

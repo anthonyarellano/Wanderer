@@ -153,7 +153,7 @@ const ListingNavBar = () => {
     useEffect(() => {
         let errors = [];
         console.log(files);
-        if (!files.length) errors.push('Please upload at least one image.')
+        if (files.length < 5) errors.push('Please upload at least five image.')
 
         setImageErrors(errors);
     }, [files])
