@@ -74,6 +74,9 @@ const ListingProfile = () => {
                         </div>
                     </div>
                     <div className='border-bottom'>
+                        <p className='big-font sub-header'>
+                                A little about the stay
+                        </p>
                         <p className='small-font'>{listing?.description}</p>
                     </div>
                     <div className='border-bottom'>

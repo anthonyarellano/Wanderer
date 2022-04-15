@@ -1,7 +1,6 @@
 import './style/amenities-card.css';
 
 const AmenitiesCard = ({ listing }) => {
-
     return (
         <div>
             <div className="amenities-display-grid-container">
