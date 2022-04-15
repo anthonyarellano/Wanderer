@@ -31,6 +31,7 @@ const ListingProfile = () => {
 
     return (
         <div className='listing-profile-container'>
+            {/* Top images */}
             <div>
                 <p style={{fontFamily: 'CerealBd', fontSize: "35px"}}>{listing?.title}</p>
             </div>
@@ -44,18 +45,21 @@ const ListingProfile = () => {
                     ))}
                 </div>
             </div>
-            <div>
+            {/* Initial details and check availability */}
+            <div className='listing-profile-details-one-container'>
                 <div>
                     <div>
-                        <p>{listing?.room_type} hosted by {listing?.username}</p>
+                        <p style={{fontSize: "22px"}} className='big-font'>{listing?.room_type} hosted by {listing?.username}</p>
                     </div>
                     <div>
-                        <p>{listing?.maximum_guests} guests &middot; {listing?.bedroom_number} bedroom(s)
-                        &middot; {listing?.bed_number} 	bed(s) &middot; {listing?.bath_number} bath(s)</p>
+                        <p className='small-font'>
+                            {listing?.maximum_guests} guests &middot; {listing?.bedroom_number} bedroom(s)
+                                &middot; {listing?.bed_number} 	bed(s) &middot; {listing?.bath_number} bath(s)
+                        </p>
                     </div>
                 </div>
                 <div>
-
+                        <img alt="profile" style={{width: "56px", height: "56px", borderRadius: "100%"}} src={listing?.user_photo}></img>
                 </div>
             </div>
 

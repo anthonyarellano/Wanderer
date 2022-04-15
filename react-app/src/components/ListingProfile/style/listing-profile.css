@@ -5,6 +5,7 @@
     flex-direction: column;
     margin-left: 20%;
     margin-right: 20%;
+    width: fit-content;
 }
 
 .listing-profile-main-image {
@@ -25,4 +26,20 @@
     grid-template-columns: 50% 50%;
     grid-template-rows: 50% 50%;
     overflow: hidden;
+}
+
+.listing-profile-details-one-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #DDDDDD;
+    width: 60%
+}
+
+.big-font {
+    font-family: "CerealBd";
+}
+
+.small-font {
+    font-family: "CerealLight";
 }
