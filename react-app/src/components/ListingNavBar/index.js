@@ -24,7 +24,7 @@ const myBucket = new AWS.S3({
     region: REGION,
 })
 
-const ListingNavBar = () => {
+const ListingNavBar = ({ editEnable }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -284,9 +284,11 @@ const ListingNavBar = () => {
         }
     }
 
-    return (
-        <>
-            <LoadingModal modalIsOpen={modalIsOpen}/>
+    // If editEnable prop is passed, change form into edit form by removing location tab.
+    // Done for reusability.
+    let links;
+    if (editEnable) {
+        links = (
             <div className="link-container">
                 <div className="links-list">
                     <div
@@ -318,6 +320,42 @@ const ListingNavBar = () => {
                         onClick={handleSubmit}>Submit {progress && `(${progress ? progress : ""})%`}</div>
                 </div>
             </div>
+        )
+    } if (!editEnable) {
+        links = (
+            <div className="link-container">
+                <div className="links-list">
+                    <div
+                        style={aboutErrors?.length === 0 ? validated : hasSubmitted && aboutErrors?.length ? notValid : null}
+                        className={active === 'About' ? 'listing-nav-button selected' : 'listing-nav-button'}
+                        onClick={() => setActive('About')}>
+                        About the property
+                    </div>
+                    <div
+                        style={amenityErrors?.length === 0 ? validated : hasSubmitted && amenityErrors?.length ? notValid : null}
+                        className={active === 'Amenities' ? 'listing-nav-button selected' : 'listing-nav-button'}
+                        onClick={() => setActive('Amenities')}>
+                        Amenities
+                    </div>
+                    <div
+                        style={imageErrors?.length === 0 ? validated : hasSubmitted && imageErrors?.length ? notValid : null}
+                        className={active === 'Images' ? 'listing-nav-button selected' : 'listing-nav-button'}
+                        onClick={() => setActive('Images')}>
+                        Images
+                    </div>
+                    <div
+                        style={submitReady ? {color: 'green', cursor: "pointer"} : {color: 'gray'}}
+                        onClick={handleSubmit}>Submit {progress && `(${progress ? progress : ""})%`}</div>
+                </div>
+            </div>
+        )
+    }
+
+
+    return (
+        <>
+            <LoadingModal modalIsOpen={modalIsOpen}/>
+            {links}
             <div style={{ marginLeft: "10%" }}>
                 {active === "About" ?
                     <About aboutErrors={aboutErrors} hasSubmitted={hasSubmitted} aboutFuncs={aboutFuncs} /> :
