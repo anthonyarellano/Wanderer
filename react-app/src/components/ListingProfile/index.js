@@ -76,13 +76,12 @@ const ListingProfile = () => {
                         <p className='small-font'>{listing?.description}</p>
                     </div>
                     <div className='border-bottom'>
-                        <p
-                            style={{fontSize: "20px"}}
-                            className='big-font'>
+                        <p className='big-font sub-header'>
                                 What this place offers
                         </p>
                     </div>
                     <div ref={myRef} className='border-bottom'>
+                        <p className='big-font sub-header'>Select Your Dates</p>
                         <Calendar minDate={new Date()} showDoubleView={true} selectRange={true}/>
                     </div>
                 </div>

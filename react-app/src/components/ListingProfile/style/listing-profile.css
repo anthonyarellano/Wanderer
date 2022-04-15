@@ -70,3 +70,7 @@
 .border-bottom {
     border-bottom: 1px solid #DDDDDD;
 }
+
+.sub-header {
+    font-size: 20px;
+}
