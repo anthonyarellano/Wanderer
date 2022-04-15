@@ -35,6 +35,11 @@ const ListingProfile = () => {
         height: '100%', width: '100%', objectFit: "cover", borderRadius: "0px 0px 10px 0px"
     }
 
+    const disabledDates = [
+        new Date(2022, 4, 20),
+        new Date(2022, 4, 21)
+    ]
+
     return (
         <div className='listing-profile-container'>
             {/* Top images */}
@@ -75,28 +80,34 @@ const ListingProfile = () => {
                     </div>
                     <div className='border-bottom'>
                         <p className='big-font sub-header'>
-                                A little about the stay
+                            A little about the stay
                         </p>
                         <p className='small-font'>{listing?.description}</p>
                     </div>
                     <div className='border-bottom'>
                         <p className='big-font sub-header'>
-                                What this place offers
+                            What this place offers
                         </p>
-                        <AmenitiesCard listing={listing}/>
+                        <AmenitiesCard listing={listing} />
                     </div>
                     <div ref={myRef} className='border-bottom'>
                         <p className='big-font sub-header'>Select Your Dates</p>
-                        <Calendar minDate={new Date()} showDoubleView={true} selectRange={true}/>
+                        <Calendar tileDisabled={({ date, view }) =>
+                            (view === 'month') && // Block day tiles only
+                            disabledDates.some(disabledDate =>
+                                date.getFullYear() === disabledDate.getFullYear() &&
+                                date.getMonth() === disabledDate.getMonth() &&
+                                date.getDate() === disabledDate.getDate()
+                            )} returnValue="range" onChange={(value, e) => alert(value)} minDate={new Date()} showDoubleView={true} selectRange={true} />
                     </div>
                 </div>
                 <div className='listing-booking-container'>
                     <div
-                        style={{fontSize: "23px"}}
+                        style={{ fontSize: "23px" }}
                         className='flex'
                     >
-                        <p style={{margin: "0px"}} className='big-font'>${listing?.price}</p>
-                        <p style={{margin:"0px 0px 0px 3px", fontSize: "17px"}} className='small-font'>night</p>
+                        <p style={{ margin: "0px" }} className='big-font'>${listing?.price}</p>
+                        <p style={{ margin: "0px 0px 0px 3px", fontSize: "17px" }} className='small-font'>night</p>
                     </div>
                     <div className='flex small-font'>
                         <div>

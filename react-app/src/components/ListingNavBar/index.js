@@ -287,7 +287,7 @@ const ListingNavBar = ({ editEnable }) => {
     // If editEnable prop is passed, change form into edit form by removing location tab.
     // Done for reusability.
     let links;
-    if (editEnable) {
+    if (!editEnable) {
         links = (
             <div className="link-container">
                 <div className="links-list">
@@ -321,7 +321,7 @@ const ListingNavBar = ({ editEnable }) => {
                 </div>
             </div>
         )
-    } if (!editEnable) {
+    } if (editEnable) {
         links = (
             <div className="link-container">
                 <div className="links-list">

@@ -45,10 +45,10 @@ export const Banner = () => {
         links = (
             <>
                 <div>
-                    <p className='popout-item'>Trips</p>
+                    <p className='popout-item'>Trips (coming soon)</p>
                 </div>
                 <div>
-                    <p className='popout-item'>Wishlist</p>
+                    <p className='popout-item'>Wishlist (coming soon)</p>
                 </div>
                 <div style={{ borderTop: "1px solid #DEDEDE" }}>
                     <div>
@@ -58,14 +58,21 @@ export const Banner = () => {
                             Host your home
                         </p>
                     </div>
+                    <div>
+                        <p className='popout-item'
+                            onClick={() => history.push('/my-listings')}
+                        >
+                            Your listings (coming soon)
+                        </p>
+                    </div>
                     {/* <div>
                         <p className='popout-item'>Account</p>
                     </div> */}
                 </div>
                 <div style={{ borderTop: "1px solid #DEDEDE" }}>
-                    <div>
+                    {/* <div>
                         <p className='popout-item'>Help</p>
-                    </div>
+                    </div> */}
                     <div>
                         <p
                             className='popout-item'
@@ -87,7 +94,7 @@ export const Banner = () => {
                         className='popout-item'
                         onClick={signUpModal}>Sign up</p>
                 </div>
-                <div style={{ borderTop: "1px solid #DEDEDE" }}>
+                {/* <div style={{ borderTop: "1px solid #DEDEDE" }}>
                     <div>
                         <p
                             className='popout-item'
@@ -98,7 +105,7 @@ export const Banner = () => {
                     <div>
                         <p className='popout-item'>Help</p>
                     </div>
-                </div>
+                </div> */}
             </>
         )
     }
