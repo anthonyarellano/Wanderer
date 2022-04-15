@@ -37,6 +37,10 @@
     height: 44px;
     margin-bottom: 1em;
   }
+  .react-calendar__navigation__label {
+    font-family: "CerealBd";
+    font-size: 20px;
+  }
   .react-calendar__navigation button {
     min-width: 44px;
     background: none;
@@ -78,10 +82,12 @@
   }
   .react-calendar__tile {
     max-width: 100%;
-    padding: 10px 6.6667px;
+    padding: 20px 15px;
     background: none;
     text-align: center;
     line-height: 16px;
+    font-family: "CerealLight";
+    font-size: 15px;
   }
   .react-calendar__tile:disabled {
     background-color: #f0f0f0;
@@ -89,7 +95,6 @@
   .react-calendar__tile:enabled:hover,
   .react-calendar__tile:enabled:focus {
     background-color: #e6e6e6;
-    border-radius: 100%;
   }
   /* .react-calendar__tile--now {
     background: #ffff76;
@@ -118,8 +123,13 @@
   .react-calendar--selectRange .react-calendar__tile--hover {
     background-color: #F7F7F7;
   }
-  
+
 abbr {
     border-bottom: none !important;
     text-decoration: none !important;
+}
+
+.react-calendar__tile--rangeStart {
+    background-color: black !important;
+    color: white !important;
 }
