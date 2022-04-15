@@ -43,3 +43,8 @@
 .small-font {
     font-family: "CerealLight";
 }
+
+.listing-profile-scheduling-container {
+    height: 75%;
+    border: 1px solid black;
+}
