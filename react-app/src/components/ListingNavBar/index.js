@@ -261,8 +261,8 @@ const ListingNavBar = () => {
 
     const handleSubmit = async () => {
         setHasSubmitted(true);
-        openModal()
         if (submitReady) {
+            openModal()
             const listing = {
                 owner_id: user.id,
                 title,
@@ -292,8 +292,8 @@ const ListingNavBar = () => {
                 check_out: checkOut,
                 room_type_id: type,
             };
-            // const newListing = await dispatch(createListing(listing));
-            // submitAWS(newListing.id, files);
+            const newListing = await dispatch(createListing(listing));
+            submitAWS(newListing.id, files);
         }
     }
 
