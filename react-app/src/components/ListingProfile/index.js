@@ -74,7 +74,7 @@ const ListingProfile = () => {
                     </div>
                 </div>
                 <div>
-                    <Calendar selectRange={true}/>
+                    <Calendar minDate={new Date()} showDoubleView={true} selectRange={true}/>
                 </div>
             </div>
         </div>
