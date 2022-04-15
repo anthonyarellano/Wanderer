@@ -35,10 +35,36 @@ const ListingProfile = () => {
         height: '100%', width: '100%', objectFit: "cover", borderRadius: "0px 0px 10px 0px"
     }
 
+    // TODO programatically find dates
     const disabledDates = [
         new Date(2022, 4, 20),
         new Date(2022, 4, 21)
     ]
+
+    const formatDate = (date) => {
+        let retArr = [];
+        date.forEach((date) => {
+            let returnStr = ''
+            let dateArr = date.toString().split(" ");
+            returnStr += dateArr[3] + "-"
+            if (dateArr[1] === "Jan") returnStr += '01-';
+            if (dateArr[1] === "Feb") returnStr += '02-';
+            if (dateArr[1] === "Mar") returnStr += '03-';
+            if (dateArr[1] === "Apr") returnStr += '04-';
+            if (dateArr[1] === "May") returnStr += '05-';
+            if (dateArr[1] === "Jun") returnStr += '06-';
+            if (dateArr[1] === "Jul") returnStr += '07-';
+            if (dateArr[1] === "Aug") returnStr += '08-';
+            if (dateArr[1] === "Sep") returnStr += '09-';
+            if (dateArr[1] === "Oct") returnStr += '10-';
+            if (dateArr[1] === "Nov") returnStr += '11-';
+            if (dateArr[1] === "Dev") returnStr += '12-';
+            returnStr += dateArr[2]
+            retArr.push(returnStr);
+        })
+        console.log(retArr);
+        return retArr; 
+    }
 
     return (
         <div className='listing-profile-container'>
@@ -92,13 +118,13 @@ const ListingProfile = () => {
                     </div>
                     <div ref={myRef} className='border-bottom'>
                         <p className='big-font sub-header'>Select Your Dates</p>
-                        <Calendar tileDisabled={({ date, view }) =>
+                        <Calendar  tileDisabled={({ date, view }) =>
                             (view === 'month') && // Block day tiles only
                             disabledDates.some(disabledDate =>
                                 date.getFullYear() === disabledDate.getFullYear() &&
                                 date.getMonth() === disabledDate.getMonth() &&
                                 date.getDate() === disabledDate.getDate()
-                            )} returnValue="range" onChange={(value, e) => alert(value)} minDate={new Date()} showDoubleView={true} selectRange={true} />
+                            )} returnValue="range" onChange={(value, e) => console.log(formatDate(value))} minDate={new Date()} showDoubleView={true} selectRange={true} />
                     </div>
                 </div>
                 <div className='listing-booking-container'>
@@ -123,7 +149,6 @@ const ListingProfile = () => {
                     <div className='small-font' onClick={executeScroll}>
                         check availability
                     </div>
-                    {/* <Calendar minDate={new Date()} showDoubleView={true} selectRange={true}/> */}
                 </div>
             </div>
         </div>
