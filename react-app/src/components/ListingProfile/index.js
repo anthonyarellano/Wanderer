@@ -3,9 +3,9 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListing, getImages } from '../../store/listings';
 import Calendar from 'react-calendar';
-import './style/listing-profile.css';
-import 'react-calendar/dist/Calendar.css';
 import AmenitiesCard from './AmenitiesCard';
+import './style/listing-profile.css';
+import './style/calendar.css';;
 
 const ListingProfile = () => {
     const listing = useSelector((state) => Object.values(state.listings.selected)[0])
