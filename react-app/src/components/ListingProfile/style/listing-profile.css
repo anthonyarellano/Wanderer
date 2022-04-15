@@ -49,9 +49,24 @@
 }
 
 .listing-profile-section-one {
-    width: 60%;
+    width: 55%;
 }
 
 .listing-profile-lower-half-container {
     display: flex;
+}
+
+.listing-booking-container {
+   position: relative;
+}
+
+.calendar-container {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: -300px;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #DDDDDD;
 }

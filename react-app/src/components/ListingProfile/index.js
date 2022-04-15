@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListing, getImages } from '../../store/listings';
 import Calendar from 'react-calendar';
@@ -10,9 +10,12 @@ const ListingProfile = () => {
     const listing = useSelector((state) => Object.values(state.listings.selected)[0])
     const images = useSelector((state) => Object.values(state.listings.images))
     const secondaryImages = images.slice(1)
+    const myRef = useRef(null);
 
     const { listingId } = useParams();
     const dispatch = useDispatch();
+
+    const executeScroll = () => myRef.current.scrollIntoView();
 
     useEffect(() => {
         dispatch(getListing(listingId))
@@ -69,12 +72,39 @@ const ListingProfile = () => {
                             <img alt="profile" style={{ width: "56px", height: "56px", borderRadius: "100%" }} src={listing?.user_photo}></img>
                         </div>
                     </div>
-                    <div>
-                        <p>SELF CHECK IN</p>
+                    <div className='border-bottom'>
+                        <p className='small-font'>{listing?.description}</p>
+                    </div>
+                    <div className='border-bottom'>
+                        <p
+                            style={{fontSize: "20px"}}
+                            className='big-font'>
+                                What this place offers
+                        </p>
+                    </div>
+                    <div ref={myRef} className='border-bottom'>
+                        <Calendar minDate={new Date()} showDoubleView={true} selectRange={true}/>
                     </div>
                 </div>
-                <div>
-                    <Calendar minDate={new Date()} showDoubleView={true} selectRange={true}/>
+                <div className='listing-booking-container'>
+                    <div>
+                        <p>{listing?.price} night</p>
+                    </div>
+                    <div>
+                        <div>
+                            checkin
+                        </div>
+                        <div>
+                            checkout
+                        </div>
+                    </div>
+                    <div>
+                        Guests
+                    </div>
+                    <div onClick={executeScroll}>
+                        check availability
+                    </div>
+                    {/* <Calendar minDate={new Date()} showDoubleView={true} selectRange={true}/> */}
                 </div>
             </div>
         </div>
