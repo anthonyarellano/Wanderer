@@ -5,6 +5,7 @@
     flex-direction: column;
     margin-left: 20%;
     margin-right: 20%;
+    width: fit-content;
 }
 
 .listing-profile-main-image {
@@ -25,4 +26,51 @@
     grid-template-columns: 50% 50%;
     grid-template-rows: 50% 50%;
     overflow: hidden;
+}
+
+.listing-profile-details-one-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.big-font {
+    font-family: "CerealBd";
+}
+
+.small-font {
+    font-family: "CerealLight";
+}
+
+.listing-profile-scheduling-container {
+    height: 75%;
+    border: 1px solid black;
+}
+
+.listing-profile-section-one {
+    width: 55%;
+}
+
+.listing-profile-lower-half-container {
+    display: flex;
+}
+
+.listing-booking-container {
+   position: relative;
+}
+
+.calendar-container {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: -300px;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.sub-header {
+    font-size: 20px;
 }

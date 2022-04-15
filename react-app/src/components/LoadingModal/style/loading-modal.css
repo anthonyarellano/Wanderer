@@ -1,0 +1,13 @@
+.loadinggif-logo-container {
+    display: flex;
+    align-items: center;
+    font-family: "CerealBd";
+    font-size: 40px;
+    color: #FF385C;
+}
+
+.modal-host-tip {
+    text-indent: 20px;
+    font-family: "CerealLight";
+    font-size: 25px;
+}

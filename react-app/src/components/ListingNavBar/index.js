@@ -6,7 +6,9 @@ import About from './About';
 import Location from './Location';
 import Amenities from './Amenities';
 import Images from './Images';
+import LoadingModal from '../LoadingModal';
 import './style/listing-navbar.css';
+import { useHistory } from 'react-router-dom';
 
 
 const S3_BUCKET = process.env.REACT_APP_BUCKET;
@@ -24,6 +26,7 @@ const myBucket = new AWS.S3({
 
 const ListingNavBar = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const user = useSelector((state) => state.session.user);
     const [progress, setProgress] = useState(null);
@@ -33,6 +36,7 @@ const ListingNavBar = () => {
     const [imageErrors, setImageErrors] = useState([]);
     const [amenityErrors, setAmenityErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);
+    const [modalIsOpen, setIsOpen] = useState(false);
 
     const validated = {
         color: "green"
@@ -77,7 +81,7 @@ const ListingNavBar = () => {
 
     // State for image form
     const [files, setFiles] = useState([]);
-    console.log(files);
+
     // form validations
     useEffect(() => {
         let errors = [];
@@ -152,8 +156,7 @@ const ListingNavBar = () => {
 
     useEffect(() => {
         let errors = [];
-        console.log(files);
-        if (!files.length) errors.push('Please upload at least one image.')
+        if (files.length < 5) errors.push('Please upload at least five image.')
 
         setImageErrors(errors);
     }, [files])
@@ -182,48 +185,39 @@ const ListingNavBar = () => {
     }
 
     const amenitiesFuncs = {
-        wifi, setWifi,
-        tv, setTv,
-        kitchen, setKitchen,
-        ac, setAc,
-        pool, setPool,
-        washer, setWasher,
-        dryer, setDryer,
-        hairDryer, setHairDryer,
-        parking, setParking,
-        fridge, setFridge,
-        bbq, setBbq,
-        stove, setStove
+        wifi, setWifi, tv, setTv,
+        kitchen, setKitchen, ac, setAc,
+        pool, setPool, washer, setWasher,
+        dryer, setDryer, hairDryer, setHairDryer,
+        parking, setParking, fridge, setFridge,
+        bbq, setBbq, stove, setStove
     }
 
     const locationFuncs = {
-        lat, setLat,
-        long, setLong,
-        city, setCity,
-        address, setAddress,
+        lat, setLat, long, setLong,
+        city, setCity, address, setAddress,
         country, setCountry
     }
 
     const aboutFuncs = {
-        active, setActive,
-        title, setTitle,
-        beds, setBeds,
-        baths, setBaths,
-        bedrooms, setBedrooms,
-        guests, setGuests,
-        price, setPrice,
-        description, setDescription,
-        checkIn, setCheckIn,
-        checkOut, setCheckOut,
+        active, setActive, title, setTitle,
+        beds, setBeds, baths, setBaths,
+        bedrooms, setBedrooms, guests, setGuests,
+        price, setPrice, description, setDescription,
+        checkIn, setCheckIn, checkOut, setCheckOut,
         type, setType
+    }
+
+    const openModal = () => {
+        setIsOpen(true);
+        return;
     }
 
     // eslint-disable-next-line
     const submitAWS = async (listingId, files) => {
         let fileUrls = {};
-
-        if (files.length > 0) {
-            console.log(files, "FLILES!");
+        if (files.length >= 5) {
+            openModal()
             files.forEach((file, i) => {
                 const params = {
                     Body: file,
@@ -242,6 +236,9 @@ const ListingNavBar = () => {
                         };
                     })
             })
+            setTimeout(() => {
+                history.push(`/listings/${listingId}`);
+            }, 10000)
         }
     }
 
@@ -252,6 +249,7 @@ const ListingNavBar = () => {
     const handleSubmit = async () => {
         setHasSubmitted(true);
         if (submitReady) {
+            openModal()
             const listing = {
                 owner_id: user.id,
                 title,
@@ -288,6 +286,7 @@ const ListingNavBar = () => {
 
     return (
         <>
+            <LoadingModal modalIsOpen={modalIsOpen}/>
             <div className="link-container">
                 <div className="links-list">
                     <div

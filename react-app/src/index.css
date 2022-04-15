@@ -14,5 +14,8 @@
 
 body {
     margin: 0px;
-    margin-top: 6%;
+    margin-top: 7%;
+}
+html {
+    scroll-behavior: smooth;
 }

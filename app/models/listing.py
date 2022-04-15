@@ -71,5 +71,6 @@ class Listing(db.Model):
             'check_in': self.check_in,
             'check_out': self.check_out,
             'room_type': self.room_type.type,
-            'username': self.user.username
+            'username': self.user.username,
+            'user_photo': self.user.profile_picture
         }
