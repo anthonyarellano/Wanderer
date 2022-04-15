@@ -1,0 +1,15 @@
+.amenities-display-grid-container {
+    display: grid;
+    grid-template-columns: 150px 150px 150px 150px;
+}
+.amenities-display {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.amenity-text {
+    font-family: "CerealLight";
+    font-size: 15px;
+    margin-left: 5%;
+}

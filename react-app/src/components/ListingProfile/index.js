@@ -5,6 +5,7 @@ import { getListing, getImages } from '../../store/listings';
 import Calendar from 'react-calendar';
 import './style/listing-profile.css';
 import 'react-calendar/dist/Calendar.css';
+import AmenitiesCard from './AmenitiesCard';
 
 const ListingProfile = () => {
     const listing = useSelector((state) => Object.values(state.listings.selected)[0])
@@ -79,6 +80,7 @@ const ListingProfile = () => {
                         <p className='big-font sub-header'>
                                 What this place offers
                         </p>
+                        <AmenitiesCard listing={listing}/>
                     </div>
                     <div ref={myRef} className='border-bottom'>
                         <p className='big-font sub-header'>Select Your Dates</p>
