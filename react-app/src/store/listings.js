@@ -128,7 +128,8 @@ const listingReducer = (state = initialState, action) => {
             const newState = {...state, images: {}, selected: {...state.selected}};
             action.images.forEach((image) => {
                 const imgArr = image.url.split('=index?');
-                newState.images[imgArr[1]] = imgArr[0]
+                image.url = imgArr[0]; 
+                newState.images[imgArr[1]] = image
             });
             return newState;
         };

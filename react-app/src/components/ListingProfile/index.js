@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListing, getImages } from '../../store/listings';
 import Calendar from 'react-calendar';
@@ -11,9 +11,9 @@ const ListingProfile = () => {
     const listing = useSelector((state) => Object.values(state.listings.selected)[0])
     const images = useSelector((state) => Object.values(state.listings.images))
     const secondaryImages = images.slice(1)
-    const myRef = useRef(null);
 
     const { listingId } = useParams();
+    const myRef = useRef(null);
     const dispatch = useDispatch();
 
     const executeScroll = () => myRef.current.scrollIntoView();
@@ -74,11 +74,11 @@ const ListingProfile = () => {
             </div>
             <div className='listing-profile-image-container'>
                 <div className='listing-profile-main-image'>
-                    <img alt='main' style={{ width: '100%', height: '100%', borderRadius: "10px 0px 0px 10px", objectFit: 'cover' }} src={images[0]}></img>
+                    <img alt='main' style={{ width: '100%', height: '100%', borderRadius: "10px 0px 0px 10px", objectFit: 'cover' }} src={images[0]?.url}></img>
                 </div>
                 <div className='listing-profile-secondary-images'>
-                    {secondaryImages?.map((url, i) => (
-                        <img alt={`url${i}`} className='image' style={i === 1 ? style2 : i === 3 ? style3 : style1} src={url}></img>
+                    {secondaryImages?.map((image, i) => (
+                        <img alt={`url${i}`} className='image' style={i === 1 ? style2 : i === 3 ? style3 : style1} src={image?.url}></img>
                     ))}
                     <div className='show-all-photos small-font'>show all photos</div>
                 </div>
