@@ -74,3 +74,44 @@ class Listing(db.Model):
             'username': self.user.username,
             'user_photo': self.user.profile_picture
         }
+
+    def to_dict_images(self):
+        imageList = []
+        if self.images:
+            for image in self.images:
+                imageList.append(image.to_dict())
+
+        return {
+           'id': self.id,
+            'owner_id': self.owner_id,
+            'title': self.title,
+            'bed_number': self.bed_number,
+            'bath_number': self.bath_number,
+            'bedroom_number': self.bedroom_number,
+            'maximum_guests': self.maximum_guests,
+            'latitude': self.latitude,
+            'longitude': self.longitude,
+            'city': self.city,
+            'price': self.price,
+            'address': self.address,
+            'description': self.description,
+            'wifi_avail': self.wifi_avail,
+            'tv_avail': self.tv_avail,
+            'kitchen_avail': self.kitchen_avail,
+            'ac_avail': self.ac_avail,
+            'washer_avail': self.washer_avail,
+            'dryer_avail': self.dryer_avail,
+            'hair_dryer_avail': self.hair_dryer_avail,
+            'parking_avail': self.parking_avail,
+            'fridge_avail': self.fridge_avail,
+            'bbq_avail': self.bbq_avail,
+            'stove_avail': self.stove_avail,
+            'pool_avail': self.pool_avail,
+            'check_in': self.check_in,
+            'check_out': self.check_out,
+            'room_type': self.room_type.type,
+            'username': self.user.username,
+            'user_photo': self.user.profile_picture,
+            'images': imageList,
+            'room_type_id': self.room_type_id
+        }

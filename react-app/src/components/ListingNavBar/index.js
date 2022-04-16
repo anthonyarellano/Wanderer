@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { createImages, createListing } from '../../store/listings';
+import { createImages, createListing, updateListing } from '../../store/listings';
 import AWS from 'aws-sdk';
 import About from './About';
 import Location from './Location';
@@ -24,10 +24,10 @@ const myBucket = new AWS.S3({
     region: REGION,
 })
 
-const ListingNavBar = ({ editEnable }) => {
+const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-
+    console.log(listing);
     const user = useSelector((state) => state.session.user);
     const [progress, setProgress] = useState(null);
     const [active, setActive] = useState('About');
@@ -156,10 +156,10 @@ const ListingNavBar = ({ editEnable }) => {
 
     useEffect(() => {
         let errors = [];
-        if (files.length < 5) errors.push('Please upload at least five image.')
+        if (files.length < 5 && !editEnable) errors.push('Please upload at least five image.')
 
         setImageErrors(errors);
-    }, [files])
+    }, [files, editEnable])
 
     // amenity validations
     useEffect(() => {
@@ -216,7 +216,7 @@ const ListingNavBar = ({ editEnable }) => {
     // eslint-disable-next-line
     const submitAWS = async (listingId, files) => {
         let fileUrls = {};
-        if (files.length >= 5) {
+        if (files.length) {
             openModal()
             files.forEach((file, i) => {
                 const params = {
@@ -231,7 +231,7 @@ const ListingNavBar = ({ editEnable }) => {
                     .send((err, data) => {
                         if (err) return console.log((err));;
                         if (data) {
-                            fileUrls[`url`] = `${data.Location}=index?${i}`;
+                            fileUrls[`url`] = `${data.Location}=index?${listing.images.length + i}`;
                             dispatch(createImages(fileUrls, listingId))
                         };
                     })
@@ -245,12 +245,14 @@ const ListingNavBar = ({ editEnable }) => {
 
     let submitReady = false;
     if (![...locationErrors].length && !aboutErrors?.length && !imageErrors?.length && !amenityErrors?.length) submitReady = true;
+    let editSubmitReady = false;
+    if (!aboutErrors?.length && !imageErrors?.length && !amenityErrors?.length) editSubmitReady = true;
 
     const handleSubmit = async () => {
         setHasSubmitted(true);
-        if (submitReady) {
+        if (submitReady || editSubmitReady) {
             openModal()
-            const listing = {
+            const listingInfo = {
                 owner_id: user.id,
                 title,
                 bed_number: beds,
@@ -278,11 +280,20 @@ const ListingNavBar = ({ editEnable }) => {
                 check_in: checkIn,
                 check_out: checkOut,
                 room_type_id: type,
+            }
+            if (!editEnable) {
+                const newListing = await dispatch(createListing(listingInfo));
+                submitAWS(newListing.id, files);
+            } if (editEnable) {
+                await dispatch(updateListing(listingInfo, listing.id));
+                if (files.length) {
+                    submitAWS(listing.id, files)
+                } else {
+                    history.push(`/listings/${listing.id}`)
+                };
             };
-            const newListing = await dispatch(createListing(listing));
-            submitAWS(newListing.id, files);
-        }
-    }
+        };
+    };
 
     // If editEnable prop is passed, change form into edit form by removing location tab.
     // Done for reusability.
@@ -317,7 +328,8 @@ const ListingNavBar = ({ editEnable }) => {
                     </div>
                     <div
                         style={submitReady ? {color: 'green', cursor: "pointer"} : {color: 'gray'}}
-                        onClick={handleSubmit}>Submit {progress && `(${progress ? progress : ""})%`}</div>
+                        onClick={handleSubmit}>Submit {progress && `(${progress ? progress : ""})%`}
+                    </div>
                 </div>
             </div>
         )
@@ -341,16 +353,51 @@ const ListingNavBar = ({ editEnable }) => {
                         style={imageErrors?.length === 0 ? validated : hasSubmitted && imageErrors?.length ? notValid : null}
                         className={active === 'Images' ? 'listing-nav-button selected' : 'listing-nav-button'}
                         onClick={() => setActive('Images')}>
-                        Images
+                        Add Images
                     </div>
                     <div
-                        style={submitReady ? {color: 'green', cursor: "pointer"} : {color: 'gray'}}
-                        onClick={handleSubmit}>Submit {progress && `(${progress ? progress : ""})%`}</div>
+                        style={editSubmitReady ? {color: 'green', cursor: "pointer"} : {color: 'gray'}}
+                        onClick={handleSubmit}>Submit {progress && `(${progress ? progress : ""})%`}
+                    </div>
+                    <div
+                        style={{marginLeft: "3%"}}
+                        className='listing-nav-button'
+                        onClick={() => setEditOn(false)}>
+                        Cancel
+                    </div>
                 </div>
             </div>
         )
     }
 
+    console.log(listing);
+    // Setting values on edit form
+    useEffect(() => {
+        if (editEnable && listing) {
+            setTitle(listing?.title);
+            setCheckIn(listing?.check_in);
+            setCheckOut(listing?.check_out);
+            setBeds(listing?.bed_number);
+            setBaths(listing?.bath_number);
+            setBedrooms(listing?.bedroom_number);
+            setGuests(listing?.maximum_guests);
+            setPrice(listing?.price);
+            setDescription(listing?.description);
+            setType(listing?.room_type_id);
+            setAc(listing?.ac_avail);
+            setBbq(listing?.bbq_avail);
+            setWifi(listing?.wifi_avail);
+            setTv(listing?.tv_avail);
+            setKitchen(listing?.kitchen_avail);
+            setWasher(listing?.washer_avail);
+            setDryer(listing?.dryer_avail);
+            setHairDryer(listing?.hair_dryer_avail);
+            setParking(listing?.parking_avail);
+            setFridge(listing?.fridge_avail);
+            setStove(listing?.stove_avail);
+            setPool(listing?.pool_avail);
+        }
+    }, [editEnable, listing])
 
     return (
         <>
@@ -360,11 +407,11 @@ const ListingNavBar = ({ editEnable }) => {
                 {active === "About" ?
                     <About aboutErrors={aboutErrors} hasSubmitted={hasSubmitted} aboutFuncs={aboutFuncs} /> :
                     active === "Location" ?
-                        <Location locationErrors={locationErrors} hasSubmitted={hasSubmitted} locationFuncs={locationFuncs} /> :
-                        active === "Amenities" ?
-                            <Amenities amenityErrors={amenityErrors} hasSubmitted={hasSubmitted} amenitiesFuncs={amenitiesFuncs} /> :
-                            active === "Images" ?
-                                <Images imageErrors={imageErrors} hasSubmitted={hasSubmitted} imagesFuncs={imagesFuncs} /> : null}
+                    <Location locationErrors={locationErrors} hasSubmitted={hasSubmitted} locationFuncs={locationFuncs} /> :
+                    active === "Amenities" ?
+                    <Amenities amenityErrors={amenityErrors} hasSubmitted={hasSubmitted} amenitiesFuncs={amenitiesFuncs} /> :
+                    active === "Images" ?
+                    <Images imageErrors={imageErrors} hasSubmitted={hasSubmitted} imagesFuncs={imagesFuncs} /> : null}
             </div>
         </>
     )

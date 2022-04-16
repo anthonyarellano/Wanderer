@@ -27,6 +27,18 @@
     grid-template-columns: 50% 50%;
     grid-template-rows: 50% 50%;
     overflow: hidden;
+    position: relative;
+}
+
+.show-all-photos {
+    cursor: pointer;
+    position: absolute;
+    right: 3%;
+    bottom: 2%;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    border-radius: 3px;
 }
 
 .listing-profile-details-one-container {

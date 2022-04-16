@@ -3,6 +3,9 @@ import './style/amenities-card.css';
 const AmenitiesCard = ({ listing }) => {
     return (
         <div>
+            <p className='big-font sub-header'>
+                What this place offers
+            </p>
             <div className="amenities-display-grid-container">
                 <div className={listing?.ac_avail ? 'amenities-input' : 'hidden'}>
                     <img src={require('../ListingNavBar/style/images/ac.png').default} alt="ac"></img>

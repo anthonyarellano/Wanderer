@@ -16,8 +16,6 @@ const Images = ({ imagesFuncs, hasSubmitted, imageErrors }) => {
         files, setFiles
     } = imagesFuncs;
 
-    console.log(files);
-
     // useEffect(() => {
     //     files?.forEach(file => URL.createObjectURL(file))
     // }, [files]);

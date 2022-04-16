@@ -62,17 +62,11 @@ export const Banner = () => {
                         <p className='popout-item'
                             onClick={() => history.push('/my-listings')}
                         >
-                            Your listings (coming soon)
+                            Your listings
                         </p>
                     </div>
-                    {/* <div>
-                        <p className='popout-item'>Account</p>
-                    </div> */}
                 </div>
                 <div style={{ borderTop: "1px solid #DEDEDE" }}>
-                    {/* <div>
-                        <p className='popout-item'>Help</p>
-                    </div> */}
                     <div>
                         <p
                             className='popout-item'
@@ -94,18 +88,6 @@ export const Banner = () => {
                         className='popout-item'
                         onClick={signUpModal}>Sign up</p>
                 </div>
-                {/* <div style={{ borderTop: "1px solid #DEDEDE" }}>
-                    <div>
-                        <p
-                            className='popout-item'
-                            onClick={() => history.push('/create-listing')}>
-                            Host your home
-                        </p>
-                    </div>
-                    <div>
-                        <p className='popout-item'>Help</p>
-                    </div>
-                </div> */}
             </>
         )
     }
