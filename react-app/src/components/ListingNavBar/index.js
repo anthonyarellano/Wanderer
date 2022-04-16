@@ -159,7 +159,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
         if (files.length < 5 && !editEnable) errors.push('Please upload at least five image.')
 
         setImageErrors(errors);
-    }, [files])
+    }, [files, editEnable])
 
     // amenity validations
     useEffect(() => {
@@ -285,7 +285,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
                 const newListing = await dispatch(createListing(listingInfo));
                 submitAWS(newListing.id, files);
             } if (editEnable) {
-                const editedListing = await dispatch(updateListing(listingInfo, listing.id));
+                await dispatch(updateListing(listingInfo, listing.id));
                 if (files.length) {
                     submitAWS(listing.id, files)
                 } else {
@@ -397,7 +397,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
             setStove(listing?.stove_avail);
             setPool(listing?.pool_avail);
         }
-    }, [])
+    }, [editEnable, listing])
 
     return (
         <>

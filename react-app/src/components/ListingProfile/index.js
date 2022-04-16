@@ -63,6 +63,7 @@ const ListingProfile = () => {
             >
                 {images?.map((image) => (
                     <img
+                        alt="profile"
                         style={{width: '500px', height: '300px', objectFit: "cover"}}
                         src={image?.url}>
                     </img>

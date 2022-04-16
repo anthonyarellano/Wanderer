@@ -30,7 +30,10 @@ const MyListingCard = ({ listing }) => {
             </div>
             <div className="flex small-font">
                 <div>
-                    <img style={{height: "100px", width: "200px", objectFit: "cover"}} src={firstImage} />
+                    <img
+                        alt="first"
+                        src={firstImage}
+                        style={{height: "100px", width: "200px", objectFit: "cover"}} />
                 </div>
                 <div style={{marginLeft: "40px"}}>
                     <p>{listing?.room_type} in {listing?.city}</p>
