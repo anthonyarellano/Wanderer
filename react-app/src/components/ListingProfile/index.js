@@ -3,8 +3,9 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListing, getImages } from '../../store/listings';
 import Calendar from 'react-calendar';
+import AmenitiesCard from './AmenitiesCard';
 import './style/listing-profile.css';
-import 'react-calendar/dist/Calendar.css';
+import './style/calendar.css';;
 
 const ListingProfile = () => {
     const listing = useSelector((state) => Object.values(state.listings.selected)[0])
@@ -32,6 +33,37 @@ const ListingProfile = () => {
 
     const style3 = {
         height: '100%', width: '100%', objectFit: "cover", borderRadius: "0px 0px 10px 0px"
+    }
+
+    // TODO programatically find dates
+    const disabledDates = [
+        new Date(2022, 4, 20),
+        new Date(2022, 4, 21)
+    ]
+
+    const formatDate = (date) => {
+        let retArr = [];
+        date.forEach((date) => {
+            let returnStr = ''
+            let dateArr = date.toString().split(" ");
+            returnStr += dateArr[3] + "-"
+            if (dateArr[1] === "Jan") returnStr += '01-';
+            if (dateArr[1] === "Feb") returnStr += '02-';
+            if (dateArr[1] === "Mar") returnStr += '03-';
+            if (dateArr[1] === "Apr") returnStr += '04-';
+            if (dateArr[1] === "May") returnStr += '05-';
+            if (dateArr[1] === "Jun") returnStr += '06-';
+            if (dateArr[1] === "Jul") returnStr += '07-';
+            if (dateArr[1] === "Aug") returnStr += '08-';
+            if (dateArr[1] === "Sep") returnStr += '09-';
+            if (dateArr[1] === "Oct") returnStr += '10-';
+            if (dateArr[1] === "Nov") returnStr += '11-';
+            if (dateArr[1] === "Dev") returnStr += '12-';
+            returnStr += dateArr[2]
+            retArr.push(returnStr);
+        })
+        console.log(retArr);
+        return retArr; 
     }
 
     return (
@@ -73,23 +105,37 @@ const ListingProfile = () => {
                         </div>
                     </div>
                     <div className='border-bottom'>
+                        <p className='big-font sub-header'>
+                            A little about the stay
+                        </p>
                         <p className='small-font'>{listing?.description}</p>
                     </div>
                     <div className='border-bottom'>
                         <p className='big-font sub-header'>
-                                What this place offers
+                            What this place offers
                         </p>
+                        <AmenitiesCard listing={listing} />
                     </div>
                     <div ref={myRef} className='border-bottom'>
                         <p className='big-font sub-header'>Select Your Dates</p>
-                        <Calendar minDate={new Date()} showDoubleView={true} selectRange={true}/>
+                        <Calendar  tileDisabled={({ date, view }) =>
+                            (view === 'month') && // Block day tiles only
+                            disabledDates.some(disabledDate =>
+                                date.getFullYear() === disabledDate.getFullYear() &&
+                                date.getMonth() === disabledDate.getMonth() &&
+                                date.getDate() === disabledDate.getDate()
+                            )} returnValue="range" onChange={(value, e) => console.log(formatDate(value))} minDate={new Date()} showDoubleView={true} selectRange={true} />
                     </div>
                 </div>
                 <div className='listing-booking-container'>
-                    <div>
-                        <p>{listing?.price} night</p>
+                    <div
+                        style={{ fontSize: "23px" }}
+                        className='flex'
+                    >
+                        <p style={{ margin: "0px" }} className='big-font'>${listing?.price}</p>
+                        <p style={{ margin: "0px 0px 0px 3px", fontSize: "17px" }} className='small-font'>night</p>
                     </div>
-                    <div>
+                    <div className='flex small-font'>
                         <div>
                             checkin
                         </div>
@@ -97,13 +143,12 @@ const ListingProfile = () => {
                             checkout
                         </div>
                     </div>
-                    <div>
+                    <div className='small-font'>
                         Guests
                     </div>
-                    <div onClick={executeScroll}>
+                    <div className='small-font' onClick={executeScroll}>
                         check availability
                     </div>
-                    {/* <Calendar minDate={new Date()} showDoubleView={true} selectRange={true}/> */}
                 </div>
             </div>
         </div>
