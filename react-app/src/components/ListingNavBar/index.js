@@ -359,6 +359,34 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
         )
     }
 
+    console.log(listing);
+    // Setting values on edit form
+    useEffect(() => {
+        if (editEnable && listing) {
+            setTitle(listing?.title);
+            setCheckIn(listing?.check_in);
+            setCheckOut(listing?.check_out);
+            setBeds(listing?.bed_number);
+            setBaths(listing?.bath_number);
+            setBedrooms(listing?.bedroom_number);
+            setGuests(listing?.maximum_guests);
+            setPrice(listing?.price);
+            setDescription(listing?.description);
+            setType(listing?.room_type_id);
+            setAc(listing?.ac_avail);
+            setBbq(listing?.bbq_avail);
+            setWifi(listing?.wifi_avail);
+            setTv(listing?.tv_avail);
+            setKitchen(listing?.kitchen_avail);
+            setWasher(listing?.washer_avail);
+            setDryer(listing?.dryer_avail);
+            setHairDryer(listing?.hair_dryer_avail);
+            setParking(listing?.parking_avail);
+            setFridge(listing?.fridge_avail);
+            setStove(listing?.stove_avail);
+            setPool(listing?.pool_avail);
+        }
+    }, [])
 
     return (
         <>
@@ -368,11 +396,11 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
                 {active === "About" ?
                     <About aboutErrors={aboutErrors} hasSubmitted={hasSubmitted} aboutFuncs={aboutFuncs} /> :
                     active === "Location" ?
-                        <Location locationErrors={locationErrors} hasSubmitted={hasSubmitted} locationFuncs={locationFuncs} /> :
-                        active === "Amenities" ?
-                            <Amenities amenityErrors={amenityErrors} hasSubmitted={hasSubmitted} amenitiesFuncs={amenitiesFuncs} /> :
-                            active === "Images" ?
-                                <Images imageErrors={imageErrors} hasSubmitted={hasSubmitted} imagesFuncs={imagesFuncs} /> : null}
+                    <Location locationErrors={locationErrors} hasSubmitted={hasSubmitted} locationFuncs={locationFuncs} /> :
+                    active === "Amenities" ?
+                    <Amenities amenityErrors={amenityErrors} hasSubmitted={hasSubmitted} amenitiesFuncs={amenitiesFuncs} /> :
+                    active === "Images" ?
+                    <Images imageErrors={imageErrors} hasSubmitted={hasSubmitted} imagesFuncs={imagesFuncs} /> : null}
             </div>
         </>
     )

@@ -112,5 +112,6 @@ class Listing(db.Model):
             'room_type': self.room_type.type,
             'username': self.user.username,
             'user_photo': self.user.profile_picture,
-            'images': imageList
+            'images': imageList,
+            'room_type_id': self.room_type_id
         }
