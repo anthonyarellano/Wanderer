@@ -62,9 +62,8 @@ const ListingProfile = () => {
             returnStr += dateArr[2]
             retArr.push(returnStr);
         })
-        console.log(retArr);
-        return retArr; 
-    }
+        return retArr;
+    };
 
     return (
         <div className='listing-profile-container'>

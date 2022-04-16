@@ -1,6 +1,7 @@
 const ADD_ONE = 'listings/ADD_ONE';
 const LOAD_IMAGES = 'listings/LOAD_IMAGES';
 const SELECT_ONE = 'listings/SELECT_ONE';
+const LOAD_LISTINGS = 'listings/LOAD_LISTINGS';
 
 const addOne = (listing) => {
     return {
@@ -20,8 +21,15 @@ const loadImages = (images) => {
     return {
         type: LOAD_IMAGES,
         images
-    }
-}
+    };
+};
+
+const loadListings = (listings) => {
+    return {
+        type: LOAD_LISTINGS,
+        listings
+    };
+};
 
 export const createImages = (images, listingId) => async (dispatch) => {
     console.log(images, "IN THUNK!");
@@ -36,8 +44,8 @@ export const createImages = (images, listingId) => async (dispatch) => {
         const newImages = await response.json();
         // dispatch(loadImages(newImages));
         return newImages;
-    }
-}
+    };
+};
 
 export const createListing = (listing) => async (dispatch) => {
     const response = await fetch('/api/listings/create', {
@@ -51,8 +59,8 @@ export const createListing = (listing) => async (dispatch) => {
         const newListing = await response.json();
             dispatch(addOne(newListing))
             return newListing
-    }
-}
+    };
+};
 
 export const getListing = (id) => async (dispatch) => {
     const response = await fetch(`/api/listings/${id}`);
@@ -60,8 +68,8 @@ export const getListing = (id) => async (dispatch) => {
         const listing = await response.json();
         dispatch(selectOne(listing));
         return listing;
-    }
-}
+    };
+};
 
 export const getImages = (id) => async (dispatch) => {
     const response = await fetch(`/api/listings/images/${id}`);
@@ -69,14 +77,23 @@ export const getImages = (id) => async (dispatch) => {
         const images = await response.json();
         dispatch(loadImages(images));
         return images;
-    }
-}
+    };
+};
+
+export const getUserListings = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/listings/user/${userId}`);
+    if (response.ok) {
+        const listings = await response.json();
+        dispatch(loadListings(listings));
+        return listings;
+    };
+};
 
 
 const initialState = {
     images: {},
     selected: {}
-}
+};
 
 const listingReducer = (state = initialState, action) => {
 
@@ -97,10 +114,17 @@ const listingReducer = (state = initialState, action) => {
         case SELECT_ONE: {
             const newState = {...state, images: {...state.images}, selected: {[action.listing.id]: action.listing}};
             return newState;
+        };
+        case LOAD_LISTINGS: {
+            const newState = {};
+            action.listings.forEach((listing) => {
+                newState[listing.id] = listing;
+            });
+            return newState; 
         }
         default:
             return state;
-    }
-}
+    };
+};
 
 export default listingReducer;

@@ -66,3 +66,13 @@ def create_listing_images(id):
     db.session.add(newImage)
     db.session.commit()
     return newImage.to_dict()
+
+
+@listing_routes.route('/user/<int:id>')
+def get_user_listings(id):
+    listings = Listing.query.filter(Listing.owner_id == id).all()
+    listingList = []
+    for listing in listings:
+        listingList.append(listing.to_dict())
+
+    return jsonify(listingList)
