@@ -10,8 +10,9 @@ import './style/listing-profile.css';
 import './style/calendar.css';;
 
 const ListingProfile = () => {
-    const listingState = useSelector((state) => state.listings.selected)
-    const imagesState = useSelector((state) => state.listings.images)
+    const user = useSelector((state) => state.session.user);
+    const listingState = useSelector((state) => state.listings.selected);
+    const imagesState = useSelector((state) => state.listings.images);
     const [isOpen, setIsOpen] = useState(false);
     const { listingId } = useParams();
 
@@ -23,7 +24,7 @@ const ListingProfile = () => {
     if (listingState) listing = listingState[listingId]
     if (imagesState) images = Object.values(imagesState)
     if (images) mainImage = images[0];
-    const secondaryImages = images?.slice(1)
+    const secondaryImages = images?.slice(1);
 
     const myRef = useRef(null);
     const dispatch = useDispatch();
@@ -33,12 +34,12 @@ const ListingProfile = () => {
     const openModal = () => {
         setIsOpen(true);
         return;
-    }
+    };
 
     const closeModal = () => {
         setIsOpen(false);
         return
-    }
+    };
 
     useEffect(() => {
         dispatch(getListing(listingId))
@@ -47,15 +48,15 @@ const ListingProfile = () => {
 
     const style1 = {
         height: '100%', width: '100%', objectFit: "cover"
-    }
+    };
 
     const style2 = {
         height: '100%', width: '100%', objectFit: "cover", borderRadius: "0px 10px 0px 0px"
-    }
+    };
 
     const style3 = {
         height: '100%', width: '100%', objectFit: "cover", borderRadius: "0px 0px 10px 0px"
-    }
+    };
 
     // TODO programatically find dates
     const disabledDates = [
@@ -66,18 +67,29 @@ const ListingProfile = () => {
 
     return (
         <div className='listing-profile-container'>
+            {/* All images display modal */}
             <Modal
                 isOpen={isOpen}
                 onRequestClose={closeModal}
             >
                 {images?.map((image) => (
-                    <img
-                        alt="profile"
-                        style={{width: '500px', height: '300px', objectFit: "cover"}}
-                        src={image?.url}>
-                    </img>
+                    <div style={{position: "relative"}}>
+                        <img
+                            alt="profile"
+                            style={{width: '500px', height: '300px', objectFit: "cover"}}
+                            src={image?.url}>
+                        </img>
+                        <div
+                            className={listing?.owner_id === user?.id ? 'small-font' : 'hidden'}
+                            style={{position: "absolute", top: "5%", left: "2%",
+                                    backgroundColor: "white", padding: "5px", borderRadius: "10px",
+                                    cursor: "pointer"}}>
+                            Delete
+                        </div>
+                    </div>
                 ))}
             </Modal>
+
             {/* Top images */}
             <div>
                 <p style={{ fontFamily: 'CerealBd', fontSize: "35px", margin: "0px 0px 5px 0px" }}>{listing?.title}</p>
@@ -140,7 +152,13 @@ const ListingProfile = () => {
                                 date.getFullYear() === disabledDate.getFullYear() &&
                                 date.getMonth() === disabledDate.getMonth() &&
                                 date.getDate() === disabledDate.getDate()
-                            )} returnValue="range" onChange={(value, e) => console.log(formatDate(value))} minDate={new Date()} showDoubleView={true} selectRange={true} />
+                            )}
+                            returnValue="range"
+                            onChange={(value, e) => console.log(formatDate(value))}
+                            minDate={new Date()}
+                            showDoubleView={true}
+                            selectRange={true}
+                        />
                     </div>
                 </div>
                 <div className='listing-booking-container'>
@@ -148,8 +166,16 @@ const ListingProfile = () => {
                         style={{ fontSize: "23px" }}
                         className='flex'
                     >
-                        <p style={{ margin: "0px" }} className='big-font'>${listing?.price}</p>
-                        <p style={{ margin: "0px 0px 0px 3px", fontSize: "17px" }} className='small-font'>night</p>
+                        <p
+                            style={{ margin: "0px" }}
+                            className='big-font'>
+                                ${listing?.price}
+                        </p>
+                        <p
+                            style={{ margin: "0px 0px 0px 3px", fontSize: "17px" }} c
+                            lassName='small-font'>
+                                night
+                        </p>
                     </div>
                     <div className='flex small-font'>
                         <div>
