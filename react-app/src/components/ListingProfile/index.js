@@ -80,6 +80,7 @@ const ListingProfile = () => {
                     {secondaryImages?.map((url, i) => (
                         <img alt={`url${i}`} className='image' style={i === 1 ? style2 : i === 3 ? style3 : style1} src={url}></img>
                     ))}
+                    <div className='show-all-photos small-font'>show all photos</div>
                 </div>
             </div>
             {/* Initial details and check availability */}

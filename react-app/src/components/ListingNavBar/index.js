@@ -27,7 +27,7 @@ const myBucket = new AWS.S3({
 const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-
+    console.log(listing);
     const user = useSelector((state) => state.session.user);
     const [progress, setProgress] = useState(null);
     const [active, setActive] = useState('About');
@@ -231,7 +231,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
                     .send((err, data) => {
                         if (err) return console.log((err));;
                         if (data) {
-                            fileUrls[`url`] = `${data.Location}=index?${i}`;
+                            fileUrls[`url`] = `${data.Location}=index?${listing.images.length + i}`;
                             dispatch(createImages(fileUrls, listingId))
                         };
                     })
