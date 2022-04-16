@@ -10,12 +10,21 @@ import './style/listing-profile.css';
 import './style/calendar.css';;
 
 const ListingProfile = () => {
-    const listing = useSelector((state) => Object.values(state.listings.selected)[0])
-    const images = useSelector((state) => Object.values(state.listings.images))
-    const secondaryImages = images.slice(1)
+    const listingState = useSelector((state) => state.listings.selected)
+    const imagesState = useSelector((state) => state.listings.images)
     const [isOpen, setIsOpen] = useState(false);
-
     const { listingId } = useParams();
+
+    // Conditional steps to ensure variable availabiliy when
+    // coming from "Your Listings"
+    let listing;
+    let images;
+    let mainImage;
+    if (listingState) listing = listingState[listingId]
+    if (imagesState) images = Object.values(imagesState)
+    if (images) mainImage = images[0];
+    const secondaryImages = images?.slice(1)
+
     const myRef = useRef(null);
     const dispatch = useDispatch();
 
@@ -76,7 +85,7 @@ const ListingProfile = () => {
             </div>
             <div className='listing-profile-image-container'>
                 <div className='listing-profile-main-image'>
-                    <img alt='main' style={{ width: '100%', height: '100%', borderRadius: "10px 0px 0px 10px", objectFit: 'cover' }} src={images[0]?.url}></img>
+                    <img alt='main' style={{ width: '100%', height: '100%', borderRadius: "10px 0px 0px 10px", objectFit: 'cover' }} src={mainImage?.url}></img>
                 </div>
                 <div className='listing-profile-secondary-images'>
                     {secondaryImages?.map((image, i) => (
