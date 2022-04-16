@@ -24,7 +24,7 @@ const ListingProfile = () => {
     if (listingState) listing = listingState[listingId]
     if (imagesState) images = Object.values(imagesState)
     if (images) mainImage = images[0];
-    const secondaryImages = images?.slice(1);
+    const secondaryImages = images?.slice(1, 5);
 
     const myRef = useRef(null);
     const dispatch = useDispatch();
@@ -43,7 +43,6 @@ const ListingProfile = () => {
 
     const handleImageDelete = async (image) => {
         if (images?.length > 5) {
-            // do delete
             console.log(image);
             console.log("delete");
             await dispatch(deleteImage(image))
