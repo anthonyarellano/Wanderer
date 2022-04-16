@@ -73,6 +73,6 @@ def get_user_listings(id):
     listings = Listing.query.filter(Listing.owner_id == id).all()
     listingList = []
     for listing in listings:
-        listingList.append(listing.to_dict())
+        listingList.append(listing.to_dict_images())
 
     return jsonify(listingList)
