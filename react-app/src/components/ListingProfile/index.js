@@ -80,7 +80,7 @@ const ListingProfile = () => {
                             src={image?.url}>
                         </img>
                         <div
-                            className={listing?.owner_id === user?.id ? 'small-font' : 'hidden'}
+                            className={listing?.owner_id === user?.id ? 'big-font' : 'hidden'}
                             style={{position: "absolute", top: "5%", left: "2%",
                                     backgroundColor: "white", padding: "5px", borderRadius: "10px",
                                     cursor: "pointer"}}>
@@ -105,7 +105,7 @@ const ListingProfile = () => {
                     ))}
                     <div
                         onClick={openModal}
-                        className='show-all-photos small-font'>show all photos</div>
+                        className='show-all-photos big-font'>show all photos</div>
                 </div>
             </div>
 
