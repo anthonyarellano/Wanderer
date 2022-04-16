@@ -24,7 +24,7 @@ const myBucket = new AWS.S3({
     region: REGION,
 })
 
-const ListingNavBar = ({ editEnable }) => {
+const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -317,7 +317,8 @@ const ListingNavBar = ({ editEnable }) => {
                     </div>
                     <div
                         style={submitReady ? {color: 'green', cursor: "pointer"} : {color: 'gray'}}
-                        onClick={handleSubmit}>Submit {progress && `(${progress ? progress : ""})%`}</div>
+                        onClick={handleSubmit}>Submit {progress && `(${progress ? progress : ""})%`}
+                    </div>
                 </div>
             </div>
         )
@@ -345,7 +346,14 @@ const ListingNavBar = ({ editEnable }) => {
                     </div>
                     <div
                         style={submitReady ? {color: 'green', cursor: "pointer"} : {color: 'gray'}}
-                        onClick={handleSubmit}>Submit {progress && `(${progress ? progress : ""})%`}</div>
+                        onClick={handleSubmit}>Submit {progress && `(${progress ? progress : ""})%`}
+                    </div>
+                    <div
+                        style={{marginLeft: "3%"}}
+                        className='listing-nav-button'
+                        onClick={() => setEditOn(false)}>
+                        Cancel
+                    </div>
                 </div>
             </div>
         )
