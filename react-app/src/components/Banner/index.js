@@ -62,7 +62,7 @@ export const Banner = () => {
                         <p className='popout-item'
                             onClick={() => history.push('/my-listings')}
                         >
-                            Your listings (coming soon)
+                            Your listings
                         </p>
                     </div>
                     {/* <div>
