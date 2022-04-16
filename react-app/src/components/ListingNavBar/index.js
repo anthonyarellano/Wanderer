@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { createImages, createListing } from '../../store/listings';
+import { createImages, createListing, updateListing } from '../../store/listings';
 import AWS from 'aws-sdk';
 import About from './About';
 import Location from './Location';
@@ -156,7 +156,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
 
     useEffect(() => {
         let errors = [];
-        if (files.length < 5) errors.push('Please upload at least five image.')
+        if (files.length < 5 && !editEnable) errors.push('Please upload at least five image.')
 
         setImageErrors(errors);
     }, [files])
@@ -216,7 +216,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     // eslint-disable-next-line
     const submitAWS = async (listingId, files) => {
         let fileUrls = {};
-        if (files.length >= 5) {
+        if (files.length) {
             openModal()
             files.forEach((file, i) => {
                 const params = {
@@ -245,12 +245,14 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
 
     let submitReady = false;
     if (![...locationErrors].length && !aboutErrors?.length && !imageErrors?.length && !amenityErrors?.length) submitReady = true;
+    let editSubmitReady = false;
+    if (!aboutErrors?.length && !imageErrors?.length && !amenityErrors?.length) editSubmitReady = true;
 
     const handleSubmit = async () => {
         setHasSubmitted(true);
-        if (submitReady) {
+        if (submitReady || editSubmitReady) {
             openModal()
-            const listing = {
+            const listingInfo = {
                 owner_id: user.id,
                 title,
                 bed_number: beds,
@@ -278,11 +280,20 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
                 check_in: checkIn,
                 check_out: checkOut,
                 room_type_id: type,
+            }
+            if (!editEnable) {
+                const newListing = await dispatch(createListing(listingInfo));
+                submitAWS(newListing.id, files);
+            } if (editEnable) {
+                const editedListing = await dispatch(updateListing(listingInfo, listing.id));
+                if (files.length) {
+                    submitAWS(listing.id, files)
+                } else {
+                    history.push(`/listings/${listing.id}`)
+                };
             };
-            const newListing = await dispatch(createListing(listing));
-            submitAWS(newListing.id, files);
-        }
-    }
+        };
+    };
 
     // If editEnable prop is passed, change form into edit form by removing location tab.
     // Done for reusability.
@@ -342,10 +353,10 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
                         style={imageErrors?.length === 0 ? validated : hasSubmitted && imageErrors?.length ? notValid : null}
                         className={active === 'Images' ? 'listing-nav-button selected' : 'listing-nav-button'}
                         onClick={() => setActive('Images')}>
-                        Images
+                        Add Images
                     </div>
                     <div
-                        style={submitReady ? {color: 'green', cursor: "pointer"} : {color: 'gray'}}
+                        style={editSubmitReady ? {color: 'green', cursor: "pointer"} : {color: 'gray'}}
                         onClick={handleSubmit}>Submit {progress && `(${progress ? progress : ""})%`}
                     </div>
                     <div

@@ -2,6 +2,7 @@ const ADD_ONE = 'listings/ADD_ONE';
 const LOAD_IMAGES = 'listings/LOAD_IMAGES';
 const SELECT_ONE = 'listings/SELECT_ONE';
 const LOAD_LISTINGS = 'listings/LOAD_LISTINGS';
+const UPDATE_ONE = 'listings/UPDATE_ONE';
 
 const addOne = (listing) => {
     return {
@@ -31,8 +32,14 @@ const loadListings = (listings) => {
     };
 };
 
+const updateOne = (listing) => {
+    return {
+        type: UPDATE_ONE,
+        listing
+    };
+};
+
 export const createImages = (images, listingId) => async (dispatch) => {
-    console.log(images, "IN THUNK!");
     const response = await fetch(`/api/listings/create/images/${listingId}`, {
         method: "POST",
         headers: {
@@ -89,6 +96,20 @@ export const getUserListings = (userId) => async (dispatch) => {
     };
 };
 
+export const updateListing = (listing, listingId) => async (dispatch) => {
+    const response = await fetch(`/api/listings/update/${listingId}`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(listing)
+    });
+    if (response.ok) {
+        const updatedListing = await response.json();
+        dispatch(updateOne(updatedListing));
+        return updatedListing;
+    };
+}
 
 const initialState = {
     images: {},
@@ -120,8 +141,13 @@ const listingReducer = (state = initialState, action) => {
             action.listings.forEach((listing) => {
                 newState[listing.id] = listing;
             });
-            return newState; 
-        }
+            return newState;
+        };
+        case UPDATE_ONE: {
+            const newState = {...state, images: {...state.images}, selected: {...state.selected}};
+            newState[action.listing.id] = action.listing;
+            return newState;
+        };
         default:
             return state;
     };

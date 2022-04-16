@@ -58,7 +58,6 @@ def create_listing():
 @listing_routes.route('/create/images/<int:id>', methods=["POST"])
 def create_listing_images(id):
     images = request.json
-    print(images)
     newImage = Image(
             listing_id=id,
             url=images['url']
@@ -76,3 +75,33 @@ def get_user_listings(id):
         listingList.append(listing.to_dict_images())
 
     return jsonify(listingList)
+
+
+@listing_routes.route('/update/<int:id>', methods=['PUT'])
+def update_listing(id):
+    listing = request.json
+    dbListing = Listing.query.get(id)
+    dbListing.title = listing['title']
+    dbListing.bed_number = listing['bed_number']
+    dbListing.bath_number = listing['bath_number']
+    dbListing.bedroom_number = listing['bedroom_number']
+    dbListing.maximum_guests = listing['maximum_guests']
+    dbListing.price = listing['price']
+    dbListing.description = listing['description']
+    dbListing.wifi_avail = listing['wifi_avail']
+    dbListing.tv_avail = listing['tv_avail']
+    dbListing.kitchen_avail = listing['kitchen_avail']
+    dbListing.ac_avail = listing['ac_avail']
+    dbListing.washer_avail = listing['washer_avail']
+    dbListing.dryer_avail = listing['dryer_avail']
+    dbListing.hair_dryer_avail = listing['hair_dryer_avail']
+    dbListing.parking_avail = listing['parking_avail']
+    dbListing.fridge_avail = listing['fridge_avail']
+    dbListing.bbq_avail = listing['bbq_avail']
+    dbListing.stove_avail = listing['stove_avail']
+    dbListing.pool_avail = listing['pool_avail']
+    dbListing.check_in = listing['check_in']
+    dbListing.check_out = listing['check_out']
+    dbListing.room_type_id = listing['room_type_id']
+    db.session.commit()
+    return dbListing.to_dict()
