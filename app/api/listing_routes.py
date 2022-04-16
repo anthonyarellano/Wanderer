@@ -105,3 +105,11 @@ def update_listing(id):
     dbListing.room_type_id = listing['room_type_id']
     db.session.commit()
     return dbListing.to_dict()
+
+
+@listing_routes.route('/images/delete/<int:id>', methods=['DELETE'])
+def delete_listing_image(id):
+    image = Image.query.get(id)
+    db.session.delete(image)
+    db.session.commit()
+    return jsonify("Success")

@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getListing, getImages } from '../../store/listings';
+import { getListing, getImages, deleteImage } from '../../store/listings';
+import { formatDate } from '../Utils/formatDate';
 import Calendar from 'react-calendar';
 import Modal from 'react-modal';
-import { formatDate } from '../Utils/formatDate';
 import AmenitiesCard from './AmenitiesCard';
 import './style/listing-profile.css';
 import './style/calendar.css';;
@@ -40,6 +40,18 @@ const ListingProfile = () => {
         setIsOpen(false);
         return
     };
+
+    const handleImageDelete = async (image) => {
+        if (images?.length > 5) {
+            // do delete
+            console.log(image);
+            console.log("delete");
+            await dispatch(deleteImage(image))
+        }
+        if (images?.length <= 5) {
+            return alert('Listing must have a minimum of 5 photos.')
+        }
+    }
 
     useEffect(() => {
         dispatch(getListing(listingId))
@@ -80,6 +92,8 @@ const ListingProfile = () => {
                             src={image?.url}>
                         </img>
                         <div
+                            id={image?.id}
+                            onClick={() => handleImageDelete(image)}
                             className={listing?.owner_id === user?.id ? 'big-font' : 'hidden'}
                             style={{position: "absolute", top: "5%", left: "2%",
                                     backgroundColor: "white", padding: "5px", borderRadius: "10px",
@@ -173,7 +187,7 @@ const ListingProfile = () => {
                         </p>
                         <p
                             style={{ margin: "0px 0px 0px 3px", fontSize: "17px" }} c
-                            lassName='small-font'>
+                            className='small-font'>
                                 night
                         </p>
                     </div>

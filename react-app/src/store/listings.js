@@ -3,6 +3,7 @@ const LOAD_IMAGES = 'listings/LOAD_IMAGES';
 const SELECT_ONE = 'listings/SELECT_ONE';
 const LOAD_LISTINGS = 'listings/LOAD_LISTINGS';
 const UPDATE_ONE = 'listings/UPDATE_ONE';
+const DELETE_IMAGE = 'listings/DELETE_IMAGE';
 
 const addOne = (listing) => {
     return {
@@ -37,6 +38,24 @@ const updateOne = (listing) => {
         type: UPDATE_ONE,
         listing
     };
+};
+
+const removeImage = (imageIndex) => {
+    return {
+        type: DELETE_IMAGE,
+        imageIndex
+    }
+};
+
+export const deleteImage = (image) => async (dispatch) => {
+    const response = await fetch(`/api/listings/images/delete/${image?.id}`, {
+        method: "DELETE"
+    });
+    if (response.ok) {
+        const res = await response.json();
+        dispatch(removeImage(image?.index));
+        return res;
+    }
 };
 
 export const createImages = (images, listingId) => async (dispatch) => {
@@ -128,7 +147,8 @@ const listingReducer = (state = initialState, action) => {
             const newState = {...state, images: {}, selected: {...state.selected}};
             action.images.forEach((image) => {
                 const imgArr = image.url.split('=index?');
-                image.url = imgArr[0]; 
+                image.url = imgArr[0];
+                image.index = imgArr[1]
                 newState.images[imgArr[1]] = image
             });
             return newState;
@@ -149,6 +169,11 @@ const listingReducer = (state = initialState, action) => {
             newState[action.listing.id] = action.listing;
             return newState;
         };
+        case DELETE_IMAGE: {
+            const newState = {...state, images: {...state.images}, selected: {...state.selected}};
+            delete newState.images[action.imageIndex];
+            return newState;
+        }
         default:
             return state;
     };
