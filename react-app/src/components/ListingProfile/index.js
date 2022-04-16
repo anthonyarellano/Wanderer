@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListing, getImages } from '../../store/listings';
 import Calendar from 'react-calendar';
+import Modal from 'react-modal';
+import { formatDate } from '../Utils/formatDate';
 import AmenitiesCard from './AmenitiesCard';
 import './style/listing-profile.css';
 import './style/calendar.css';;
@@ -11,12 +13,23 @@ const ListingProfile = () => {
     const listing = useSelector((state) => Object.values(state.listings.selected)[0])
     const images = useSelector((state) => Object.values(state.listings.images))
     const secondaryImages = images.slice(1)
+    const [isOpen, setIsOpen] = useState(false);
 
     const { listingId } = useParams();
     const myRef = useRef(null);
     const dispatch = useDispatch();
 
     const executeScroll = () => myRef.current.scrollIntoView();
+
+    const openModal = () => {
+        setIsOpen(true);
+        return;
+    }
+
+    const closeModal = () => {
+        setIsOpen(false);
+        return
+    }
 
     useEffect(() => {
         dispatch(getListing(listingId))
@@ -41,32 +54,20 @@ const ListingProfile = () => {
         new Date(2022, 4, 21)
     ]
 
-    const formatDate = (date) => {
-        let retArr = [];
-        date.forEach((date) => {
-            let returnStr = ''
-            let dateArr = date.toString().split(" ");
-            returnStr += dateArr[3] + "-"
-            if (dateArr[1] === "Jan") returnStr += '01-';
-            if (dateArr[1] === "Feb") returnStr += '02-';
-            if (dateArr[1] === "Mar") returnStr += '03-';
-            if (dateArr[1] === "Apr") returnStr += '04-';
-            if (dateArr[1] === "May") returnStr += '05-';
-            if (dateArr[1] === "Jun") returnStr += '06-';
-            if (dateArr[1] === "Jul") returnStr += '07-';
-            if (dateArr[1] === "Aug") returnStr += '08-';
-            if (dateArr[1] === "Sep") returnStr += '09-';
-            if (dateArr[1] === "Oct") returnStr += '10-';
-            if (dateArr[1] === "Nov") returnStr += '11-';
-            if (dateArr[1] === "Dev") returnStr += '12-';
-            returnStr += dateArr[2]
-            retArr.push(returnStr);
-        })
-        return retArr;
-    };
 
     return (
         <div className='listing-profile-container'>
+            <Modal
+                isOpen={isOpen}
+                onRequestClose={closeModal}
+            >
+                {images?.map((image) => (
+                    <img
+                        style={{width: '500px', height: '300px', objectFit: "cover"}}
+                        src={image?.url}>
+                    </img>
+                ))}
+            </Modal>
             {/* Top images */}
             <div>
                 <p style={{ fontFamily: 'CerealBd', fontSize: "35px", margin: "0px 0px 5px 0px" }}>{listing?.title}</p>
@@ -80,9 +81,12 @@ const ListingProfile = () => {
                     {secondaryImages?.map((image, i) => (
                         <img alt={`url${i}`} className='image' style={i === 1 ? style2 : i === 3 ? style3 : style1} src={image?.url}></img>
                     ))}
-                    <div className='show-all-photos small-font'>show all photos</div>
+                    <div
+                        onClick={openModal}
+                        className='show-all-photos small-font'>show all photos</div>
                 </div>
             </div>
+
             {/* Initial details and check availability */}
             <div className='listing-profile-lower-half-container'>
                 <div className='listing-profile-section-one'>
@@ -104,18 +108,20 @@ const ListingProfile = () => {
                             <img alt="profile" style={{ width: "56px", height: "56px", borderRadius: "100%" }} src={listing?.user_photo}></img>
                         </div>
                     </div>
+
+                    {/* Listing Description */}
                     <div className='border-bottom'>
                         <p className='big-font sub-header'>
                             A little about the stay
                         </p>
                         <p className='small-font'>{listing?.description}</p>
                     </div>
+
+                    {/* Amenities Display */}
                     <div className='border-bottom'>
-                        <p className='big-font sub-header'>
-                            What this place offers
-                        </p>
                         <AmenitiesCard listing={listing} />
                     </div>
+
                     <div ref={myRef} className='border-bottom'>
                         <p className='big-font sub-header'>Select Your Dates</p>
                         <Calendar  tileDisabled={({ date, view }) =>
