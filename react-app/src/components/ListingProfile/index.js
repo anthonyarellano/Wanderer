@@ -10,8 +10,10 @@ import ImageCard from './ImageCard';
 import Calendar from 'react-calendar';
 import Modal from 'react-modal';
 import AmenitiesCard from './AmenitiesCard';
+import ProfileImageGallery from './ProfileImageGallery';
 import './style/listing-profile.css';
 import './style/calendar.css';
+import BookingCard from './BookingCard';
 
 const ListingProfile = () => {
     const user = useSelector((state) => state.session.user);
@@ -76,22 +78,10 @@ const ListingProfile = () => {
         dispatch(getReservations(listingId));
     }, [listingId, dispatch]);
 
-    const style1 = {
-        height: '100%', width: '100%', objectFit: "cover"
-    };
-
-    const style2 = {
-        height: '100%', width: '100%', objectFit: "cover", borderRadius: "0px 10px 0px 0px"
-    };
-
-    const style3 = {
-        height: '100%', width: '100%', objectFit: "cover", borderRadius: "0px 0px 10px 0px"
-    };
-
     const handleDateUpdate = (dateArr) => {
         setStartDate(dateArr[0]);
         setEndDate(dateArr[1]);
-    }
+    };
 
     const handleSelection = (date) => {
         let dateSplit = date[0].split('-');
@@ -120,6 +110,7 @@ const ListingProfile = () => {
 
     return (
         <div className='listing-profile-container'>
+
             {/* All images display modal */}
             <Modal
                 isOpen={isOpen}
@@ -141,19 +132,11 @@ const ListingProfile = () => {
                 <p style={{ fontFamily: 'CerealBd', fontSize: "35px", margin: "0px 0px 5px 0px" }}>{listing?.title}</p>
                 <p style={{ fontFamily: 'CerealLight', fontSize: "20px", margin: "0px 0px 15px 0px" }}>{listing?.city}, United States</p>
             </div>
-            <div className='listing-profile-image-container'>
-                <div className='listing-profile-main-image'>
-                    <img alt='main' style={{ width: '100%', height: '100%', borderRadius: "10px 0px 0px 10px", objectFit: 'cover' }} src={mainImage?.url}></img>
-                </div>
-                <div className='listing-profile-secondary-images'>
-                    {secondaryImages?.map((image, i) => (
-                        <img alt={`url${i}`} className='image' style={i === 1 ? style2 : i === 3 ? style3 : style1} src={image?.url}></img>
-                    ))}
-                    <div
-                        onClick={openModal}
-                        className='show-all-photos big-font'>show all photos</div>
-                </div>
-            </div>
+            <ProfileImageGallery
+                mainImage={mainImage}
+                secondaryImages={secondaryImages}
+                openModal={openModal}
+            />
 
             {/* Initial details and check availability */}
             <div className='listing-profile-lower-half-container'>
@@ -186,10 +169,9 @@ const ListingProfile = () => {
                     </div>
 
                     {/* Amenities Display */}
-                    <div className='border-bottom'>
-                        <AmenitiesCard listing={listing} />
-                    </div>
+                    <AmenitiesCard listing={listing} />
 
+                    {/* Calendar Display */}
                     <div ref={myRef} className='border-bottom'>
                         <p className='big-font sub-header'>Select Your Dates</p>
                         <Calendar tileDisabled={({ date, view }) =>
@@ -211,80 +193,18 @@ const ListingProfile = () => {
                         <p
                             className='big-font'
                             style={{cursor: "pointer", textDecoration: 'underline'}}
-                            onClick={clearDates}>clear dates</p>
-                    </div>
-                </div>
-                <div className='listing-booking-container'>
-                    <div
-                        style={{ fontSize: "23px" }}
-                        className='flex'
-                    >
-                        <p
-                            style={{ margin: "0px" }}
-                            className='big-font'>
-                            ${listing?.price}
-                        </p>
-                        <p
-                            style={{ margin: "0px 0px 0px 3px", fontSize: "17px" }} c
-                            className='small-font'>
-                            night
+                            onClick={clearDates}
+                        >
+                            clear dates
                         </p>
                     </div>
-                    <div
-                        style={{ marginTop: "15px" }}
-                        className='flex small-font'>
-                        <div
-                            style={{ borderRight: "0px", borderRadius: "10px 0px 0px 0px"}}
-                            className='booking-availability-input'>
-                            <div className='booking-availability-text-header'>
-                                CHECK-IN
-                            </div>
-                            <div>
-                                <input
-                                    type='date'
-                                    readOnly={true}
-                                    className='booking-input-box'
-                                    value={startDate}
-                                />
-                            </div>
-                        </div>
-                        <div
-                            style={{ borderRadius: "0px 10px 0px 0px" }}
-                            className='booking-availability-input'>
-                            <div className='booking-availability-text-header'>
-                                CHECK-OUT
-                            </div>
-                            <div>
-                                <input
-                                    type='date'
-                                    value={endDate}
-                                    readOnly={true}
-                                    className='booking-input-box'/>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        style={{ borderTop: "0px", borderRadius: "0px 0px 10px 10px"}}
-                        className='booking-availability-input'>
-                        <div className='booking-availability-text-header'>
-                            GUESTS
-                        </div>
-                        <div>
-                            <input
-                                type='number'
-                                style={{width: "100%"}}
-                                className='booking-input-box'
-                                placeholder='Enter amount of guests'
-                            />
-                        </div>
-                    </div>
-                    <div
-                        className='booking-availability-button'
-                        onClick={executeScroll}
-                        style={{textAlign: 'center', cursor: 'pointer'}}>
-                        Check availability
-                    </div>
                 </div>
+                <BookingCard
+                    endDate={endDate}
+                    startDate={startDate}
+                    listing={listing}
+                    executeScroll={executeScroll}
+                />
             </div>
         </div>
     )
