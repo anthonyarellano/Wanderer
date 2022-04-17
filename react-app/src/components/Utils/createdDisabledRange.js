@@ -6,7 +6,6 @@ export const createDisabledRange = (dateArr) => {
         let startDate = new Date(dates[0]);
         let endDate = new Date(dates[1]);
 
-
         const date = new Date(startDate)
         date.setMinutes( date.getMinutes() + date.getTimezoneOffset() );
         endDate.setMinutes( date.getMinutes() + date.getTimezoneOffset() );
@@ -15,15 +14,15 @@ export const createDisabledRange = (dateArr) => {
              testDate.setMinutes( date.getMinutes() + date.getTimezoneOffset() );
              disabledDates.push(testDate)
              date.setDate(date.getDate() + 1);
-         }
+         };
 
-    })
+    });
 
     let formattedDates = [];
     disabledDates.forEach((date) => {
         let modifiedDate = new Date(formatDbDate([date.toString()]))
         modifiedDate.setMinutes( date.getMinutes() + date.getTimezoneOffset() );
         formattedDates.push(modifiedDate);
-    })
+    });
     return formattedDates;
 };

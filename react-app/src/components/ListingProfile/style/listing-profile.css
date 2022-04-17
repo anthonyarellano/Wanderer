@@ -116,4 +116,10 @@
 .booking-availability-input {
     border: 1px solid #B0B0B0;
     padding: 13px;
+    outline: none;
+}
+
+.booking-input-box {
+    outline: none;
+    border: 0px;
 }

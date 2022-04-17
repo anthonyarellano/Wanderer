@@ -5,12 +5,12 @@ import { getListing, getImages, deleteImage } from '../../store/listings';
 import { formatDate } from '../Utils/formatDate';
 import { formatDbDate } from '../Utils/formatDbDate';
 import { createDisabledRange } from '../Utils/createdDisabledRange';
+import { getReservations } from '../../store/reservations';
 import Calendar from 'react-calendar';
 import Modal from 'react-modal';
 import AmenitiesCard from './AmenitiesCard';
 import './style/listing-profile.css';
-import './style/calendar.css';import { getReservations } from '../../store/reservations';
-
+import './style/calendar.css';
 
 const ListingProfile = () => {
     const user = useSelector((state) => state.session.user);
@@ -247,7 +247,12 @@ const ListingProfile = () => {
                                 CHECK-IN
                             </div>
                             <div>
-                                <input value={startDate} readOnly={true} type='date' />
+                                <input
+                                    type='date'
+                                    readOnly={true}
+                                    className='booking-input-box'
+                                    value={startDate}
+                                />
                             </div>
                         </div>
                         <div
@@ -257,7 +262,11 @@ const ListingProfile = () => {
                                 CHECK-OUT
                             </div>
                             <div>
-                                <input value={endDate} readOnly={true} type='date' />
+                                <input
+                                    type='date'
+                                    value={endDate}
+                                    readOnly={true}
+                                    className='booking-input-box'/>
                             </div>
                         </div>
                     </div>
@@ -268,13 +277,18 @@ const ListingProfile = () => {
                             GUESTS
                         </div>
                         <div>
-                            <input style={{width: "100%"}} type='number' />
+                            <input
+                                type='number'
+                                style={{width: "100%"}}
+                                className='booking-input-box'
+                                placeholder='Enter amount of guests'
+                            />
                         </div>
                     </div>
                     <div
                         className='booking-availability-button'
                         onClick={executeScroll}
-                        style={{textAlign: 'center'}}>
+                        style={{textAlign: 'center', cursor: 'pointer'}}>
                         Check availability
                     </div>
                 </div>
