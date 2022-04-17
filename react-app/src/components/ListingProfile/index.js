@@ -10,7 +10,7 @@ import Modal from 'react-modal';
 import AmenitiesCard from './AmenitiesCard';
 import './style/listing-profile.css';
 import './style/calendar.css';import { getReservations } from '../../store/reservations';
-;
+
 
 const ListingProfile = () => {
     const user = useSelector((state) => state.session.user);
@@ -95,6 +95,7 @@ const ListingProfile = () => {
         let firstDate = new Date(dateSplit[0], dateSplit[1], dateSplit[2])
         // const lastDate = disabledDates[0]
         // setUnavailable(lastDate)
+        handleUnavailable(firstDate)
         setSelected(firstDate);
     }
 
@@ -103,6 +104,16 @@ const ListingProfile = () => {
         setUnavailable("");
         setStartDate("");
         setEndDate("");
+    }
+
+    const handleUnavailable = (firstDate) => {
+        let i = 0;
+        while (i < disabledDates?.length) {
+            if (disabledDates[i] > firstDate) {
+                setUnavailable(disabledDates[i]);
+                return;
+            };
+        }
     }
 
     return (
