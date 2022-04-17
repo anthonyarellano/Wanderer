@@ -11,9 +11,9 @@ import Calendar from 'react-calendar';
 import Modal from 'react-modal';
 import AmenitiesCard from './AmenitiesCard';
 import ProfileImageGallery from './ProfileImageGallery';
+import BookingCard from './BookingCard';
 import './style/listing-profile.css';
 import './style/calendar.css';
-import BookingCard from './BookingCard';
 
 const ListingProfile = () => {
     const user = useSelector((state) => state.session.user);
@@ -26,7 +26,7 @@ const ListingProfile = () => {
     const [endDate, setEndDate] = useState("");
     const [selected, setSelected] = useState("");
     const [unavailable, setUnavailable] = useState("");
-    const [guests, setGuests] = useState("");
+    const [guests, setGuests] = useState(0);
 
     const { listingId } = useParams();
 
@@ -129,8 +129,16 @@ const ListingProfile = () => {
 
             {/* Top images */}
             <div>
-                <p style={{ fontFamily: 'CerealBd', fontSize: "35px", margin: "0px 0px 5px 0px" }}>{listing?.title}</p>
-                <p style={{ fontFamily: 'CerealLight', fontSize: "20px", margin: "0px 0px 15px 0px" }}>{listing?.city}, United States</p>
+                <p
+                    style={{ fontFamily: 'CerealBd', fontSize: "35px", margin: "0px 0px 5px 0px" }}
+                >
+                    {listing?.title}
+                </p>
+                <p
+                    style={{ fontFamily: 'CerealLight', fontSize: "20px", margin: "0px 0px 15px 0px" }}
+                >
+                    {listing?.city}, United States
+                </p>
             </div>
             <ProfileImageGallery
                 mainImage={mainImage}
@@ -156,7 +164,10 @@ const ListingProfile = () => {
                             </div>
                         </div>
                         <div>
-                            <img alt="profile" style={{ width: "56px", height: "56px", borderRadius: "100%" }} src={listing?.user_photo}></img>
+                            <img
+                                alt="profile"
+                                style={{ width: "56px", height: "56px", borderRadius: "100%" }}
+                                src={listing?.user_photo}/>
                         </div>
                     </div>
 
@@ -200,6 +211,7 @@ const ListingProfile = () => {
                     </div>
                 </div>
                 <BookingCard
+                    funcs={{guests, setGuests}}
                     endDate={endDate}
                     startDate={startDate}
                     listing={listing}

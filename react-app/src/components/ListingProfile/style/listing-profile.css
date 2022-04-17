@@ -122,4 +122,11 @@
 .booking-input-box {
     outline: none;
     border: 0px;
+    font-family: "CerealLight";
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
