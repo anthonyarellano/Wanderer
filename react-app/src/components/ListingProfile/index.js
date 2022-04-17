@@ -82,19 +82,21 @@ const ListingProfile = () => {
                 onRequestClose={closeModal}
             >
                 {images?.map((image) => (
-                    <div style={{position: "relative"}}>
+                    <div style={{ position: "relative" }}>
                         <img
                             alt="profile"
-                            style={{width: '500px', height: '300px', objectFit: "cover"}}
+                            style={{ width: '500px', height: '300px', objectFit: "cover" }}
                             src={image?.url}>
                         </img>
                         <div
                             id={image?.id}
                             onClick={() => handleImageDelete(image)}
                             className={listing?.owner_id === user?.id ? 'big-font' : 'hidden'}
-                            style={{position: "absolute", top: "5%", left: "2%",
-                                    backgroundColor: "white", padding: "5px", borderRadius: "10px",
-                                    cursor: "pointer"}}>
+                            style={{
+                                position: "absolute", top: "5%", left: "2%",
+                                backgroundColor: "white", padding: "5px", borderRadius: "10px",
+                                cursor: "pointer"
+                            }}>
                             Delete
                         </div>
                     </div>
@@ -157,7 +159,7 @@ const ListingProfile = () => {
 
                     <div ref={myRef} className='border-bottom'>
                         <p className='big-font sub-header'>Select Your Dates</p>
-                        <Calendar  tileDisabled={({ date, view }) =>
+                        <Calendar tileDisabled={({ date, view }) =>
                             (view === 'month') && // Block day tiles only
                             disabledDates.some(disabledDate =>
                                 date.getFullYear() === disabledDate.getFullYear() &&
@@ -180,26 +182,36 @@ const ListingProfile = () => {
                         <p
                             style={{ margin: "0px" }}
                             className='big-font'>
-                                ${listing?.price}
+                            ${listing?.price}
                         </p>
                         <p
                             style={{ margin: "0px 0px 0px 3px", fontSize: "17px" }} c
                             className='small-font'>
-                                night
+                            night
                         </p>
                     </div>
-                    <div className='flex small-font'>
+                    <div style={{border: '1px solid black'}} className='flex small-font'>
                         <div>
-                            checkin
+                            <div>
+                                checkout
+                            </div>
+                            <div>
+                                <input type='date' />
+                            </div>
                         </div>
                         <div>
-                            checkout
+                            <div>
+                                checkout
+                            </div>
+                            <div>
+                                <input type='date' />
+                            </div>
                         </div>
                     </div>
                     <div className='small-font'>
                         Guests
                     </div>
-                    <div className='small-font' onClick={executeScroll}>
+                    <div style={{textAlign: 'center'}} className='small-font' onClick={executeScroll}>
                         check availability
                     </div>
                 </div>

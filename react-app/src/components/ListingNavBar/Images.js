@@ -16,10 +16,6 @@ const Images = ({ imagesFuncs, hasSubmitted, imageErrors }) => {
         files, setFiles
     } = imagesFuncs;
 
-    // useEffect(() => {
-    //     files?.forEach(file => URL.createObjectURL(file))
-    // }, [files]);
-
     const onSortEnd = ({ oldIndex, newIndex }) => {
         setFiles(arrayMoveImmutable(files, oldIndex, newIndex));
     };
