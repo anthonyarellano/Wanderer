@@ -24,6 +24,8 @@ const ListingProfile = () => {
     const [unavailable, setUnavailable] = useState("");
     const { listingId } = useParams();
 
+    // Uses custom functions to format incoming date information &
+    // create an array which the calendar uses to block off unavailable days.
     let disabledDates;
     if (reservations) {
         let formatted = formatDbDate(reservations);
@@ -82,24 +84,25 @@ const ListingProfile = () => {
         height: '100%', width: '100%', objectFit: "cover", borderRadius: "0px 0px 10px 0px"
     };
 
-    // TODO programatically find dates
-    // const disabledDates = [
-    //     new Date(2022, 4, 20),
-    //     new Date(2022, 4, 21)
-    // ]
-
     const handleDateUpdate = (dateArr) => {
-        console.log(dateArr);
         setStartDate(dateArr[0]);
         setEndDate(dateArr[1]);
     }
 
     const handleSelection = (date) => {
+        // setUnavailable("")
         let dateSplit = date[0].split('-');
         let firstDate = new Date(dateSplit[0], dateSplit[1], dateSplit[2])
-        const lastDate = disabledDates[0]
-        setUnavailable(lastDate)
+        // const lastDate = disabledDates[0]
+        // setUnavailable(lastDate)
         setSelected(firstDate);
+    }
+
+    const clearDates = (date) => {
+        setSelected("");
+        setUnavailable("");
+        setStartDate("");
+        setEndDate("");
     }
 
     return (
@@ -201,7 +204,9 @@ const ListingProfile = () => {
                             maxDate={unavailable ? unavailable : null}
                             showDoubleView={true}
                             selectRange={true}
+                            value={[startDate, endDate]}
                         />
+                        <p onClick={clearDates}>clear dates</p>
                     </div>
                 </div>
                 <div className='listing-booking-container'>

@@ -1,4 +1,3 @@
-import { formatDate } from "./formatDate";
 import { formatDbDate } from "./formatDbDate";
 
 export const createDisabledRange = (dateArr) => {
