@@ -97,3 +97,12 @@
     display: flex;
     align-items: center;
 }
+
+.booking-availability-button {
+    font-family: "CerealBd";
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0px 10px 0px;
+    background-color: #E71E50;
+}

@@ -211,8 +211,14 @@ const ListingProfile = () => {
                     <div className='small-font'>
                         Guests
                     </div>
-                    <div style={{textAlign: 'center'}} className='small-font' onClick={executeScroll}>
-                        check availability
+                    <div>
+                        <input style={{width: "100%"}} type='number' />
+                    </div>
+                    <div
+                        className='booking-availability-button'
+                        onClick={executeScroll}
+                        style={{textAlign: 'center'}}>
+                        Check availability
                     </div>
                 </div>
             </div>
