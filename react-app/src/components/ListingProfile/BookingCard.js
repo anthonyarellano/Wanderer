@@ -1,4 +1,7 @@
+import { useState } from 'react';
+
 const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
+    const [checkout, setCheckOut] = useState(false);
     const { guests, setGuests } = funcs;
 
     let submitReady;
@@ -8,7 +11,8 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
         if (!submitReady) {
             executeScroll()
         };
-        if (submitReady) {
+        if (submitReady && startDate && endDate) {
+            setCheckOut(true);
             console.log("SUBMITTED!");
         };
     };
@@ -22,6 +26,30 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
         }
 
     }
+
+    let links;
+    if (checkout) {
+        links = (
+            <div>
+                <div
+                    className='booking-availability-button'
+                    onClick={handleCheckAvail}
+                    style={{ textAlign: 'center', cursor: 'pointer' }}>
+                    Reserve
+                </div>
+            </div>
+        )
+    } if (!checkout) {
+        links = (
+            <div
+                className='booking-availability-button'
+                onClick={handleCheckAvail}
+                style={{ textAlign: 'center', cursor: 'pointer' }}>
+                Check availability
+            </div>
+        )
+    }
+
 
     return (
         <div className='listing-booking-container'>
@@ -79,37 +107,23 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
                 <div className='booking-availability-text-header'>
                     GUESTS
                 </div>
-                <div style={{justifyContent: "space-between" }} className='flex'>
+                <div style={{ justifyContent: "space-between" }} className='flex'>
                     <div className="big-font">
                         {guests}
                     </div>
                     <div className='flex'>
                         <div
                             className='big-font unselectable'
-                            style={{cursor: "pointer", fontSize: "20px"}}
+                            style={{ cursor: "pointer", fontSize: "20px" }}
                             onClick={() => handleSet("subtract")}>-</div>
                         <div
                             className='big-font unselectable'
-                            style={{cursor: "pointer", marginLeft: "15px", fontSize: "20px"}}
+                            style={{ cursor: "pointer", marginLeft: "15px", fontSize: "20px" }}
                             onClick={() => handleSet("add")}>+</div>
                     </div>
-                    {/* <input
-                        type='number'
-                        value={guests}
-                        style={{ width: "100%" }}
-                        className='booking-input-box'
-                        placeholder='Enter amount of guests'
-                        max={listing?.maximum_guests}
-                        onChange={(e) => setGuests(e.target.value)}
-                    /> */}
                 </div>
             </div>
-            <div
-                className='booking-availability-button'
-                onClick={handleCheckAvail}
-                style={{ textAlign: 'center', cursor: 'pointer' }}>
-                Check availability
-            </div>
+            {links}
         </div>
     )
 };
