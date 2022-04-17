@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getListing, getImages, deleteImage } from '../../store/listings';
 import { formatDate } from '../Utils/formatDate';
 import { formatDbDate } from '../Utils/formatDbDate';
+import { createDisabledRange } from '../Utils/createdDisabledRange';
 import Calendar from 'react-calendar';
 import Modal from 'react-modal';
 import AmenitiesCard from './AmenitiesCard';
@@ -22,9 +23,13 @@ const ListingProfile = () => {
     const [selected, setSelected] = useState("");
     const [unavailable, setUnavailable] = useState("");
     const { listingId } = useParams();
+
+    let disabledDates;
     if (reservations) {
-        console.log(formatDbDate(reservations));
+        let formatted = formatDbDate(reservations);
+        disabledDates = createDisabledRange(formatted);
     }
+
     // Conditional steps to ensure variable availabiliy when
     // coming from "Your Listings"
     let listing;
@@ -78,10 +83,10 @@ const ListingProfile = () => {
     };
 
     // TODO programatically find dates
-    const disabledDates = [
-        new Date(2022, 4, 20),
-        new Date(2022, 4, 21)
-    ]
+    // const disabledDates = [
+    //     new Date(2022, 4, 20),
+    //     new Date(2022, 4, 21)
+    // ]
 
     const handleDateUpdate = (dateArr) => {
         console.log(dateArr);
