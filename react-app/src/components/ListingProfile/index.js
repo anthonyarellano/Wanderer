@@ -3,23 +3,28 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListing, getImages, deleteImage } from '../../store/listings';
 import { formatDate } from '../Utils/formatDate';
+import { formatDbDate } from '../Utils/formatDbDate';
 import Calendar from 'react-calendar';
 import Modal from 'react-modal';
 import AmenitiesCard from './AmenitiesCard';
 import './style/listing-profile.css';
-import './style/calendar.css';;
+import './style/calendar.css';import { getReservations } from '../../store/reservations';
+;
 
 const ListingProfile = () => {
     const user = useSelector((state) => state.session.user);
     const listingState = useSelector((state) => state.listings.selected);
     const imagesState = useSelector((state) => state.listings.images);
+    const reservations = useSelector((state) => Object.values(state.reservations))
     const [isOpen, setIsOpen] = useState(false);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [selected, setSelected] = useState("");
     const [unavailable, setUnavailable] = useState("");
     const { listingId } = useParams();
-
+    if (reservations) {
+        console.log(formatDbDate(reservations));
+    }
     // Conditional steps to ensure variable availabiliy when
     // coming from "Your Listings"
     let listing;
@@ -47,17 +52,18 @@ const ListingProfile = () => {
 
     const handleImageDelete = async (image) => {
         if (images?.length > 5) {
-            await dispatch(deleteImage(image))
-        }
+            await dispatch(deleteImage(image));
+        };
         if (images?.length <= 5) {
-            return alert('Listing must have a minimum of 5 photos.')
+            return alert('Listing must have a minimum of 5 photos.');
         };
     };
 
     useEffect(() => {
-        dispatch(getListing(listingId))
-        dispatch(getImages(listingId))
-    }, [listingId, dispatch])
+        dispatch(getListing(listingId));
+        dispatch(getImages(listingId));
+        dispatch(getReservations(listingId));
+    }, [listingId, dispatch]);
 
     const style1 = {
         height: '100%', width: '100%', objectFit: "cover"

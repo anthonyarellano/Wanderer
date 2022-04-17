@@ -3,6 +3,7 @@ from .users import seed_users, undo_users
 from .room_types import seed_room_types, undo_seed_room_types
 from .listings import seed_listings, undo_seed_listings
 from .images import seed_images, undo_seed_images
+from .reservations import seed_reservations, undo_reservations
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
 seed_commands = AppGroup('seed')
@@ -15,6 +16,7 @@ def seed():
     seed_room_types()
     seed_listings()
     seed_images()
+    seed_reservations()
     # Add other seed functions here
 
 
@@ -24,5 +26,6 @@ def undo():
     undo_users()
     undo_seed_room_types()
     undo_seed_images()
+    undo_reservations()
     undo_seed_listings()
     # Add other undo functions here

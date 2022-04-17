@@ -1,6 +1,6 @@
 const ADD_ONE = 'listings/ADD_ONE';
-const LOAD_IMAGES = 'listings/LOAD_IMAGES';
 const SELECT_ONE = 'listings/SELECT_ONE';
+const LOAD_IMAGES = 'listings/LOAD_IMAGES';
 const LOAD_LISTINGS = 'listings/LOAD_LISTINGS';
 const UPDATE_ONE = 'listings/UPDATE_ONE';
 const DELETE_IMAGE = 'listings/DELETE_IMAGE';
@@ -129,7 +129,6 @@ export const getUserListings = (userId) => async (dispatch) => {
     const response = await fetch(`/api/listings/user/${userId}`);
     if (response.ok) {
         const listings = await response.json();
-        console.log("in thunk--------------------", listings);
         dispatch(loadListings(listings));
         return listings;
     };
@@ -153,7 +152,7 @@ export const updateListing = (listing, listingId) => async (dispatch) => {
 const initialState = {
     images: {},
     selected: {},
-    listings: {}
+    listings: {},
 };
 
 const listingReducer = (state = initialState, action) => {
