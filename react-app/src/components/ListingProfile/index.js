@@ -21,8 +21,8 @@ const ListingProfile = () => {
     let listing;
     let images;
     let mainImage;
-    if (listingState) listing = listingState[listingId]
-    if (imagesState) images = Object.values(imagesState)
+    if (listingState) listing = listingState[listingId];
+    if (imagesState) images = Object.values(imagesState);
     if (images) mainImage = images[0];
     const secondaryImages = images?.slice(1, 5);
 
@@ -43,14 +43,12 @@ const ListingProfile = () => {
 
     const handleImageDelete = async (image) => {
         if (images?.length > 5) {
-            console.log(image);
-            console.log("delete");
             await dispatch(deleteImage(image))
         }
         if (images?.length <= 5) {
             return alert('Listing must have a minimum of 5 photos.')
-        }
-    }
+        };
+    };
 
     useEffect(() => {
         dispatch(getListing(listingId))

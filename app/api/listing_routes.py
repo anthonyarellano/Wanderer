@@ -124,3 +124,11 @@ def delete_listing_image(id):
     db.session.delete(image)
     db.session.commit()
     return jsonify("Success")
+
+
+@listing_routes.route('/delete/<int:id>', methods=['DELETE'])
+def delete_listing(id):
+    listing = Listing.query.get(id)
+    db.session.delete(listing)
+    db.session.commit()
+    return jsonify("Success")

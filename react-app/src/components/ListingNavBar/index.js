@@ -213,7 +213,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     }
 
     // eslint-disable-next-line
-    const submitAWS = async (listingId, files) => {
+    const submitAWS = async (listingId, files, initialize) => {
         let fileUrls = [];
         if (files.length) {
             openModal()
@@ -230,8 +230,8 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
                     .send((err, data) => {
                         if (err) return console.log((err));;
                         if (data) {
-                            fileUrls.push(`${data.Location}=index?${listing.images.length + i}`);
-                            if (fileUrls.length == files.length) {
+                            fileUrls.push(`${data.Location}=index?${initialize ? i : listing?.images?.length + i}`);
+                            if (fileUrls.length === files.length) {
                                 dispatch(createImages(fileUrls, listingId)).then(() => history.push(`/listings/${listingId}`))
                             }
                         };
@@ -281,7 +281,8 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
             }
             if (!editEnable) {
                 const newListing = await dispatch(createListing(listingInfo));
-                submitAWS(newListing.id, files);
+                let initialize = true;
+                submitAWS(newListing.id, files, initialize);
             } if (editEnable) {
                 await dispatch(updateListing(listingInfo, listing.id));
                 if (files.length) {

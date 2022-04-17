@@ -4,6 +4,7 @@ const SELECT_ONE = 'listings/SELECT_ONE';
 const LOAD_LISTINGS = 'listings/LOAD_LISTINGS';
 const UPDATE_ONE = 'listings/UPDATE_ONE';
 const DELETE_IMAGE = 'listings/DELETE_IMAGE';
+const DELETE_LISTING = 'listings/DELETE_LISTING';
 
 const addOne = (listing) => {
     return {
@@ -44,8 +45,26 @@ const removeImage = (imageIndex) => {
     return {
         type: DELETE_IMAGE,
         imageIndex
-    }
+    };
 };
+
+const removeListing = (listingId) => {
+    return {
+        type: DELETE_LISTING,
+        listingId
+    };
+};
+
+export const deleteListing = (listingId) => async (dispatch) => {
+    const response = await fetch(`/api/listings/delete/${listingId}`, {
+        method: "DELETE"
+    });
+    if (response.ok) {
+        const res = await response.json();
+        dispatch(removeListing(listingId));
+        return res;
+    }
+}
 
 export const deleteImage = (image) => async (dispatch) => {
     const response = await fetch(`/api/listings/images/delete/${image?.id}`, {
@@ -110,6 +129,7 @@ export const getUserListings = (userId) => async (dispatch) => {
     const response = await fetch(`/api/listings/user/${userId}`);
     if (response.ok) {
         const listings = await response.json();
+        console.log("in thunk--------------------", listings);
         dispatch(loadListings(listings));
         return listings;
     };
@@ -132,19 +152,20 @@ export const updateListing = (listing, listingId) => async (dispatch) => {
 
 const initialState = {
     images: {},
-    selected: {}
+    selected: {},
+    listings: {}
 };
 
 const listingReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_ONE: {
-            const newState = {...state, images: {...state.images}};
-            newState[action.listing.id] = action.listing;
+            const newState = {...state, listings: {...state.listings}, images: {...state.images}};
+            newState.listings[action.listing.id] = action.listing;
             return newState;
         };
         case LOAD_IMAGES: {
-            const newState = {...state, images: {}, selected: {...state.selected}};
+            const newState = {...state, listings: {...state.listings},images: {}, selected: {...state.selected}};
             action.images.forEach((image) => {
                 const imgArr = image.url.split('=index?');
                 image.url = imgArr[0];
@@ -154,24 +175,29 @@ const listingReducer = (state = initialState, action) => {
             return newState;
         };
         case SELECT_ONE: {
-            const newState = {...state, images: {...state.images}, selected: {[action.listing.id]: action.listing}};
+            const newState = {...state, listings: {}, images: {...state.images}, selected: {[action.listing.id]: action.listing}};
             return newState;
         };
         case LOAD_LISTINGS: {
-            const newState = {};
+            const newState = {...state, listings: {}, images: {...state.images}, selected: {}};
             action.listings.forEach((listing) => {
-                newState[listing.id] = listing;
+                newState.listings[listing.id] = listing;
             });
             return newState;
         };
         case UPDATE_ONE: {
-            const newState = {...state, images: {...state.images}, selected: {...state.selected}};
-            newState[action.listing.id] = action.listing;
+            const newState = {...state, listings: {...state.listings}, images: {...state.images}, selected: {...state.selected}};
+            newState.listings[action.listing.id] = action.listing;
             return newState;
         };
         case DELETE_IMAGE: {
-            const newState = {...state, images: {...state.images}, selected: {...state.selected}};
+            const newState = {...state, listings: {...state.listings}, images: {...state.images}, selected: {...state.selected}};
             delete newState.images[action.imageIndex];
+            return newState;
+        }
+        case DELETE_LISTING: {
+            const newState = {...state, listings: {...state.listings}, images: {...state.images}, selected: {...state.selected}};
+            delete newState.listings[action.listingId];
             return newState;
         }
         default:
