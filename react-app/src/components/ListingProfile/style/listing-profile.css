@@ -76,6 +76,7 @@
    border-radius: 10px;
    margin: 20px;
    padding: 15px;
+   box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
 }
 
 .calendar-container {
@@ -105,4 +106,14 @@
     border-radius: 5px;
     margin: 10px 0px 10px 0px;
     background-color: #E71E50;
+}
+
+.booking-availability-text-header {
+    font-family: "CerealBd";
+    font-size: 10px;
+}
+
+.booking-availability-input {
+    border: 1px solid #B0B0B0;
+    padding: 13px;
 }

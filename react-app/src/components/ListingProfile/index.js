@@ -14,6 +14,9 @@ const ListingProfile = () => {
     const listingState = useSelector((state) => state.listings.selected);
     const imagesState = useSelector((state) => state.listings.images);
     const [isOpen, setIsOpen] = useState(false);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [selected, setSelected] = useState("");
     const { listingId } = useParams();
 
     // Conditional steps to ensure variable availabiliy when
@@ -73,6 +76,17 @@ const ListingProfile = () => {
         new Date(2022, 4, 21)
     ]
 
+    const handleDateUpdate = (dateArr) => {
+        console.log(dateArr);
+        setStartDate(dateArr[0]);
+        setEndDate(dateArr[1]);
+    }
+
+    const handleSelection = (date) => {
+        let dateSplit = date[0].split('-');
+        let firstDate = new Date(dateSplit[0], dateSplit[1], dateSplit[2])
+        setSelected(firstDate);
+    }
 
     return (
         <div className='listing-profile-container'>
@@ -167,8 +181,9 @@ const ListingProfile = () => {
                                 date.getDate() === disabledDate.getDate()
                             )}
                             returnValue="range"
-                            onChange={(value, e) => console.log(formatDate(value))}
-                            minDate={new Date()}
+                            onChange={(value, e) => handleDateUpdate(formatDate(value))}
+                            onClickDay={(value, e) => handleSelection(formatDate([value]))}
+                            minDate={selected ? selected : new Date()}
                             showDoubleView={true}
                             selectRange={true}
                         />
@@ -190,29 +205,39 @@ const ListingProfile = () => {
                             night
                         </p>
                     </div>
-                    <div style={{border: '1px solid black'}} className='flex small-font'>
-                        <div>
-                            <div>
-                                checkout
+                    <div
+                        style={{ marginTop: "15px" }}
+                        className='flex small-font'>
+                        <div
+                            style={{ borderRight: "0px", borderRadius: "10px 0px 0px 0px"}}
+                            className='booking-availability-input'>
+                            <div className='booking-availability-text-header'>
+                                CHECK-IN
                             </div>
                             <div>
-                                <input type='date' />
+                                <input value={startDate} readOnly={true} type='date' />
                             </div>
                         </div>
-                        <div>
-                            <div>
-                                checkout
+                        <div
+                            style={{ borderRadius: "0px 10px 0px 0px" }}
+                            className='booking-availability-input'>
+                            <div className='booking-availability-text-header'>
+                                CHECK-OUT
                             </div>
                             <div>
-                                <input type='date' />
+                                <input value={endDate} readOnly={true} type='date' />
                             </div>
                         </div>
                     </div>
-                    <div className='small-font'>
-                        Guests
-                    </div>
-                    <div>
-                        <input style={{width: "100%"}} type='number' />
+                    <div
+                        style={{ borderTop: "0px", borderRadius: "0px 0px 10px 10px"}}
+                        className='booking-availability-input'>
+                        <div className='booking-availability-text-header'>
+                            GUESTS
+                        </div>
+                        <div>
+                            <input style={{width: "100%"}} type='number' />
+                        </div>
                     </div>
                     <div
                         className='booking-availability-button'
