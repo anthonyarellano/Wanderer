@@ -6,6 +6,7 @@ import { formatDate } from '../Utils/formatDate';
 import { formatDbDate } from '../Utils/formatDbDate';
 import { createDisabledRange } from '../Utils/createdDisabledRange';
 import { getReservations } from '../../store/reservations';
+import ImageCard from './ImageCard';
 import Calendar from 'react-calendar';
 import Modal from 'react-modal';
 import AmenitiesCard from './AmenitiesCard';
@@ -17,11 +18,14 @@ const ListingProfile = () => {
     const listingState = useSelector((state) => state.listings.selected);
     const imagesState = useSelector((state) => state.listings.images);
     const reservations = useSelector((state) => Object.values(state.reservations))
+
     const [isOpen, setIsOpen] = useState(false);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [selected, setSelected] = useState("");
     const [unavailable, setUnavailable] = useState("");
+    const [guests, setGuests] = useState("");
+
     const { listingId } = useParams();
 
     // Uses custom functions to format incoming date information &
@@ -121,25 +125,14 @@ const ListingProfile = () => {
                 isOpen={isOpen}
                 onRequestClose={closeModal}
             >
-                {images?.map((image) => (
-                    <div style={{ position: "relative" }}>
-                        <img
-                            alt="profile"
-                            style={{ width: '500px', height: '300px', objectFit: "cover" }}
-                            src={image?.url}>
-                        </img>
-                        <div
-                            id={image?.id}
-                            onClick={() => handleImageDelete(image)}
-                            className={listing?.owner_id === user?.id ? 'big-font' : 'hidden'}
-                            style={{
-                                position: "absolute", top: "5%", left: "2%",
-                                backgroundColor: "white", padding: "5px", borderRadius: "10px",
-                                cursor: "pointer"
-                            }}>
-                            Delete
-                        </div>
-                    </div>
+                {images?.map((image, i) => (
+                    <ImageCard
+                        key={i}
+                        user={user}
+                        image={image}
+                        listing={listing}
+                        handleImageDelete={handleImageDelete}
+                    />
                 ))}
             </Modal>
 
