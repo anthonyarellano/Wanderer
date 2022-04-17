@@ -35,7 +35,7 @@ class Listing(db.Model):
     room_type_id = db.Column(db.Integer, db.ForeignKey('room_types.id'), nullable=False)
     created_at = db.Column(DateTime, default=datetime.utcnow())
 
-    user = db.relationship("User", back_populates="listings", cascade="all, delete")
+    user = db.relationship("User", back_populates="listings")
     reviews = db.relationship("Review", back_populates="listing", cascade="all, delete")
     images = db.relationship("Image", back_populates="listing", cascade="all, delete")
     reservations = db.relationship("Reservation", back_populates="listing", cascade="all, delete")

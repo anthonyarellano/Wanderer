@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { createImages, createListing, updateListing } from '../../store/listings';
@@ -8,8 +9,6 @@ import Amenities from './Amenities';
 import Images from './Images';
 import LoadingModal from '../LoadingModal';
 import './style/listing-navbar.css';
-import { useHistory } from 'react-router-dom';
-
 
 const S3_BUCKET = process.env.REACT_APP_BUCKET;
 const REGION = process.env.REACT_APP_REGION;
@@ -214,8 +213,8 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     }
 
     // eslint-disable-next-line
-    const submitAWS = async (listingId, files) => {
-        let fileUrls = {};
+    const submitAWS = async (listingId, files, initialize) => {
+        let fileUrls = [];
         if (files.length) {
             openModal()
             files.forEach((file, i) => {
@@ -223,22 +222,21 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
                     Body: file,
                     Bucket: S3_BUCKET,
                     Key: file.name
-                  };
-                  myBucket.upload(params)
+                };
+                myBucket.upload(params)
                     .on('httpUploadProgress', (evt) => {
                         setProgress(Math.round((evt.loaded / evt.total) * 100))
                     })
                     .send((err, data) => {
                         if (err) return console.log((err));;
                         if (data) {
-                            fileUrls[`url`] = `${data.Location}=index?${listing.images.length + i}`;
-                            dispatch(createImages(fileUrls, listingId))
+                            fileUrls.push(`${data.Location}=index?${initialize ? i : listing?.images?.length + i}`);
+                            if (fileUrls.length === files.length) {
+                                dispatch(createImages(fileUrls, listingId)).then(() => history.push(`/listings/${listingId}`))
+                            }
                         };
                     })
             })
-            setTimeout(() => {
-                history.push(`/listings/${listingId}`);
-            }, 10000)
         }
     }
 
@@ -283,7 +281,8 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
             }
             if (!editEnable) {
                 const newListing = await dispatch(createListing(listingInfo));
-                submitAWS(newListing.id, files);
+                let initialize = true;
+                submitAWS(newListing.id, files, initialize);
             } if (editEnable) {
                 await dispatch(updateListing(listingInfo, listing.id));
                 if (files.length) {
@@ -327,7 +326,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
                         Images
                     </div>
                     <div
-                        style={submitReady ? {color: 'green', cursor: "pointer"} : {color: 'gray'}}
+                        style={submitReady ? { color: 'green', cursor: "pointer" } : { color: 'gray' }}
                         onClick={handleSubmit}>Submit {progress && `(${progress ? progress : ""})%`}
                     </div>
                 </div>
@@ -356,11 +355,11 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
                         Add Images
                     </div>
                     <div
-                        style={editSubmitReady ? {color: 'green', cursor: "pointer"} : {color: 'gray'}}
+                        style={editSubmitReady ? { color: 'green', cursor: "pointer" } : { color: 'gray' }}
                         onClick={handleSubmit}>Submit {progress && `(${progress ? progress : ""})%`}
                     </div>
                     <div
-                        style={{marginLeft: "3%"}}
+                        style={{ marginLeft: "3%" }}
                         className='listing-nav-button'
                         onClick={() => setEditOn(false)}>
                         Cancel
@@ -401,17 +400,17 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
 
     return (
         <>
-            <LoadingModal modalIsOpen={modalIsOpen}/>
+            <LoadingModal modalIsOpen={modalIsOpen} />
             {links}
             <div style={{ marginLeft: "10%" }}>
                 {active === "About" ?
                     <About aboutErrors={aboutErrors} hasSubmitted={hasSubmitted} aboutFuncs={aboutFuncs} /> :
                     active === "Location" ?
-                    <Location locationErrors={locationErrors} hasSubmitted={hasSubmitted} locationFuncs={locationFuncs} /> :
-                    active === "Amenities" ?
-                    <Amenities amenityErrors={amenityErrors} hasSubmitted={hasSubmitted} amenitiesFuncs={amenitiesFuncs} /> :
-                    active === "Images" ?
-                    <Images imageErrors={imageErrors} hasSubmitted={hasSubmitted} imagesFuncs={imagesFuncs} /> : null}
+                        <Location locationErrors={locationErrors} hasSubmitted={hasSubmitted} locationFuncs={locationFuncs} /> :
+                        active === "Amenities" ?
+                            <Amenities amenityErrors={amenityErrors} hasSubmitted={hasSubmitted} amenitiesFuncs={amenitiesFuncs} /> :
+                            active === "Images" ?
+                                <Images imageErrors={imageErrors} hasSubmitted={hasSubmitted} imagesFuncs={imagesFuncs} /> : null}
             </div>
         </>
     )

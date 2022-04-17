@@ -1,21 +1,31 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getListing, getImages } from '../../store/listings';
+import { getListing, getImages, deleteImage } from '../../store/listings';
+import { formatDate } from '../Utils/formatDate';
 import Calendar from 'react-calendar';
 import Modal from 'react-modal';
-import { formatDate } from '../Utils/formatDate';
 import AmenitiesCard from './AmenitiesCard';
 import './style/listing-profile.css';
 import './style/calendar.css';;
 
 const ListingProfile = () => {
-    const listing = useSelector((state) => Object.values(state.listings.selected)[0])
-    const images = useSelector((state) => Object.values(state.listings.images))
-    const secondaryImages = images.slice(1)
+    const user = useSelector((state) => state.session.user);
+    const listingState = useSelector((state) => state.listings.selected);
+    const imagesState = useSelector((state) => state.listings.images);
     const [isOpen, setIsOpen] = useState(false);
-
     const { listingId } = useParams();
+
+    // Conditional steps to ensure variable availabiliy when
+    // coming from "Your Listings"
+    let listing;
+    let images;
+    let mainImage;
+    if (listingState) listing = listingState[listingId];
+    if (imagesState) images = Object.values(imagesState);
+    if (images) mainImage = images[0];
+    const secondaryImages = images?.slice(1, 5);
+
     const myRef = useRef(null);
     const dispatch = useDispatch();
 
@@ -24,12 +34,21 @@ const ListingProfile = () => {
     const openModal = () => {
         setIsOpen(true);
         return;
-    }
+    };
 
     const closeModal = () => {
         setIsOpen(false);
         return
-    }
+    };
+
+    const handleImageDelete = async (image) => {
+        if (images?.length > 5) {
+            await dispatch(deleteImage(image))
+        }
+        if (images?.length <= 5) {
+            return alert('Listing must have a minimum of 5 photos.')
+        };
+    };
 
     useEffect(() => {
         dispatch(getListing(listingId))
@@ -38,15 +57,15 @@ const ListingProfile = () => {
 
     const style1 = {
         height: '100%', width: '100%', objectFit: "cover"
-    }
+    };
 
     const style2 = {
         height: '100%', width: '100%', objectFit: "cover", borderRadius: "0px 10px 0px 0px"
-    }
+    };
 
     const style3 = {
         height: '100%', width: '100%', objectFit: "cover", borderRadius: "0px 0px 10px 0px"
-    }
+    };
 
     // TODO programatically find dates
     const disabledDates = [
@@ -57,18 +76,31 @@ const ListingProfile = () => {
 
     return (
         <div className='listing-profile-container'>
+            {/* All images display modal */}
             <Modal
                 isOpen={isOpen}
                 onRequestClose={closeModal}
             >
                 {images?.map((image) => (
-                    <img
-                        alt="profile"
-                        style={{width: '500px', height: '300px', objectFit: "cover"}}
-                        src={image?.url}>
-                    </img>
+                    <div style={{position: "relative"}}>
+                        <img
+                            alt="profile"
+                            style={{width: '500px', height: '300px', objectFit: "cover"}}
+                            src={image?.url}>
+                        </img>
+                        <div
+                            id={image?.id}
+                            onClick={() => handleImageDelete(image)}
+                            className={listing?.owner_id === user?.id ? 'big-font' : 'hidden'}
+                            style={{position: "absolute", top: "5%", left: "2%",
+                                    backgroundColor: "white", padding: "5px", borderRadius: "10px",
+                                    cursor: "pointer"}}>
+                            Delete
+                        </div>
+                    </div>
                 ))}
             </Modal>
+
             {/* Top images */}
             <div>
                 <p style={{ fontFamily: 'CerealBd', fontSize: "35px", margin: "0px 0px 5px 0px" }}>{listing?.title}</p>
@@ -76,7 +108,7 @@ const ListingProfile = () => {
             </div>
             <div className='listing-profile-image-container'>
                 <div className='listing-profile-main-image'>
-                    <img alt='main' style={{ width: '100%', height: '100%', borderRadius: "10px 0px 0px 10px", objectFit: 'cover' }} src={images[0]?.url}></img>
+                    <img alt='main' style={{ width: '100%', height: '100%', borderRadius: "10px 0px 0px 10px", objectFit: 'cover' }} src={mainImage?.url}></img>
                 </div>
                 <div className='listing-profile-secondary-images'>
                     {secondaryImages?.map((image, i) => (
@@ -84,7 +116,7 @@ const ListingProfile = () => {
                     ))}
                     <div
                         onClick={openModal}
-                        className='show-all-photos small-font'>show all photos</div>
+                        className='show-all-photos big-font'>show all photos</div>
                 </div>
             </div>
 
@@ -131,7 +163,13 @@ const ListingProfile = () => {
                                 date.getFullYear() === disabledDate.getFullYear() &&
                                 date.getMonth() === disabledDate.getMonth() &&
                                 date.getDate() === disabledDate.getDate()
-                            )} returnValue="range" onChange={(value, e) => console.log(formatDate(value))} minDate={new Date()} showDoubleView={true} selectRange={true} />
+                            )}
+                            returnValue="range"
+                            onChange={(value, e) => console.log(formatDate(value))}
+                            minDate={new Date()}
+                            showDoubleView={true}
+                            selectRange={true}
+                        />
                     </div>
                 </div>
                 <div className='listing-booking-container'>
@@ -139,8 +177,16 @@ const ListingProfile = () => {
                         style={{ fontSize: "23px" }}
                         className='flex'
                     >
-                        <p style={{ margin: "0px" }} className='big-font'>${listing?.price}</p>
-                        <p style={{ margin: "0px 0px 0px 3px", fontSize: "17px" }} className='small-font'>night</p>
+                        <p
+                            style={{ margin: "0px" }}
+                            className='big-font'>
+                                ${listing?.price}
+                        </p>
+                        <p
+                            style={{ margin: "0px 0px 0px 3px", fontSize: "17px" }} c
+                            className='small-font'>
+                                night
+                        </p>
                     </div>
                     <div className='flex small-font'>
                         <div>

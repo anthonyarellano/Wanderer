@@ -5,9 +5,13 @@ import MyListingCard from './MyListingCard';
 
 const MyListings = () => {
     const user = useSelector((state) => state.session.user);
-    const listings = useSelector((state) => Object.values(state.listings))
+    const listings = useSelector((state) => state.listings.listings)
     const dispatch = useDispatch();
 
+    let listingArr;
+    if (listings) {
+        listingArr = Object.values(listings)
+    }
 
     useEffect(() => {
         dispatch(getUserListings(user.id));
@@ -18,7 +22,7 @@ const MyListings = () => {
             <div>
                 <p style={{fontSize: "40px"}} className="big-font">Your Listings</p>
             </div>
-            {listings?.map((listing) => (
+            {listingArr?.map((listing) => (
                 <MyListingCard listing={listing} />
             ))}
         </div>

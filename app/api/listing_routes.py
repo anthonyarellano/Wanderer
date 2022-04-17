@@ -58,13 +58,24 @@ def create_listing():
 @listing_routes.route('/create/images/<int:id>', methods=["POST"])
 def create_listing_images(id):
     images = request.json
-    newImage = Image(
+    print(images)
+    imageList = []
+    for image in images:
+        newImage = Image(
             listing_id=id,
-            url=images['url']
+            url=image
         )
-    db.session.add(newImage)
-    db.session.commit()
-    return newImage.to_dict()
+        db.session.add(newImage)
+        db.session.commit()
+        imageList.append(newImage.to_dict())
+    # newImage = Image(
+    #         listing_id=id,
+    #         url=images['url']
+    #     )
+    # db.session.add(newImage)
+    # db.session.commit()
+    # return newImage.to_dict()
+    return jsonify(imageList)
 
 
 @listing_routes.route('/user/<int:id>')
@@ -105,3 +116,19 @@ def update_listing(id):
     dbListing.room_type_id = listing['room_type_id']
     db.session.commit()
     return dbListing.to_dict()
+
+
+@listing_routes.route('/images/delete/<int:id>', methods=['DELETE'])
+def delete_listing_image(id):
+    image = Image.query.get(id)
+    db.session.delete(image)
+    db.session.commit()
+    return jsonify("Success")
+
+
+@listing_routes.route('/delete/<int:id>', methods=['DELETE'])
+def delete_listing(id):
+    listing = Listing.query.get(id)
+    db.session.delete(listing)
+    db.session.commit()
+    return jsonify("Success")
