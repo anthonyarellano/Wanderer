@@ -90,21 +90,18 @@ const ListingProfile = () => {
     }
 
     const handleSelection = (date) => {
-        // setUnavailable("")
         let dateSplit = date[0].split('-');
         let firstDate = new Date(dateSplit[0], dateSplit[1], dateSplit[2])
-        // const lastDate = disabledDates[0]
-        // setUnavailable(lastDate)
-        handleUnavailable(firstDate)
+        handleUnavailable(firstDate);
         setSelected(firstDate);
-    }
+    };
 
-    const clearDates = (date) => {
+    const clearDates = () => {
         setSelected("");
         setUnavailable("");
         setStartDate("");
         setEndDate("");
-    }
+    };
 
     const handleUnavailable = (firstDate) => {
         let i = 0;
@@ -113,8 +110,9 @@ const ListingProfile = () => {
                 setUnavailable(disabledDates[i]);
                 return;
             };
-        }
-    }
+            i++;
+        };
+    };
 
     return (
         <div className='listing-profile-container'>
@@ -217,7 +215,10 @@ const ListingProfile = () => {
                             selectRange={true}
                             value={[startDate, endDate]}
                         />
-                        <p onClick={clearDates}>clear dates</p>
+                        <p
+                            className='big-font'
+                            style={{cursor: "pointer", textDecoration: 'underline'}}
+                            onClick={clearDates}>clear dates</p>
                     </div>
                 </div>
                 <div className='listing-booking-container'>
