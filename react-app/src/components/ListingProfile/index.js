@@ -17,6 +17,7 @@ const ListingProfile = () => {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [selected, setSelected] = useState("");
+    const [unavailable, setUnavailable] = useState("");
     const { listingId } = useParams();
 
     // Conditional steps to ensure variable availabiliy when
@@ -85,6 +86,8 @@ const ListingProfile = () => {
     const handleSelection = (date) => {
         let dateSplit = date[0].split('-');
         let firstDate = new Date(dateSplit[0], dateSplit[1], dateSplit[2])
+        const lastDate = disabledDates[0]
+        setUnavailable(lastDate)
         setSelected(firstDate);
     }
 
@@ -184,6 +187,7 @@ const ListingProfile = () => {
                             onChange={(value, e) => handleDateUpdate(formatDate(value))}
                             onClickDay={(value, e) => handleSelection(formatDate([value]))}
                             minDate={selected ? selected : new Date()}
+                            maxDate={unavailable ? unavailable : null}
                             showDoubleView={true}
                             selectRange={true}
                         />
