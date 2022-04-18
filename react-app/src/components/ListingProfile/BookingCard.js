@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { daysBetween } from '../Utils/daysBetween';
 
 const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
-    // const [checkout, setCheckOut] = useState(false);
     const [nights, setNights] = useState('');
     const { guests, setGuests, checkout, setCheckOut } = funcs;
 
@@ -16,8 +15,6 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
         if (submitReady && startDate && endDate) {
             setCheckOut(true);
             setNights(daysBetween(startDate, endDate));
-            // console.log(daysBetween(startDate, endDate));
-
         };
     };
 
