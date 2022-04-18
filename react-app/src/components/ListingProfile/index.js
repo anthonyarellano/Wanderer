@@ -27,7 +27,7 @@ const ListingProfile = () => {
     const [endDate, setEndDate] = useState("");
     const [selected, setSelected] = useState("");
     const [unavailable, setUnavailable] = useState("");
-    const [guests, setGuests] = useState(0);
+    const [guests, setGuests] = useState(1);
     const [checkout, setCheckOut] = useState(false);
 
     const { listingId } = useParams();

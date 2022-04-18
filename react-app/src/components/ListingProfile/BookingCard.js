@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { daysBetween } from '../Utils/daysBetween';
 
 const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
@@ -7,6 +7,12 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
 
     let submitReady;
     if (startDate && endDate && guests <= listing?.maximum_guests) submitReady = true;
+
+    // Setting nights whenever the startDate or endDate are
+    // changed. 
+    useEffect(() => {
+        setNights(() => daysBetween(startDate, endDate))
+    }, [startDate, endDate])
 
     const handleCheckAvail = () => {
         if (!submitReady) {
@@ -22,11 +28,15 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
         if (key === "add" && guests < listing?.maximum_guests) {
             setGuests((guests) => guests + 1)
         };
-        if (key === "subtract" && guests <= listing?.maximum_guests && guests > 0) {
+        if (key === "subtract" && guests <= listing?.maximum_guests && guests > 1) {
             setGuests((guests) => guests - 1)
-        }
+        };
 
-    }
+    };
+
+    const handleReservation = () => {
+
+    };
 
     let links;
     if (checkout) {
@@ -34,7 +44,7 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
             <div>
                 <div
                     className='booking-availability-button'
-                    onClick={handleCheckAvail}
+                    onClick={handleReservation}
                     style={{ textAlign: 'center', cursor: 'pointer' }}>
                     Reserve
                 </div>
@@ -48,7 +58,7 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
                         ${listing?.price} x {nights} nights
                     </div>
                     <div>
-                        ${listing?.price * nights}
+                        ${listing?.price * nights}.00
                     </div>
                 </div>
                 <div
@@ -62,10 +72,9 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
                         Toal before taxes
                     </div>
                     <div>
-                        ${listing?.price * nights}
+                        ${listing?.price * nights}.00
                     </div>
                 </div>
-
             </div>
         )
     } if (!checkout) {
