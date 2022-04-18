@@ -8,7 +8,7 @@ const ShowListing = ({id}) => {
                     justifyContent: "space-between",
                     cursor: "pointer",
                     borderTop: "1px solid #DDDDDD",
-                    margin: "20px 20px 0px 20px"
+                    margin: "1px 20px 20px 20px"
                 }}
                 className='flex'>
                 <div className='flex'>

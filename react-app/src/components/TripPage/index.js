@@ -4,6 +4,7 @@ import { useParams, Redirect } from "react-router-dom";
 import { getSingleReservation } from "../../store/reservations";
 import { useState } from 'react';
 import YourStay from "./YourStay";
+import ReservationDetails from "./ReservationDetails";
 import './style/trip-page.css';
 
 const TripPage = () => {
@@ -36,6 +37,7 @@ const TripPage = () => {
                 {/* your stay component */}
                 <YourStay reservation={reservation[0]}/>
                 {/* reservation details component */}
+                <ReservationDetails reservation={reservation[0]}/>
                 {/* getting there component */}
                 {/* where youre staying component */}
                 {/* hosted by component */}
