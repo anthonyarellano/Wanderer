@@ -28,6 +28,7 @@ const ListingProfile = () => {
     const [selected, setSelected] = useState("");
     const [unavailable, setUnavailable] = useState("");
     const [guests, setGuests] = useState(0);
+    const [checkout, setCheckOut] = useState(false);
 
     const { listingId } = useParams();
 
@@ -96,6 +97,7 @@ const ListingProfile = () => {
         setUnavailable("");
         setStartDate("");
         setEndDate("");
+        setCheckOut(false);
     };
 
     const handleUnavailable = (firstDate) => {
@@ -219,7 +221,7 @@ const ListingProfile = () => {
                     </div>
                 </div>
                 <BookingCard
-                    funcs={{guests, setGuests}}
+                    funcs={{guests, setGuests, checkout, setCheckOut}}
                     endDate={endDate}
                     startDate={startDate}
                     listing={listing}
