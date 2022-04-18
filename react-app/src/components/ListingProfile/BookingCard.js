@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { daysBetween } from '../Utils/daysBetween';
 
 const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
-    const [checkout, setCheckOut] = useState(false);
     const [nights, setNights] = useState('');
-    const { guests, setGuests } = funcs;
+    const { guests, setGuests, checkout, setCheckOut } = funcs;
 
     let submitReady;
     if (startDate && endDate && guests <= listing?.maximum_guests) submitReady = true;
@@ -16,8 +15,6 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
         if (submitReady && startDate && endDate) {
             setCheckOut(true);
             setNights(daysBetween(startDate, endDate));
-            // console.log(daysBetween(startDate, endDate));
-
         };
     };
 
