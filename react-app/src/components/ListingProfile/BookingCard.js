@@ -6,7 +6,6 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
     const [nights, setNights] = useState('');
     const { guests, setGuests } = funcs;
 
-    console.log(startDate, endDate, nights, guests);
     let submitReady;
     if (startDate && endDate && guests <= listing?.maximum_guests) submitReady = true;
 
