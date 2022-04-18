@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, abort
 from app.models import db, Listing, Image, Reservation
 
 reservation_routes = Blueprint('reservations', __name__)
@@ -15,6 +15,8 @@ def get_listing_reservations(id):
 @reservation_routes.route('/<int:id>')
 def get_reservation(id):
     reservation = Reservation.query.get(id)
+    if reservation is None:
+        abort(404)
     return reservation.to_dict()
 
 
