@@ -39,6 +39,15 @@ export const getReservations = (listingId) => async (dispatch) => {
     };
 };
 
+export const getUserReservations = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/reservations/user/${userId}`);
+    if (response.ok) {
+        const reservations = await response.json();
+        dispatch(loadReservations(reservations));
+        return reservations;
+    };
+}
+
 const initialState = {}
 
 const reservationReducer = (state = initialState, action) => {

@@ -12,6 +12,15 @@ def get_listing_reservations(id):
     return jsonify(reservationList)
 
 
+@reservation_routes.route('/user/<int:id>')
+def get_user_reservations(id):
+    reservations = Reservation.query.filter(Reservation.user_id == id).order_by(Reservation.start_date).all()
+    reservationList = []
+    for reservation in reservations:
+        reservationList.append(reservation.to_dict())
+    return jsonify(reservationList)
+
+
 @reservation_routes.route('/', methods=["POST"])
 def create_reservation():
     reservation = request.json
