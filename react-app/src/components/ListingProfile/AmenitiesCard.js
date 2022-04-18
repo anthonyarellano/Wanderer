@@ -2,7 +2,7 @@ import './style/amenities-card.css';
 
 const AmenitiesCard = ({ listing }) => {
     return (
-        <div>
+        <div className='border-bottom'>
             <p className='big-font sub-header'>
                 What this place offers
             </p>

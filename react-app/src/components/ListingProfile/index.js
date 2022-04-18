@@ -3,18 +3,41 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListing, getImages, deleteImage } from '../../store/listings';
 import { formatDate } from '../Utils/formatDate';
+import { formatDbDate } from '../Utils/formatDbDate';
+import { createDisabledRange } from '../Utils/createdDisabledRange';
+import { getReservations } from '../../store/reservations';
+import { formatDateForCalendar } from '../Utils/formatDateForCalendar';
+import ImageCard from './ImageCard';
 import Calendar from 'react-calendar';
 import Modal from 'react-modal';
 import AmenitiesCard from './AmenitiesCard';
+import ProfileImageGallery from './ProfileImageGallery';
+import BookingCard from './BookingCard';
 import './style/listing-profile.css';
-import './style/calendar.css';;
+import './style/calendar.css';
 
 const ListingProfile = () => {
     const user = useSelector((state) => state.session.user);
     const listingState = useSelector((state) => state.listings.selected);
     const imagesState = useSelector((state) => state.listings.images);
+    const reservations = useSelector((state) => Object.values(state.reservations))
+
     const [isOpen, setIsOpen] = useState(false);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [selected, setSelected] = useState("");
+    const [unavailable, setUnavailable] = useState("");
+    const [guests, setGuests] = useState(0);
+
     const { listingId } = useParams();
+
+    // Uses custom functions to format incoming date information &
+    // create an array which the calendar uses to block off unavailable days.
+    let disabledDates;
+    if (reservations) {
+        let formatted = formatDbDate(reservations);
+        disabledDates = createDisabledRange(formatted);
+    }
 
     // Conditional steps to ensure variable availabiliy when
     // coming from "Your Listings"
@@ -43,82 +66,91 @@ const ListingProfile = () => {
 
     const handleImageDelete = async (image) => {
         if (images?.length > 5) {
-            await dispatch(deleteImage(image))
-        }
+            await dispatch(deleteImage(image));
+        };
         if (images?.length <= 5) {
-            return alert('Listing must have a minimum of 5 photos.')
+            return alert('Listing must have a minimum of 5 photos.');
         };
     };
 
     useEffect(() => {
-        dispatch(getListing(listingId))
-        dispatch(getImages(listingId))
-    }, [listingId, dispatch])
+        dispatch(getListing(listingId));
+        dispatch(getImages(listingId));
+        dispatch(getReservations(listingId));
+    }, [listingId, dispatch]);
 
-    const style1 = {
-        height: '100%', width: '100%', objectFit: "cover"
+    useEffect(() => {
+        if (selected) {
+            handleUnavailable(selected);
+        }
+    }, [selected])
+
+    const handleDateUpdate = (dateArr) => {
+        setStartDate(dateArr[0]);
+        setEndDate(dateArr[1]);
     };
 
-    const style2 = {
-        height: '100%', width: '100%', objectFit: "cover", borderRadius: "0px 10px 0px 0px"
+    const handleSelection = (date) => {
+        let dateSplit = date[0].split('-');
+        let firstDate = new Date(dateSplit[0], dateSplit[1], dateSplit[2])
+        setSelected(firstDate)
     };
 
-    const style3 = {
-        height: '100%', width: '100%', objectFit: "cover", borderRadius: "0px 0px 10px 0px"
+    const clearDates = () => {
+        setSelected("");
+        setUnavailable("");
+        setStartDate("");
+        setEndDate("");
     };
 
-    // TODO programatically find dates
-    const disabledDates = [
-        new Date(2022, 4, 20),
-        new Date(2022, 4, 21)
-    ]
-
+    const handleUnavailable = (firstDate) => {
+        let i = 0;
+        while (i < disabledDates?.length) {
+            if (firstDate < disabledDates[i]) {
+                setUnavailable(disabledDates[i])
+                return;
+            };
+            i++;
+        };
+    };
 
     return (
         <div className='listing-profile-container'>
+
             {/* All images display modal */}
             <Modal
                 isOpen={isOpen}
                 onRequestClose={closeModal}
             >
-                {images?.map((image) => (
-                    <div style={{position: "relative"}}>
-                        <img
-                            alt="profile"
-                            style={{width: '500px', height: '300px', objectFit: "cover"}}
-                            src={image?.url}>
-                        </img>
-                        <div
-                            id={image?.id}
-                            onClick={() => handleImageDelete(image)}
-                            className={listing?.owner_id === user?.id ? 'big-font' : 'hidden'}
-                            style={{position: "absolute", top: "5%", left: "2%",
-                                    backgroundColor: "white", padding: "5px", borderRadius: "10px",
-                                    cursor: "pointer"}}>
-                            Delete
-                        </div>
-                    </div>
+                {images?.map((image, i) => (
+                    <ImageCard
+                        key={i}
+                        user={user}
+                        image={image}
+                        listing={listing}
+                        handleImageDelete={handleImageDelete}
+                    />
                 ))}
             </Modal>
 
             {/* Top images */}
             <div>
-                <p style={{ fontFamily: 'CerealBd', fontSize: "35px", margin: "0px 0px 5px 0px" }}>{listing?.title}</p>
-                <p style={{ fontFamily: 'CerealLight', fontSize: "20px", margin: "0px 0px 15px 0px" }}>{listing?.city}, United States</p>
+                <p
+                    style={{ fontFamily: 'CerealBd', fontSize: "35px", margin: "0px 0px 5px 0px" }}
+                >
+                    {listing?.title}
+                </p>
+                <p
+                    style={{ fontFamily: 'CerealLight', fontSize: "20px", margin: "0px 0px 15px 0px" }}
+                >
+                    {listing?.city}, United States
+                </p>
             </div>
-            <div className='listing-profile-image-container'>
-                <div className='listing-profile-main-image'>
-                    <img alt='main' style={{ width: '100%', height: '100%', borderRadius: "10px 0px 0px 10px", objectFit: 'cover' }} src={mainImage?.url}></img>
-                </div>
-                <div className='listing-profile-secondary-images'>
-                    {secondaryImages?.map((image, i) => (
-                        <img alt={`url${i}`} className='image' style={i === 1 ? style2 : i === 3 ? style3 : style1} src={image?.url}></img>
-                    ))}
-                    <div
-                        onClick={openModal}
-                        className='show-all-photos big-font'>show all photos</div>
-                </div>
-            </div>
+            <ProfileImageGallery
+                mainImage={mainImage}
+                secondaryImages={secondaryImages}
+                openModal={openModal}
+            />
 
             {/* Initial details and check availability */}
             <div className='listing-profile-lower-half-container'>
@@ -138,7 +170,10 @@ const ListingProfile = () => {
                             </div>
                         </div>
                         <div>
-                            <img alt="profile" style={{ width: "56px", height: "56px", borderRadius: "100%" }} src={listing?.user_photo}></img>
+                            <img
+                                alt="profile"
+                                style={{ width: "56px", height: "56px", borderRadius: "100%" }}
+                                src={listing?.user_photo}/>
                         </div>
                     </div>
 
@@ -151,13 +186,12 @@ const ListingProfile = () => {
                     </div>
 
                     {/* Amenities Display */}
-                    <div className='border-bottom'>
-                        <AmenitiesCard listing={listing} />
-                    </div>
+                    <AmenitiesCard listing={listing} />
 
+                    {/* Calendar Display */}
                     <div ref={myRef} className='border-bottom'>
                         <p className='big-font sub-header'>Select Your Dates</p>
-                        <Calendar  tileDisabled={({ date, view }) =>
+                        <Calendar tileDisabled={({ date, view }) =>
                             (view === 'month') && // Block day tiles only
                             disabledDates.some(disabledDate =>
                                 date.getFullYear() === disabledDate.getFullYear() &&
@@ -165,44 +199,30 @@ const ListingProfile = () => {
                                 date.getDate() === disabledDate.getDate()
                             )}
                             returnValue="range"
-                            onChange={(value, e) => console.log(formatDate(value))}
-                            minDate={new Date()}
+                            onChange={(value, e) => handleDateUpdate(formatDateForCalendar(value))}
+                            onClickDay={(value, e) => handleSelection(formatDate([value]))}
+                            minDate={selected ? selected : new Date()}
+                            maxDate={unavailable ? unavailable : null}
                             showDoubleView={true}
                             selectRange={true}
+                            // defaultValue={startDate && endDate ? [new Date(startDate), new Date(endDate)] : null}
                         />
-                    </div>
-                </div>
-                <div className='listing-booking-container'>
-                    <div
-                        style={{ fontSize: "23px" }}
-                        className='flex'
-                    >
                         <p
-                            style={{ margin: "0px" }}
-                            className='big-font'>
-                                ${listing?.price}
-                        </p>
-                        <p
-                            style={{ margin: "0px 0px 0px 3px", fontSize: "17px" }} c
-                            className='small-font'>
-                                night
+                            className='big-font'
+                            style={{cursor: "pointer", textDecoration: 'underline'}}
+                            onClick={clearDates}
+                        >
+                            clear dates
                         </p>
                     </div>
-                    <div className='flex small-font'>
-                        <div>
-                            checkin
-                        </div>
-                        <div>
-                            checkout
-                        </div>
-                    </div>
-                    <div className='small-font'>
-                        Guests
-                    </div>
-                    <div className='small-font' onClick={executeScroll}>
-                        check availability
-                    </div>
                 </div>
+                <BookingCard
+                    funcs={{guests, setGuests}}
+                    endDate={endDate}
+                    startDate={startDate}
+                    listing={listing}
+                    executeScroll={executeScroll}
+                />
             </div>
         </div>
     )

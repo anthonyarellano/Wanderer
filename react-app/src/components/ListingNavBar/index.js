@@ -26,7 +26,7 @@ const myBucket = new AWS.S3({
 const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    console.log(listing);
+
     const user = useSelector((state) => state.session.user);
     const [progress, setProgress] = useState(null);
     const [active, setActive] = useState('About');
@@ -369,7 +369,6 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
         )
     }
 
-    console.log(listing);
     // Setting values on edit form
     useEffect(() => {
         if (editEnable && listing) {
