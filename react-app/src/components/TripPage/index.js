@@ -3,9 +3,11 @@ import { useEffect } from "react";
 import { useParams, Redirect } from "react-router-dom";
 import { getSingleReservation } from "../../store/reservations";
 import { useState } from 'react';
+
 const TripPage = () => {
     const user = useSelector((state) => state.session.user);
     const reservation = useSelector((state) => Object.values(state.reservations));
+
     const dispatch = useDispatch();
     const { reservationId } = useParams();
 

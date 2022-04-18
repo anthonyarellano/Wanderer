@@ -55,7 +55,7 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
     };
 
     let links;
-    if (checkout) {
+    if (checkout && user) {
         links = (
             <div>
                 <div
@@ -93,13 +93,21 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
                 </div>
             </div>
         )
-    } if (!checkout) {
+    } if (!checkout && user) {
         links = (
             <div
                 className='booking-availability-button'
                 onClick={handleCheckAvail}
                 style={{ textAlign: 'center', cursor: 'pointer' }}>
                 Check availability
+            </div>
+        )
+    } if (!user) {
+        links = (
+            <div
+                className='booking-availability-button'
+                style={{ textAlign: 'center'}}>
+                Login to view availability
             </div>
         )
     }
