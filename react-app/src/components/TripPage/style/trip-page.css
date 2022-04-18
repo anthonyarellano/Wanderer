@@ -11,3 +11,11 @@
     margin: 0px;
     margin-top: 1px;
 }
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+}
