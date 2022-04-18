@@ -13,6 +13,7 @@ const GetDirections = ({ lat, lng }) => {
                 className='flex'>
                 <div className='flex'>
                     <img
+                        alt="pin"
                         style={{
                             width: "20px",
                             height: "20px"
@@ -26,6 +27,7 @@ const GetDirections = ({ lat, lng }) => {
                 </div>
                 <div>
                     <img
+                        alt="arrow"
                         style={{
                             width: "15px",
                             height: "15px"

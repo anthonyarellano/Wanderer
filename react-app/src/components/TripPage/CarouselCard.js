@@ -22,7 +22,7 @@ const CarouselCard = ({image, i, host}) => {
     return (
         <div style={{position: "relative"}}>
             {title}
-            <img style={{height: "400px"}} src={image} />
+            <img alt="carouselcard" style={{height: "400px"}} src={image} />
         </div>
     )
 };

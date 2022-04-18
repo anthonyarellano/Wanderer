@@ -13,6 +13,7 @@ const ShowListing = ({id}) => {
                 className='flex'>
                 <div className='flex'>
                     <img
+                        alt="house"
                         style={{
                             width: "20px",
                             height: "20px"
@@ -26,6 +27,7 @@ const ShowListing = ({id}) => {
                 </div>
                 <div>
                     <img
+                        alt="arrow"
                         style={{
                             width: "15px",
                             height: "15px"

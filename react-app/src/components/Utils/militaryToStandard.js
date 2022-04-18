@@ -12,7 +12,7 @@ export const militaryToStandard = (time) => {
         timeValue = "" + hours;
     } else if (hours > 12) {
         timeValue = "" + (hours - 12);
-    } else if (hours == 0) {
+    } else if (hours === 0) {
         timeValue = "12";
     }
 
