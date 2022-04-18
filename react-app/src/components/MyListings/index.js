@@ -10,8 +10,8 @@ const MyListings = () => {
 
     let listingArr;
     if (listings) {
-        listingArr = Object.values(listings)
-    }
+        listingArr = Object.values(listings);
+    };
 
     useEffect(() => {
         dispatch(getUserListings(user.id));
