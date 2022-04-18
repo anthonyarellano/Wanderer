@@ -37,5 +37,6 @@ class Reservation(db.Model):
             "check_in": self.listing.check_in,
             "check_out": self.listing.check_out,
             "lat": self.listing.latitude,
-            "lng": self.listing.longitude
+            "lng": self.listing.longitude,
+            "listing_id": self.listing.id
         }

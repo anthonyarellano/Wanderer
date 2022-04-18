@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-const GetDirections = ({ lat, lng }) => {
+const ShowListing = ({id}) => {
     return (
-        <Link to={{ pathname: `https://maps.google.com/?q=${lat},${lng}` }} target="_blank">
+        <Link to={`/listings/${id}`} target="_blank">
             <div
                 style={{
                     justifyContent: "space-between",
@@ -17,12 +17,12 @@ const GetDirections = ({ lat, lng }) => {
                             width: "20px",
                             height: "20px"
                         }}
-                        src={require('../style/images/pin.png').default} />
+                        src={require('../style/images/house.png').default} />
                     <p
                         style={{
                             marginLeft: "10px"
                         }}
-                        className='small-font'>Get directions</p>
+                        className='small-font'>Show listing</p>
                 </div>
                 <div>
                     <img
@@ -37,4 +37,4 @@ const GetDirections = ({ lat, lng }) => {
     )
 };
 
-export default GetDirections;
+export default ShowListing;

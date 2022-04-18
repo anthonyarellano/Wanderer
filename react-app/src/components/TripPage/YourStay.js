@@ -2,6 +2,7 @@ import { Carousel } from 'react-responsive-carousel';
 import { militaryToStandard } from '../Utils/militaryToStandard';
 import CarouselCard from './CarouselCard';
 import GetDirections from './Sub-Components/GetDirections';
+import ShowListing from './Sub-Components/ShowListing';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 const YourStay = ({ reservation }) => {
 
@@ -50,6 +51,7 @@ const YourStay = ({ reservation }) => {
                 </div>
             </div>
             <GetDirections lat={reservation?.lat} lng={reservation?.lng}/>
+            <ShowListing id={reservation?.listing_id}/>
         </div>
     )
 };
