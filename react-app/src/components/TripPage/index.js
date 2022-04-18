@@ -25,7 +25,19 @@ const TripPage = () => {
     };
 
     return (
-        <p>trip page</p>
+        <div>
+            <div>
+                {/* your stay component */}
+                {/* reservation details component */}
+                {/* getting there component */}
+                {/* where youre staying component */}
+                {/* hosted by component */}
+                {/* support */}
+            </div>
+            <div>
+                {/* google maps component */}
+            </div>
+        </div>
     )
 };
 
