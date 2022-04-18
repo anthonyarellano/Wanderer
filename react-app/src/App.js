@@ -12,6 +12,7 @@ import ListingProfile from './components/ListingProfile';
 import ListingForm from './components/ListingForm';
 import MyTrips from './components/MyTrips';
 import MyListings from './components/MyListings';
+import TripPage from './components/TripPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -46,6 +47,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/my-trips' exact={true} >
           <MyTrips />
+        </ProtectedRoute>
+        <ProtectedRoute path='/trips/:reservationId' exact={true} >
+          <TripPage />
         </ProtectedRoute>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>

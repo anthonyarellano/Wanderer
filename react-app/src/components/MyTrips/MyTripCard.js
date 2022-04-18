@@ -16,7 +16,6 @@ const MyTripCard = ({ reservation }) => {
         formattedDate = formatDbDate([date])
         let date1 = formattedDate[0][0].split('-')
         let date2 = formattedDate[0][1].split('-');
-        console.log(date1, date2);
         displayDate1 = date1[1] + "-" + date1[2];
         displayDate2 = date2[1] + "-" + date2[2];
     }
