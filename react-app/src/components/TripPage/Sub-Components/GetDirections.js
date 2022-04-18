@@ -10,7 +10,12 @@ const GetDirections = ({ lat, lng }) => {
                 }}
                 className='flex'>
                 <div className='flex'>
-                    <p>hi</p>
+                    <img
+                        style={{
+                            width: "20px",
+                            height: "20px"
+                        }}
+                        src={require('../style/images/pin.png').default} />
                     <p>Get Directions</p>
                 </div>
                 <div>
