@@ -51,7 +51,7 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
             end_date: endDate
         };
         await dispatch(createReservation(reservation))
-            .then(() => history.push('/'))
+            .then(() => history.push('/my-trips'));
     };
 
     let links;
