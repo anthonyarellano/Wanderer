@@ -79,11 +79,6 @@ const ListingProfile = () => {
         dispatch(getReservations(listingId));
     }, [listingId, dispatch]);
 
-    useEffect(() => {
-        if (selected) {
-            handleUnavailable(selected);
-        }
-    }, [selected])
 
     const handleDateUpdate = (dateArr) => {
         setStartDate(dateArr[0]);
@@ -113,6 +108,13 @@ const ListingProfile = () => {
             i++;
         };
     };
+
+    useEffect(() => {
+        if (selected) {
+            handleUnavailable(selected);
+        }
+    // eslint-disable-next-line
+    }, [selected])
 
     return (
         <div className='listing-profile-container'>
