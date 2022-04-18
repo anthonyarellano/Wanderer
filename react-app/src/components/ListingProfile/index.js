@@ -6,6 +6,7 @@ import { formatDate } from '../Utils/formatDate';
 import { formatDbDate } from '../Utils/formatDbDate';
 import { createDisabledRange } from '../Utils/createdDisabledRange';
 import { getReservations } from '../../store/reservations';
+import { formatDateForCalendar } from '../Utils/formatDateForCalendar';
 import ImageCard from './ImageCard';
 import Calendar from 'react-calendar';
 import Modal from 'react-modal';
@@ -78,6 +79,12 @@ const ListingProfile = () => {
         dispatch(getReservations(listingId));
     }, [listingId, dispatch]);
 
+    useEffect(() => {
+        if (selected) {
+            handleUnavailable(selected);
+        }
+    }, [selected])
+
     const handleDateUpdate = (dateArr) => {
         setStartDate(dateArr[0]);
         setEndDate(dateArr[1]);
@@ -86,8 +93,7 @@ const ListingProfile = () => {
     const handleSelection = (date) => {
         let dateSplit = date[0].split('-');
         let firstDate = new Date(dateSplit[0], dateSplit[1], dateSplit[2])
-        handleUnavailable(firstDate);
-        setSelected(firstDate);
+        setSelected(firstDate)
     };
 
     const clearDates = () => {
@@ -100,8 +106,8 @@ const ListingProfile = () => {
     const handleUnavailable = (firstDate) => {
         let i = 0;
         while (i < disabledDates?.length) {
-            if (disabledDates[i] > firstDate) {
-                setUnavailable(disabledDates[i]);
+            if (firstDate < disabledDates[i]) {
+                setUnavailable(disabledDates[i])
                 return;
             };
             i++;
@@ -193,13 +199,13 @@ const ListingProfile = () => {
                                 date.getDate() === disabledDate.getDate()
                             )}
                             returnValue="range"
-                            onChange={(value, e) => handleDateUpdate(formatDate(value))}
+                            onChange={(value, e) => handleDateUpdate(formatDateForCalendar(value))}
                             onClickDay={(value, e) => handleSelection(formatDate([value]))}
                             minDate={selected ? selected : new Date()}
                             maxDate={unavailable ? unavailable : null}
                             showDoubleView={true}
                             selectRange={true}
-                            value={[startDate, endDate]}
+                            // defaultValue={startDate && endDate ? [new Date(startDate), new Date(endDate)] : null}
                         />
                         <p
                             className='big-font'

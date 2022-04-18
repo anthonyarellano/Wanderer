@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { daysBetween } from '../Utils/daysBetween';
 
 const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
     const [checkout, setCheckOut] = useState(false);
+    const [nights, setNights] = useState('');
     const { guests, setGuests } = funcs;
 
+    console.log(startDate, endDate, nights, guests);
     let submitReady;
     if (startDate && endDate && guests <= listing?.maximum_guests) submitReady = true;
 
@@ -13,7 +16,9 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
         };
         if (submitReady && startDate && endDate) {
             setCheckOut(true);
-            console.log("SUBMITTED!");
+            setNights(daysBetween(startDate, endDate));
+            // console.log(daysBetween(startDate, endDate));
+
         };
     };
 
@@ -37,6 +42,34 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
                     style={{ textAlign: 'center', cursor: 'pointer' }}>
                     Reserve
                 </div>
+                <div
+                    style={{
+                        justifyContent: "space-between",
+                        padding: "15px"
+                    }}
+                    className='small-font flex'>
+                    <div>
+                        ${listing?.price} x {nights} nights
+                    </div>
+                    <div>
+                        ${listing?.price * nights}
+                    </div>
+                </div>
+                <div
+                    style={{
+                        justifyContent: "space-between",
+                        borderTop: "1px solid #DDDDDD",
+                        padding: "15px"
+                    }}
+                    className='big-font flex'>
+                    <div>
+                        Toal before taxes
+                    </div>
+                    <div>
+                        ${listing?.price * nights}
+                    </div>
+                </div>
+
             </div>
         )
     } if (!checkout) {
@@ -108,7 +141,7 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
                     GUESTS
                 </div>
                 <div style={{ justifyContent: "space-between" }} className='flex'>
-                    <div className="big-font">
+                    <div className="small-font">
                         {guests}
                     </div>
                     <div className='flex'>
