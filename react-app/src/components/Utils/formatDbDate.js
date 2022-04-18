@@ -1,6 +1,6 @@
-export const formatDbDate = (dateArr) => {
+export const formatDbDate = (dateArr, key) => {
     let retArr = [];
-    if (dateArr.length === 1) {
+    if (dateArr.length === 1 && key === "range") {
             let startStr = '';
             let dateSplit = dateArr[0].split(" ");
 

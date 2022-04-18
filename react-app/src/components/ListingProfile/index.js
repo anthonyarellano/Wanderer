@@ -35,7 +35,8 @@ const ListingProfile = () => {
     // Uses custom functions to format incoming date information &
     // create an array which the calendar uses to block off unavailable days.
     let disabledDates;
-    if (reservations) {
+    if (reservations.length) {
+        console.log(reservations);
         let formatted = formatDbDate(reservations);
         disabledDates = createDisabledRange(formatted);
     }
@@ -197,7 +198,7 @@ const ListingProfile = () => {
                         <p className='big-font sub-header'>Select Your Dates</p>
                         <Calendar tileDisabled={({ date, view }) =>
                             (view === 'month') && // Block day tiles only
-                            disabledDates.some(disabledDate =>
+                            disabledDates?.some(disabledDate =>
                                 date.getFullYear() === disabledDate.getFullYear() &&
                                 date.getMonth() === disabledDate.getMonth() &&
                                 date.getDate() === disabledDate.getDate()

@@ -10,3 +10,18 @@ def get_listing_reservations(id):
     for reservation in reservations:
         reservationList.append(reservation.to_dict())
     return jsonify(reservationList)
+
+
+@reservation_routes.route('/', methods=["POST"])
+def create_reservation():
+    reservation = request.json
+    newReservation = Reservation(
+        user_id=reservation['user_id'],
+        listing_id=reservation['listing_id'],
+        total_cost=reservation['total_cost'],
+        start_date=reservation['start_date'],
+        end_date=reservation['end_date']
+    )
+    db.session.add(newReservation)
+    db.session.commit()
+    return newReservation.to_dict()
