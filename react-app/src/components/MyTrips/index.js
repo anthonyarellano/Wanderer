@@ -25,10 +25,9 @@ const MyTrips = () => {
                 </p>
             </div>
             <div
-                style={{
-                    flexWrap: 'wrap'
-                }}
-                className="flex">
+                style={{flexWrap: 'wrap'}}
+                className="flex"
+            >
                 {reservationsArr?.map((reservation, i) => (
                     <MyTripCard key={i} reservation={reservation} />
                 ))}

@@ -1,7 +1,10 @@
+import { useHistory } from "react-router-dom";
 import { formatDbDate } from "../Utils/formatDbDate";
 
 const MyTripCard = ({ reservation }) => {
     const url = reservation?.listing_image?.url.split('=index?')[0];
+    const history = useHistory();
+
     const date = {
         start_date: reservation?.start_date,
         end_date: reservation?.end_date
@@ -20,11 +23,14 @@ const MyTripCard = ({ reservation }) => {
 
     return (
         <div style={{
-            marginBottom: "50px"
-        }}
+            marginBottom: "50px",
+            cursor: "pointer",
+            }}
+            onClick={() => history.push(`/trips/${reservation?.id}`)}
             className="flex">
             <div>
                 <img
+                    alt="primary"
                     style={{
                         width: "72px",
                         height: "72px",
