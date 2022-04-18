@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { authenticate } from './store/session';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -9,8 +10,9 @@ import User from './components/User';
 import Banner from './components/Banner';
 import ListingProfile from './components/ListingProfile';
 import ListingForm from './components/ListingForm';
-import { authenticate } from './store/session';
+import MyTrips from './components/MyTrips';
 import MyListings from './components/MyListings';
+import TripPage from './components/TripPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,6 +44,12 @@ function App() {
         </Route>
         <ProtectedRoute path='/my-listings' exact={true} >
           <MyListings />
+        </ProtectedRoute>
+        <ProtectedRoute path='/my-trips' exact={true} >
+          <MyTrips />
+        </ProtectedRoute>
+        <ProtectedRoute path='/trips/:reservationId' exact={true} >
+          <TripPage />
         </ProtectedRoute>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>

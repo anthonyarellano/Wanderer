@@ -45,7 +45,12 @@ export const Banner = () => {
         links = (
             <>
                 <div>
-                    <p className='popout-item'>Trips (coming soon)</p>
+                    <p
+                        className='popout-item'
+                        onClick={() => history.push('/my-trips')}
+                    >
+                        Trips
+                    </p>
                 </div>
                 <div>
                     <p className='popout-item'>Wishlist (coming soon)</p>

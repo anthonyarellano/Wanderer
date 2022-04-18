@@ -1,0 +1,33 @@
+.trip-page-container {
+    margin-left: .5%;
+}
+
+.your-stay-container {
+    border-radius: 10px 0px 0px 0px;
+    overflow: hidden;
+    box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+}
+
+.no-margin {
+    margin: 0px;
+    margin-top: 1px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+}
+
+.your-stay-container-secondary {
+    border-radius: 10px 0px 0px 0px;
+    overflow: hidden;
+    box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+    margin-top: 3%;
+}
+
+.trip-page-title {
+    font-size: 25px;
+}

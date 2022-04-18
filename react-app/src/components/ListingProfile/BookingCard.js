@@ -1,12 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { createReservation } from '../../store/reservations';
 import { daysBetween } from '../Utils/daysBetween';
+import { useHistory } from 'react-router-dom';
 
 const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
+    const user = useSelector((state) => state.session.user);
     const [nights, setNights] = useState('');
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+
     const { guests, setGuests, checkout, setCheckOut } = funcs;
 
     let submitReady;
     if (startDate && endDate && guests <= listing?.maximum_guests) submitReady = true;
+
+    // Setting nights whenever the startDate or endDate are
+    // changed.
+    useEffect(() => {
+        setNights(() => daysBetween(startDate, endDate))
+    }, [startDate, endDate])
 
     const handleCheckAvail = () => {
         if (!submitReady) {
@@ -22,19 +36,31 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
         if (key === "add" && guests < listing?.maximum_guests) {
             setGuests((guests) => guests + 1)
         };
-        if (key === "subtract" && guests <= listing?.maximum_guests && guests > 0) {
+        if (key === "subtract" && guests <= listing?.maximum_guests && guests > 1) {
             setGuests((guests) => guests - 1)
-        }
+        };
 
-    }
+    };
+
+    const handleReservation = async () => {
+        const reservation = {
+            user_id: user?.id,
+            listing_id: listing?.id,
+            total_cost: nights * listing?.price,
+            start_date: startDate,
+            end_date: endDate
+        };
+        await dispatch(createReservation(reservation))
+            .then(() => history.push('/my-trips'));
+    };
 
     let links;
-    if (checkout) {
+    if (checkout && user) {
         links = (
             <div>
                 <div
                     className='booking-availability-button'
-                    onClick={handleCheckAvail}
+                    onClick={handleReservation}
                     style={{ textAlign: 'center', cursor: 'pointer' }}>
                     Reserve
                 </div>
@@ -48,7 +74,7 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
                         ${listing?.price} x {nights} nights
                     </div>
                     <div>
-                        ${listing?.price * nights}
+                        ${listing?.price * nights}.00
                     </div>
                 </div>
                 <div
@@ -62,19 +88,26 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
                         Toal before taxes
                     </div>
                     <div>
-                        ${listing?.price * nights}
+                        ${listing?.price * nights}.00
                     </div>
                 </div>
-
             </div>
         )
-    } if (!checkout) {
+    } if (!checkout && user) {
         links = (
             <div
                 className='booking-availability-button'
                 onClick={handleCheckAvail}
                 style={{ textAlign: 'center', cursor: 'pointer' }}>
                 Check availability
+            </div>
+        )
+    } if (!user) {
+        links = (
+            <div
+                className='booking-availability-button'
+                style={{ textAlign: 'center'}}>
+                Login to view availability
             </div>
         )
     }

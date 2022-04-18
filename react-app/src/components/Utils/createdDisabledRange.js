@@ -20,7 +20,7 @@ export const createDisabledRange = (dateArr) => {
 
     let formattedDates = [];
     disabledDates.forEach((date) => {
-        let modifiedDate = new Date(formatDbDate([date.toString()]))
+        let modifiedDate = new Date(formatDbDate([date.toString()], "range"))
         modifiedDate.setMinutes( date.getMinutes() + date.getTimezoneOffset() );
         formattedDates.push(modifiedDate);
     });

@@ -10,7 +10,6 @@ const LoginForm = ({setIsOpen}) => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
-
   const demoLogin = async () => {
     await dispatch(login('demo@aa.io', 'password'));
     setIsOpen(false);
