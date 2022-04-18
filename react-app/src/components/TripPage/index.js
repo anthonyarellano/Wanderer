@@ -3,14 +3,16 @@ import { useEffect } from "react";
 import { useParams, Redirect } from "react-router-dom";
 import { getSingleReservation } from "../../store/reservations";
 import { useState } from 'react';
+import YourStay from "./YourStay";
+import './style/trip-page.css';
 
 const TripPage = () => {
     const user = useSelector((state) => state.session.user);
     const reservation = useSelector((state) => Object.values(state.reservations));
-
     const dispatch = useDispatch();
     const { reservationId } = useParams();
 
+    console.log(reservation);
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
@@ -25,9 +27,14 @@ const TripPage = () => {
     };
 
     return (
-        <div>
-            <div>
+        <div className="flex trip-page-container">
+            <div
+                className="trip-left-half-container"
+                style={{
+                        width: "30%"
+                       }}>
                 {/* your stay component */}
+                <YourStay reservation={reservation[0]}/>
                 {/* reservation details component */}
                 {/* getting there component */}
                 {/* where youre staying component */}
@@ -35,6 +42,7 @@ const TripPage = () => {
                 {/* support */}
             </div>
             <div>
+                im a map
                 {/* google maps component */}
             </div>
         </div>

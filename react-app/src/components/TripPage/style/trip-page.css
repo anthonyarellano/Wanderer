@@ -1,0 +1,13 @@
+.trip-page-container {
+    margin-left: .5%;
+}
+
+.your-stay-container {
+    border-radius: 10px 0px 0px 0px;
+    overflow: hidden;
+}
+
+.no-margin {
+    margin: 0px;
+    margin-top: 1px;
+}

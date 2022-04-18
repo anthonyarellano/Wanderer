@@ -17,6 +17,11 @@ class Reservation(db.Model):
     listing = db.relationship("Listing", back_populates="reservations")
 
     def to_dict(self):
+        imageList = []
+        for image in self.listing.images:
+            imageDict = image.to_dict()
+            imageReady = imageDict['url'].split('=index?')[0]
+            imageList.append(imageReady)
         return {
             "id": self.id,
             "user_id": self.user_id,
@@ -27,5 +32,8 @@ class Reservation(db.Model):
             "listing_title": self.listing.title,
             "host": self.user.username,
             "listing_image": self.listing.images[0].to_dict(),
-            "city": self.listing.city
+            "city": self.listing.city,
+            "image_list": imageList,
+            "check_in": self.listing.check_in,
+            "check_out": self.listing.check_out
         }
