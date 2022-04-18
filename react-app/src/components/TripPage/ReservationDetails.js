@@ -1,8 +1,10 @@
+import DeleteReservation from "./Sub-Components/DeleteReservation";
+
 const ReservationDetails = ({reservation}) => {
     console.log(reservation);
     return (
         <div className='your-stay-container-secondary'>
-            <div style={{marginLeft: "4%"}}>
+            <div style={{margin: "0% 0% 4% 4%"}}>
                 <div
                     style={{ margin: "4% 0% 4% 0%" }}>
                     <p
@@ -14,7 +16,11 @@ const ReservationDetails = ({reservation}) => {
                 <div>
                     <p className="big-font no-margin">Who's coming</p>
                 </div>
+                <div>
+                    <p className="small-font no-margin">{reservation?.guests} guest(s)</p>
+                </div>
             </div>
+            <DeleteReservation />
         </div>
     )
 };
