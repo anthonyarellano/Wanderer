@@ -37,7 +37,8 @@ def create_reservation():
         listing_id=reservation['listing_id'],
         total_cost=reservation['total_cost'],
         start_date=reservation['start_date'],
-        end_date=reservation['end_date']
+        end_date=reservation['end_date'],
+        guests=reservation['guests']
     )
     db.session.add(newReservation)
     db.session.commit()
