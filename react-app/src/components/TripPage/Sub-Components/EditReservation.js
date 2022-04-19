@@ -63,7 +63,7 @@ const EditReservation = ({ reservation }) => {
             setGuests(reservation?.guests);
         };
         // eslint-disable-next-line
-    }, [reservations?.length])
+    }, [formattedDates])
 
     useEffect(() => {
         if (reservation) {
