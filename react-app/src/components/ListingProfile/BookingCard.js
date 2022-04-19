@@ -48,7 +48,8 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
             listing_id: listing?.id,
             total_cost: nights * listing?.price,
             start_date: startDate,
-            end_date: endDate
+            end_date: endDate,
+            guests
         };
         await dispatch(createReservation(reservation))
             .then(() => history.push('/my-trips'));

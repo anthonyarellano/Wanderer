@@ -20,6 +20,14 @@ def get_reservation(id):
     return reservation.to_dict()
 
 
+@reservation_routes.route('/delete/<int:id>', methods=["DELETE"])
+def delete_reservation(id):
+    reservation = Reservation.query.get(id)
+    db.session.delete(reservation)
+    db.session.commit()
+    return jsonify("Success")
+
+
 @reservation_routes.route('/user/<int:id>')
 def get_user_reservations(id):
     reservations = Reservation.query.filter(Reservation.user_id == id).order_by(Reservation.start_date).all()
@@ -37,7 +45,8 @@ def create_reservation():
         listing_id=reservation['listing_id'],
         total_cost=reservation['total_cost'],
         start_date=reservation['start_date'],
-        end_date=reservation['end_date']
+        end_date=reservation['end_date'],
+        guests=reservation['guests']
     )
     db.session.add(newReservation)
     db.session.commit()

@@ -1,6 +1,7 @@
 const LOAD_RESERVATIONS = 'listings/LOAD_RESERVATIONS';
 const ADD_RESERVATION = 'reservations/ADD_RESERVATION'
 const LOAD_SINGLE = 'reservations/LOAD_SINGLE';
+const DELETE_RESERVATION = 'reservations/DELETE_RESERVATION';
 
 const loadReservations = (reservations) => {
     return {
@@ -20,6 +21,24 @@ const loadSingleReservation = (reservation) => {
     return {
         type: LOAD_SINGLE,
         reservation
+    };
+};
+
+const removeReservation = (reservationId) => {
+    return {
+        type: DELETE_RESERVATION,
+        reservationId
+    };
+};
+
+export const deleteReservation = (reservationId) => async (dispatch) => {
+    const response = await fetch(`/api/reservations/delete/${reservationId}`, {
+        method: "DELETE"
+    });
+    if (response.ok) {
+        const res = await response.json();
+        dispatch(removeReservation(reservationId));
+        return res;
     };
 };
 
@@ -85,6 +104,11 @@ const reservationReducer = (state = initialState, action) => {
         case LOAD_SINGLE: {
             const newState = {};
             newState[action.reservation.id] = action.reservation;
+            return newState;
+        };
+        case DELETE_RESERVATION: {
+            const newState = {...state};
+            delete newState[action.reservationId];
             return newState; 
         }
         default:

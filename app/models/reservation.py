@@ -11,6 +11,7 @@ class Reservation(db.Model):
     total_cost = db.Column(db.Integer, nullable=False)
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
+    guests = db.Column(db.Integer, nullable=False)
     created_at = db.Column(DateTime, default=datetime.utcnow())
 
     user = db.relationship("User", back_populates="reservations")
@@ -38,5 +39,6 @@ class Reservation(db.Model):
             "check_out": self.listing.check_out,
             "lat": self.listing.latitude,
             "lng": self.listing.longitude,
-            "listing_id": self.listing.id
+            "listing_id": self.listing.id,
+            "guests": self.guests
         }
