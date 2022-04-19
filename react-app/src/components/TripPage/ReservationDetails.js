@@ -1,4 +1,4 @@
-import DeleteReservation from "./Sub-Components/DeleteReservation";
+import CancelReservation from "./Sub-Components/CancelReservation";
 
 const ReservationDetails = ({reservation}) => {
     console.log(reservation);
@@ -20,7 +20,7 @@ const ReservationDetails = ({reservation}) => {
                     <p className="small-font no-margin">{reservation?.guests} guest(s)</p>
                 </div>
             </div>
-            <DeleteReservation />
+            <CancelReservation id={reservation?.id}/>
         </div>
     )
 };

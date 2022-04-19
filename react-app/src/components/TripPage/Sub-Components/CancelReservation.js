@@ -1,6 +1,25 @@
-const DeleteReservation = () => {
+import { deleteReservation } from '../../../store/reservations';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+const CancelReservation = ({ id }) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const handleCancel = async () => {
+        const res = window.prompt('Type "Confirm" to delete reservation.')
+        if (res === "Confirm") {
+            await dispatch(deleteReservation(id))
+                .then(() => history.push('/my-trips'));
+        };
+        if (res !== "Confirm") {
+            return alert("Cancel aborted.")
+        };
+    };
+
     return (
         <div
+            onClick={handleCancel}
             style={{
                 justifyContent: "space-between",
                 cursor: "pointer",
@@ -35,4 +54,4 @@ const DeleteReservation = () => {
     )
 };
 
-export default DeleteReservation;
+export default CancelReservation;
