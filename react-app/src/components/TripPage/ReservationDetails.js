@@ -2,7 +2,6 @@ import CancelReservation from "./Sub-Components/CancelReservation";
 import EditReservation from "./Sub-Components/EditReservation";
 
 const ReservationDetails = ({reservation}) => {
-    console.log(reservation);
     return (
         <div className='your-stay-container-secondary'>
             <div style={{margin: "0% 0% 4% 4%"}}>
