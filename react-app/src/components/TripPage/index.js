@@ -1,30 +1,45 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Redirect } from "react-router-dom";
 import { getSingleReservation } from "../../store/reservations";
-import { useState } from 'react';
+import { initMapScript } from "../Utils/GoogleMapsAPI/scriptLoading";
 import YourStay from "./YourStay";
 import ReservationDetails from "./ReservationDetails";
+import Map from "../Map";
 import './style/trip-page.css';
 
 const TripPage = () => {
     const user = useSelector((state) => state.session.user);
-    const reservation = useSelector((state) => Object.values(state.reservations));
+    const reservationState = useSelector((state) => state.reservations.selected);
     const dispatch = useDispatch();
     const { reservationId } = useParams();
 
-    console.log(reservation);
+    let reservation;
+    if (reservationState) {
+        reservation = reservationState[reservationId]
+    }
+
     const [loaded, setLoaded] = useState(false);
+    const [mapsLoaded, setMapsLoaded] = useState(false);
 
     useEffect(() => {
         dispatch(getSingleReservation(reservationId))
             .then(() => setLoaded(() => true));
     }, [dispatch, reservationId])
 
-    if (user.id !== reservation[0]?.user_id && loaded) {
+    useEffect(() => {
+        initMapScript().then(() => setMapsLoaded(() => true));
+    }, [])
+
+    if (user.id !== reservation?.user_id && loaded) {
         return (
             <Redirect to="/" />
         )
+    };
+
+    const style = {
+        width: "100%",
+        // height: "100%"
     };
 
     return (
@@ -32,20 +47,26 @@ const TripPage = () => {
             <div
                 className="trip-left-half-container"
                 style={{
-                        width: "30%"
+                        top: "0px",
+                        height: "90vh",
+                        width: "30%",
+                        overflow: "scroll"
                        }}>
-                {/* your stay component */}
-                <YourStay reservation={reservation[0]}/>
-                {/* reservation details component */}
-                <ReservationDetails reservation={reservation[0]}/>
+                <YourStay reservation={reservation}/>
+                <ReservationDetails reservation={reservation}/>
                 {/* getting there component */}
                 {/* where youre staying component */}
                 {/* hosted by component */}
                 {/* support */}
             </div>
-            <div>
-                im a map
-                {/* google maps component */}
+            <div
+                style={{
+                    width: "70%",
+                    height: "100%",
+                    overflow: 'hidden'
+                }}>
+                {mapsLoaded &&
+                <Map style={style} lat={parseFloat(reservation?.lat)} lng={parseFloat(reservation?.lng)}/>}
             </div>
         </div>
     )

@@ -2,17 +2,15 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListing, getImages, deleteImage } from '../../store/listings';
-import { formatDate } from '../Utils/formatDate';
 import { formatDbDate } from '../Utils/formatDbDate';
 import { createDisabledRange } from '../Utils/createdDisabledRange';
 import { getReservations } from '../../store/reservations';
-import { formatDateForCalendar } from '../Utils/formatDateForCalendar';
 import ImageCard from './ImageCard';
-import Calendar from 'react-calendar';
 import Modal from 'react-modal';
 import AmenitiesCard from './AmenitiesCard';
 import ProfileImageGallery from './ProfileImageGallery';
 import BookingCard from './BookingCard';
+import CustomCalendar from '../Calendar';
 import './style/listing-profile.css';
 import './style/calendar.css';
 
@@ -20,7 +18,7 @@ const ListingProfile = () => {
     const user = useSelector((state) => state.session.user);
     const listingState = useSelector((state) => state.listings.selected);
     const imagesState = useSelector((state) => state.listings.images);
-    const reservations = useSelector((state) => Object.values(state.reservations))
+    const reservations = useSelector((state) => Object.values(state.reservations.reservations))
 
     const [isOpen, setIsOpen] = useState(false);
     const [startDate, setStartDate] = useState("");
@@ -36,7 +34,6 @@ const ListingProfile = () => {
     // create an array which the calendar uses to block off unavailable days.
     let disabledDates;
     if (reservations.length) {
-        console.log(reservations);
         let formatted = formatDbDate(reservations);
         disabledDates = createDisabledRange(formatted);
     }
@@ -82,24 +79,24 @@ const ListingProfile = () => {
     }, [listingId, dispatch]);
 
 
-    const handleDateUpdate = (dateArr) => {
-        setStartDate(dateArr[0]);
-        setEndDate(dateArr[1]);
-    };
+    // const handleDateUpdate = (dateArr) => {
+    //     setStartDate(dateArr[0]);
+    //     setEndDate(dateArr[1]);
+    // };
 
-    const handleSelection = (date) => {
-        let dateSplit = date[0].split('-');
-        let firstDate = new Date(dateSplit[0], dateSplit[1], dateSplit[2])
-        setSelected(firstDate)
-    };
+    // const handleSelection = (date) => {
+    //     let dateSplit = date[0].split('-');
+    //     let firstDate = new Date(dateSplit[0], dateSplit[1], dateSplit[2])
+    //     setSelected(firstDate)
+    // };
 
-    const clearDates = () => {
-        setSelected("");
-        setUnavailable("");
-        setStartDate("");
-        setEndDate("");
-        setCheckOut(false);
-    };
+    // const clearDates = () => {
+    //     setSelected("");
+    //     setUnavailable("");
+    //     setStartDate("");
+    //     setEndDate("");
+    //     setCheckOut(false);
+    // };
 
     const handleUnavailable = (firstDate) => {
         let i = 0;
@@ -118,6 +115,16 @@ const ListingProfile = () => {
         }
     // eslint-disable-next-line
     }, [selected])
+
+    const calendarFuncs = {
+        selected,
+        setSelected,
+        unavailable,
+        setStartDate,
+        setEndDate,
+        setUnavailable,
+        setCheckOut
+    }
 
     return (
         <div className='listing-profile-container'>
@@ -194,7 +201,8 @@ const ListingProfile = () => {
                     <AmenitiesCard listing={listing} />
 
                     {/* Calendar Display */}
-                    <div ref={myRef} className='border-bottom'>
+                    <CustomCalendar funcs={calendarFuncs} ref={myRef} disabledDates={disabledDates}/>
+                    {/* <div ref={myRef} className='border-bottom'>
                         <p className='big-font sub-header'>Select Your Dates</p>
                         <Calendar tileDisabled={({ date, view }) =>
                             (view === 'month') && // Block day tiles only
@@ -219,7 +227,7 @@ const ListingProfile = () => {
                         >
                             clear dates
                         </p>
-                    </div>
+                    </div> */}
                 </div>
                 <BookingCard
                     funcs={{guests, setGuests, checkout, setCheckOut}}

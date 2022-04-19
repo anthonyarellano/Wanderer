@@ -2,6 +2,14 @@ const LOAD_RESERVATIONS = 'listings/LOAD_RESERVATIONS';
 const ADD_RESERVATION = 'reservations/ADD_RESERVATION'
 const LOAD_SINGLE = 'reservations/LOAD_SINGLE';
 const DELETE_RESERVATION = 'reservations/DELETE_RESERVATION';
+const LOAD_RESERVATIONS_EDIT = 'reservations/LOAD_RESERVATIONS_EDIT'
+
+const loadReservationsForEdit = (reservations) => {
+    return {
+        type: LOAD_RESERVATIONS_EDIT,
+        reservations
+    };
+};
 
 const loadReservations = (reservations) => {
     return {
@@ -57,11 +65,35 @@ export const createReservation = (reservation) => async (dispatch) => {
     };
 };
 
+export const editReservation = (reservation, id) => async (dispatch) => {
+    const response = await fetch(`/api/reservations/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(reservation)
+    });
+    if (response.ok) {
+        const reservation = await response.json();
+        dispatch(addReservation(reservation));
+        return reservation;
+    };
+};
+
 export const getReservations = (listingId) => async (dispatch) => {
     const response = await fetch(`/api/reservations/listing/${listingId}`);
     if (response.ok) {
         const reservations = await response.json();
         dispatch(loadReservations(reservations));
+        return reservations;
+    };
+};
+
+export const getReservationsForEdit = (listingId) => async (dispatch) => {
+    const response = await fetch(`/api/reservations/listing/${listingId}`);
+    if (response.ok) {
+        const reservations = await response.json();
+        dispatch(loadReservationsForEdit(reservations));
         return reservations;
     };
 };
@@ -84,32 +116,43 @@ export const getSingleReservation = (resrvationId) => async (dispatch) => {
     };
 }
 
-const initialState = {}
+const initialState = {
+    notSelected: {},
+    selected: {},
+    reservations: {}
+};
 
 const reservationReducer = (state = initialState, action) => {
 
     switch(action.type) {
         case LOAD_RESERVATIONS: {
-            const newState = {};
+            const newState = {reservations: {}};
             action.reservations.forEach((reservation, i) => {
-                newState[i] = reservation;
+                newState.reservations[i] = reservation;
             });
             return newState;
         };
+        case LOAD_RESERVATIONS_EDIT: {
+            const newState = {...state};
+            action.reservations.forEach((reservation, i) => {
+                newState.notSelected[i] = reservation;
+            });
+            return newState
+        };
         case ADD_RESERVATION: {
             const newState = {...state};
-            newState[action.reservation.id] = action.reservation;
+            newState.reservations[action.reservation.id] = action.reservation;
             return newState;
         };
         case LOAD_SINGLE: {
-            const newState = {};
-            newState[action.reservation.id] = action.reservation;
+            const newState = {...state, notSelected: {...state.notSelected}, selected: {}, reservations: {...state.reservations}};
+            newState.selected[action.reservation.id] = action.reservation;
             return newState;
         };
         case DELETE_RESERVATION: {
-            const newState = {...state};
-            delete newState[action.reservationId];
-            return newState; 
+            const newState = {...state, reservations: {...state.reservations}};
+            delete newState.reservations[action.reservationId];
+            return newState;
         }
         default:
             return state;

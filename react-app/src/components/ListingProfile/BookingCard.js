@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createReservation } from '../../store/reservations';
+import { createReservation, editReservation } from '../../store/reservations';
 import { daysBetween } from '../Utils/daysBetween';
 import { useHistory } from 'react-router-dom';
 
-const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
+const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs, editForm, reservationId }) => {
     const user = useSelector((state) => state.session.user);
     const [nights, setNights] = useState('');
 
@@ -51,8 +51,15 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
             end_date: endDate,
             guests
         };
-        await dispatch(createReservation(reservation))
-            .then(() => history.push('/my-trips'));
+        if (editForm) {
+            console.log(reservation, reservationId, "HEEEEE");
+            await dispatch(editReservation(reservation, reservationId))
+                .then(() => history.push('/my-trips'));
+        }
+        if (!editForm) {
+            await dispatch(createReservation(reservation))
+                .then(() => history.push('/my-trips'));
+        }
     };
 
     let links;
@@ -86,7 +93,7 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs }) => {
                     }}
                     className='big-font flex'>
                     <div>
-                        Toal before taxes
+                        Total before taxes
                     </div>
                     <div>
                         ${listing?.price * nights}.00
