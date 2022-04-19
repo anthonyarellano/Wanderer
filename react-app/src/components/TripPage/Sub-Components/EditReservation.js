@@ -1,8 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getReservationsForEdit } from '../../../store/reservations';
+import { formatDbDate } from '../../Utils/formatDbDate';
+import { createDisabledRange } from '../../Utils/createdDisabledRange';
 import Modal from 'react-modal';
+import CustomCalendar from '../../Calendar';
 
-const EditReservation = () => {
+const EditReservation = ({ reservation }) => {
+    const reservationsState =  useSelector((state) => state.reservations.notSelected)
+
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [selected, setSelected] = useState("");
+    const [unavailable, setUnavailable] = useState("");
+    const [checkout, setCheckOut] = useState(false);
+
+    const dispatch = useDispatch();
+
+    let reservations;
+    if (reservationsState) {
+        reservations = Object.values(reservationsState);
+    };
+
+    const calendarFuncs = {
+        selected,
+        setSelected,
+        unavailable,
+        setStartDate,
+        setEndDate,
+        setUnavailable,
+        setCheckOut
+    }
 
     const openModal = () => {
         setIsOpen(true);
@@ -14,6 +43,21 @@ const EditReservation = () => {
         return
     }
 
+    let disabledDates;
+    if (reservations?.length) {
+        const curr = reservations.findIndex((element) => element.id === reservation?.id)
+        reservations.splice(curr, 1)
+        console.log(reservations);
+        let formatted = formatDbDate(reservations);
+        disabledDates = createDisabledRange(formatted);
+    }
+
+    useEffect(() => {
+        if (reservation) {
+            dispatch(getReservationsForEdit(reservation?.listing_id));
+        }
+    }, [reservation, dispatch]);
+
     return (
         <>
             <Modal
@@ -22,7 +66,7 @@ const EditReservation = () => {
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
             >
-                {/* modal calendar content */}
+                <CustomCalendar disabledDates={disabledDates} funcs={calendarFuncs} />
             </Modal>
             <div
                 onClick={() => setIsOpen(true)}

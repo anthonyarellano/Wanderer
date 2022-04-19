@@ -22,7 +22,7 @@ const ReservationDetails = ({reservation}) => {
                 </div>
             </div>
             <CancelReservation id={reservation?.id}/>
-            <EditReservation />
+            <EditReservation reservation={reservation}/>
         </div>
     )
 };

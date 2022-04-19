@@ -10,11 +10,15 @@ import './style/trip-page.css';
 
 const TripPage = () => {
     const user = useSelector((state) => state.session.user);
-    const reservation = useSelector((state) => Object.values(state.reservations));
+    const reservationState = useSelector((state) => state.reservations.selected);
     const dispatch = useDispatch();
     const { reservationId } = useParams();
-    console.log(reservation);
-    console.log(reservation);
+
+    let reservation;
+    if (reservationState) {
+        reservation = reservationState[reservationId]
+    }
+
     const [loaded, setLoaded] = useState(false);
     const [mapsLoaded, setMapsLoaded] = useState(false);
 
@@ -27,7 +31,7 @@ const TripPage = () => {
         initMapScript().then(() => setMapsLoaded(() => true));
     }, [])
 
-    if (user.id !== reservation[0]?.user_id && loaded) {
+    if (user.id !== reservation?.user_id && loaded) {
         return (
             <Redirect to="/" />
         )
@@ -49,9 +53,9 @@ const TripPage = () => {
                         overflow: "scroll"
                        }}>
                 {/* your stay component */}
-                <YourStay reservation={reservation[0]}/>
+                <YourStay reservation={reservation}/>
                 {/* reservation details component */}
-                <ReservationDetails reservation={reservation[0]}/>
+                <ReservationDetails reservation={reservation}/>
                 {/* getting there component */}
                 {/* where youre staying component */}
                 {/* hosted by component */}

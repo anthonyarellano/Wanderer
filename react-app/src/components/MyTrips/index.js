@@ -5,7 +5,7 @@ import MyTripCard from "./MyTripCard";
 
 const MyTrips = () => {
     const user = useSelector((state) => state.session.user);
-    const reservations = useSelector((state) => state.reservations)
+    const reservations = useSelector((state) => state.reservations.reservations)
     const dispatch = useDispatch();
 
     let reservationsArr;

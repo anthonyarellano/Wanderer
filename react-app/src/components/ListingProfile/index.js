@@ -13,6 +13,7 @@ import Modal from 'react-modal';
 import AmenitiesCard from './AmenitiesCard';
 import ProfileImageGallery from './ProfileImageGallery';
 import BookingCard from './BookingCard';
+import CustomCalendar from '../Calendar';
 import './style/listing-profile.css';
 import './style/calendar.css';
 
@@ -20,7 +21,7 @@ const ListingProfile = () => {
     const user = useSelector((state) => state.session.user);
     const listingState = useSelector((state) => state.listings.selected);
     const imagesState = useSelector((state) => state.listings.images);
-    const reservations = useSelector((state) => Object.values(state.reservations))
+    const reservations = useSelector((state) => Object.values(state.reservations.reservations))
 
     const [isOpen, setIsOpen] = useState(false);
     const [startDate, setStartDate] = useState("");
@@ -36,7 +37,6 @@ const ListingProfile = () => {
     // create an array which the calendar uses to block off unavailable days.
     let disabledDates;
     if (reservations.length) {
-        console.log(reservations);
         let formatted = formatDbDate(reservations);
         disabledDates = createDisabledRange(formatted);
     }
@@ -119,6 +119,16 @@ const ListingProfile = () => {
     // eslint-disable-next-line
     }, [selected])
 
+    const calendarFuncs = {
+        selected,
+        setSelected,
+        unavailable,
+        setStartDate,
+        setEndDate,
+        setUnavailable,
+        setCheckOut
+    }
+
     return (
         <div className='listing-profile-container'>
 
@@ -194,7 +204,8 @@ const ListingProfile = () => {
                     <AmenitiesCard listing={listing} />
 
                     {/* Calendar Display */}
-                    <div ref={myRef} className='border-bottom'>
+                    <CustomCalendar funcs={calendarFuncs} ref={myRef} disabledDates={disabledDates}/>
+                    {/* <div ref={myRef} className='border-bottom'>
                         <p className='big-font sub-header'>Select Your Dates</p>
                         <Calendar tileDisabled={({ date, view }) =>
                             (view === 'month') && // Block day tiles only
@@ -219,7 +230,7 @@ const ListingProfile = () => {
                         >
                             clear dates
                         </p>
-                    </div>
+                    </div> */}
                 </div>
                 <BookingCard
                     funcs={{guests, setGuests, checkout, setCheckOut}}
