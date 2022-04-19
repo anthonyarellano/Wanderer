@@ -31,7 +31,7 @@ class Reservation(db.Model):
             "start_date": self.start_date,
             "end_date": self.end_date,
             "listing_title": self.listing.title,
-            "host": self.user.username,
+            "host": self.listing.user.username,
             "listing_image": self.listing.images[0].to_dict(),
             "city": self.listing.city,
             "image_list": imageList,
