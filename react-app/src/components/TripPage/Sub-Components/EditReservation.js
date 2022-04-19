@@ -11,7 +11,6 @@ import CustomCalendar from '../../Calendar';
 const EditReservation = ({ reservation }) => {
     const reservationsState =  useSelector((state) => state.reservations.notSelected)
     const listingState = useSelector((state) => state.listings.selected);
-
     const [modalIsOpen, setIsOpen] = useState(false);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
@@ -48,12 +47,22 @@ const EditReservation = ({ reservation }) => {
     };
 
     let disabledDates;
+    let formattedDates;
     if (reservations?.length) {
         const curr = reservations.findIndex((element) => element.id === reservation?.id)
+        formattedDates = formatDbDate([reservations[curr]])
         reservations.splice(curr, 1)
         let formatted = formatDbDate(reservations);
         disabledDates = createDisabledRange(formatted);
     };
+
+    useEffect(() => {
+        if (formattedDates?.length) {
+            setStartDate(formattedDates[0][0])
+            setEndDate(formattedDates[0][1])
+        };
+    }, [reservations?.length])
+
 
     useEffect(() => {
         if (reservation) {
