@@ -52,14 +52,13 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs, editFo
             guests
         };
         if (editForm) {
-            console.log(reservation, reservationId, "HEEEEE");
             await dispatch(editReservation(reservation, reservationId))
                 .then(() => history.push('/my-trips'));
-        }
+        };
         if (!editForm) {
             await dispatch(createReservation(reservation))
                 .then(() => history.push('/my-trips'));
-        }
+        };
     };
 
     let links;
