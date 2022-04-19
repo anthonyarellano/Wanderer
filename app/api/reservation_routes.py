@@ -12,6 +12,18 @@ def get_listing_reservations(id):
     return jsonify(reservationList)
 
 
+@reservation_routes.route('/<int:id>', methods=["PUT"])
+def edit_reservation(id):
+    currentReservation = request.json
+    dbReservation = Reservation.query.get(id)
+    dbReservation.total_cost = currentReservation['total_cost']
+    dbReservation.start_date = currentReservation['start_date']
+    dbReservation.end_date = currentReservation['end_date']
+    dbReservation.guests = currentReservation['guests']
+    db.session.commit()
+    return dbReservation.to_dict()
+
+
 @reservation_routes.route('/<int:id>')
 def get_reservation(id):
     reservation = Reservation.query.get(id)

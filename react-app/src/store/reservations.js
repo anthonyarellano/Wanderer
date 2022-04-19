@@ -65,6 +65,21 @@ export const createReservation = (reservation) => async (dispatch) => {
     };
 };
 
+export const editReservation = (reservation, id) => async (dispatch) => {
+    const response = await fetch(`/api/reservations/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(reservation)
+    });
+    if (response.ok) {
+        const reservation = await response.json();
+        dispatch(addReservation(reservation));
+        return reservation;
+    };
+};
+
 export const getReservations = (listingId) => async (dispatch) => {
     const response = await fetch(`/api/reservations/listing/${listingId}`);
     if (response.ok) {

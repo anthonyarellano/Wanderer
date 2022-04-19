@@ -17,7 +17,7 @@ const EditReservation = ({ reservation }) => {
     const [selected, setSelected] = useState("");
     const [unavailable, setUnavailable] = useState("");
     const [checkout, setCheckOut] = useState(false);
-    const [guests, setGuests] = useState(reservation ? reservation?.guests : 0)
+    const [guests, setGuests] = useState(0)
     const dispatch = useDispatch();
 
     let reservations;
@@ -58,11 +58,11 @@ const EditReservation = ({ reservation }) => {
 
     useEffect(() => {
         if (formattedDates?.length) {
-            setStartDate(formattedDates[0][0])
-            setEndDate(formattedDates[0][1])
+            setStartDate(formattedDates[0][0]);
+            setEndDate(formattedDates[0][1]);
+            setGuests(reservation?.guests);
         };
     }, [reservations?.length])
-
 
     useEffect(() => {
         if (reservation) {
@@ -70,8 +70,6 @@ const EditReservation = ({ reservation }) => {
         }
         dispatch(getListing(reservation?.listing_id));
     }, [reservation, dispatch]);
-
-
 
     return (
         <>
@@ -90,6 +88,8 @@ const EditReservation = ({ reservation }) => {
                     startDate={startDate}
                     endDate={endDate}
                     listing={listing}
+                    editForm={true}
+                    reservationId={reservation?.id}
                 />
             </Modal>
             <div

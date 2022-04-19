@@ -52,9 +52,7 @@ const TripPage = () => {
                         width: "30%",
                         overflow: "scroll"
                        }}>
-                {/* your stay component */}
                 <YourStay reservation={reservation}/>
-                {/* reservation details component */}
                 <ReservationDetails reservation={reservation}/>
                 {/* getting there component */}
                 {/* where youre staying component */}
@@ -68,7 +66,7 @@ const TripPage = () => {
                     overflow: 'hidden'
                 }}>
                 {/* {mapsLoaded &&
-                <Map style={style} lat={parseFloat(reservation[0]?.lat)} lng={parseFloat(reservation[0]?.lng)}/>} */}
+                <Map style={style} lat={parseFloat(reservation?.lat)} lng={parseFloat(reservation?.lng)}/>} */}
             </div>
         </div>
     )
