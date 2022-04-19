@@ -1,4 +1,5 @@
 import CancelReservation from "./Sub-Components/CancelReservation";
+import EditReservation from "./Sub-Components/EditReservation";
 
 const ReservationDetails = ({reservation}) => {
     console.log(reservation);
@@ -21,6 +22,7 @@ const ReservationDetails = ({reservation}) => {
                 </div>
             </div>
             <CancelReservation id={reservation?.id}/>
+            <EditReservation />
         </div>
     )
 };

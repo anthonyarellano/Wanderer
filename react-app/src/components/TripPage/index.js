@@ -63,9 +63,8 @@ const TripPage = () => {
                     height: "100%",
                     overflow: 'hidden'
                 }}>
-                {mapsLoaded &&
-                <Map style={style} lat={parseFloat(reservation[0]?.lat)} lng={parseFloat(reservation[0]?.lng)}/>}
-                {/* google maps component */}
+                {/* {mapsLoaded &&
+                <Map style={style} lat={parseFloat(reservation[0]?.lat)} lng={parseFloat(reservation[0]?.lng)}/>} */}
             </div>
         </div>
     )
