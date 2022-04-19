@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getReservationsForEdit } from '../../../store/reservations';
+import { getListing } from '../../../store/listings';
 import { formatDbDate } from '../../Utils/formatDbDate';
 import { createDisabledRange } from '../../Utils/createdDisabledRange';
+import BookingCard from '../../ListingProfile/BookingCard';
 import Modal from 'react-modal';
 import CustomCalendar from '../../Calendar';
 
 const EditReservation = ({ reservation }) => {
     const reservationsState =  useSelector((state) => state.reservations.notSelected)
+    const listingState = useSelector((state) => state.listings.selected);
 
     const [modalIsOpen, setIsOpen] = useState(false);
     const [startDate, setStartDate] = useState("");
@@ -15,13 +18,14 @@ const EditReservation = ({ reservation }) => {
     const [selected, setSelected] = useState("");
     const [unavailable, setUnavailable] = useState("");
     const [checkout, setCheckOut] = useState(false);
-
+    const [guests, setGuests] = useState(reservation ? reservation?.guests : 0)
     const dispatch = useDispatch();
 
     let reservations;
-    if (reservationsState) {
-        reservations = Object.values(reservationsState);
-    };
+    let listing;
+    if (reservationsState)  reservations = Object.values(reservationsState);
+    if (listingState) listing = listingState[reservation?.listing_id];
+
 
     const calendarFuncs = {
         selected,
@@ -31,32 +35,34 @@ const EditReservation = ({ reservation }) => {
         setEndDate,
         setUnavailable,
         setCheckOut
-    }
+    };
 
-    const openModal = () => {
-        setIsOpen(true);
-        return;
-    }
+    const bookingFuncs = {
+        guests, setGuests,
+        checkout, setCheckOut
+    };
 
     const closeModal = () => {
         setIsOpen(false);
         return
-    }
+    };
 
     let disabledDates;
     if (reservations?.length) {
         const curr = reservations.findIndex((element) => element.id === reservation?.id)
         reservations.splice(curr, 1)
-        console.log(reservations);
         let formatted = formatDbDate(reservations);
         disabledDates = createDisabledRange(formatted);
-    }
+    };
 
     useEffect(() => {
         if (reservation) {
             dispatch(getReservationsForEdit(reservation?.listing_id));
         }
+        dispatch(getListing(reservation?.listing_id));
     }, [reservation, dispatch]);
+
+
 
     return (
         <>
@@ -66,7 +72,16 @@ const EditReservation = ({ reservation }) => {
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
             >
-                <CustomCalendar disabledDates={disabledDates} funcs={calendarFuncs} />
+                <CustomCalendar
+                    disabledDates={disabledDates}
+                    funcs={calendarFuncs}
+                />
+                <BookingCard
+                    funcs={bookingFuncs}
+                    startDate={startDate}
+                    endDate={endDate}
+                    listing={listing}
+                />
             </Modal>
             <div
                 onClick={() => setIsOpen(true)}
