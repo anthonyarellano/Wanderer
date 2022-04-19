@@ -65,8 +65,8 @@ const TripPage = () => {
                     height: "100%",
                     overflow: 'hidden'
                 }}>
-                {/* {mapsLoaded &&
-                <Map style={style} lat={parseFloat(reservation?.lat)} lng={parseFloat(reservation?.lng)}/>} */}
+                {mapsLoaded &&
+                <Map style={style} lat={parseFloat(reservation?.lat)} lng={parseFloat(reservation?.lng)}/>}
             </div>
         </div>
     )

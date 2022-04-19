@@ -2,13 +2,10 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListing, getImages, deleteImage } from '../../store/listings';
-import { formatDate } from '../Utils/formatDate';
 import { formatDbDate } from '../Utils/formatDbDate';
 import { createDisabledRange } from '../Utils/createdDisabledRange';
 import { getReservations } from '../../store/reservations';
-import { formatDateForCalendar } from '../Utils/formatDateForCalendar';
 import ImageCard from './ImageCard';
-import Calendar from 'react-calendar';
 import Modal from 'react-modal';
 import AmenitiesCard from './AmenitiesCard';
 import ProfileImageGallery from './ProfileImageGallery';
@@ -82,24 +79,24 @@ const ListingProfile = () => {
     }, [listingId, dispatch]);
 
 
-    const handleDateUpdate = (dateArr) => {
-        setStartDate(dateArr[0]);
-        setEndDate(dateArr[1]);
-    };
+    // const handleDateUpdate = (dateArr) => {
+    //     setStartDate(dateArr[0]);
+    //     setEndDate(dateArr[1]);
+    // };
 
-    const handleSelection = (date) => {
-        let dateSplit = date[0].split('-');
-        let firstDate = new Date(dateSplit[0], dateSplit[1], dateSplit[2])
-        setSelected(firstDate)
-    };
+    // const handleSelection = (date) => {
+    //     let dateSplit = date[0].split('-');
+    //     let firstDate = new Date(dateSplit[0], dateSplit[1], dateSplit[2])
+    //     setSelected(firstDate)
+    // };
 
-    const clearDates = () => {
-        setSelected("");
-        setUnavailable("");
-        setStartDate("");
-        setEndDate("");
-        setCheckOut(false);
-    };
+    // const clearDates = () => {
+    //     setSelected("");
+    //     setUnavailable("");
+    //     setStartDate("");
+    //     setEndDate("");
+    //     setCheckOut(false);
+    // };
 
     const handleUnavailable = (firstDate) => {
         let i = 0;
