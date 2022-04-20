@@ -159,7 +159,10 @@ export const Banner = () => {
                     <p
                         style={{fontSize: "25px"}}
                         className='big-font'>Welcome to Wanderer</p>
-                    {form === 'login' ? <LoginForm setIsOpen={setIsOpen} /> : form === 'signup' ? <SignUpForm setIsOpen={setIsOpen}/> : null}
+                    {form === 'login' ?
+                    <LoginForm setIsOpen={setIsOpen} setForm={setForm}/> :
+                    form === 'signup' ?
+                    <SignUpForm setIsOpen={setIsOpen} setForm={setForm}/> : null}
                 </div>
             </Modal>
         </div>

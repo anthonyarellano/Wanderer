@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
-const SignUpForm = () => {
+const SignUpForm = ({setIsOpen, setForm}) => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
-  const onSignUp = async ({setIsOpen}) => {
+  const onSignUp = async () => {
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
@@ -114,6 +114,10 @@ const SignUpForm = () => {
         }}
         className='booking-availability-button'>Sign Up</div>
         <div>
+        <div
+          onClick={() => setForm('login')}
+          className='small-font'
+          style={{cursor: "pointer"}}>Already have an account? Log In</div>
         {errors.map((error, ind) => (
           <div
             style={{color: "red"}}

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 
-const LoginForm = ({setIsOpen}) => {
+const LoginForm = ({setIsOpen, setForm}) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,7 +37,7 @@ const LoginForm = ({setIsOpen}) => {
   }
 
   return (
-    <form onSubmit={onLogin}>
+    <div>
       <div>
         <input
           style={{
@@ -84,6 +84,10 @@ const LoginForm = ({setIsOpen}) => {
         }}
         className='booking-availability-button'
         onClick={demoLogin}>Demo</div>
+        <div
+          onClick={() => setForm('signup')}
+          className='small-font'
+          style={{cursor: "pointer"}}>Don't have an account? Sign up</div>
         <div>
         {errors.map((error, ind) => (
           <div
@@ -92,7 +96,7 @@ const LoginForm = ({setIsOpen}) => {
             key={ind}>{error}</div>
         ))}
       </div>
-    </form>
+    </div>
   );
 };
 
