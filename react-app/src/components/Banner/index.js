@@ -4,7 +4,7 @@ import SignUpForm from '../auth/SignUpForm';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import './style/banner.css';
 
 
@@ -15,6 +15,7 @@ export const Banner = () => {
     const user = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
     const history = useHistory();
+    const location = useLocation();
 
     const openModal = () => {
         setIsOpen(true);
@@ -48,7 +49,7 @@ export const Banner = () => {
                     <p
                         className='popout-item'
                         onClick={() => history.push('/my-trips')}
-                    >
+                        >
                         Trips
                     </p>
                 </div>
@@ -59,14 +60,14 @@ export const Banner = () => {
                     <div>
                         <p className='popout-item'
                             onClick={() => history.push('/create-listing')}
-                        >
+                            >
                             Host your home
                         </p>
                     </div>
                     <div>
                         <p className='popout-item'
                             onClick={() => history.push('/my-listings')}
-                        >
+                            >
                             Your listings
                         </p>
                     </div>
@@ -97,6 +98,10 @@ export const Banner = () => {
         )
     }
 
+    if (location.pathname === '/') {
+        return null;
+    }
+
     return (
         <div className="banner-container">
             <div className="banner-logo-container">
@@ -108,7 +113,7 @@ export const Banner = () => {
                 <div
                     style={{cursor: "pointer"}}
                     className='banner-logo-text-container'
-                    onClick={() => history.push('/')}>
+                    onClick={() => history.push('/home')}>
                     <p className='banner-logo-text'>wanderer</p>
                 </div>
             </div>

@@ -117,7 +117,7 @@ const ListingProfile = () => {
                 isOpen={isOpen}
                 onRequestClose={closeModal}
             >
-                {images?.map((image, i) => (
+                {loaded && images?.map((image, i) => (
                     <ImageCard
                         key={i}
                         user={user}

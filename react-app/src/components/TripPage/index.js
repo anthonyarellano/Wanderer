@@ -33,7 +33,7 @@ const TripPage = () => {
 
     if (user.id !== reservation?.user_id && loaded) {
         return (
-            <Redirect to="/" />
+            <Redirect to="/home" />
         )
     };
 

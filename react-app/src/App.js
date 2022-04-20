@@ -16,6 +16,7 @@ import TripPage from './components/TripPage';
 import HomePage from './components/HomePage';
 import ViewListings from './components/ViewListings';
 import { Redirect } from 'react-router-dom';
+import SplashPage from './components/SplashPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -60,11 +61,14 @@ function App() {
         <ProtectedRoute path='/create-listing' exact={true} >
           <ListingForm />
         </ProtectedRoute>
-        <Route path='/' exact={true} >
+        <Route path='/' exact={true}>
+          <SplashPage />
+        </Route>
+        <Route path='/home' exact={true} >
           <HomePage />
         </Route>
         <Route path='/'>
-          <Redirect to="/" />
+          <Redirect to="/home" />
         </Route>
       </Switch>
     </BrowserRouter>
