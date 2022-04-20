@@ -147,6 +147,8 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
 
         if (!address) errors.add('This location is not yet supported.');
 
+        if (!state) errors.add('This location is not yet supported.')
+
         if (country) {
             if (country !== "United States") errors.add('We apologize, wanderer is only currently available in the United States.')
         } if (!country) errors.add('This location is not yet supported.');
