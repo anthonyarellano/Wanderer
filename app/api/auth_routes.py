@@ -65,7 +65,8 @@ def sign_up():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            profile_picture="https://tonesbucket.s3.amazonaws.com/generic.png"
         )
         db.session.add(user)
         db.session.commit()
