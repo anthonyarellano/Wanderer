@@ -50,8 +50,14 @@ const SignUpForm = () => {
         ))}
       </div>
       <div>
-        <label>User Name</label>
         <input
+          style={{
+            width: "96%",
+            fontSize: "20px",
+            borderRadius: "10px 10px 0px 0px"
+          }}
+          className='booking-availability-input small-font'
+          placeholder='Username'
           type='text'
           name='username'
           onChange={updateUsername}
@@ -59,8 +65,14 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Email</label>
         <input
+          style={{
+            width: "96%",
+            fontSize: "20px",
+            borderTop: "0px"
+          }}
+          className='booking-availability-input small-font'
+          placeholder='Email'
           type='text'
           name='email'
           onChange={updateEmail}
@@ -68,8 +80,14 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Password</label>
         <input
+          style={{
+            width: "96%",
+            fontSize: "20px",
+            borderTop: "0px",
+          }}
+          className='booking-availability-input small-font'
+          placeholder='Password'
           type='password'
           name='password'
           onChange={updatePassword}
@@ -77,8 +95,15 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Repeat Password</label>
         <input
+          style={{
+            width: "96%",
+            borderTop: "0px",
+            fontSize: "20px",
+            borderRadius: "0px 0px 10px 10px",
+          }}
+          className='booking-availability-input small-font'
+          placeholder='Repeat Password'
           type='password'
           name='repeat_password'
           onChange={updateRepeatPassword}
@@ -86,7 +111,9 @@ const SignUpForm = () => {
           required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <div
+        style={{textAlign: "center"}}
+        className='booking-availability-button'>Sign Up</div>
     </form>
   );
 };
