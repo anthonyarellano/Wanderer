@@ -15,6 +15,7 @@ class Listing(db.Model):
     latitude = db.Column(db.Float, nullable=True)
     longitude = db.Column(db.Float, nullable=True)
     city = db.Column(db.String(255), nullable=False)
+    state= db.Column(db.String(255), nullable=False)
     price = db.Column(db.Integer, nullable=False)
     address = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
@@ -72,7 +73,8 @@ class Listing(db.Model):
             'check_out': self.check_out,
             'room_type': self.room_type.type,
             'username': self.user.username,
-            'user_photo': self.user.profile_picture
+            'user_photo': self.user.profile_picture,
+            'state': self.state
         }
 
     def to_dict_images(self):
@@ -113,5 +115,6 @@ class Listing(db.Model):
             'username': self.user.username,
             'user_photo': self.user.profile_picture,
             'images': imageList,
-            'room_type_id': self.room_type_id
+            'room_type_id': self.room_type_id,
+            'state': self.state
         }

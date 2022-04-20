@@ -5,14 +5,16 @@ import { authenticate } from './store/session';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
 import Banner from './components/Banner';
 import ListingProfile from './components/ListingProfile';
 import ListingForm from './components/ListingForm';
 import MyTrips from './components/MyTrips';
 import MyListings from './components/MyListings';
 import TripPage from './components/TripPage';
+import HomePage from './components/HomePage';
+import ViewListings from './components/ViewListings';
+import { Redirect } from 'react-router-dom';
+import SplashPage from './components/SplashPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,6 +44,9 @@ function App() {
         <Route path='/listings/:listingId'>
          <ListingProfile />
         </Route>
+        <Route path='/view-listings'>
+          <ViewListings />
+        </Route>
         <ProtectedRoute path='/my-listings' exact={true} >
           <MyListings />
         </ProtectedRoute>
@@ -51,17 +56,17 @@ function App() {
         <ProtectedRoute path='/trips/:reservationId' exact={true} >
           <TripPage />
         </ProtectedRoute>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
         <ProtectedRoute path='/create-listing' exact={true} >
           <ListingForm />
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
-        <Route path='/' exact={true} >
-          <h1>My Home Page</h1>
+        <Route path='/' exact={true}>
+          <SplashPage />
+        </Route>
+        <Route path='/home' exact={true} >
+          <HomePage />
+        </Route>
+        <Route path='/'>
+          <Redirect to="/home" />
         </Route>
       </Switch>
     </BrowserRouter>

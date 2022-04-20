@@ -7,7 +7,7 @@ const Map = ({ lat, lng, style }) => {
     }
 
     return (
-        <GoogleMap center={center} zoom={15} mapContainerStyle={style ? { height: "90vh"} : {width: '1000px', height: "500px"}}>
+        <GoogleMap  mapTypeId='satellite' center={center} zoom={18} mapContainerStyle={style ? { height: "90vh"} : {width: '1000px', height: "500px"}}>
             <Marker position={center}/>
         </GoogleMap>
     )

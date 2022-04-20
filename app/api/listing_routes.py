@@ -1,11 +1,25 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, abort
 from app.models import db, Listing, Image
 
 listing_routes = Blueprint('listings', __name__)
 
+
+@listing_routes.route('/')
+def get_all_listings():
+    listings = Listing.query.all()
+    listingList = []
+    if listings is None:
+        abort(404)
+    for listing in listings:
+        listingList.append(listing.to_dict_images())
+    return jsonify(listingList)
+
+
 @listing_routes.route('/<int:id>')
 def get_listing(id):
     listing = Listing.query.get(id)
+    if listing is None:
+        abort(404)
     return listing.to_dict()
 
 
@@ -31,6 +45,7 @@ def create_listing():
         latitude=listing['latitude'],
         longitude=listing['longitude'],
         city=listing['city'],
+        state=listing['state'],
         price=listing['price'],
         address=listing['address'],
         description=listing['description'],

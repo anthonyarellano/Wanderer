@@ -9,7 +9,7 @@ const Location = ({ locationFuncs, hasSubmitted, locationErrors }) => {
         lat, setLat,
         long, setLong,
         setCity, setAddress,
-        setCountry
+        setCountry, setState,
     } = locationFuncs;
 
     const searchInput = useRef(null)
@@ -32,7 +32,7 @@ const Location = ({ locationFuncs, hasSubmitted, locationErrors }) => {
 
         address.lat = place?.geometry.location.lat();
         address.long = place?.geometry.location.lng();
-
+        console.log(place);
         place.address_components.forEach(component => {
             const types = component.types;
             const value = component.long_name;
@@ -42,7 +42,11 @@ const Location = ({ locationFuncs, hasSubmitted, locationErrors }) => {
             };
 
             if (types.includes("administrative_area_level_1")) {
+                if (value === "New York") {
+                    address.city = "NY"
+                }
                 address.state = value;
+
             };
 
             if (types.includes("postal_code")) {
@@ -67,12 +71,13 @@ const Location = ({ locationFuncs, hasSubmitted, locationErrors }) => {
     const onChangeAddress = (autocomplete) => {
         const location = autocomplete.getPlace();
         const locationInfo = pullAddress(location);
-
+        console.log(locationInfo);
         if (locationInfo) {
             setLat(locationInfo.lat);
             setLong(locationInfo.long);
             setCity(locationInfo.city);
             setCountry(locationInfo.country);
+            setState(locationInfo.state);
             setAddress(`${locationInfo.streetNumber}-${locationInfo.street}-${locationInfo.zip}`)
         }
     }

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListing, getImages, deleteImage } from '../../store/listings';
@@ -27,8 +27,10 @@ const ListingProfile = () => {
     const [unavailable, setUnavailable] = useState("");
     const [guests, setGuests] = useState(1);
     const [checkout, setCheckOut] = useState(false);
+    const [loaded, setLoaded] = useState(false);
 
     const { listingId } = useParams();
+    const history = useHistory();
 
     // Uses custom functions to format incoming date information &
     // create an array which the calendar uses to block off unavailable days.
@@ -43,6 +45,7 @@ const ListingProfile = () => {
     let listing;
     let images;
     let mainImage;
+    if (Object.keys(listingState).length === 0 && loaded) history.push('/view-listings')
     if (listingState) listing = listingState[listingId];
     if (imagesState) images = Object.values(imagesState);
     if (images) mainImage = images[0];
@@ -73,7 +76,7 @@ const ListingProfile = () => {
     };
 
     useEffect(() => {
-        dispatch(getListing(listingId));
+        dispatch(getListing(listingId)).then(() => setLoaded(true));
         dispatch(getImages(listingId));
         dispatch(getReservations(listingId));
     }, [listingId, dispatch]);
@@ -114,7 +117,7 @@ const ListingProfile = () => {
                 isOpen={isOpen}
                 onRequestClose={closeModal}
             >
-                {images?.map((image, i) => (
+                {loaded && images?.map((image, i) => (
                     <ImageCard
                         key={i}
                         user={user}
@@ -135,7 +138,7 @@ const ListingProfile = () => {
                 <p
                     style={{ fontFamily: 'CerealLight', fontSize: "20px", margin: "0px 0px 15px 0px" }}
                 >
-                    {listing?.city}, United States
+                    {listing?.city}, {listing?.state}, United States
                 </p>
             </div>
             <ProfileImageGallery

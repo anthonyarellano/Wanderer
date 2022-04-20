@@ -61,6 +61,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     const [lat, setLat] = useState(null);
     const [long, setLong] = useState(null);
     const [city, setCity] = useState(null);
+    const [state, setState] = useState(null);
     const [country, setCountry] = useState(null);
     const [address, setAddress] = useState(null);
 
@@ -138,17 +139,17 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     // location form validations
     useEffect(() => {
         let errors = new Set([]);
-        if (!lat) errors.add('Please select a location.');
+        if (!lat) errors.add('This location is not yet supported.');
 
-        if (!long) errors.add('Please select a location.');
+        if (!long) errors.add('This location is not yet supported.');
 
-        if (!city) errors.add('Please select a location.');
+        if (!city) errors.add('This location is not yet supported.');
 
-        if (!address) errors.add('Please select a location.');
+        if (!address) errors.add('This location is not yet supported.');
 
         if (country) {
             if (country !== "United States") errors.add('We apologize, wanderer is only currently available in the United States.')
-        } if (!country) errors.add('Please select a location.');
+        } if (!country) errors.add('This location is not yet supported.');
 
         setLocationErrors(errors);
     }, [lat, long, city, address, country])
@@ -195,7 +196,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     const locationFuncs = {
         lat, setLat, long, setLong,
         city, setCity, address, setAddress,
-        country, setCountry
+        country, setCountry, state, setState
     }
 
     const aboutFuncs = {
@@ -261,6 +262,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
                 longitude: long,
                 city,
                 price,
+                state,
                 address,
                 description,
                 wifi_avail: wifi,
