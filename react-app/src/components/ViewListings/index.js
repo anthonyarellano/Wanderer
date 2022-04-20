@@ -16,10 +16,10 @@ const ViewListings = () => {
         <div
             className='all-listings-container'>
             {listings?.map((listing) => (
-                <div style={{width: "285px", margin: "0px 40px 40px 40px"}}>
+                <div style={{ width: "285px", margin: "0px 40px 40px 40px" }}>
                     <ListingCard
                         key={listing?.id}
-                        listing={listing}/>
+                        listing={listing} />
                 </div>
             ))}
         </div>

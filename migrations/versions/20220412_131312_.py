@@ -37,6 +37,7 @@ def upgrade():
     sa.Column('city', sa.String(length=255), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
     sa.Column('address', sa.String(length=255), nullable=False),
+    sa.Column('state', sa.String(length=255), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('wifi_avail', sa.Boolean(), nullable=False),
     sa.Column('tv_avail', sa.Boolean(), nullable=False),

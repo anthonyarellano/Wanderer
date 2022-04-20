@@ -1,8 +1,13 @@
-const ListingCarouselCard = ({img}) => {
-    const url = img.split('=index?')[0];
+import { useHistory } from "react-router-dom";
 
+const ListingCarouselCard = ({img}) => {
+    const history = useHistory();
+    const url = img.url?.split('=index?')[0];
+    console.log(img?.listing_id);
     return (
-        <div>
+        <div
+            style={{cursor: "pointer"}}
+            onClick={() => history.push(`/listings/${img?.listing_id}`)}>
             <img
                 style={{
                     height: "300px",

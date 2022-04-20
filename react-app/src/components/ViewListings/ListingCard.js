@@ -9,11 +9,21 @@ const ListingCard = ({ listing }) => {
                 showStatus={false}
                 width={"285px"}>
                 {listing?.images?.map((image) => (
-                    <ListingCarouselCard img={image?.url} />
+                    <ListingCarouselCard img={image} />
                 ))}
             </Carousel>
-            <div>
-                text
+            <div
+                style={{
+                    justifyContent: 'space-between',
+                    marginTop: "10px"
+                }}
+                className='flex'>
+                <div className='big-font'>
+                    {listing?.city}
+                </div>
+                <div className='small-font'>
+                    ${listing?.price} night
+                </div>
             </div>
         </div>
     )

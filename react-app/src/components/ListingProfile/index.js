@@ -44,7 +44,7 @@ const ListingProfile = () => {
     let listing;
     let images;
     let mainImage;
-    if (Object.keys(listingState).length === 0) history.push('/view-listings')
+    // if (Object.keys(listingState).length === 0) history.push('/view-listings')
     if (listingState) listing = listingState[listingId];
     if (imagesState) images = Object.values(imagesState);
     if (images) mainImage = images[0];

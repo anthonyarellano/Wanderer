@@ -45,6 +45,7 @@ def create_listing():
         latitude=listing['latitude'],
         longitude=listing['longitude'],
         city=listing['city'],
+        state=listing['state'],
         price=listing['price'],
         address=listing['address'],
         description=listing['description'],
