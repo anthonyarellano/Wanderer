@@ -39,13 +39,13 @@ const LoginForm = ({setIsOpen}) => {
   return (
     <form onSubmit={onLogin}>
       <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-      <div>
-        {/* <label htmlFor='email'>Email</label> */}
         <input
+          style={{
+            width: "96%",
+            fontSize: "20px",
+            borderRadius: "10px 10px 0px 0px"
+          }}
+          className='booking-availability-input small-font'
           name='email'
           type='text'
           placeholder='Email'
@@ -54,8 +54,14 @@ const LoginForm = ({setIsOpen}) => {
         />
       </div>
       <div>
-        {/* <label htmlFor='password'>Password</label> */}
         <input
+          style={{
+            width: "96%",
+            fontSize: "20px",
+            borderRadius: "0px 0px 10px 10px",
+            borderTop: "0px"
+          }}
+          className='booking-availability-input small-font'
           name='password'
           type='password'
           placeholder='Password'
@@ -63,8 +69,29 @@ const LoginForm = ({setIsOpen}) => {
           onChange={updatePassword}
         />
       </div>
-      <button type='submit'>Login</button>
-      <div onClick={demoLogin}>Demo</div>
+      <div
+        style={{
+          textAlign: "center",
+          cursor: "pointer"
+        }}
+        className='booking-availability-button'
+        onClick={onLogin}>Login
+      </div>
+      <div
+        style={{
+          textAlign: "center",
+          cursor: "pointer"
+        }}
+        className='booking-availability-button'
+        onClick={demoLogin}>Demo</div>
+        <div>
+        {errors.map((error, ind) => (
+          <div
+            style={{color: "red"}}
+            className='small-font'
+            key={ind}>{error}</div>
+        ))}
+      </div>
     </form>
   );
 };
