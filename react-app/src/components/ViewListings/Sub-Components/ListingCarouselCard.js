@@ -9,6 +9,7 @@ const ListingCarouselCard = ({img}) => {
             style={{cursor: "pointer"}}
             onClick={() => history.push(`/listings/${img?.listing_id}`)}>
             <img
+                alt="listing"
                 style={{
                     height: "300px",
                     objectFit: "cover",

@@ -9,9 +9,7 @@ const Location = ({ locationFuncs, hasSubmitted, locationErrors }) => {
         lat, setLat,
         long, setLong,
         setCity, setAddress,
-        city, country,
         setCountry, setState,
-        state
     } = locationFuncs;
 
     const searchInput = useRef(null)

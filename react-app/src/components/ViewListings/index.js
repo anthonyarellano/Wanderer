@@ -10,7 +10,7 @@ const ViewListings = () => {
 
     useEffect(() => {
         dispatch(getAllListings())
-    }, []);
+    }, [dispatch]);
 
     return (
         <div

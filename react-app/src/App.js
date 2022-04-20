@@ -5,8 +5,6 @@ import { authenticate } from './store/session';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
 import Banner from './components/Banner';
 import ListingProfile from './components/ListingProfile';
 import ListingForm from './components/ListingForm';

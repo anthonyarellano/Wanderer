@@ -19,11 +19,13 @@ const SplashPage = () => {
                 className='flex'>
                 <Link to={{ pathname: `https://github.com/badjub1es` }} target="_blank">
                     <img
+                        alt="github"
                         style={{width: "70px", height: "70px", marginRight: "5%"}}
                         src={require('./style/images/github.png').default}></img>
                 </Link>
                 <Link to={{ pathname: `https://www.linkedin.com/in/antarellano/` }} target="_blank">
                     <img
+                        alt="linkedin"
                         style={{width: "70px", height: "70px", marginLeft: "5%"}}
                         src={require('./style/images/linkedin.png').default}></img>
                 </Link>
