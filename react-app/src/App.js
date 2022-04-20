@@ -13,6 +13,7 @@ import ListingForm from './components/ListingForm';
 import MyTrips from './components/MyTrips';
 import MyListings from './components/MyListings';
 import TripPage from './components/TripPage';
+import HomePage from './components/HomePage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -51,17 +52,17 @@ function App() {
         <ProtectedRoute path='/trips/:reservationId' exact={true} >
           <TripPage />
         </ProtectedRoute>
-        <ProtectedRoute path='/users' exact={true} >
+        {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path='/create-listing' exact={true} >
           <ListingForm />
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
+        {/* <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <Route path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <HomePage />
         </Route>
       </Switch>
     </BrowserRouter>
