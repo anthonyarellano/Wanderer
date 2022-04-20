@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, abort
 from app.models import db, Listing, Image
 
 listing_routes = Blueprint('listings', __name__)
@@ -6,6 +6,8 @@ listing_routes = Blueprint('listings', __name__)
 @listing_routes.route('/<int:id>')
 def get_listing(id):
     listing = Listing.query.get(id)
+    if listing is None:
+        abort(404)
     return listing.to_dict()
 
 

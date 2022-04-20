@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListing, getImages, deleteImage } from '../../store/listings';
@@ -29,6 +29,7 @@ const ListingProfile = () => {
     const [checkout, setCheckOut] = useState(false);
 
     const { listingId } = useParams();
+    const history = useHistory();
 
     // Uses custom functions to format incoming date information &
     // create an array which the calendar uses to block off unavailable days.
@@ -43,6 +44,7 @@ const ListingProfile = () => {
     let listing;
     let images;
     let mainImage;
+    if (Object.keys(listingState).length === 0) history.push('/view-listings')
     if (listingState) listing = listingState[listingId];
     if (imagesState) images = Object.values(imagesState);
     if (images) mainImage = images[0];
