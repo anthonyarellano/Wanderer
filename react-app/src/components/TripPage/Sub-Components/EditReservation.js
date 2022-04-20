@@ -46,6 +46,11 @@ const EditReservation = ({ reservation }) => {
         return
     };
 
+    const setDates = () => {
+        setStartDate(() => formattedDates[0][0]);
+        setEndDate(() => formattedDates[0][1]);
+    }
+
     let disabledDates;
     let formattedDates;
     if (reservations?.length) {
@@ -58,11 +63,10 @@ const EditReservation = ({ reservation }) => {
 
     useEffect(() => {
         if (formattedDates?.length) {
-            setStartDate(formattedDates[0][0]);
-            setEndDate(formattedDates[0][1]);
+            setDates()
         };
         // eslint-disable-next-line
-    }, [formattedDates])
+    }, [formattedDates?.length])
 
     useEffect(() => {
         setGuests(reservation?.guests);
