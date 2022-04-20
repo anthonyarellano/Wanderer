@@ -12,13 +12,14 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
-  const onSignUp = async () => {
+  const onSignUp = async ({setIsOpen}) => {
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
         setErrors(data)
-      }
-    }
+      };
+      if (!data) setIsOpen(false);
+    };
   };
 
   const updateUsername = (e) => {

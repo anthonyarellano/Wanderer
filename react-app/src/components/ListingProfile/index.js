@@ -78,26 +78,6 @@ const ListingProfile = () => {
         dispatch(getReservations(listingId));
     }, [listingId, dispatch]);
 
-
-    // const handleDateUpdate = (dateArr) => {
-    //     setStartDate(dateArr[0]);
-    //     setEndDate(dateArr[1]);
-    // };
-
-    // const handleSelection = (date) => {
-    //     let dateSplit = date[0].split('-');
-    //     let firstDate = new Date(dateSplit[0], dateSplit[1], dateSplit[2])
-    //     setSelected(firstDate)
-    // };
-
-    // const clearDates = () => {
-    //     setSelected("");
-    //     setUnavailable("");
-    //     setStartDate("");
-    //     setEndDate("");
-    //     setCheckOut(false);
-    // };
-
     const handleUnavailable = (firstDate) => {
         let i = 0;
         while (i < disabledDates?.length) {
@@ -201,33 +181,10 @@ const ListingProfile = () => {
                     <AmenitiesCard listing={listing} />
 
                     {/* Calendar Display */}
-                    <CustomCalendar funcs={calendarFuncs} ref={myRef} disabledDates={disabledDates}/>
-                    {/* <div ref={myRef} className='border-bottom'>
-                        <p className='big-font sub-header'>Select Your Dates</p>
-                        <Calendar tileDisabled={({ date, view }) =>
-                            (view === 'month') && // Block day tiles only
-                            disabledDates?.some(disabledDate =>
-                                date.getFullYear() === disabledDate.getFullYear() &&
-                                date.getMonth() === disabledDate.getMonth() &&
-                                date.getDate() === disabledDate.getDate()
-                            )}
-                            returnValue="range"
-                            onChange={(value, e) => handleDateUpdate(formatDateForCalendar(value))}
-                            onClickDay={(value, e) => handleSelection(formatDate([value]))}
-                            minDate={selected ? selected : new Date()}
-                            maxDate={unavailable ? unavailable : null}
-                            showDoubleView={true}
-                            selectRange={true}
-                            // defaultValue={startDate && endDate ? [new Date(startDate), new Date(endDate)] : null}
-                        />
-                        <p
-                            className='big-font'
-                            style={{cursor: "pointer", textDecoration: 'underline'}}
-                            onClick={clearDates}
-                        >
-                            clear dates
-                        </p>
-                    </div> */}
+                    <div ref={myRef}>
+                        <CustomCalendar funcs={calendarFuncs} ref={myRef} disabledDates={disabledDates}/>
+                    </div>
+
                 </div>
                 <BookingCard
                     funcs={{guests, setGuests, checkout, setCheckOut}}
