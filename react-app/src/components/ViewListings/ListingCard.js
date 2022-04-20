@@ -7,7 +7,7 @@ const ListingCard = ({ listing }) => {
             <Carousel
                 showThumbs={false}
                 showStatus={false}
-                width={"285px"}>
+                width={"300px"}>
                 {listing?.images?.map((image) => (
                     <ListingCarouselCard img={image} />
                 ))}
@@ -18,10 +18,14 @@ const ListingCard = ({ listing }) => {
                     marginTop: "10px"
                 }}
                 className='flex'>
-                <div className='big-font'>
-                    {listing?.city}
+                <div
+                    style={{fontSize: "15px"}}
+                    className='big-font'>
+                    {listing?.city}, {listing?.state}
                 </div>
-                <div className='small-font'>
+                <div
+                    style={{fontSize: "15px"}}
+                    className='small-font'>
                     ${listing?.price} night
                 </div>
             </div>

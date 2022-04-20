@@ -137,7 +137,7 @@ const ListingProfile = () => {
                 <p
                     style={{ fontFamily: 'CerealLight', fontSize: "20px", margin: "0px 0px 15px 0px" }}
                 >
-                    {listing?.city}, United States
+                    {listing?.city}, {listing?.state}, United States
                 </p>
             </div>
             <ProfileImageGallery

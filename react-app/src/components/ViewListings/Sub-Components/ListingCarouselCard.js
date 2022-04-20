@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 const ListingCarouselCard = ({img}) => {
     const history = useHistory();
     const url = img.url?.split('=index?')[0];
-    console.log(img?.listing_id);
+
     return (
         <div
             style={{cursor: "pointer"}}
