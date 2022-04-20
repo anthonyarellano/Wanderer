@@ -57,15 +57,9 @@ function App() {
         <ProtectedRoute path='/trips/:reservationId' exact={true} >
           <TripPage />
         </ProtectedRoute>
-        {/* <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute> */}
         <ProtectedRoute path='/create-listing' exact={true} >
           <ListingForm />
         </ProtectedRoute>
-        {/* <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute> */}
         <Route path='/' exact={true} >
           <HomePage />
         </Route>

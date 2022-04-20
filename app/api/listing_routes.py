@@ -3,6 +3,18 @@ from app.models import db, Listing, Image
 
 listing_routes = Blueprint('listings', __name__)
 
+
+@listing_routes.route('/')
+def get_all_listings():
+    listings = Listing.query.all()
+    listingList = []
+    if listings is None:
+        abort(404)
+    for listing in listings:
+        listingList.append(listing.to_dict())
+    return jsonify(listingList)
+
+
 @listing_routes.route('/<int:id>')
 def get_listing(id):
     listing = Listing.query.get(id)

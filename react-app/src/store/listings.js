@@ -134,6 +134,15 @@ export const getUserListings = (userId) => async (dispatch) => {
     };
 };
 
+export const getAllListings = () => async (dispatch) => {
+    const response = await fetch(`/api/listings/`);
+    if (response.ok) {
+        const listings = await response.json();
+        dispatch(loadListings(listings));
+        return listings;
+    };
+};
+
 export const updateListing = (listing, listingId) => async (dispatch) => {
     const response = await fetch(`/api/listings/update/${listingId}`, {
         method: "PUT",
