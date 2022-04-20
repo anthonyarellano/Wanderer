@@ -147,14 +147,20 @@ export const Banner = () => {
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
             >
-                <div>
-                    <div>x</div>
+                <div
+                    style={{
+                        justifyContent: "center",
+                        borderBottom: "1px solid #EAEAEA"
+                    }}
+                    className='flex big-font'>
                     <p>Log in or Sign Up</p>
                 </div>
-                <div>
-                    <p>Welcome to Wanderer</p>
+                <div style={{margin: "0% 3% 0% 3%"}}>
+                    <p
+                        style={{fontSize: "25px"}}
+                        className='big-font'>Welcome to Wanderer</p>
+                    {form === 'login' ? <LoginForm setIsOpen={setIsOpen} /> : form === 'signup' ? <SignUpForm /> : null}
                 </div>
-                {form === 'login' ? <LoginForm setIsOpen={setIsOpen} /> : form === 'signup' ? <SignUpForm /> : null}
             </Modal>
         </div>
     )
