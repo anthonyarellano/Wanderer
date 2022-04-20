@@ -114,6 +114,7 @@ export const Banner = () => {
             </div>
             <div>
                 <input
+                    value={'Search bar coming soon . . .'}
                     placeholder='Start your search'
                     style={{ width: "500px" }}
                     className='banner-search-bar'

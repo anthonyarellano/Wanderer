@@ -14,6 +14,8 @@ import MyTrips from './components/MyTrips';
 import MyListings from './components/MyListings';
 import TripPage from './components/TripPage';
 import HomePage from './components/HomePage';
+import ViewListings from './components/ViewListings';
+import { Redirect } from 'react-router-dom';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -43,6 +45,9 @@ function App() {
         <Route path='/listings/:listingId'>
          <ListingProfile />
         </Route>
+        <Route path='/view-listings'>
+          <ViewListings />
+        </Route>
         <ProtectedRoute path='/my-listings' exact={true} >
           <MyListings />
         </ProtectedRoute>
@@ -63,6 +68,9 @@ function App() {
         </ProtectedRoute> */}
         <Route path='/' exact={true} >
           <HomePage />
+        </Route>
+        <Route path='/'>
+          <Redirect to="/" />
         </Route>
       </Switch>
     </BrowserRouter>
