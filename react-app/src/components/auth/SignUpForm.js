@@ -12,8 +12,7 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
-  const onSignUp = async (e) => {
-    e.preventDefault();
+  const onSignUp = async () => {
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
@@ -43,12 +42,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
+    <div>
       <div>
         <input
           style={{
@@ -112,9 +106,21 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div
-        style={{textAlign: "center"}}
+        onClick={onSignUp}
+        style={{
+          cursor:"pointer",
+          textAlign: "center"
+        }}
         className='booking-availability-button'>Sign Up</div>
-    </form>
+        <div>
+        {errors.map((error, ind) => (
+          <div
+            style={{color: "red"}}
+            className='small-font'
+            key={ind}>{error}</div>
+        ))}
+      </div>
+    </div>
   );
 };
 

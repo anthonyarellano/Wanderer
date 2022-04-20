@@ -87,7 +87,7 @@ const LoginForm = ({setIsOpen}) => {
         <div>
         {errors.map((error, ind) => (
           <div
-            style={{padding: "10px"}}
+            style={{color: "red"}}
             className='small-font'
             key={ind}>{error}</div>
         ))}

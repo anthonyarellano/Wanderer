@@ -121,5 +121,6 @@
 
 .form-modal {
     border: 1px solid #EAEAEA;
+    border-radius: 20px;
     outline-color: white;
   }
