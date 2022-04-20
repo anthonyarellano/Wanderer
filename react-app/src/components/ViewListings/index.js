@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getAllListings } from '../../store/listings';
+import ListingCard from './ListingCard';
+import './style/view-listings.css';
 
 const ViewListings = () => {
     const listings = useSelector((state) => Object.values(state.listings.listings))
@@ -11,7 +13,17 @@ const ViewListings = () => {
     }, []);
 
     return (
-        <p>Listings galore</p>
+        <div
+            className='all-listings-container'>
+            {listings?.map((listing) => (
+                <div style={{width: "300px"}}>
+                    <ListingCard
+                        key={listing?.id}
+                        listing={listing}/>
+                </div>
+            ))}
+        </div>
+
     )
 };
 

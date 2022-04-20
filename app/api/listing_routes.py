@@ -11,7 +11,7 @@ def get_all_listings():
     if listings is None:
         abort(404)
     for listing in listings:
-        listingList.append(listing.to_dict())
+        listingList.append(listing.to_dict_images())
     return jsonify(listingList)
 
 
