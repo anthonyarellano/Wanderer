@@ -155,7 +155,7 @@ export const Banner = () => {
                     className='flex big-font'>
                     <p>Log in or Sign Up</p>
                 </div>
-                <div style={{margin: "0% 3% 0% 3%"}}>
+                <div style={{margin: "0% 3% 5% 3%"}}>
                     <p
                         style={{fontSize: "25px"}}
                         className='big-font'>Welcome to Wanderer</p>
