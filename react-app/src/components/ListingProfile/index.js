@@ -27,6 +27,7 @@ const ListingProfile = () => {
     const [unavailable, setUnavailable] = useState("");
     const [guests, setGuests] = useState(1);
     const [checkout, setCheckOut] = useState(false);
+    const [loaded, setLoaded] = useState(false);
 
     const { listingId } = useParams();
     const history = useHistory();
@@ -44,7 +45,7 @@ const ListingProfile = () => {
     let listing;
     let images;
     let mainImage;
-    // if (Object.keys(listingState).length === 0) history.push('/view-listings')
+    if (Object.keys(listingState).length === 0 && loaded) history.push('/view-listings')
     if (listingState) listing = listingState[listingId];
     if (imagesState) images = Object.values(imagesState);
     if (images) mainImage = images[0];
@@ -75,7 +76,7 @@ const ListingProfile = () => {
     };
 
     useEffect(() => {
-        dispatch(getListing(listingId));
+        dispatch(getListing(listingId)).then(() => setLoaded(true));
         dispatch(getImages(listingId));
         dispatch(getReservations(listingId));
     }, [listingId, dispatch]);
