@@ -7,7 +7,7 @@ const ListingCarouselCard = ({img}) => {
                 style={{
                     height: "300px",
                     objectFit: "cover",
-                    borderRadius: "20px"
+                    borderRadius: "15px"
                 }}
                 src={url}></img>
         </div>

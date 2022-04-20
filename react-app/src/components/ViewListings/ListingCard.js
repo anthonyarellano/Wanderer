@@ -7,7 +7,7 @@ const ListingCard = ({ listing }) => {
             <Carousel
                 showThumbs={false}
                 showStatus={false}
-                width={"300px"}>
+                width={"285px"}>
                 {listing?.images?.map((image) => (
                     <ListingCarouselCard img={image?.url} />
                 ))}
