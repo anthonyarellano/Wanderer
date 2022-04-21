@@ -14,3 +14,6 @@ Planned features:
 - Further Google Maps API integration 
 - Reviews
 - Favorites
+
+## Technologies Used
+<a src="google.com"> <img src="https://user-images.githubusercontent.com/24263351/157998349-284820ed-dff1-4ddb-ace8-620da40907a8.png" alt="drawing" width="75"/> </a><img src="https://cdn-media-1.freecodecamp.org/images/LwOjDA5I0tNxHZPOuhTS9abq4Bc3FxMr1SJQ" alt="drawing" width="150"/>
