@@ -67,7 +67,7 @@ const Images = ({ imagesFuncs, hasSubmitted, imageErrors }) => {
             ))}
             <div {...getRootProps({ style: baseStyle })}>
                 <input {...getInputProps()} />
-                <p>Drag 'n' drop for multiple files here, or click to select one file</p>
+                <p>Drag 'n' drop at least 5 photos here, then click and drag to re-order</p>
             </div>
             <aside style={thumbsContainer}>
                 <div>
