@@ -115,7 +115,10 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs, editFo
         links = (
             <div
                 className='booking-availability-button'
-                style={{ textAlign: 'center'}}
+                style={{
+                    textAlign: 'center',
+                    cursor: "pointer"
+                }}
                 onClick={() => setIsOpen(true)}>
                 Login to view availability
             </div>
@@ -125,7 +128,7 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs, editFo
 
     return (
         <div className='listing-booking-container'>
-            <LoginModal setIsOpen={setIsOpen} modalIsOpen={modalIsOpen}/>
+            <LoginModal setIsOpen={setIsOpen} modalIsOpen={modalIsOpen} />
             <div
                 style={{ fontSize: "23px" }}
                 className='flex'
