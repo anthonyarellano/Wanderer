@@ -9,6 +9,7 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs, editFo
     const user = useSelector((state) => state.session.user);
     const [nights, setNights] = useState('');
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [form, setForm] = useState('login');
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -128,7 +129,7 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs, editFo
 
     return (
         <div className='listing-booking-container'>
-            <LoginModal setIsOpen={setIsOpen} modalIsOpen={modalIsOpen} />
+            <LoginModal form={form} setForm={setForm} setIsOpen={setIsOpen} modalIsOpen={modalIsOpen} />
             <div
                 style={{ fontSize: "23px" }}
                 className='flex'
