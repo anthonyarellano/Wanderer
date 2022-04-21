@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
 import { useHistory, useLocation } from 'react-router-dom';
 import './style/banner.css';
+import LoginModal from '../LoginModal';
 
 
 export const Banner = () => {
@@ -20,11 +21,6 @@ export const Banner = () => {
     const openModal = () => {
         setIsOpen(true);
         return;
-    }
-
-    const closeModal = () => {
-        setIsOpen(false);
-        return
     }
 
     const loginModal = () => {
@@ -147,30 +143,7 @@ export const Banner = () => {
                     {links}
                 </div>
             </div>
-            <Modal
-                className='form-modal'
-                ariaHideApp={false}
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-            >
-                <div
-                    style={{
-                        justifyContent: "center",
-                        borderBottom: "1px solid #EAEAEA"
-                    }}
-                    className='flex big-font'>
-                    <p>Log in or Sign Up</p>
-                </div>
-                <div style={{margin: "0% 3% 5% 3%"}}>
-                    <p
-                        style={{fontSize: "25px"}}
-                        className='big-font'>Welcome to Wanderer</p>
-                    {form === 'login' ?
-                    <LoginForm setIsOpen={setIsOpen} setForm={setForm}/> :
-                    form === 'signup' ?
-                    <SignUpForm setIsOpen={setIsOpen} setForm={setForm}/> : null}
-                </div>
-            </Modal>
+            <LoginModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}/>
         </div>
     )
 }
