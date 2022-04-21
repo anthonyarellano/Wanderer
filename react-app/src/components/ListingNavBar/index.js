@@ -123,6 +123,9 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
             if (price > 2147483646) errors.push('Please enter smaller value for nightly price.');
         } if (!price) errors.push('Please enter a value for nightly price.');
 
+        if (description) {
+            if (description.length > 2000) errors.push('Please keep description less than 2000 characters.')
+        }
         if (!description) errors.push('Please enter a value for description.');
 
         if (!checkIn) errors.push('Please enter a check-in time.');
@@ -154,7 +157,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
         } if (!country) errors.add('This location is not yet supported.');
 
         setLocationErrors(errors);
-    }, [lat, long, city, address, country])
+    }, [lat, long, city, address, country, state])
 
     useEffect(() => {
         let errors = [];
