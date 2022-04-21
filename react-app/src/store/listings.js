@@ -108,12 +108,6 @@ export const createListing = (listing) => async (dispatch) => {
 };
 
 export const getListing = (id) => async (dispatch) => {
-    let badChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=|\\}]{[:;".,><?/';
-    let badId;
-    id.split('').forEach((char) => {
-        if (badChars.includes(char)) badId = true;
-    })
-    if (badId) return null;
     const response = await fetch(`/api/listings/${id}`);
     if (response.ok) {
         const listing = await response.json();

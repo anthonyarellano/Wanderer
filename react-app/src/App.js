@@ -33,7 +33,7 @@ function App() {
     <BrowserRouter>
       <Banner />
       <Switch>
-        <Route path='/listings/:listingId'>
+        <Route path='/listings/:listingId(//d+)'>
          <ListingProfile />
         </Route>
         <Route path='/view-listings'>
@@ -45,7 +45,7 @@ function App() {
         <ProtectedRoute path='/my-trips' exact={true} >
           <MyTrips />
         </ProtectedRoute>
-        <ProtectedRoute path='/trips/:reservationId' exact={true} >
+        <ProtectedRoute path='/trips/:reservationId(//d+)' exact={true} >
           <TripPage />
         </ProtectedRoute>
         <ProtectedRoute path='/create-listing' exact={true} >
