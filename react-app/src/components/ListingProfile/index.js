@@ -141,11 +141,11 @@ const ListingProfile = () => {
                     {listing?.city}, {listing?.state}, United States
                 </p>
             </div>
-            <ProfileImageGallery
+            {loaded && <ProfileImageGallery
                 mainImage={mainImage}
                 secondaryImages={secondaryImages}
                 openModal={openModal}
-            />
+            />}
 
             {/* Initial details and check availability */}
             <div className='listing-profile-lower-half-container'>
