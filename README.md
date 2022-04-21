@@ -39,3 +39,12 @@ On a listings page a user can view important details about the listing as well a
 ![listing1](https://user-images.githubusercontent.com/24263351/164359946-b329ea89-6341-4c26-8637-c3b4a5f1ccfb.PNG)
 ![listing2](https://user-images.githubusercontent.com/24263351/164359949-d1ae7d7b-2dd6-424e-ae76-421705ec4c67.PNG)
 
+Here is the form for creating a listing. Packed with validators it ensures that a listing can be created and rendered without worry. 
+![listings3](https://user-images.githubusercontent.com/24263351/164360198-45c64572-7918-472d-b253-5d6cd421ec23.PNG)
+
+## Trips
+Upon navigating to my trips via the user interface, users can view upcoming trips in aggregate and click on an individual card in order to see further details.
+![trips](https://user-images.githubusercontent.com/24263351/164360336-2249c8b6-f72c-4292-88b0-dc34d5d5274a.PNG)
+
+Upon clicking a trip's card the details are displayed and from here a user can edit the details of their upcoming reservation.
+![res](https://user-images.githubusercontent.com/24263351/164360456-be0d1000-4689-4a7c-9cd9-0577916314c1.PNG)
