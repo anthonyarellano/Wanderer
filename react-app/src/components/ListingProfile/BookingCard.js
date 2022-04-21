@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createReservation, editReservation } from '../../store/reservations';
 import { daysBetween } from '../Utils/daysBetween';
 import { useHistory } from 'react-router-dom';
+import LoginModal from '../LoginModal';
 
 const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs, editForm, reservationId }) => {
     const user = useSelector((state) => state.session.user);
     const [nights, setNights] = useState('');
+    const [modalIsOpen, setIsOpen] = useState(false);
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -113,7 +115,11 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs, editFo
         links = (
             <div
                 className='booking-availability-button'
-                style={{ textAlign: 'center'}}>
+                style={{
+                    textAlign: 'center',
+                    cursor: "pointer"
+                }}
+                onClick={() => setIsOpen(true)}>
                 Login to view availability
             </div>
         )
@@ -122,6 +128,7 @@ const BookingCard = ({ executeScroll, startDate, endDate, listing, funcs, editFo
 
     return (
         <div className='listing-booking-container'>
+            <LoginModal setIsOpen={setIsOpen} modalIsOpen={modalIsOpen} />
             <div
                 style={{ fontSize: "23px" }}
                 className='flex'

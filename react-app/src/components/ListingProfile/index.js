@@ -13,12 +13,15 @@ import BookingCard from './BookingCard';
 import CustomCalendar from '../Calendar';
 import './style/listing-profile.css';
 import './style/calendar.css';
+import LoginModal from '../LoginModal';
 
 const ListingProfile = () => {
     const user = useSelector((state) => state.session.user);
     const listingState = useSelector((state) => state.listings.selected);
     const imagesState = useSelector((state) => state.listings.images);
     const reservations = useSelector((state) => Object.values(state.reservations.reservations))
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const [isOpen, setIsOpen] = useState(false);
     const [startDate, setStartDate] = useState("");
@@ -127,6 +130,8 @@ const ListingProfile = () => {
                     />
                 ))}
             </Modal>
+
+            <LoginModal setIsOpen={setModalIsOpen} modalIsOpen={modalIsOpen}/>
 
             {/* Top images */}
             <div>

@@ -35,12 +35,6 @@ function App() {
     <BrowserRouter>
       <Banner />
       <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
         <Route path='/listings/:listingId'>
          <ListingProfile />
         </Route>
