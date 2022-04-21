@@ -33,7 +33,7 @@ const MyListingCard = ({ listing }) => {
                 <div className="listing-card-container">
                     <div className='flex'>
                         <div
-                            style={{cursor: "pointer"}}
+                            style={{cursor: "pointer", width: "75%", overflow: "clip"}}
                             className="big-font"
                             onClick={() => history.push(`/listings/${listing?.id}`)}
                         >

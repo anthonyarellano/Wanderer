@@ -130,11 +130,16 @@ const ListingProfile = () => {
 
             {/* Top images */}
             <div>
-                <p
-                    style={{ fontFamily: 'CerealBd', fontSize: "35px", margin: "0px 0px 5px 0px" }}
-                >
-                    {listing?.title}
-                </p>
+                <div style={{
+                    width: "1000px",
+                    overflow: "clip"
+                    }}>
+                    <p
+                        style={{ fontFamily: 'CerealBd', fontSize: "35px", margin: "0px 0px 5px 0px" }}
+                    >
+                        {listing?.title}
+                    </p>
+                </div>
                 <p
                     style={{ fontFamily: 'CerealLight', fontSize: "20px", margin: "0px 0px 15px 0px" }}
                 >
