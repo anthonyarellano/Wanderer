@@ -108,7 +108,7 @@ export const createListing = (listing) => async (dispatch) => {
 };
 
 export const getListing = (id) => async (dispatch) => {
-    let badChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=|\}]{[:;".,><?/';
+    let badChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=|\\}]{[:;".,><?/';
     let badId;
     id.split('').forEach((char) => {
         if (badChars.includes(char)) badId = true;
