@@ -1,6 +1,3 @@
-import Modal from 'react-modal';
-import LoginForm from '../auth/LoginForm';
-import SignUpForm from '../auth/SignUpForm';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
@@ -143,7 +140,7 @@ export const Banner = () => {
                     {links}
                 </div>
             </div>
-            <LoginModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}/>
+            <LoginModal form={form} setForm={setForm} modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}/>
         </div>
     )
 }

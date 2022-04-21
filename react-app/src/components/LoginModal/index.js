@@ -1,11 +1,8 @@
 import Modal from 'react-modal';
-import { useState } from 'react';
 import LoginForm from '../auth/LoginForm';
 import SignUpForm from '../auth/SignUpForm';
 
-const LoginModal = ({setIsOpen, modalIsOpen}) => {
-    const [form, setForm] = useState('login');
-    // const [isOpen, setIsOpen] = useState(false);
+const LoginModal = ({setIsOpen, modalIsOpen, form, setForm}) => {
 
     const closeModal = () => {
         setIsOpen(false);
