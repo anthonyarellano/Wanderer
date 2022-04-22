@@ -8,6 +8,7 @@ import Location from './Location';
 import Amenities from './Amenities';
 import Images from './Images';
 import LoadingModal from '../LoadingModal';
+import Compressor from 'compressorjs';
 import './style/listing-navbar.css';
 
 const S3_BUCKET = process.env.REACT_APP_BUCKET;
@@ -224,24 +225,48 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
         if (files.length) {
             openModal()
             files.forEach((file, i) => {
-                const params = {
-                    Body: file,
-                    Bucket: S3_BUCKET,
-                    Key: file.name
-                };
-                myBucket.upload(params)
-                    .on('httpUploadProgress', (evt) => {
-                        setProgress(Math.round((evt.loaded / evt.total) * 100))
-                    })
-                    .send((err, data) => {
-                        if (err) return console.log((err));;
-                        if (data) {
-                            fileUrls.push(`${data.Location}=index?${initialize ? i : listing?.images?.length + i}`);
-                            if (fileUrls.length === files.length) {
-                                dispatch(createImages(fileUrls, listingId)).then(() => history.push(`/listings/${listingId}`))
-                            }
-                        };
-                    })
+                new Compressor(file, {
+                    quality: 0.6,
+
+                    success(result) {
+                        const params = {
+                                Body: result,
+                                Bucket: S3_BUCKET,
+                                Key: result.name
+                            };
+                            myBucket.upload(params)
+                                .on('httpUploadProgress', (evt) => {
+                                    setProgress(Math.round((evt.loaded / evt.total) * 100))
+                                })
+                                .send((err, data) => {
+                                    if (err) return console.log((err));
+                                    if (data) {
+                                        fileUrls.push(`${data.Location}=index?${initialize ? i : listing?.images?.length + i}`);
+                                        if (fileUrls.length === files.length) {
+                                            dispatch(createImages(fileUrls, listingId)).then(() => history.push(`/listings/${listingId}`))
+                                        }
+                                    };
+                                })
+                    }
+                })
+                // const params = {
+                //     Body: file,
+                //     Bucket: S3_BUCKET,
+                //     Key: file.name
+                // };
+                // myBucket.upload(params)
+                //     .on('httpUploadProgress', (evt) => {
+                //         setProgress(Math.round((evt.loaded / evt.total) * 100))
+                //     })
+                //     .send((err, data) => {
+                //         if (err) return console.log((err));;
+                //         if (data) {
+                //             fileUrls.push(`${data.Location}=index?${initialize ? i : listing?.images?.length + i}`);
+                //             if (fileUrls.length === files.length) {
+                //                 dispatch(createImages(fileUrls, listingId)).then(() => history.push(`/listings/${listingId}`))
+                //             }
+                //         };
+                //     })
             })
         }
     }

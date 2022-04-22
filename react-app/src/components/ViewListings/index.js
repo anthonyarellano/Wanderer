@@ -14,16 +14,19 @@ const ViewListings = () => {
     }, [dispatch]);
 
     return (
-        <div
-            className='all-listings-container'>
-            {loaded && listings?.map((listing) => (
-                <div style={{ width: "300px", margin: "0px 40px 40px 40px" }}>
-                    <ListingCard
-                        key={listing?.id}
-                        listing={listing} />
-                </div>
-            ))}
-        </div>
+        <>
+            {loaded ? (
+            <div
+                className='all-listings-container'>
+                {loaded && listings?.map((listing) => (
+                    <div style={{ width: "300px", margin: "0px 40px 40px 40px" }}>
+                        <ListingCard
+                            key={listing?.id}
+                            listing={listing} />
+                    </div>
+                ))}
+            </div>) : <img  alt="loading" src={require('../LoadingModal/style/loader/Preloader_1.gif').default}/>}
+        </>
 
     )
 };

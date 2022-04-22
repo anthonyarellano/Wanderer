@@ -113,101 +113,103 @@ const ListingProfile = () => {
     }
 
     return (
-        <div className='listing-profile-container'>
+        <>
+            {loaded ? <div className='listing-profile-container'>
 
-            {/* All images display modal */}
-            <Modal
-                isOpen={isOpen}
-                onRequestClose={closeModal}
-            >
-                {loaded && images?.map((image, i) => (
-                    <ImageCard
-                        key={i}
-                        user={user}
-                        image={image}
-                        listing={listing}
-                        handleImageDelete={handleImageDelete}
-                    />
-                ))}
-            </Modal>
+                {/* All images display modal */}
+                <Modal
+                    isOpen={isOpen}
+                    onRequestClose={closeModal}
+                >
+                    {loaded && images?.map((image, i) => (
+                        <ImageCard
+                            key={i}
+                            user={user}
+                            image={image}
+                            listing={listing}
+                            handleImageDelete={handleImageDelete}
+                        />
+                    ))}
+                </Modal>
 
-            <LoginModal setIsOpen={setModalIsOpen} modalIsOpen={modalIsOpen}/>
+                <LoginModal setIsOpen={setModalIsOpen} modalIsOpen={modalIsOpen}/>
 
-            {/* Top images */}
-            <div>
-                <div style={{
-                    width: "1000px",
-                    overflow: "clip"
-                    }}>
+                {/* Top images */}
+                <div>
+                    <div style={{
+                        width: "1000px",
+                        overflow: "clip"
+                        }}>
+                        <p
+                            style={{ fontFamily: 'CerealBd', fontSize: "35px", margin: "0px 0px 5px 0px" }}
+                        >
+                            {listing?.title}
+                        </p>
+                    </div>
                     <p
-                        style={{ fontFamily: 'CerealBd', fontSize: "35px", margin: "0px 0px 5px 0px" }}
+                        style={{ fontFamily: 'CerealLight', fontSize: "20px", margin: "0px 0px 15px 0px" }}
                     >
-                        {listing?.title}
+                        {listing?.city}, {listing?.state}, United States
                     </p>
                 </div>
-                <p
-                    style={{ fontFamily: 'CerealLight', fontSize: "20px", margin: "0px 0px 15px 0px" }}
-                >
-                    {listing?.city}, {listing?.state}, United States
-                </p>
-            </div>
-            {loaded && <ProfileImageGallery
-                mainImage={mainImage}
-                secondaryImages={secondaryImages}
-                openModal={openModal}
-            />}
+                {loaded && <ProfileImageGallery
+                    mainImage={mainImage}
+                    secondaryImages={secondaryImages}
+                    openModal={openModal}
+                />}
 
-            {/* Initial details and check availability */}
-            <div className='listing-profile-lower-half-container'>
-                <div className='listing-profile-section-one'>
-                    <div className='listing-profile-details-one-container'>
-                        <div>
+                {/* Initial details and check availability */}
+                <div className='listing-profile-lower-half-container'>
+                    <div className='listing-profile-section-one'>
+                        <div className='listing-profile-details-one-container'>
                             <div>
-                                <p style={{ fontSize: "22px" }} className='big-font'>
-                                    {listing?.room_type} hosted by {listing?.username}
-                                </p>
+                                <div>
+                                    <p style={{ fontSize: "22px" }} className='big-font'>
+                                        {listing?.room_type} hosted by {listing?.username}
+                                    </p>
+                                </div>
+                                <div>
+                                    <p className='small-font'>
+                                        {listing?.maximum_guests} guests &middot; {listing?.bedroom_number} bedroom(s)
+                                        &middot; {listing?.bed_number} 	bed(s) &middot; {listing?.bath_number} bath(s)
+                                    </p>
+                                </div>
                             </div>
                             <div>
-                                <p className='small-font'>
-                                    {listing?.maximum_guests} guests &middot; {listing?.bedroom_number} bedroom(s)
-                                    &middot; {listing?.bed_number} 	bed(s) &middot; {listing?.bath_number} bath(s)
-                                </p>
+                                <img
+                                    alt="profile"
+                                    style={{ width: "56px", height: "56px", borderRadius: "100%" }}
+                                    src={listing?.user_photo}/>
                             </div>
                         </div>
-                        <div>
-                            <img
-                                alt="profile"
-                                style={{ width: "56px", height: "56px", borderRadius: "100%" }}
-                                src={listing?.user_photo}/>
+
+                        {/* Listing Description */}
+                        <div className='border-bottom'>
+                            <p className='big-font sub-header'>
+                                A little about the stay
+                            </p>
+                            <p className='small-font'>{listing?.description}</p>
                         </div>
+
+                        {/* Amenities Display */}
+                        <AmenitiesCard listing={listing} />
+
+                        {/* Calendar Display */}
+                        <div ref={myRef}>
+                            <CustomCalendar funcs={calendarFuncs} ref={myRef} disabledDates={disabledDates}/>
+                        </div>
+
                     </div>
-
-                    {/* Listing Description */}
-                    <div className='border-bottom'>
-                        <p className='big-font sub-header'>
-                            A little about the stay
-                        </p>
-                        <p className='small-font'>{listing?.description}</p>
-                    </div>
-
-                    {/* Amenities Display */}
-                    <AmenitiesCard listing={listing} />
-
-                    {/* Calendar Display */}
-                    <div ref={myRef}>
-                        <CustomCalendar funcs={calendarFuncs} ref={myRef} disabledDates={disabledDates}/>
-                    </div>
-
+                    <BookingCard
+                        funcs={{guests, setGuests, checkout, setCheckOut}}
+                        endDate={endDate}
+                        startDate={startDate}
+                        listing={listing}
+                        executeScroll={executeScroll}
+                    />
                 </div>
-                <BookingCard
-                    funcs={{guests, setGuests, checkout, setCheckOut}}
-                    endDate={endDate}
-                    startDate={startDate}
-                    listing={listing}
-                    executeScroll={executeScroll}
-                />
-            </div>
-        </div>
+            </div> : <img alt="loading" src={require('../LoadingModal/style/loader/Preloader_1.gif').default}/>}
+        </>
     )
 };
 
