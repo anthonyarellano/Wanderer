@@ -30,7 +30,9 @@ const ListingProfile = () => {
     const [unavailable, setUnavailable] = useState("");
     const [guests, setGuests] = useState(1);
     const [checkout, setCheckOut] = useState(false);
-    const [loaded, setLoaded] = useState(false);
+    const [loaded1, setLoaded1] = useState(false);
+    const [loaded2, setLoaded2] = useState(false);
+    const [loaded3, setLoaded3] = useState(false);
 
     const { listingId } = useParams();
     const history = useHistory();
@@ -43,12 +45,15 @@ const ListingProfile = () => {
         disabledDates = createDisabledRange(formatted);
     }
 
+    let allLoaded = false;
+    if (loaded1 && loaded2 && loaded3) allLoaded = true;
+
     // Conditional steps to ensure variable availabiliy when
     // coming from "Your Listings"
     let listing;
     let images;
     let mainImage;
-    if (Object.keys(listingState).length === 0 && loaded) history.push('/view-listings')
+    if (Object.keys(listingState).length === 0 && allLoaded) history.push('/view-listings')
     if (listingState) listing = listingState[listingId];
     if (imagesState) images = Object.values(imagesState);
     if (images) mainImage = images[0];
@@ -79,9 +84,9 @@ const ListingProfile = () => {
     };
 
     useEffect(() => {
-        dispatch(getListing(listingId)).then(() => setLoaded(true));
-        dispatch(getImages(listingId));
-        dispatch(getReservations(listingId));
+        dispatch(getListing(listingId)).then(() => setLoaded1(true));
+        dispatch(getImages(listingId)).then(() => setLoaded2(true));
+        dispatch(getReservations(listingId)).then(() => setLoaded3(true));
     }, [listingId, dispatch]);
 
     const handleUnavailable = (firstDate) => {
@@ -114,14 +119,14 @@ const ListingProfile = () => {
 
     return (
         <>
-            {loaded ? <div className='listing-profile-container'>
+            {allLoaded ? <div className='listing-profile-container'>
 
                 {/* All images display modal */}
                 <Modal
                     isOpen={isOpen}
                     onRequestClose={closeModal}
                 >
-                    {loaded && images?.map((image, i) => (
+                    {allLoaded && images?.map((image, i) => (
                         <ImageCard
                             key={i}
                             user={user}
@@ -152,7 +157,7 @@ const ListingProfile = () => {
                         {listing?.city}, {listing?.state}, United States
                     </p>
                 </div>
-                {loaded && <ProfileImageGallery
+                {allLoaded && <ProfileImageGallery
                     mainImage={mainImage}
                     secondaryImages={secondaryImages}
                     openModal={openModal}
