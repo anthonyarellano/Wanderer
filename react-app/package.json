@@ -9,6 +9,8 @@
     "@testing-library/user-event": "^12.8.3",
     "array-move": "^4.0.0",
     "aws-sdk": "^2.1114.0",
+    "browser-image-compression": "^2.0.0",
+    "compressorjs": "^1.1.1",
     "http-proxy-middleware": "^1.0.5",
     "react": "^17.0.2",
     "react-calendar": "^3.7.0",

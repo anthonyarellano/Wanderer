@@ -3,23 +3,23 @@ from app.models import db, Image
 def seed_images():
     one = Image(
         listing_id=1,
-        url='https://tonesbucket.s3.amazonaws.com/katie-manning-oSIuIEZZ6v0-unsplash.jpg=index?2'
+        url='https://tonesbucket.s3.amazonaws.com/beach1.jpg=index?0'
     )
     two = Image(
         listing_id=1,
-        url='https://tonesbucket.s3.amazonaws.com/marvin-meyer-cjhuXRtRT0Y-unsplash.jpg=index?0'
+        url='https://tonesbucket.s3.amazonaws.com/beach2.jpg=index?1'
     )
     three = Image(
         listing_id=1,
-        url='https://tonesbucket.s3.amazonaws.com/www-florida-guidebook-com-HkAbnEf0Jwc-unsplash.jpg=index?1'
+        url='https://tonesbucket.s3.amazonaws.com/beach3.jpg=index?2'
     )
     four = Image(
         listing_id=1,
-        url='https://tonesbucket.s3.amazonaws.com/joshua-patterson-N6y7e4lTijg-unsplash.jpg=index?3'
+        url='https://tonesbucket.s3.amazonaws.com/beach4.jpg=index?3'
     )
     five = Image(
         listing_id=1,
-        url='https://tonesbucket.s3.amazonaws.com/allison-huang-_u8KhAZRGHs-unsplash.jpg=index?4'
+        url='https://tonesbucket.s3.amazonaws.com/beach5.jpg=index?4'
     )
     cabin1 = Image(
         listing_id=2,
@@ -63,43 +63,43 @@ def seed_images():
     )
     nyc1 = Image(
         listing_id=4,
-        url='https://tonesbucket.s3.amazonaws.com/nyc1%20%284%29.jpg=index?3'
+        url='https://tonesbucket.s3.amazonaws.com/nyc1.jpg=index?0'
     )
     nyc2 = Image(
         listing_id=4,
-        url='https://tonesbucket.s3.amazonaws.com/nyc1%20%282%29.jpg=index?0'
+        url='https://tonesbucket.s3.amazonaws.com/nyc2.jpg=index?1'
     )
     nyc3 = Image(
         listing_id=4,
-        url='https://tonesbucket.s3.amazonaws.com/nyc1%20%283%29.jpg=index?2'
+        url='https://tonesbucket.s3.amazonaws.com/nyc3.jpg=index?2'
     )
     nyc4 = Image(
         listing_id=4,
-        url='https://tonesbucket.s3.amazonaws.com/nyc1%20%285%29.jpg=index?4'
+        url='https://tonesbucket.s3.amazonaws.com/nyc4.jpg=index?3'
     )
     nyc5 = Image(
         listing_id=4,
-        url='https://tonesbucket.s3.amazonaws.com/nyc1%20%281%29.jpg=index?1'
+        url='https://tonesbucket.s3.amazonaws.com/nyc5.jpg=index?4'
     )
     sub1 = Image(
         listing_id=5,
-        url='https://tonesbucket.s3.amazonaws.com/suburbs1%20%282%29.jpg=index?4'
+        url='https://tonesbucket.s3.amazonaws.com/suburbs1.jpg=index?0'
     )
     sub2 = Image(
         listing_id=5,
-        url='https://tonesbucket.s3.amazonaws.com/suburbs1%20%281%29.jpg=index?0'
+        url='https://tonesbucket.s3.amazonaws.com/suburbs2.jpg=index?1'
     )
     sub3 = Image(
         listing_id=5,
-        url='https://tonesbucket.s3.amazonaws.com/suburbs1%20%285%29.jpg=index?2'
+        url='https://tonesbucket.s3.amazonaws.com/suburbs3.jpg=index?2'
     )
     sub4 = Image(
         listing_id=5,
-        url='https://tonesbucket.s3.amazonaws.com/suburbs1%20%283%29.jpg=index?3'
+        url='https://tonesbucket.s3.amazonaws.com/suburbs4.jpg=index?3'
     )
     sub5 = Image(
         listing_id=5,
-        url='https://tonesbucket.s3.amazonaws.com/suburbs1%20%284%29.jpg=index?1'
+        url='https://tonesbucket.s3.amazonaws.com/suburbs5.jpg=index?4'
     )
     db.session.add(one)
     db.session.add(two)
