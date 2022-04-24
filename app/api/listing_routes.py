@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, abort
 from app.models import db, Listing, Image
+from .validations import verify_image_fields, verify_listing_fields
 
 listing_routes = Blueprint('listings', __name__)
 
@@ -26,6 +27,8 @@ def get_listing(id):
 @listing_routes.route('/images/<int:id>')
 def get_listing_images(id):
     images = Image.query.filter(Image.listing_id == id).all()
+    if images is None:
+        abort(404)
     imageList = []
     for image in images:
         imageList.append(image.to_dict())
@@ -35,6 +38,10 @@ def get_listing_images(id):
 @listing_routes.route('/create', methods=["POST"])
 def create_listing():
     listing = dict(request.json)
+    error = verify_listing_fields(listing)
+    if error:
+        abort(400, description=error)
+
     new_listing = Listing(
         owner_id=listing['owner_id'],
         title=listing['title'],
@@ -73,7 +80,10 @@ def create_listing():
 @listing_routes.route('/create/images/<int:id>', methods=["POST"])
 def create_listing_images(id):
     images = request.json
-    print(images)
+    error = verify_image_fields(images)
+    if error:
+        abort(400, description=error)
+
     imageList = []
     for image in images:
         newImage = Image(
@@ -83,13 +93,6 @@ def create_listing_images(id):
         db.session.add(newImage)
         db.session.commit()
         imageList.append(newImage.to_dict())
-    # newImage = Image(
-    #         listing_id=id,
-    #         url=images['url']
-    #     )
-    # db.session.add(newImage)
-    # db.session.commit()
-    # return newImage.to_dict()
     return jsonify(imageList)
 
 
