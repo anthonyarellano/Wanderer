@@ -25,7 +25,7 @@ const About = ({ aboutFuncs, aboutErrors, hasSubmitted }) => {
             <div>
                 <div className='checkin-container'>
                     <div>
-                        <p style={{fontFamily: 'CerealLight', margin: "0px 0px 5px 0px"}}>Check-in</p>
+                        <p style={{fontFamily: 'CerealLight', margin: "0px 0px 5px 0px"}}>Check-in time</p>
                         <input
                             type="time"
                             value={checkIn}
@@ -33,7 +33,7 @@ const About = ({ aboutFuncs, aboutErrors, hasSubmitted }) => {
                             onChange={(e) => setCheckIn(e.target.value)} />
                     </div>
                     <div>
-                        <p style={{fontFamily: 'CerealLight', margin: "0px 0px 5px 0px"}}>Check-out</p>
+                        <p style={{fontFamily: 'CerealLight', margin: "0px 0px 5px 0px"}}>Check-out time</p>
                         <input
                             type="time"
                             value={checkOut}
@@ -53,6 +53,7 @@ const About = ({ aboutFuncs, aboutErrors, hasSubmitted }) => {
                     <input
                         type="number"
                         value={beds}
+                        min="0"
                         className="input-field"
                         placeholder='Number of beds'
                         onChange={(e) => setBeds(e.target.value)} />
@@ -61,6 +62,7 @@ const About = ({ aboutFuncs, aboutErrors, hasSubmitted }) => {
                     <input
                         type="number"
                         value={baths}
+                        min="0"
                         className="input-field"
                         placeholder='Number of baths'
                         onChange={(e) => setBaths(e.target.value)} />
@@ -69,6 +71,7 @@ const About = ({ aboutFuncs, aboutErrors, hasSubmitted }) => {
                     <input
                         type="number"
                         value={bedrooms}
+                        min="0"
                         className="input-field"
                         placeholder='Number of bedrooms'
                         onChange={(e) => setBedrooms(e.target.value)} />
@@ -77,6 +80,7 @@ const About = ({ aboutFuncs, aboutErrors, hasSubmitted }) => {
                     <input
                         type="number"
                         value={guests}
+                        min="0"
                         className="input-field"
                         placeholder='Maximum number of guests'
                         onChange={(e) => setGuests(e.target.value)} />
@@ -85,6 +89,7 @@ const About = ({ aboutFuncs, aboutErrors, hasSubmitted }) => {
                     <input
                         type="number"
                         value={price}
+                        min="0"
                         className="input-field"
                         placeholder='Cost per night'
                         onChange={(e) => setPrice(e.target.value)} />

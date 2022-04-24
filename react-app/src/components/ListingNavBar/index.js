@@ -243,7 +243,8 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
                                     if (data) {
                                         fileUrls.push(`${data.Location}=index?${initialize ? i : listing?.images?.length + i}`);
                                         if (fileUrls.length === files.length) {
-                                            dispatch(createImages(fileUrls, listingId)).then(() => history.push(`/listings/${listingId}`))
+                                            dispatch(createImages(fileUrls, listingId))
+                                                .then(() => history.push(`/listings/${listingId}`))
                                         }
                                     };
                                 })
