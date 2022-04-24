@@ -115,14 +115,12 @@ def get_user_listings(id):
 @listing_routes.route('/update/<int:id>', methods=['PUT'])
 def update_listing(id):
     listing = request.json
-    print(listing, "-------------------------")
     dbListing = Listing.query.get(id)
     if dbListing is None:
         abort(404)
 
     error = verify_listing_update(listing, dbListing)
     if error:
-        print(error, "--------------")
         abort(400, description=error)
     if error is None:
         db.session.commit()
@@ -132,6 +130,9 @@ def update_listing(id):
 @listing_routes.route('/images/delete/<int:id>', methods=['DELETE'])
 def delete_listing_image(id):
     image = Image.query.get(id)
+    print(image.listing.images)
+    if len(image.listing.images) <= 5:
+        abort(400, description="Listing must have a minimum of 5 images.")
     db.session.delete(image)
     db.session.commit()
     return jsonify("Success")
