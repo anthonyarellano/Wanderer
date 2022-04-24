@@ -1,4 +1,5 @@
-import datetime
+import time
+from app.models import db, Listing, Image
 
 def verify_image_fields(images):
     error = None
@@ -131,19 +132,19 @@ def verify_listing_values(listing):
     if type(listing['pool_avail']) is not bool:
         errors.append('pool_avail must be a boolean value.')
     if type(listing['check_in']) is not str:
-        errors.append('check_in must be a string formatted YYYY-MM-DD')
+        errors.append('check_in must be a string formatted H:M')
     if type(listing['check_in']) is str:
         try:
-            datetime.datetime.strptime(listing['check_in'], '%Y-%m-%d')
+            time.strptime(listing['check_in'], '%H:%M')
         except ValueError:
-            errors.append("Incorrect check_in format, should be YYYY-MM-DD")
+            errors.append("Incorrect check_in format, should be H:M")
     if type(listing['check_out']) is not str:
-        errors.append('check_out must be a string formatted YYYY-MM-DD')
+        errors.append('check_out must be a string formatted H:M')
     if type(listing['check_out']) is str:
         try:
-            datetime.datetime.strptime(listing['check_out'], '%Y-%m-%d')
+             time.strptime(listing['check_out'], '%H:%M')
         except ValueError:
-            errors.append("Incorrect check_out format, should be YYYY-MM-DD")
+            errors.append("Incorrect check_out format, should be H:M")
     if type(listing['room_type_id']) is not int:
         errors.append('room_type_id must be an integer.')
     if type(listing['room_type_id']) is int:
@@ -152,4 +153,186 @@ def verify_listing_values(listing):
     if errors:
         return f"Error in fields: {', '.join(errors)}"
     else:
+        return None
+
+def verify_listing_update(listing, dbListing):
+    errors = []
+    if "title" in listing.keys():
+        error = False
+        if type(listing['title']) is not str:
+            errors.append('title must be a string.')
+            error = True
+        if type(listing['title']) is str:
+            if len(listing['title']) <= 0 or len(listing['title']) > 255:
+                errors.append('title must be between 1 and 255 characters.')
+                error = True
+        if error == False:
+            dbListing.title = listing['title']
+    if "bed_number" in listing.keys():
+        error = False
+        if int(listing["bed_number"]) <= 0 or int(listing['bed_number']) > 2147483647:
+            errors.append('bed_number must be greater than 0 and within postgreSQL integer range.')
+            error = True
+        if error == False:
+            dbListing.bed_number = listing['bed_number']
+    if "bath_number" in listing.keys():
+        error = False
+        if int(listing["bath_number"]) <= 0 or int(listing['bath_number']) > 2147483647:
+            errors.append('bath_number must be greater than 0 and within postgreSQL integer range.')
+            error = True
+        if error == False:
+            dbListing.bath_number = listing['bath_number']
+    if "bedroom_number" in listing.keys():
+        error = False
+        if int(listing["bedroom_number"]) <= 0 or int(listing['bedroom_number']) > 2147483647:
+            errors.append('bedroom_number must be greater than 0 and within postgreSQL integer range.')
+            error = True
+        if error == False:
+            dbListing.bedroom_number = listing['bedroom_number']
+    if "maximum_guests" in listing.keys():
+        error = False
+        if int(listing["maximum_guests"]) <= 0 or int(listing['maximum_guests']) > 2147483647:
+            errors.append('maximum_guests must be greater than 0 and within postgreSQL integer range.')
+            error = True
+        if error == False:
+            dbListing.maximum_guests = listing['maximum_guests']
+    if "price" in listing.keys():
+        error = False
+        if int(listing["price"]) <= 0 or int(listing['price']) > 2147483647:
+            errors.append('price must be greater than 0 and within postgreSQL integer range.')
+            error = True
+        if error == False:
+            dbListing.price = listing['price']
+    if "description" in listing.keys():
+        error = False
+        if type(listing['description']) is not str:
+            errors.append('description must be a string.')
+            error = True
+        if type(listing['description']) is str:
+            if len(listing['description']) <= 0:
+                errors.append('description must be greater than 0 characters long.')
+                error = True
+        if error == False:
+            dbListing.description = listing['description']
+    if "wifi_avail" in listing.keys():
+        error = False
+        if type(listing["wifi_avail"]) is not bool:
+            errors.append('wifi must be a boolean.')
+            error = True
+        if error == False:
+            dbListing.wifi_avail = listing['wifi_avail']
+    if "tv_avail" in listing.keys():
+        error = False
+        if type(listing["tv_avail"]) is not bool:
+            errors.append('tv must be a boolean.')
+            error = True
+        if error == False:
+            dbListing.tv_avail = listing['tv_avail']
+    if "kitchen_avail" in listing.keys():
+        error = False
+        if type(listing["kitchen_avail"]) is not bool:
+            errors.append('kitchen must be a boolean.')
+            error = True
+        if error == False:
+            dbListing.kitchen_avail = listing['kitchen_avail']
+    if "ac_avail" in listing.keys():
+        error = False
+        if type(listing["ac_avail"]) is not bool:
+            errors.append('ac_avail must be a boolean.')
+            error = True
+        if error == False:
+            dbListing.ac_avail = listing['ac_avail']
+    if "washer_avail" in listing.keys():
+        error = False
+        if type(listing["washer_avail"]) is not bool:
+            errors.append('washer_avail must be a boolean.')
+            error = True
+        if error == False:
+            dbListing.washer_avail = listing['washer_avail']
+    if "dryer_avail" in listing.keys():
+        error = False
+        if type(listing["dryer_avail"]) is not bool:
+            errors.append('dryer_avail must be a boolean.')
+            error = True
+        if error == False:
+            dbListing.dryer_avail = listing['dryer_avail']
+    if "hair_dryer_avail" in listing.keys():
+        error = False
+        if type(listing["hair_dryer_avail"]) is not bool:
+            errors.append('hair_dryer_avail must be a boolean.')
+            error = True
+        if error == False:
+            dbListing.hair_dryer_avail = listing['hair_dryer_avail']
+    if "parking_avail" in listing.keys():
+        error = False
+        if type(listing["parking_avail"]) is not bool:
+            errors.append('parking_avail must be a boolean.')
+            error = True
+        if error == False:
+            dbListing.parking_avail = listing['parking_avail']
+    if "fridge_avail" in listing.keys():
+        error = False
+        if type(listing["fridge_avail"]) is not bool:
+            errors.append('fridge_avail must be a boolean.')
+            error = True
+        if error == False:
+            dbListing.fridge_avail = listing['fridge_avail']
+    if "bbq_avail" in listing.keys():
+        error = False
+        if type(listing["bbq_avail"]) is not bool:
+            errors.append('bbq_avail must be a boolean.')
+            error = True
+        if error == False:
+            dbListing.bbq_avail = listing['bbq_avail']
+    if "stove_avail" in listing.keys():
+        error = False
+        if type(listing["stove_avail"]) is not bool:
+            errors.append('stove_avail must be a boolean.')
+            error = True
+        if error == False:
+            dbListing.stove_avail = listing['stove_avail']
+    if "pool_avail" in listing.keys():
+        error = False
+        if type(listing["pool_avail"]) is not bool:
+            errors.append('pool_avail must be a boolean.')
+            error = True
+        if error == False:
+            dbListing.pool_avail = listing['pool_avail']
+    if "check_out" in listing.keys():
+        error = False
+        if type(listing['check_out']) is not str:
+            errors.append(' must be a string')
+            error = True
+        if type(listing['check_out']) is str:
+            try:
+             time.strptime(listing['check_in'], '%H:%M')
+            except ValueError:
+                errors.append("Incorrect check_in format, should be H:M")
+                error = True
+        if error == False:
+            dbListing.check_in = listing['check_in']
+    if "check_out" in listing.keys():
+        error = False
+        if type(listing['check_out']) is not str:
+            errors.append('check_out must be a string')
+            error = True
+        if type(listing['check_out']) is str:
+            try:
+             time.strptime(listing['check_out'], '%H:%M')
+            except ValueError:
+                errors.append("Incorrect check_out format, should be H:M")
+                error = True
+        if error == False:
+            dbListing.check_out = listing['check_out']
+    if "room_type_id" in listing.keys():
+        error = False
+        if int(listing["room_type_id"]) <= 0 or int(listing['room_type_id']) > 2147483647:
+            errors.append('room_type_id must be greater than 0 and within postgreSQL integer range.')
+            error = True
+        if error == False:
+            dbListing.room_type_id = listing['room_type_id']
+
+    if errors:
+        return f"Error in fields: {', '.join(errors)}"
+    if errors is None:
         return None
