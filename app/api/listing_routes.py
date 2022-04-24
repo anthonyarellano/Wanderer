@@ -141,6 +141,8 @@ def delete_listing_image(id):
 @listing_routes.route('/delete/<int:id>', methods=['DELETE'])
 def delete_listing(id):
     listing = Listing.query.get(id)
+    if listing is None:
+        abort(404)
     db.session.delete(listing)
     db.session.commit()
     return jsonify("Success")
