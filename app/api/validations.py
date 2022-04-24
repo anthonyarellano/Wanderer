@@ -92,16 +92,18 @@ def verify_listing_values(listing):
          errors.append('bedroom_number must be greater than 0 and within postgreSQL integer range.')
     if listing['maximum_guests'] <= 0 or listing['bed_number'] > 2147483647:
          errors.append('maximum_guests must be greater than 0 and within postgreSQL integer range.')
+    if listing['price'] <= 0 or listing['price'] > 2147483647:
+         errors.append('price must be greater than 0 and within postgreSQL integer range.')
     if listing['latitude'] > 90 or listing['latitude'] < -90:
         errors.append('Invalid latitude.')
     if listing['longitude'] > 180 or listing['longitude'] < -180:
         errors.append('Invalid longitude.')
     if len(listing['city']) <= 0 or len(listing['city']) > 255:
-        errors.append('city must be greater than 0 or within postgreSQL integer range.')
+        errors.append('city must be greater than 0 and less than 255 characters.')
     if len(listing['address']) <= 0 or len(listing['address']) > 255:
-        errors.append('address must be greater than 0 or within postgreSQL integer range.')
+        errors.append('address must be greater than 0 and less than 255 characters.')
     if len(listing['state']) <= 0 or len(listing['state']) > 255:
-        errors.append('state must be greater than 0 or within postgreSQL integer range.')
+        errors.append('state must be greater than 0 and less than 255 characters.')
     if len(listing['description']) <= 0 or len(listing['description']) > 2000:
         errors.append('description must be greater than 0 and less than 2000 characters.')
     if type(listing['wifi_avail']) is not bool:
@@ -142,6 +144,11 @@ def verify_listing_values(listing):
             datetime.datetime.strptime(listing['check_out'], '%Y-%m-%d')
         except ValueError:
             errors.append("Incorrect check_out format, should be YYYY-MM-DD")
+    if type(listing['room_type_id']) is not int:
+        errors.append('room_type_id must be an integer.')
+    if type(listing['room_type_id']) is int:
+        if listing['room_type_id'] <= 0 or listing['room_type_id'] > 6:
+            errors.append('room_type_id must be an integer between 1 and 6.')
     if errors:
         return f"Error in fields: {', '.join(errors)}"
     else:

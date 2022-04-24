@@ -38,12 +38,12 @@ def get_listing_images(id):
 @listing_routes.route('/create', methods=["POST"])
 def create_listing():
     listing = dict(request.json)
-    error = verify_listing_values(listing)
-    if error:
-        abort(400, description=error)
-    # error = verify_listing_fields(listing)
-    # if error:
-    #     abort(400, description=error)
+    field_error = verify_listing_fields(listing)
+    if field_error:
+        abort(400, description=field_error)
+    value_error = verify_listing_values(listing)
+    if value_error:
+        abort(400, description=value_error)
 
     new_listing = Listing(
         owner_id=listing['owner_id'],
