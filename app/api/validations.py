@@ -1,14 +1,19 @@
+import datetime
+
 def verify_image_fields(images):
-    missing_fields = []
+    error = None
+    if type(images) is not list:
+        error = "Urls must be in a list."
+        return error
     for image in images:
-        if 'listing_id' not in images.keys():
-            missing_fields.append('listing_id')
-        if 'url' not in images.keys():
-            missing_fields.append('url')
-    if len(missing_fields):
-        return f"Error in fields: {', '.join(missing_fields)}"
-    else:
-         return None
+        if type(image) is not str:
+            error = "Url must be a string"
+            return error
+        in_aws = image.startswith('https://tonesbucket.s3.amazonaws.com/')
+        if in_aws is False:
+            error = "Url(s) must be uploaded via authorized S3 bucket."
+            return error
+
 
 def verify_listing_fields(listing):
     missing_fields = []
@@ -72,3 +77,72 @@ def verify_listing_fields(listing):
         return f"Error in fields: {', '.join(missing_fields)}"
     else:
          return None
+
+def verify_listing_values(listing):
+    errors = []
+    if listing['owner_id'] <= 0:
+        errors.append('Invalid owner_id')
+    if len(listing['title']) <= 0 or len(listing['title']) > 255:
+        errors.append('title must be between 1 and 255 characters.')
+    if listing['bed_number'] <= 0 or listing['bed_number'] > 2147483647:
+        errors.append('bed_number must be greater than 0 and within postgreSQL integer range.')
+    if listing['bath_number'] <= 0 or listing['bed_number'] > 2147483647:
+         errors.append('bath_number must be greater than 0 and within postgreSQL integer range.')
+    if listing['bedroom_number'] <= 0 or listing['bed_number'] > 2147483647:
+         errors.append('bedroom_number must be greater than 0 and within postgreSQL integer range.')
+    if listing['maximum_guests'] <= 0 or listing['bed_number'] > 2147483647:
+         errors.append('maximum_guests must be greater than 0 and within postgreSQL integer range.')
+    if listing['latitude'] > 90 or listing['latitude'] < -90:
+        errors.append('Invalid latitude.')
+    if listing['longitude'] > 180 or listing['longitude'] < -180:
+        errors.append('Invalid longitude.')
+    if len(listing['city']) <= 0 or len(listing['city']) > 255:
+        errors.append('city must be greater than 0 or within postgreSQL integer range.')
+    if len(listing['address']) <= 0 or len(listing['address']) > 255:
+        errors.append('address must be greater than 0 or within postgreSQL integer range.')
+    if len(listing['state']) <= 0 or len(listing['state']) > 255:
+        errors.append('state must be greater than 0 or within postgreSQL integer range.')
+    if len(listing['description']) <= 0 or len(listing['description']) > 2000:
+        errors.append('description must be greater than 0 and less than 2000 characters.')
+    if type(listing['wifi_avail']) is not bool:
+        errors.append('wifi_avail must be a boolean value.')
+    if type(listing['tv_avail']) is not bool:
+        errors.append('tv_avail must be a boolean value.')
+    if type(listing['kitchen_avail']) is not bool:
+        errors.append('kitchen_avail must be a boolean value.')
+    if type(listing['ac_avail']) is not bool:
+        errors.append('ac_avail must be a boolean value.')
+    if type(listing['washer_avail']) is not bool:
+        errors.append('washer_avail must be a boolean value.')
+    if type(listing['dryer_avail']) is not bool:
+        errors.append('dryer_avail must be a boolean value.')
+    if type(listing['hair_dryer_avail']) is not bool:
+        errors.append('hair_dryer_avail must be a boolean value.')
+    if type(listing['parking_avail']) is not bool:
+        errors.append('parking_avail must be a boolean value.')
+    if type(listing['fridge_avail']) is not bool:
+        errors.append('fridge_avail must be a boolean value.')
+    if type(listing['bbq_avail']) is not bool:
+        errors.append('bbq_avail must be a boolean value.')
+    if type(listing['stove_avail']) is not bool:
+        errors.append('stove_avail must be a boolean value.')
+    if type(listing['pool_avail']) is not bool:
+        errors.append('pool_avail must be a boolean value.')
+    if type(listing['check_in']) is not str:
+        errors.append('check_in must be a string formatted YYYY-MM-DD')
+    if type(listing['check_in']) is str:
+        try:
+            datetime.datetime.strptime(listing['check_in'], '%Y-%m-%d')
+        except ValueError:
+            errors.append("Incorrect check_in format, should be YYYY-MM-DD")
+    if type(listing['check_out']) is not str:
+        errors.append('check_out must be a string formatted YYYY-MM-DD')
+    if type(listing['check_out']) is str:
+        try:
+            datetime.datetime.strptime(listing['check_out'], '%Y-%m-%d')
+        except ValueError:
+            errors.append("Incorrect check_out format, should be YYYY-MM-DD")
+    if errors:
+        return f"Error in fields: {', '.join(errors)}"
+    else:
+        return None

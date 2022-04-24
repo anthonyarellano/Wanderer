@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, abort
 from app.models import db, Listing, Image
-from .validations import verify_image_fields, verify_listing_fields
+from .validations import verify_listing_fields, verify_image_fields, verify_listing_values
 
 listing_routes = Blueprint('listings', __name__)
 
@@ -38,9 +38,12 @@ def get_listing_images(id):
 @listing_routes.route('/create', methods=["POST"])
 def create_listing():
     listing = dict(request.json)
-    error = verify_listing_fields(listing)
+    error = verify_listing_values(listing)
     if error:
         abort(400, description=error)
+    # error = verify_listing_fields(listing)
+    # if error:
+    #     abort(400, description=error)
 
     new_listing = Listing(
         owner_id=listing['owner_id'],
@@ -81,6 +84,8 @@ def create_listing():
 def create_listing_images(id):
     images = request.json
     error = verify_image_fields(images)
+    if len(images) == 0:
+        abort(400, description="Missing image urls.")
     if error:
         abort(400, description=error)
 
