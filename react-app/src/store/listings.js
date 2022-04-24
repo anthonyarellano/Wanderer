@@ -103,7 +103,8 @@ export const createListing = (listing) => async (dispatch) => {
     const response = await fetch('/api/listings/create', {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': process.env.REACT_APP_BACKEND_API_KEY
         },
         body: JSON.stringify(listing)
     });
