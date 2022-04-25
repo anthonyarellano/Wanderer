@@ -162,7 +162,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
 
     useEffect(() => {
         let errors = [];
-        if (files.length < 5 && !editEnable) errors.push('Please upload at least five image.')
+        if (files?.length < 5 && !editEnable) errors.push('Please upload at least five image.')
 
         setImageErrors(errors);
     }, [files, editEnable])

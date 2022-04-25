@@ -1,5 +1,5 @@
 import { useDropzone } from 'react-dropzone';
-import {arrayMoveImmutable} from "array-move";
+import { arrayMoveImmutable } from "array-move";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import Photo from './Photo';
 import Gallery from "react-photo-gallery";
@@ -48,26 +48,30 @@ const Images = ({ imagesFuncs, hasSubmitted, imageErrors }) => {
     const { getRootProps, getInputProps } = useDropzone({
         accept: ['image/jpeg', 'image/png'],
         onDrop: acceptedFiles => {
-            setFiles(acceptedFiles.map(file => Object.assign(file, {
-                preview: URL.createObjectURL(file)
-            })));
+            setFiles((files) => {
+                let newFiles = acceptedFiles.map(file => Object.assign(file, {
+                    preview: URL.createObjectURL(file)
+                }));
+                return [...files, ...newFiles]
+            })
         }
     });
 
     const photos = []
     files?.forEach(file => (
-        photos.push({ src: file.preview, width: 3, height: 3})
+        photos.push({ src: file.preview, width: 3, height: 3 })
     ));
 
 
     return (
         <section className="container">
             {hasSubmitted && imageErrors?.map((error) => (
-                <p style={{fontFamily: 'CerealLight', color: 'red'}}>{error}</p>
+                <p style={{ fontFamily: 'CerealLight', color: 'red' }}>{error}</p>
             ))}
             <div {...getRootProps({ style: baseStyle })}>
                 <input {...getInputProps()} />
                 <p>Drag 'n' drop at least 5 photos here, then click and drag to re-order</p>
+                <p>supported file types: jpeg/png</p>
             </div>
             <aside style={thumbsContainer}>
                 <div>
