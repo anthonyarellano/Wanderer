@@ -118,10 +118,15 @@ def create_listing_images(id):
     #         abort(403, description="Invalid API Key")
     images = request.json
     error = verify_image_fields(images)
-    if len(images) == 0:
-        abort(400, description="Missing image urls.")
     if error:
-        abort(400, description=error)
+        print(error)
+        response = jsonify({'message': error})
+        response.status_code = 400
+        return response
+    if len(images) == 0:
+        response = jsonify({'message': "Missing image urls."})
+        response.status_code = 400
+        return response
 
     imageList = []
     for image in images:
@@ -164,7 +169,10 @@ def update_listing(id):
 
     error = verify_listing_update(listing, dbListing)
     if error:
-        abort(400, description=error)
+        print(error)
+        response = jsonify({'message': error})
+        response.status_code = 400
+        return response
     if error is None:
         db.session.commit()
     return dbListing.to_dict()
@@ -180,7 +188,10 @@ def delete_listing_image(id):
     image = Image.query.get(id)
     print(image.listing.images)
     if len(image.listing.images) <= 5:
-        abort(400, description="Listing must have a minimum of 5 images.")
+        response = jsonify({'message': "Listing must have a minimum of 5 images."})
+        response.status_code = 400
+        return response
+        
     db.session.delete(image)
     db.session.commit()
     return jsonify("Success")
