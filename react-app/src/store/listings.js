@@ -59,7 +59,7 @@ export const deleteListing = (listingId) => async (dispatch) => {
     const response = await fetch(`/api/listings/delete/${listingId}`, {
         method: "DELETE",
         headers: {
-            "Authorization": process.env.REACT_APP_BACKEND_API_KEY
+            // "Authorization": process.env.REACT_APP_BACKEND_API_KEY
         }
     });
     if (response.ok) {
@@ -73,7 +73,7 @@ export const deleteImage = (image) => async (dispatch) => {
     const response = await fetch(`/api/listings/images/delete/${image?.id}`, {
         method: "DELETE",
         headers: {
-            "Authorization": process.env.REACT_APP_BACKEND_API_KEY
+            // "Authorization": process.env.REACT_APP_BACKEND_API_KEY
         }
     });
     if (response.ok) {
@@ -88,7 +88,7 @@ export const createImages = (images, listingId) => async (dispatch) => {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': process.env.REACT_APP_BACKEND_API_KEY
+            // 'Authorization': process.env.REACT_APP_BACKEND_API_KEY
         },
         body: JSON.stringify(images)
     });
@@ -104,7 +104,7 @@ export const createListing = (listing) => async (dispatch) => {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': process.env.REACT_APP_BACKEND_API_KEY
+            // 'Authorization': process.env.REACT_APP_BACKEND_API_KEY
         },
         body: JSON.stringify(listing)
     });
@@ -117,9 +117,9 @@ export const createListing = (listing) => async (dispatch) => {
 
 export const getListing = (id) => async (dispatch) => {
     const response = await fetch(`/api/listings/${id}`, {
-        headers: {
-            "Authorization": process.env.REACT_APP_BACKEND_API_KEY
-        }
+        // headers: {
+        //     "Authorization": process.env.REACT_APP_BACKEND_API_KEY
+        // }
     });
     if (response.ok) {
         const listing = await response.json();
@@ -131,7 +131,7 @@ export const getListing = (id) => async (dispatch) => {
 export const getImages = (id) => async (dispatch) => {
     const response = await fetch(`/api/listings/images/${id}`, {
         headers: {
-            "Authorization": process.env.REACT_APP_BACKEND_API_KEY
+            // "Authorization": process.env.REACT_APP_BACKEND_API_KEY
         }
     });
     if (response.ok) {
@@ -143,9 +143,9 @@ export const getImages = (id) => async (dispatch) => {
 
 export const getUserListings = (userId) => async (dispatch) => {
     const response = await fetch(`/api/listings/user/${userId}`, {
-        headers: {
-            "Authorization": process.env.REACT_APP_BACKEND_API_KEY
-        }
+        // headers: {
+        //     "Authorization": process.env.REACT_APP_BACKEND_API_KEY
+        // }
     });
     if (response.ok) {
         const listings = await response.json();
@@ -157,7 +157,7 @@ export const getUserListings = (userId) => async (dispatch) => {
 export const getAllListings = () => async (dispatch) => {
     const response = await fetch(`/api/listings/`, {
         headers: {
-            "Authorization": process.env.REACT_APP_BACKEND_API_KEY
+            // "Authorization": process.env.REACT_APP_BACKEND_API_KEY
         }
     });
     if (response.ok) {
@@ -172,7 +172,7 @@ export const updateListing = (listing, listingId) => async (dispatch) => {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': process.env.REACT_APP_BACKEND_API_KEY
+            // 'Authorization': process.env.REACT_APP_BACKEND_API_KEY
         },
         body: JSON.stringify(listing)
     });
