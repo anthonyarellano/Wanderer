@@ -63,15 +63,16 @@ def create_listing():
     print(listing)
     field_error = verify_listing_fields(listing)
     if field_error:
+        print(field_error)
         response = jsonify({'message': field_error})
         response.status_code = 400
         return response
-        # abort(400, description=field_error)
-    # value_error = verify_listing_values(listing)
-    # if value_error:
-    #     response = jsonify({'message': value_error})
-    #     response.status_code = 400
-    #     return response
+    value_error = verify_listing_values(listing)
+    if value_error:
+        print(value_error)
+        response = jsonify({'message': value_error})
+        response.status_code = 400
+        return response
 
     new_listing = Listing(
         owner_id=listing['owner_id'],

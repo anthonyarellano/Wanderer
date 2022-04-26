@@ -91,31 +91,56 @@ def verify_listing_values(listing):
             errors.append('title must be between 1 and 255 characters.')
 
     if type(listing['bed_number']) is not int:
-        errors.append('bed_number must be an integer.')
+        try:
+            val = int(listing['bed_number'])
+            if val <= 0 or val > 2147483647:
+                errors.append('bed_number must be greater than 0 and within postgreSQL integer range.')
+        except ValueError:
+            errors.append('bed_number must be an integer.')
     if type(listing['bed_number']) is int:
         if listing['bed_number'] <= 0 or listing['bed_number'] > 2147483647:
             errors.append('bed_number must be greater than 0 and within postgreSQL integer range.')
 
     if type(listing['bath_number']) is not int:
-        errors.append('bath_number must be an integer.')
+        try:
+            val = int(listing['bath_number'])
+            if val <= 0 or val > 2147483647:
+                errors.append('bath_number must be greater than 0 and within postgreSQL integer range.')
+        except ValueError:
+            errors.append('bath_number must be an integer.')
     if type(listing['bath_number']) is int:
         if listing['bath_number'] <= 0 or listing['bath_number'] > 2147483647:
             errors.append('bath_number must be greater than 0 and within postgreSQL integer range.')
 
     if type(listing['bedroom_number']) is not int:
-        errors.append('bedroom_number must be an integer.')
+        try:
+            val = int(listing['bedroom_number'])
+            if val <= 0 or val > 2147483647:
+                errors.append('bedroom_number must be greater than 0 and within postgreSQL integer range.')
+        except ValueError:
+            errors.append('bedroom_number must be an integer.')
     if type(listing['bedroom_number']) is int:
         if listing['bedroom_number'] <= 0 or listing['bedroom_number'] > 2147483647:
             errors.append('bedroom_number must be greater than 0 and within postgreSQL integer range.')
 
     if type(listing['maximum_guests']) is not int:
-        errors.append('maximum_guests must be an integer.')
+        try:
+            val = int(listing['maximum_guests'])
+            if val <= 0 or val > 2147483647:
+                errors.append('maximum_guests must be greater than 0 and within postgreSQL integer range.')
+        except ValueError:
+            errors.append('maximum_guests must be an integer.')
     if type(listing['maximum_guests']) is int:
         if listing['maximum_guests'] <= 0 or listing['maximum_guests'] > 2147483647:
             errors.append('maximum_guests must be greater than 0 and within postgreSQL integer range.')
 
     if type(listing['price']) is not int:
-        errors.append('price must be an integer.')
+        try:
+            val = int(listing['price'])
+            if val <= 0 or val > 2147483647:
+                errors.append('price must be greater than 0 and within postgreSQL integer range.')
+        except ValueError:
+            errors.append('price must be an integer.')
     if type(listing['price']) is int:
         if listing['price'] <= 0 or listing['price'] > 2147483647:
             errors.append('price must be greater than 0 and within postgreSQL integer range.')
@@ -196,9 +221,14 @@ def verify_listing_values(listing):
              time.strptime(listing['check_out'], '%H:%M')
         except ValueError:
             errors.append("Incorrect check_out format, should be H:M")
-            
+
     if type(listing['room_type_id']) is not int:
-        errors.append('room_type_id must be an integer.')
+        try:
+            val = int(listing['room_type_id'])
+            if val <= 0 or val > 2147483647:
+                errors.append('room_type_id must be greater than 0 and within postgreSQL integer range.')
+        except ValueError:
+            errors.append('room_type_id must be an integer.')
     if type(listing['room_type_id']) is int:
         if listing['room_type_id'] <= 0 or listing['room_type_id'] > 6:
             errors.append('room_type_id must be an integer between 1 and 6.')
