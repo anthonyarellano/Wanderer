@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, abort
 from app.models import db, Listing, Image
-from .validations import verify_listing_fields, verify_image_fields, verify_listing_values, verify_listing_update
+from .listing_validations import verify_listing_fields, verify_image_fields, verify_listing_values, verify_listing_update
 import os
 
 listing_routes = Blueprint('listings', __name__)

@@ -1,4 +1,5 @@
-import datetime
+# import datetime
+from datetime import datetime
 
 
 def verify_reservation_fields(reservation):
@@ -71,7 +72,9 @@ def verify_reservation_values(reservation):
         errors.append('start_date must be a string')
     if type(reservation['start_date']) is str:
         try:
-            datetime.datetime.strptime(reservation['start_date'], '%Y-%m-%d')
+            datetime.strptime(reservation['start_date'], '%Y-%m-%d')
+            if datetime.strptime(reservation['start_date'], '%Y-%m-%d') < datetime.now():
+                errors.append("start_date must be in the future.")
         except ValueError:
             errors.append("Incorrect start_date format, should be YYYY-MM-DD")
 
@@ -79,7 +82,9 @@ def verify_reservation_values(reservation):
         errors.append('end_date must be a string')
     if type(reservation['end_date']) is str:
         try:
-            datetime.datetime.strptime(reservation['end_date'], '%Y-%m-%d')
+            datetime.strptime(reservation['end_date'], '%Y-%m-%d')
+            if datetime.strptime(reservation['end_date'], '%Y-%m-%d') < datetime.now():
+                errors.append("end_date must be in the future.")
         except ValueError:
             errors.append("Incorrect end_date format, should be YYYY-MM-DD")
     if errors:
