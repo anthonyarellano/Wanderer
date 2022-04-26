@@ -186,12 +186,11 @@ def delete_listing_image(id):
     #     if request.headers['Authorization'] != os.environ.get('API_KEY'):
     #         abort(403, description="Invalid API Key")
     image = Image.query.get(id)
-    print(image.listing.images)
     if len(image.listing.images) <= 5:
         response = jsonify({'message': "Listing must have a minimum of 5 images."})
         response.status_code = 400
         return response
-        
+
     db.session.delete(image)
     db.session.commit()
     return jsonify("Success")

@@ -75,14 +75,22 @@ def verify_listing_fields(listing):
     if 'room_type_id' not in listing.keys():
         missing_fields.append('room_type_id')
     if len(missing_fields):
-        return f"Error in fields: {', '.join(missing_fields)}"
+        return f"Missing Fields: {', '.join(missing_fields)}"
     else:
          return None
 
 def verify_listing_values(listing):
     errors = []
-    if listing['owner_id'] <= 0:
-        errors.append('Invalid owner_id')
+    if type(listing['owner_id']) is not int:
+        try:
+            val = int(listing['owner_id'])
+            if val <= 0 or val > 2147483647:
+                errors.append('owner_id must be greater than 0 and within postgreSQL integer range.')
+        except ValueError:
+            errors.append('owner_id must be an integer.')
+    if type(listing['owner_id']) is int:
+        if listing['owner_id'] <= 0 or listing['owner_id'] > 2147483647:
+            errors.append('owner_id must be greater than 0 and within postgreSQL integer range.')
 
     if type(listing['title']) is not str:
         errors.append('title must be a string.')
@@ -426,10 +434,10 @@ def verify_listing_update(listing, dbListing):
         if error == False:
             dbListing.pool_avail = listing['pool_avail']
 
-    if "check_out" in listing.keys():
+    if "check_in" in listing.keys():
         error = False
-        if type(listing['check_out']) is not str:
-            errors.append(' must be a string')
+        if type(listing['check_in']) is not str:
+            errors.append('check_in must be a string')
             error = True
         if type(listing['check_out']) is str:
             try:

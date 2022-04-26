@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, abort
 from app.models import db, Listing, Image, Reservation
+from .reservation_validations import verify_reservation_fields, verify_reservation_values
 
 reservation_routes = Blueprint('reservations', __name__)
 
@@ -52,6 +53,19 @@ def get_user_reservations(id):
 @reservation_routes.route('/', methods=["POST"])
 def create_reservation():
     reservation = request.json
+    field_error = verify_reservation_fields(reservation)
+    if field_error:
+        print(field_error)
+        response = jsonify({'message': field_error})
+        response.status_code = 400
+        return response
+    value_error = verify_reservation_values(reservation)
+    if value_error:
+        print(value_error)
+        response = jsonify({'message': value_error})
+        response.status_code = 400
+        return response
+
     newReservation = Reservation(
         user_id=reservation['user_id'],
         listing_id=reservation['listing_id'],
