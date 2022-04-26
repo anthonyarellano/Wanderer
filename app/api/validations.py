@@ -237,8 +237,10 @@ def verify_listing_values(listing):
     else:
         return None
 
+
 def verify_listing_update(listing, dbListing):
     errors = []
+
     if "title" in listing.keys():
         error = False
         if type(listing['title']) is not str:
@@ -250,41 +252,72 @@ def verify_listing_update(listing, dbListing):
                 error = True
         if error == False:
             dbListing.title = listing['title']
+
     if "bed_number" in listing.keys():
         error = False
-        if int(listing["bed_number"]) <= 0 or int(listing['bed_number']) > 2147483647:
-            errors.append('bed_number must be greater than 0 and within postgreSQL integer range.')
+        try:
+            val = int(listing['bed_number'])
+            if val <= 0 or val > 2147483647:
+                errors.append('bed_number must be greater than 0 and within postgreSQL integer range.')
+                error = True
+        except ValueError:
+            errors.append('bed_number must be an integer.')
             error = True
         if error == False:
             dbListing.bed_number = listing['bed_number']
+
     if "bath_number" in listing.keys():
         error = False
-        if int(listing["bath_number"]) <= 0 or int(listing['bath_number']) > 2147483647:
-            errors.append('bath_number must be greater than 0 and within postgreSQL integer range.')
+        try:
+            val = int(listing['bath_number'])
+            if val <= 0 or val > 2147483647:
+                errors.append('bath_number must be greater than 0 and within postgreSQL integer range.')
+                error = True
+        except ValueError:
+            errors.append('bath_number must be an integer.')
             error = True
         if error == False:
             dbListing.bath_number = listing['bath_number']
+
     if "bedroom_number" in listing.keys():
         error = False
-        if int(listing["bedroom_number"]) <= 0 or int(listing['bedroom_number']) > 2147483647:
-            errors.append('bedroom_number must be greater than 0 and within postgreSQL integer range.')
+        try:
+            val = int(listing['bedroom_number'])
+            if val <= 0 or val > 2147483647:
+                errors.append('bedroom_number must be greater than 0 and within postgreSQL integer range.')
+                error = True
+        except ValueError:
+            errors.append('bedroom_number must be an integer.')
             error = True
         if error == False:
             dbListing.bedroom_number = listing['bedroom_number']
+
     if "maximum_guests" in listing.keys():
         error = False
-        if int(listing["maximum_guests"]) <= 0 or int(listing['maximum_guests']) > 2147483647:
-            errors.append('maximum_guests must be greater than 0 and within postgreSQL integer range.')
+        try:
+            val = int(listing['maximum_guests'])
+            if val <= 0 or val > 2147483647:
+                errors.append('maximum_guests must be greater than 0 and within postgreSQL integer range.')
+                error = True
+        except ValueError:
+            errors.append('maximum_guests must be an integer.')
             error = True
         if error == False:
             dbListing.maximum_guests = listing['maximum_guests']
+
     if "price" in listing.keys():
         error = False
-        if int(listing["price"]) <= 0 or int(listing['price']) > 2147483647:
-            errors.append('price must be greater than 0 and within postgreSQL integer range.')
+        try:
+            val = int(listing['price'])
+            if val <= 0 or val > 2147483647:
+                errors.append('price must be greater than 0 and within postgreSQL integer range.')
+                error = True
+        except ValueError:
+            errors.append('price must be an integer.')
             error = True
         if error == False:
             dbListing.price = listing['price']
+
     if "description" in listing.keys():
         error = False
         if type(listing['description']) is not str:
@@ -296,6 +329,7 @@ def verify_listing_update(listing, dbListing):
                 error = True
         if error == False:
             dbListing.description = listing['description']
+
     if "wifi_avail" in listing.keys():
         error = False
         if type(listing["wifi_avail"]) is not bool:
@@ -303,6 +337,7 @@ def verify_listing_update(listing, dbListing):
             error = True
         if error == False:
             dbListing.wifi_avail = listing['wifi_avail']
+
     if "tv_avail" in listing.keys():
         error = False
         if type(listing["tv_avail"]) is not bool:
@@ -310,6 +345,7 @@ def verify_listing_update(listing, dbListing):
             error = True
         if error == False:
             dbListing.tv_avail = listing['tv_avail']
+
     if "kitchen_avail" in listing.keys():
         error = False
         if type(listing["kitchen_avail"]) is not bool:
@@ -317,6 +353,7 @@ def verify_listing_update(listing, dbListing):
             error = True
         if error == False:
             dbListing.kitchen_avail = listing['kitchen_avail']
+
     if "ac_avail" in listing.keys():
         error = False
         if type(listing["ac_avail"]) is not bool:
@@ -324,6 +361,7 @@ def verify_listing_update(listing, dbListing):
             error = True
         if error == False:
             dbListing.ac_avail = listing['ac_avail']
+
     if "washer_avail" in listing.keys():
         error = False
         if type(listing["washer_avail"]) is not bool:
@@ -331,6 +369,7 @@ def verify_listing_update(listing, dbListing):
             error = True
         if error == False:
             dbListing.washer_avail = listing['washer_avail']
+
     if "dryer_avail" in listing.keys():
         error = False
         if type(listing["dryer_avail"]) is not bool:
@@ -338,6 +377,7 @@ def verify_listing_update(listing, dbListing):
             error = True
         if error == False:
             dbListing.dryer_avail = listing['dryer_avail']
+
     if "hair_dryer_avail" in listing.keys():
         error = False
         if type(listing["hair_dryer_avail"]) is not bool:
@@ -345,6 +385,7 @@ def verify_listing_update(listing, dbListing):
             error = True
         if error == False:
             dbListing.hair_dryer_avail = listing['hair_dryer_avail']
+
     if "parking_avail" in listing.keys():
         error = False
         if type(listing["parking_avail"]) is not bool:
@@ -352,6 +393,7 @@ def verify_listing_update(listing, dbListing):
             error = True
         if error == False:
             dbListing.parking_avail = listing['parking_avail']
+
     if "fridge_avail" in listing.keys():
         error = False
         if type(listing["fridge_avail"]) is not bool:
@@ -359,6 +401,7 @@ def verify_listing_update(listing, dbListing):
             error = True
         if error == False:
             dbListing.fridge_avail = listing['fridge_avail']
+
     if "bbq_avail" in listing.keys():
         error = False
         if type(listing["bbq_avail"]) is not bool:
@@ -366,6 +409,7 @@ def verify_listing_update(listing, dbListing):
             error = True
         if error == False:
             dbListing.bbq_avail = listing['bbq_avail']
+
     if "stove_avail" in listing.keys():
         error = False
         if type(listing["stove_avail"]) is not bool:
@@ -373,6 +417,7 @@ def verify_listing_update(listing, dbListing):
             error = True
         if error == False:
             dbListing.stove_avail = listing['stove_avail']
+
     if "pool_avail" in listing.keys():
         error = False
         if type(listing["pool_avail"]) is not bool:
@@ -380,6 +425,7 @@ def verify_listing_update(listing, dbListing):
             error = True
         if error == False:
             dbListing.pool_avail = listing['pool_avail']
+
     if "check_out" in listing.keys():
         error = False
         if type(listing['check_out']) is not str:
@@ -393,6 +439,7 @@ def verify_listing_update(listing, dbListing):
                 error = True
         if error == False:
             dbListing.check_in = listing['check_in']
+
     if "check_out" in listing.keys():
         error = False
         if type(listing['check_out']) is not str:
@@ -406,10 +453,16 @@ def verify_listing_update(listing, dbListing):
                 error = True
         if error == False:
             dbListing.check_out = listing['check_out']
+
     if "room_type_id" in listing.keys():
         error = False
-        if int(listing["room_type_id"]) <= 0 or int(listing['room_type_id']) > 2147483647:
-            errors.append('room_type_id must be greater than 0 and within postgreSQL integer range.')
+        try:
+            val = int(listing['room_type_id'])
+            if val <= 0 or val > 2147483647:
+                errors.append('room_type_id must be greater than 0 and within postgreSQL integer range.')
+                error = True
+        except ValueError:
+            errors.append('room_type_id must be an integer.')
             error = True
         if error == False:
             dbListing.room_type_id = listing['room_type_id']
