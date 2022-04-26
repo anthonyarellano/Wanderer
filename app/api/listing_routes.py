@@ -1,11 +1,18 @@
 from flask import Blueprint, request, jsonify, abort
 from app.models import db, Listing, Image
+from .validations import verify_listing_fields, verify_image_fields, verify_listing_values, verify_listing_update
+import os
 
 listing_routes = Blueprint('listings', __name__)
 
 
 @listing_routes.route('/')
 def get_all_listings():
+    # if "Authorization" not in request.headers.keys():
+    #     abort(403, description="Missing API Key")
+    # if "Authorization" in request.headers.keys():
+    #     if request.headers['Authorization'] != os.environ.get('API_KEY'):
+    #         abort(403, description="Invalid API Key")
     listings = Listing.query.all()
     listingList = []
     if listings is None:
@@ -17,6 +24,11 @@ def get_all_listings():
 
 @listing_routes.route('/<int:id>')
 def get_listing(id):
+    # if "Authorization" not in request.headers.keys():
+    #     abort(403, description="Missing API Key")
+    # if "Authorization" in request.headers.keys():
+    #     if request.headers['Authorization'] != os.environ.get('API_KEY'):
+    #         abort(403, description="Invalid API Key")
     listing = Listing.query.get(id)
     if listing is None:
         abort(404)
@@ -25,7 +37,14 @@ def get_listing(id):
 
 @listing_routes.route('/images/<int:id>')
 def get_listing_images(id):
+    # if "Authorization" not in request.headers.keys():
+    #     abort(403, description="Missing API Key")
+    # if "Authorization" in request.headers.keys():
+    #     if request.headers['Authorization'] != os.environ.get('API_KEY'):
+    #         abort(403, description="Invalid API Key")
     images = Image.query.filter(Image.listing_id == id).all()
+    if images is None:
+        abort(404)
     imageList = []
     for image in images:
         imageList.append(image.to_dict())
@@ -34,7 +53,20 @@ def get_listing_images(id):
 
 @listing_routes.route('/create', methods=["POST"])
 def create_listing():
+    # if "Authorization" not in request.headers.keys():
+    #     abort(403, description="Missing API Key")
+    # if "Authorization" in request.headers.keys():
+    #     if request.headers['Authorization'] != os.environ.get('API_KEY'):
+    #         abort(403, description="Invalid API Key")
+
     listing = dict(request.json)
+    field_error = verify_listing_fields(listing)
+    if field_error:
+        abort(400, description=field_error)
+    value_error = verify_listing_values(listing)
+    if value_error:
+        abort(400, description=value_error)
+
     new_listing = Listing(
         owner_id=listing['owner_id'],
         title=listing['title'],
@@ -72,8 +104,18 @@ def create_listing():
 
 @listing_routes.route('/create/images/<int:id>', methods=["POST"])
 def create_listing_images(id):
+    # if "Authorization" not in request.headers.keys():
+    #     abort(403, description="Missing API Key")
+    # if "Authorization" in request.headers.keys():
+    #     if request.headers['Authorization'] != os.environ.get('API_KEY'):
+    #         abort(403, description="Invalid API Key")
     images = request.json
-    print(images)
+    error = verify_image_fields(images)
+    if len(images) == 0:
+        abort(400, description="Missing image urls.")
+    if error:
+        abort(400, description=error)
+
     imageList = []
     for image in images:
         newImage = Image(
@@ -83,18 +125,16 @@ def create_listing_images(id):
         db.session.add(newImage)
         db.session.commit()
         imageList.append(newImage.to_dict())
-    # newImage = Image(
-    #         listing_id=id,
-    #         url=images['url']
-    #     )
-    # db.session.add(newImage)
-    # db.session.commit()
-    # return newImage.to_dict()
     return jsonify(imageList)
 
 
 @listing_routes.route('/user/<int:id>')
 def get_user_listings(id):
+    # if "Authorization" not in request.headers.keys():
+    #     abort(403, description="Missing API Key")
+    # if "Authorization" in request.headers.keys():
+    #     if request.headers['Authorization'] != os.environ.get('API_KEY'):
+    #         abort(403, description="Invalid API Key")
     listings = Listing.query.filter(Listing.owner_id == id).all()
     listingList = []
     for listing in listings:
@@ -105,37 +145,35 @@ def get_user_listings(id):
 
 @listing_routes.route('/update/<int:id>', methods=['PUT'])
 def update_listing(id):
+    # if "Authorization" not in request.headers.keys():
+    #     abort(403, description="Missing API Key")
+    # if "Authorization" in request.headers.keys():
+    #     if request.headers['Authorization'] != os.environ.get('API_KEY'):
+    #         abort(403, description="Invalid API Key")
     listing = request.json
     dbListing = Listing.query.get(id)
-    dbListing.title = listing['title']
-    dbListing.bed_number = listing['bed_number']
-    dbListing.bath_number = listing['bath_number']
-    dbListing.bedroom_number = listing['bedroom_number']
-    dbListing.maximum_guests = listing['maximum_guests']
-    dbListing.price = listing['price']
-    dbListing.description = listing['description']
-    dbListing.wifi_avail = listing['wifi_avail']
-    dbListing.tv_avail = listing['tv_avail']
-    dbListing.kitchen_avail = listing['kitchen_avail']
-    dbListing.ac_avail = listing['ac_avail']
-    dbListing.washer_avail = listing['washer_avail']
-    dbListing.dryer_avail = listing['dryer_avail']
-    dbListing.hair_dryer_avail = listing['hair_dryer_avail']
-    dbListing.parking_avail = listing['parking_avail']
-    dbListing.fridge_avail = listing['fridge_avail']
-    dbListing.bbq_avail = listing['bbq_avail']
-    dbListing.stove_avail = listing['stove_avail']
-    dbListing.pool_avail = listing['pool_avail']
-    dbListing.check_in = listing['check_in']
-    dbListing.check_out = listing['check_out']
-    dbListing.room_type_id = listing['room_type_id']
-    db.session.commit()
+    if dbListing is None:
+        abort(404)
+
+    error = verify_listing_update(listing, dbListing)
+    if error:
+        abort(400, description=error)
+    if error is None:
+        db.session.commit()
     return dbListing.to_dict()
 
 
 @listing_routes.route('/images/delete/<int:id>', methods=['DELETE'])
 def delete_listing_image(id):
+    # if "Authorization" not in request.headers.keys():
+    #     abort(403, description="Missing API Key")
+    # if "Authorization" in request.headers.keys():
+    #     if request.headers['Authorization'] != os.environ.get('API_KEY'):
+    #         abort(403, description="Invalid API Key")
     image = Image.query.get(id)
+    print(image.listing.images)
+    if len(image.listing.images) <= 5:
+        abort(400, description="Listing must have a minimum of 5 images.")
     db.session.delete(image)
     db.session.commit()
     return jsonify("Success")
@@ -143,7 +181,14 @@ def delete_listing_image(id):
 
 @listing_routes.route('/delete/<int:id>', methods=['DELETE'])
 def delete_listing(id):
+    # if "Authorization" not in request.headers.keys():
+    #     abort(403, description="Missing API Key")
+    # if "Authorization" in request.headers.keys():
+    #     if request.headers['Authorization'] != os.environ.get('API_KEY'):
+    #         abort(403, description="Invalid API Key")
     listing = Listing.query.get(id)
+    if listing is None:
+        abort(404)
     db.session.delete(listing)
     db.session.commit()
     return jsonify("Success")
