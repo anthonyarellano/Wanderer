@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authenticate } from './store/session';
+import { Redirect } from 'react-router-dom';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import Banner from './components/Banner';
 import ListingProfile from './components/ListingProfile';
@@ -11,7 +12,6 @@ import MyListings from './components/MyListings';
 import TripPage from './components/TripPage';
 import HomePage from './components/HomePage';
 import ViewListings from './components/ViewListings';
-import { Redirect } from 'react-router-dom';
 import SplashPage from './components/SplashPage';
 
 function App() {
@@ -33,10 +33,10 @@ function App() {
     <BrowserRouter>
       <Banner />
       <Switch>
-        <Route path='/listings/:listingId(\d+)'>
+        <Route path='/listings/:listingId(\d+)' exact={true}>
          <ListingProfile />
         </Route>
-        <Route path='/view-listings'>
+        <Route path='/view-listings' exact={true}>
           <ViewListings />
         </Route>
         <ProtectedRoute path='/my-listings' exact={true} >

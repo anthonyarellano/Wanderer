@@ -1,7 +1,7 @@
-import './style/location.css';
-import Map from '../Map';
-import { useRef, useEffect } from 'react';
 import { initMapScript } from '../Utils/GoogleMapsAPI/scriptLoading';
+import { useRef, useEffect } from 'react';
+import Map from '../Map';
+import './style/location.css';
 
 const Location = ({ locationFuncs, hasSubmitted, locationErrors }) => {
 

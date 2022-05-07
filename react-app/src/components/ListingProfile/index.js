@@ -11,9 +11,9 @@ import AmenitiesCard from './AmenitiesCard';
 import ProfileImageGallery from './ProfileImageGallery';
 import BookingCard from './BookingCard';
 import CustomCalendar from '../Calendar';
+import LoginModal from '../LoginModal';
 import './style/listing-profile.css';
 import './style/calendar.css';
-import LoginModal from '../LoginModal';
 
 const ListingProfile = () => {
     const user = useSelector((state) => state.session.user);
@@ -74,6 +74,8 @@ const ListingProfile = () => {
         return
     };
 
+    // function for handling image deletion.
+    // frontend validation to ensure that a minimum of 5 images remain on the page. 
     const handleImageDelete = async (image) => {
         if (images?.length > 5) {
             await dispatch(deleteImage(image));

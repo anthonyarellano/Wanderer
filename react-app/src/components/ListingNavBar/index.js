@@ -11,6 +11,7 @@ import LoadingModal from '../LoadingModal';
 import Compressor from 'compressorjs';
 import './style/listing-navbar.css';
 
+// S3 bucket config from environment variables.
 const S3_BUCKET = process.env.REACT_APP_BUCKET;
 const REGION = process.env.REACT_APP_REGION;
 
@@ -22,7 +23,7 @@ AWS.config.update({
 const myBucket = new AWS.S3({
     params: { Bucket: S3_BUCKET },
     region: REGION,
-})
+});
 
 const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [modalIsOpen, setIsOpen] = useState(false);
 
+    // objects to be used as props for validation css.
     const validated = {
         color: "green"
     };
@@ -46,7 +48,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
         color: "red"
     };
 
-    // States for about form
+    // States for 'about' form
     const [title, setTitle] = useState("");
     const [beds, setBeds] = useState("");
     const [baths, setBaths] = useState("");
@@ -58,7 +60,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     const [checkOut, setCheckOut] = useState("");
     const [type, setType] = useState("");
 
-    // States for location form
+    // States for 'location' form
     const [lat, setLat] = useState(null);
     const [long, setLong] = useState(null);
     const [city, setCity] = useState(null);
@@ -66,7 +68,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     const [country, setCountry] = useState(null);
     const [address, setAddress] = useState(null);
 
-    // States for amenity form
+    // States for 'amenity' form
     const [wifi, setWifi] = useState(false);
     const [tv, setTv] = useState(false);
     const [kitchen, setKitchen] = useState(false);
@@ -80,7 +82,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     const [bbq, setBbq] = useState(false);
     const [stove, setStove] = useState(false);
 
-    // State for image form
+    // State for 'image' form
     const [files, setFiles] = useState([]);
 
     // form validations
@@ -90,8 +92,8 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
         if (title) {
             if (title.length > 255) errors.push('Please enter a title shorter than 255 characters.');
             title.split('').forEach((char) => {
-                if (badChars.includes(char)) errors.push('Title contains unusable character.')
-            })
+                if (badChars.includes(char)) errors.push('Title contains unusable character.');
+            });
         } if (!title) errors.push('Please enter a value for title.');
 
         if (beds) {
@@ -138,7 +140,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
         setAboutErrors(errors);
     }, [title, beds, baths, bedrooms,
         guests, price, description,
-        checkIn, checkOut, type])
+        checkIn, checkOut, type]);
 
     // location form validations
     useEffect(() => {
@@ -151,21 +153,21 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
 
         if (!address) errors.add('This location is not yet supported.');
 
-        if (!state) errors.add('This location is not yet supported.')
+        if (!state) errors.add('This location is not yet supported.');
 
         if (country) {
-            if (country !== "United States") errors.add('We apologize, wanderer is only currently available in the United States.')
+            if (country !== "United States") errors.add('We apologize, wanderer is only currently available in the United States.');
         } if (!country) errors.add('This location is not yet supported.');
 
         setLocationErrors(errors);
-    }, [lat, long, city, address, country, state])
+    }, [lat, long, city, address, country, state]);
 
     useEffect(() => {
         let errors = [];
         if (files?.length < 5 && !editEnable) errors.push('Please upload at least five image.')
 
         setImageErrors(errors);
-    }, [files, editEnable])
+    }, [files, editEnable]);
 
     // amenity validations
     useEffect(() => {
@@ -184,11 +186,13 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     }, [wifi, tv, kitchen,
         ac, pool, washer,
         dryer, hairDryer, parking,
-        fridge, bbq, stove])
+        fridge, bbq, stove]);
 
+    // packaging of funcs into object to be passed as a prop into
+    // invididual form components.
     const imagesFuncs = {
         files, setFiles
-    }
+    };
 
     const amenitiesFuncs = {
         wifi, setWifi, tv, setTv,
@@ -197,13 +201,13 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
         dryer, setDryer, hairDryer, setHairDryer,
         parking, setParking, fridge, setFridge,
         bbq, setBbq, stove, setStove
-    }
+    };
 
     const locationFuncs = {
         lat, setLat, long, setLong,
         city, setCity, address, setAddress,
         country, setCountry, state, setState
-    }
+    };
 
     const aboutFuncs = {
         active, setActive, title, setTitle,
@@ -212,19 +216,23 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
         price, setPrice, description, setDescription,
         checkIn, setCheckIn, checkOut, setCheckOut,
         type, setType
-    }
+    };
 
     const openModal = () => {
         setIsOpen(true);
         return;
-    }
+    };
 
+    // function for submitting to AWS S3 bucket.
     // eslint-disable-next-line
     const submitAWS = async (listingId, files, initialize) => {
         let fileUrls = [];
         if (files.length) {
+
+            // opens loading modal while images are being uploaded.
             openModal()
             files.forEach((file, i) => {
+                // runs each file through compressor.
                 new Compressor(file, {
                     quality: 0.6,
 
@@ -234,6 +242,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
                                 Bucket: S3_BUCKET,
                                 Key: result.name
                             };
+                            // upon successful compression, file uploaded to S3 bucket.
                             myBucket.upload(params)
                                 .on('httpUploadProgress', (evt) => {
                                     setProgress(Math.round((evt.loaded / evt.total) * 100))
@@ -241,43 +250,29 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
                                 .send((err, data) => {
                                     if (err) return console.log((err));
                                     if (data) {
+                                        // upon successful upload, URLs are indexed in upload order and pushed into array.
                                         fileUrls.push(`${data.Location}=index?${initialize ? i : listing?.images?.length + i}`);
+                                        // once all the URLs are present, send them to database to be added to the database.
+                                        // once images are present in the database, render completed listing's page.
                                         if (fileUrls.length === files.length) {
                                             dispatch(createImages(fileUrls, listingId))
-                                                .then(() => history.push(`/listings/${listingId}`))
-                                        }
+                                                .then(() => history.push(`/listings/${listingId}`));
+                                        };
                                     };
-                                })
+                                });
                     }
-                })
-                // const params = {
-                //     Body: file,
-                //     Bucket: S3_BUCKET,
-                //     Key: file.name
-                // };
-                // myBucket.upload(params)
-                //     .on('httpUploadProgress', (evt) => {
-                //         setProgress(Math.round((evt.loaded / evt.total) * 100))
-                //     })
-                //     .send((err, data) => {
-                //         if (err) return console.log((err));;
-                //         if (data) {
-                //             fileUrls.push(`${data.Location}=index?${initialize ? i : listing?.images?.length + i}`);
-                //             if (fileUrls.length === files.length) {
-                //                 dispatch(createImages(fileUrls, listingId)).then(() => history.push(`/listings/${listingId}`))
-                //             }
-                //         };
-                //     })
-            })
-        }
-    }
+                });
+            });
+        };
+    };
 
-
+    // checks to see if form(s) are validated and ready for submission.
     let submitReady = false;
     if (![...locationErrors].length && !aboutErrors?.length && !imageErrors?.length && !amenityErrors?.length) submitReady = true;
     let editSubmitReady = false;
     if (!aboutErrors?.length && !imageErrors?.length && !amenityErrors?.length) editSubmitReady = true;
 
+    // function for submitting a new listing to be created.
     const handleSubmit = async () => {
         setHasSubmitted(true);
         if (submitReady || editSubmitReady) {
@@ -312,6 +307,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
                 check_out: checkOut,
                 room_type_id: type,
             }
+            // if this is not the edit form do this, if it is the edit form do this.
             if (!editEnable) {
                 const newListing = await dispatch(createListing(listingInfo));
                 let initialize = true;
@@ -328,7 +324,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     };
 
     // If editEnable prop is passed, change form into edit form by removing location tab.
-    // Done for reusability.
+    // Done for reusability of component.
     let links;
     if (!editEnable) {
         links = (
@@ -435,6 +431,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
             <LoadingModal modalIsOpen={modalIsOpen} />
             {links}
             <div style={{ marginLeft: "10%" }}>
+                {/* rendering individual form component 'tab' utilizing useState */}
                 {active === "About" ?
                     <About aboutErrors={aboutErrors} hasSubmitted={hasSubmitted} aboutFuncs={aboutFuncs} /> :
                     active === "Location" ?
