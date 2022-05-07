@@ -3,8 +3,10 @@ import { useEffect } from 'react';
 import { formatDateForCalendar } from "../Utils/formatDateForCalendar";
 import { formatDate } from "../Utils/formatDate";
 
+// Calendar component for booking reservations
 const CustomCalendar = ({ funcs, ref, disabledDates }) => {
 
+    // useState functions passed in as the prop 'funcs'
     const {
         selected, setSelected,
         unavailable, setStartDate,
@@ -12,17 +14,23 @@ const CustomCalendar = ({ funcs, ref, disabledDates }) => {
         setCheckOut
     } = funcs;
 
+    // Sets start and end date upon user date selection
     const handleDateUpdate = (dateArr) => {
         setStartDate(dateArr[0]);
         setEndDate(dateArr[1]);
     };
 
+    // When user clicks the first date in range on calender, this function is called.
+    // Creates date object from 'YYYY-MM-DD' format and sets 'selected' variabled
+    // 'selected' is then passed in to calendar as the minDate prop.
     const handleSelection = (date) => {
         let dateSplit = date[0].split('-');
         let firstDate = new Date(dateSplit[0], dateSplit[1], dateSplit[2])
         setSelected(firstDate)
     };
 
+    // takes in first date in selected range, loops through disabled to find first
+    // unavailable date in the future. Sets that date as the maxDate prop in calendar.
     const handleUnavailable = (firstDate) => {
         let i = 0;
         while (i < disabledDates?.length) {
@@ -42,6 +50,7 @@ const CustomCalendar = ({ funcs, ref, disabledDates }) => {
         setCheckOut(false);
     };
 
+    // invokes 'handleUnavailable' any time 'selected' is changed. 
     useEffect(() => {
         if (selected) {
             handleUnavailable(selected);
@@ -53,7 +62,7 @@ const CustomCalendar = ({ funcs, ref, disabledDates }) => {
         <div ref={ref} className='border-bottom'>
             <p className='big-font sub-header'>Select Your Dates</p>
             <Calendar tileDisabled={({ date, view }) =>
-                (view === 'month') && // Block day tiles only
+                (view === 'month') &&
                 disabledDates?.some(disabledDate =>
                     date.getFullYear() === disabledDate.getFullYear() &&
                     date.getMonth() === disabledDate.getMonth() &&
@@ -66,7 +75,6 @@ const CustomCalendar = ({ funcs, ref, disabledDates }) => {
                 maxDate={unavailable ? unavailable : null}
                 showDoubleView={true}
                 selectRange={true}
-            // defaultValue={startDate && endDate ? [new Date(startDate), new Date(endDate)] : null}
             />
             <p
                 className='big-font'
