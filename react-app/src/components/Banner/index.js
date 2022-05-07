@@ -2,15 +2,18 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
 import { useHistory, useLocation } from 'react-router-dom';
-import './style/banner.css';
 import LoginModal from '../LoginModal';
+import './style/banner.css';
 
 
 export const Banner = () => {
+    const user = useSelector((state) => state.session.user);
+
     const [visible, setVisible] = useState(false);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [form, setForm] = useState(null);
-    const user = useSelector((state) => state.session.user);
+
+
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
@@ -34,6 +37,8 @@ export const Banner = () => {
         await dispatch(logout());
     };
 
+    // conditionally render contents of user popout div according
+    // to authorization status of user 
     let links;
     if (user) {
         links = (
