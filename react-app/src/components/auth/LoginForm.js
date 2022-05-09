@@ -10,7 +10,6 @@ const LoginForm = ({setIsOpen, setForm}) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  console.log(history);
   const demoLogin = async () => {
     await dispatch(login('demo@aa.io', 'password'))
       .then(() => setIsOpen(false))

@@ -32,7 +32,7 @@ const Location = ({ locationFuncs, hasSubmitted, locationErrors }) => {
 
         address.lat = place?.geometry.location.lat();
         address.long = place?.geometry.location.lng();
-        console.log(place);
+
         place.address_components.forEach(component => {
             const types = component.types;
             const value = component.long_name;
@@ -71,7 +71,7 @@ const Location = ({ locationFuncs, hasSubmitted, locationErrors }) => {
     const onChangeAddress = (autocomplete) => {
         const location = autocomplete.getPlace();
         const locationInfo = pullAddress(location);
-        console.log(locationInfo);
+  
         if (locationInfo) {
             setLat(locationInfo.lat);
             setLong(locationInfo.long);
