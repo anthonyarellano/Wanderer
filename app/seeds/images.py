@@ -291,194 +291,194 @@ def seed_images():
         url='https://tonesbucket.s3.amazonaws.com/nyc5.jpg=index?4'
     )
     # Denver listing 2
-    den_1 = Image(
-        listing_id=3,
-        url='https://tonesbucket.s3.amazonaws.com/.jpg=index?0'
+    den2_1 = Image(
+        listing_id=15,
+        url='https://tonesbucket.s3.amazonaws.com/cden2-min.jpg=index?0'
     )
-    den_2 = Image(
-        listing_id=3,
+    den2_2 = Image(
+        listing_id=15,
         url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
     )
-    den_3 = Image(
-        listing_id=3,
+    den2_3 = Image(
+        listing_id=15,
         url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
     )
-    den_4 = Image(
-        listing_id=3,
+    den2_4 = Image(
+        listing_id=15,
         url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
     )
-    den_5 = Image(
-        listing_id=3,
+    den2_5 = Image(
+        listing_id=15,
         url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
     )
     # Denver listing 3
-    # den_1 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/.jpg=index?0'
-    # )
-    # den_2 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
-    # )
-    # den_3 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
-    # )
-    # den_4 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
-    # )
-    # den_5 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
-    # )
+    den3_1 = Image(
+        listing_id=16,
+        url='https://tonesbucket.s3.amazonaws.com/cden3-min.jpg=index?0'
+    )
+    den3_2 = Image(
+        listing_id=16,
+        url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
+    )
+    den3_3 = Image(
+        listing_id=16,
+        url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
+    )
+    den3_4 = Image(
+        listing_id=16,
+        url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
+    )
+    den3_5 = Image(
+        listing_id=16,
+        url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
+    )
     # Denver listing 4
-    # den_1 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/.jpg=index?0'
-    # )
-    # den_2 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
-    # )
-    # den_3 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
-    # )
-    # den_4 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
-    # )
-    # den_5 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
-    # )
+    den4_1 = Image(
+        listing_id=17,
+        url='https://tonesbucket.s3.amazonaws.com/cden4-min.jpg=index?0'
+    )
+    den4_2 = Image(
+        listing_id=17,
+        url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
+    )
+    den4_3 = Image(
+        listing_id=17,
+        url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
+    )
+    den4_4 = Image(
+        listing_id=17,
+        url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
+    )
+    den4_5 = Image(
+        listing_id=17,
+        url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
+    )
     # Denver listing 5
-    # den_1 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/.jpg=index?0'
-    # )
-    # den_2 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
-    # )
-    # den_3 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
-    # )
-    # den_4 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
-    # )
-    # den_5 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
-    # )
+    den5_1 = Image(
+        listing_id=18,
+        url='https://tonesbucket.s3.amazonaws.com/cden5-min.jpg=index?0'
+    )
+    den5_2 = Image(
+        listing_id=18,
+        url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
+    )
+    den5_3 = Image(
+        listing_id=18,
+        url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
+    )
+    den5_4 = Image(
+        listing_id=18,
+        url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
+    )
+    den5_5 = Image(
+        listing_id=18,
+        url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
+    )
     # Denver listing 6
-    # den_1 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/.jpg=index?0'
-    # )
-    # den_2 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
-    # )
-    # den_3 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
-    # )
-    # den_4 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
-    # )
-    # den_5 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
-    # )
+    den6_1 = Image(
+        listing_id=19,
+        url='https://tonesbucket.s3.amazonaws.com/cden6-min.jpg=index?0'
+    )
+    den6_2 = Image(
+        listing_id=19,
+        url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
+    )
+    den6_3 = Image(
+        listing_id=19,
+        url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
+    )
+    den6_4 = Image(
+        listing_id=19,
+        url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
+    )
+    den6_5 = Image(
+        listing_id=19,
+        url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
+    )
     # Denver listing 7
-    # den_1 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/.jpg=index?0'
-    # )
-    # den_2 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
-    # )
-    # den_3 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
-    # )
-    # den_4 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
-    # )
-    # den_5 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
-    # )
+    den7_1 = Image(
+        listing_id=20,
+        url='https://tonesbucket.s3.amazonaws.com/cden7-min.jpg=index?0'
+    )
+    den7_2 = Image(
+        listing_id=20,
+        url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
+    )
+    den7_3 = Image(
+        listing_id=20,
+        url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
+    )
+    den7_4 = Image(
+        listing_id=20,
+        url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
+    )
+    den7_5 = Image(
+        listing_id=20,
+        url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
+    )
     # Denver listing 8
-    # den_1 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/.jpg=index?0'
-    # )
-    # den_2 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
-    # )
-    # den_3 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
-    # )
-    # den_4 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
-    # )
-    # den_5 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
-    # )
+    den8_1 = Image(
+        listing_id=21,
+        url='https://tonesbucket.s3.amazonaws.com/cden8-min.jpg=index?0'
+    )
+    den8_2 = Image(
+        listing_id=21,
+        url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
+    )
+    den8_3 = Image(
+        listing_id=21,
+        url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
+    )
+    den8_4 = Image(
+        listing_id=21,
+        url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
+    )
+    den8_5 = Image(
+        listing_id=21,
+        url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
+    )
     # Denver listing 9
-    # den_1 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/.jpg=index?0'
-    # )
-    # den_2 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
-    # )
-    # den_3 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
-    # )
-    # den_4 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
-    # )
-    # den_5 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
-    # )
+    den9_1 = Image(
+        listing_id=22,
+        url='https://tonesbucket.s3.amazonaws.com/cden9-min.jpg=index?0'
+    )
+    den9_2 = Image(
+        listing_id=22,
+        url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
+    )
+    den9_3 = Image(
+        listing_id=22,
+        url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
+    )
+    den9_4 = Image(
+        listing_id=22,
+        url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
+    )
+    den9_5 = Image(
+        listing_id=22,
+        url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
+    )
     # Denver listing 10
-    # den_1 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/.jpg=index?0'
-    # )
-    # den_2 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
-    # )
-    # den_3 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
-    # )
-    # den_4 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
-    # )
-    # den_5 = Image(
-    #     listing_id=3,
-    #     url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
-    # )
+    den10_1 = Image(
+        listing_id=23,
+        url='https://tonesbucket.s3.amazonaws.com/cden10-min.jpg=index?0'
+    )
+    den10_2 = Image(
+        listing_id=23,
+        url='https://tonesbucket.s3.amazonaws.com/denver2.jpg=index?2'
+    )
+    den10_3 = Image(
+        listing_id=23,
+        url='https://tonesbucket.s3.amazonaws.com/denver3.jpg=index?3'
+    )
+    den10_4 = Image(
+        listing_id=23,
+        url='https://tonesbucket.s3.amazonaws.com/denver4.jpg=index?4'
+    )
+    den10_5 = Image(
+        listing_id=23,
+        url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
+    )
 
     db.session.add(one)
     db.session.add(two)
@@ -557,6 +557,60 @@ def seed_images():
     db.session.add(nyca10_3)
     db.session.add(nyca10_4)
     db.session.add(nyca10_5)
+
+    db.session.add(den1_1)
+    db.session.add(den1_2)
+    db.session.add(den1_3)
+    db.session.add(den1_4)
+    db.session.add(den1_5)
+
+    db.session.add(den_1)
+    db.session.add(den_2)
+    db.session.add(den_3)
+    db.session.add(den_4)
+    db.session.add(den_5)
+
+    db.session.add(den_1)
+    db.session.add(den_2)
+    db.session.add(den_3)
+    db.session.add(den_4)
+    db.session.add(den_5)
+
+    db.session.add(den_1)
+    db.session.add(den_2)
+    db.session.add(den_3)
+    db.session.add(den_4)
+    db.session.add(den_5)
+
+    db.session.add(den_1)
+    db.session.add(den_2)
+    db.session.add(den_3)
+    db.session.add(den_4)
+    db.session.add(den_5)
+
+    db.session.add(den_1)
+    db.session.add(den_2)
+    db.session.add(den_3)
+    db.session.add(den_4)
+    db.session.add(den_5)
+
+    db.session.add(den_1)
+    db.session.add(den_2)
+    db.session.add(den_3)
+    db.session.add(den_4)
+    db.session.add(den_5)
+
+    db.session.add(den_1)
+    db.session.add(den_2)
+    db.session.add(den_3)
+    db.session.add(den_4)
+    db.session.add(den_5)
+
+    db.session.add(den_1)
+    db.session.add(den_2)
+    db.session.add(den_3)
+    db.session.add(den_4)
+    db.session.add(den_5)
 
     db.session.add(sub1)
     db.session.add(sub2)
