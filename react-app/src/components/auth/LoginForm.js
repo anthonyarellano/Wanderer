@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
 
 const LoginForm = ({setIsOpen, setForm}) => {
@@ -8,7 +7,6 @@ const LoginForm = ({setIsOpen, setForm}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const demoLogin = async () => {
     await dispatch(login('demo@aa.io', 'password'))
