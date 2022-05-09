@@ -506,7 +506,7 @@ def seed_images():
     # Austin listing 2
     aus_1 = Image(
         listing_id=25,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/caus2.jpg=index?0'
     )
     aus_2 = Image(
         listing_id=25,
@@ -527,7 +527,7 @@ def seed_images():
     # Austin listing 3
     aus_1 = Image(
         listing_id=26,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/caus3.jpg=index?0'
     )
     aus_2 = Image(
         listing_id=26,
@@ -548,7 +548,7 @@ def seed_images():
     # Austin listing 4
     aus_1 = Image(
         listing_id=27,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/caus4.jpg=index?0'
     )
     aus_2 = Image(
         listing_id=27,
@@ -569,7 +569,7 @@ def seed_images():
     # Austin listing 5
     aus_1 = Image(
         listing_id=28,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/caus5.jpg=index?0'
     )
     aus_2 = Image(
         listing_id=28,
@@ -590,7 +590,7 @@ def seed_images():
     # Austin listing 6
     aus_1 = Image(
         listing_id=29,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/caus6.jpg=index?0'
     )
     aus_2 = Image(
         listing_id=29,
@@ -611,7 +611,7 @@ def seed_images():
     # Austin listing 7
     aus_1 = Image(
         listing_id=30,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/caus7.jpg=index?0'
     )
     aus_2 = Image(
         listing_id=30,
@@ -632,7 +632,7 @@ def seed_images():
     # Austin listing 8
     aus_1 = Image(
         listing_id=31,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/caus8.jpg=index?0'
     )
     aus_2 = Image(
         listing_id=31,
@@ -653,7 +653,7 @@ def seed_images():
     # Austin listing 9
     aus_1 = Image(
         listing_id=32,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/caus9.jpg=index?0'
     )
     aus_2 = Image(
         listing_id=32,
@@ -674,7 +674,7 @@ def seed_images():
     # Austin listing 10
     aus_1 = Image(
         listing_id=33,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/caus10.jpg=index?0'
     )
     aus_2 = Image(
         listing_id=33,
