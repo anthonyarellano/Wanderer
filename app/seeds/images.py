@@ -101,7 +101,8 @@ def seed_images():
         listing_id=5,
         url='https://tonesbucket.s3.amazonaws.com/suburbs5.jpg=index?4'
     )
-    # NYC apartment 2
+
+    # NYC apartment 2 -- -- --
     nyca2_1 = Image(
         listing_id=6,
         url='https://tonesbucket.s3.amazonaws.com/cnyc2-min.jpg=index?0'
@@ -290,7 +291,8 @@ def seed_images():
         listing_id=14,
         url='https://tonesbucket.s3.amazonaws.com/nyc5.jpg=index?4'
     )
-    # Denver listing 2
+
+    # Denver listing 2 -- -- --
     den2_1 = Image(
         listing_id=15,
         url='https://tonesbucket.s3.amazonaws.com/cden2-min.jpg=index?0'
@@ -480,11 +482,228 @@ def seed_images():
         url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
     )
 
+    # Austin listing 1 -- -- --
+    aus1_1 = Image(
+        listing_id=24,
+        url='https://tonesbucket.s3.amazonaws.com/caus1.jpg=index?0'
+    )
+    aus1_2 = Image(
+        listing_id=24,
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
+    )
+    aus1_3 = Image(
+        listing_id=24,
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
+    )
+    aus1_4 = Image(
+        listing_id=24,
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
+    )
+    aus1_5 = Image(
+        listing_id=24,
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
+    )
+    # Austin listing 2
+    aus2_1 = Image(
+        listing_id=25,
+        url='https://tonesbucket.s3.amazonaws.com/caus2.jpg=index?0'
+    )
+    aus2_2 = Image(
+        listing_id=25,
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
+    )
+    aus2_3 = Image(
+        listing_id=25,
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
+    )
+    aus2_4 = Image(
+        listing_id=25,
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
+    )
+    aus2_5 = Image(
+        listing_id=25,
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
+    )
+    # Austin listing 3
+    aus3_1 = Image(
+        listing_id=26,
+        url='https://tonesbucket.s3.amazonaws.com/caus3.jpg=index?0'
+    )
+    aus3_2 = Image(
+        listing_id=26,
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
+    )
+    aus3_3 = Image(
+        listing_id=26,
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
+    )
+    aus3_4 = Image(
+        listing_id=26,
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
+    )
+    aus3_5 = Image(
+        listing_id=26,
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
+    )
+    # Austin listing 4
+    aus4_1 = Image(
+        listing_id=27,
+        url='https://tonesbucket.s3.amazonaws.com/caus4.jpg=index?0'
+    )
+    aus4_2 = Image(
+        listing_id=27,
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
+    )
+    aus4_3 = Image(
+        listing_id=27,
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
+    )
+    aus4_4 = Image(
+        listing_id=27,
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
+    )
+    aus4_5 = Image(
+        listing_id=27,
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
+    )
+    # Austin listing 5
+    aus5_1 = Image(
+        listing_id=28,
+        url='https://tonesbucket.s3.amazonaws.com/caus5.jpg=index?0'
+    )
+    aus5_2 = Image(
+        listing_id=28,
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
+    )
+    aus5_3 = Image(
+        listing_id=28,
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
+    )
+    aus5_4 = Image(
+        listing_id=28,
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
+    )
+    aus5_5 = Image(
+        listing_id=28,
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
+    )
+    # Austin listing 6
+    aus6_1 = Image(
+        listing_id=29,
+        url='https://tonesbucket.s3.amazonaws.com/caus6.jpg=index?0'
+    )
+    aus6_2 = Image(
+        listing_id=29,
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
+    )
+    aus6_3 = Image(
+        listing_id=29,
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
+    )
+    aus6_4 = Image(
+        listing_id=29,
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
+    )
+    aus6_5 = Image(
+        listing_id=29,
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
+    )
+    # Austin listing 7
+    aus7_1 = Image(
+        listing_id=30,
+        url='https://tonesbucket.s3.amazonaws.com/caus7.jpg=index?0'
+    )
+    aus7_2 = Image(
+        listing_id=30,
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
+    )
+    aus7_3 = Image(
+        listing_id=30,
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
+    )
+    aus7_4 = Image(
+        listing_id=30,
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
+    )
+    aus7_5 = Image(
+        listing_id=30,
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
+    )
+    # Austin listing 8
+    aus8_1 = Image(
+        listing_id=31,
+        url='https://tonesbucket.s3.amazonaws.com/caus8.jpg=index?0'
+    )
+    aus8_2 = Image(
+        listing_id=31,
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
+    )
+    aus8_3 = Image(
+        listing_id=31,
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
+    )
+    aus8_4 = Image(
+        listing_id=31,
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
+    )
+    aus8_5 = Image(
+        listing_id=31,
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
+    )
+    # Austin listing 9
+    aus9_1 = Image(
+        listing_id=32,
+        url='https://tonesbucket.s3.amazonaws.com/caus9.jpg=index?0'
+    )
+    aus9_2 = Image(
+        listing_id=32,
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
+    )
+    aus9_3 = Image(
+        listing_id=32,
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
+    )
+    aus9_4 = Image(
+        listing_id=32,
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
+    )
+    aus9_5 = Image(
+        listing_id=32,
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
+    )
+    # Austin listing 10
+    aus10_1 = Image(
+        listing_id=33,
+        url='https://tonesbucket.s3.amazonaws.com/caus10.jpg=index?0'
+    )
+    aus10_2 = Image(
+        listing_id=33,
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
+    )
+    aus10_3 = Image(
+        listing_id=33,
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
+    )
+    aus10_4 = Image(
+        listing_id=33,
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
+    )
+    aus10_5 = Image(
+        listing_id=33,
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
+    )
+
     db.session.add(one)
     db.session.add(two)
     db.session.add(three)
     db.session.add(four)
     db.session.add(five)
+
+    db.session.add(sub1)
+    db.session.add(sub2)
+    db.session.add(sub3)
+    db.session.add(sub4)
+    db.session.add(sub5)
 
     db.session.add(cabin1)
     db.session.add(cabin2)
@@ -612,14 +831,67 @@ def seed_images():
     db.session.add(den10_4)
     db.session.add(den10_5)
 
-    db.session.add(sub1)
-    db.session.add(sub2)
-    db.session.add(sub3)
-    db.session.add(sub4)
-    db.session.add(sub5)
+    db.session.add(aus1_1)
+    db.session.add(aus1_2)
+    db.session.add(aus1_3)
+    db.session.add(aus1_4)
+    db.session.add(aus1_5)
+
+    db.session.add(aus2_1)
+    db.session.add(aus2_2)
+    db.session.add(aus2_3)
+    db.session.add(aus2_4)
+    db.session.add(aus2_5)
+
+    db.session.add(aus3_1)
+    db.session.add(aus3_2)
+    db.session.add(aus3_3)
+    db.session.add(aus3_4)
+    db.session.add(aus3_5)
+
+    db.session.add(aus4_1)
+    db.session.add(aus4_2)
+    db.session.add(aus4_3)
+    db.session.add(aus4_4)
+    db.session.add(aus4_5)
+
+    db.session.add(aus5_1)
+    db.session.add(aus5_2)
+    db.session.add(aus5_3)
+    db.session.add(aus5_4)
+    db.session.add(aus5_5)
+
+    db.session.add(aus6_1)
+    db.session.add(aus6_2)
+    db.session.add(aus6_3)
+    db.session.add(aus6_4)
+    db.session.add(aus6_5)
+
+    db.session.add(aus7_1)
+    db.session.add(aus7_2)
+    db.session.add(aus7_3)
+    db.session.add(aus7_4)
+    db.session.add(aus7_5)
+
+    db.session.add(aus8_1)
+    db.session.add(aus8_2)
+    db.session.add(aus8_3)
+    db.session.add(aus8_4)
+    db.session.add(aus8_5)
+
+    db.session.add(aus9_1)
+    db.session.add(aus9_2)
+    db.session.add(aus9_3)
+    db.session.add(aus9_4)
+    db.session.add(aus9_5)
+
+    db.session.add(aus10_1)
+    db.session.add(aus10_2)
+    db.session.add(aus10_3)
+    db.session.add(aus10_4)
+    db.session.add(aus10_5)
 
     db.session.commit()
-
 
 def undo_seed_images():
     db.session.execute('TRUNCATE images RESTART IDENTITY CASCADE;')
