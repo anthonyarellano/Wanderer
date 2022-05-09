@@ -101,7 +101,8 @@ def seed_images():
         listing_id=5,
         url='https://tonesbucket.s3.amazonaws.com/suburbs5.jpg=index?4'
     )
-    # NYC apartment 2
+
+    # NYC apartment 2 -- -- --
     nyca2_1 = Image(
         listing_id=6,
         url='https://tonesbucket.s3.amazonaws.com/cnyc2-min.jpg=index?0'
@@ -290,7 +291,8 @@ def seed_images():
         listing_id=14,
         url='https://tonesbucket.s3.amazonaws.com/nyc5.jpg=index?4'
     )
-    # Denver listing 2
+
+    # Denver listing 2 -- -- --
     den2_1 = Image(
         listing_id=15,
         url='https://tonesbucket.s3.amazonaws.com/cden2-min.jpg=index?0'
@@ -478,6 +480,217 @@ def seed_images():
     den10_5 = Image(
         listing_id=23,
         url='https://tonesbucket.s3.amazonaws.com/denver5.jpg=index?1'
+    )
+
+    # Austin listing 1 -- -- --
+    aus_1 = Image(
+        listing_id=24,
+        url='https://tonesbucket.s3.amazonaws.com/caus1.jpg=index?0'
+    )
+    aus_2 = Image(
+        listing_id=24,
+        url=''
+    )
+    aus_3 = Image(
+        listing_id=24,
+        url=''
+    )
+    aus_4 = Image(
+        listing_id=24,
+        url=''
+    )
+    aus_5 = Image(
+        listing_id=24,
+        url=''
+    )
+    # Austin listing 2
+    aus_1 = Image(
+        listing_id=25,
+        url=''
+    )
+    aus_2 = Image(
+        listing_id=25,
+        url=''
+    )
+    aus_3 = Image(
+        listing_id=25,
+        url=''
+    )
+    aus_4 = Image(
+        listing_id=25,
+        url=''
+    )
+    aus_5 = Image(
+        listing_id=25,
+        url=''
+    )
+    # Austin listing 3
+    aus_1 = Image(
+        listing_id=26,
+        url=''
+    )
+    aus_2 = Image(
+        listing_id=26,
+        url=''
+    )
+    aus_3 = Image(
+        listing_id=26,
+        url=''
+    )
+    aus_4 = Image(
+        listing_id=26,
+        url=''
+    )
+    aus_5 = Image(
+        listing_id=26,
+        url=''
+    )
+    # Austin listing 4
+    aus_1 = Image(
+        listing_id=27,
+        url=''
+    )
+    aus_2 = Image(
+        listing_id=27,
+        url=''
+    )
+    aus_3 = Image(
+        listing_id=27,
+        url=''
+    )
+    aus_4 = Image(
+        listing_id=27,
+        url=''
+    )
+    aus_5 = Image(
+        listing_id=27,
+        url=''
+    )
+    # Austin listing 5
+    aus_1 = Image(
+        listing_id=28,
+        url=''
+    )
+    aus_2 = Image(
+        listing_id=28,
+        url=''
+    )
+    aus_3 = Image(
+        listing_id=28,
+        url=''
+    )
+    aus_4 = Image(
+        listing_id=28,
+        url=''
+    )
+    aus_5 = Image(
+        listing_id=28,
+        url=''
+    )
+    # Austin listing 6
+    aus_1 = Image(
+        listing_id=29,
+        url=''
+    )
+    aus_2 = Image(
+        listing_id=29,
+        url=''
+    )
+    aus_3 = Image(
+        listing_id=29,
+        url=''
+    )
+    aus_4 = Image(
+        listing_id=29,
+        url=''
+    )
+    aus_5 = Image(
+        listing_id=29,
+        url=''
+    )
+    # Austin listing 7
+    aus_1 = Image(
+        listing_id=30,
+        url=''
+    )
+    aus_2 = Image(
+        listing_id=30,
+        url=''
+    )
+    aus_3 = Image(
+        listing_id=30,
+        url=''
+    )
+    aus_4 = Image(
+        listing_id=30,
+        url=''
+    )
+    aus_5 = Image(
+        listing_id=30,
+        url=''
+    )
+    # Austin listing 8
+    aus_1 = Image(
+        listing_id=31,
+        url=''
+    )
+    aus_2 = Image(
+        listing_id=31,
+        url=''
+    )
+    aus_3 = Image(
+        listing_id=31,
+        url=''
+    )
+    aus_4 = Image(
+        listing_id=31,
+        url=''
+    )
+    aus_5 = Image(
+        listing_id=31,
+        url=''
+    )
+    # Austin listing 9
+    aus_1 = Image(
+        listing_id=32,
+        url=''
+    )
+    aus_2 = Image(
+        listing_id=32,
+        url=''
+    )
+    aus_3 = Image(
+        listing_id=32,
+        url=''
+    )
+    aus_4 = Image(
+        listing_id=32,
+        url=''
+    )
+    aus_5 = Image(
+        listing_id=32,
+        url=''
+    )
+    # Austin listing 10
+    aus_1 = Image(
+        listing_id=33,
+        url=''
+    )
+    aus_2 = Image(
+        listing_id=33,
+        url=''
+    )
+    aus_3 = Image(
+        listing_id=33,
+        url=''
+    )
+    aus_4 = Image(
+        listing_id=33,
+        url=''
+    )
+    aus_5 = Image(
+        listing_id=33,
+        url=''
     )
 
     db.session.add(one)
