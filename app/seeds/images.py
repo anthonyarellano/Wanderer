@@ -489,19 +489,19 @@ def seed_images():
     )
     aus_2 = Image(
         listing_id=24,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
     )
     aus_3 = Image(
         listing_id=24,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
     )
     aus_4 = Image(
         listing_id=24,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
     )
     aus_5 = Image(
         listing_id=24,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
     )
     # Austin listing 2
     aus_1 = Image(
@@ -510,19 +510,19 @@ def seed_images():
     )
     aus_2 = Image(
         listing_id=25,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
     )
     aus_3 = Image(
         listing_id=25,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
     )
     aus_4 = Image(
         listing_id=25,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
     )
     aus_5 = Image(
         listing_id=25,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
     )
     # Austin listing 3
     aus_1 = Image(
@@ -531,19 +531,19 @@ def seed_images():
     )
     aus_2 = Image(
         listing_id=26,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
     )
     aus_3 = Image(
         listing_id=26,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
     )
     aus_4 = Image(
         listing_id=26,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
     )
     aus_5 = Image(
         listing_id=26,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
     )
     # Austin listing 4
     aus_1 = Image(
@@ -552,19 +552,19 @@ def seed_images():
     )
     aus_2 = Image(
         listing_id=27,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
     )
     aus_3 = Image(
         listing_id=27,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
     )
     aus_4 = Image(
         listing_id=27,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
     )
     aus_5 = Image(
         listing_id=27,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
     )
     # Austin listing 5
     aus_1 = Image(
@@ -573,19 +573,19 @@ def seed_images():
     )
     aus_2 = Image(
         listing_id=28,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
     )
     aus_3 = Image(
         listing_id=28,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
     )
     aus_4 = Image(
         listing_id=28,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
     )
     aus_5 = Image(
         listing_id=28,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
     )
     # Austin listing 6
     aus_1 = Image(
@@ -594,19 +594,19 @@ def seed_images():
     )
     aus_2 = Image(
         listing_id=29,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
     )
     aus_3 = Image(
         listing_id=29,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
     )
     aus_4 = Image(
         listing_id=29,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
     )
     aus_5 = Image(
         listing_id=29,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
     )
     # Austin listing 7
     aus_1 = Image(
@@ -615,19 +615,19 @@ def seed_images():
     )
     aus_2 = Image(
         listing_id=30,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
     )
     aus_3 = Image(
         listing_id=30,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
     )
     aus_4 = Image(
         listing_id=30,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
     )
     aus_5 = Image(
         listing_id=30,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
     )
     # Austin listing 8
     aus_1 = Image(
@@ -636,19 +636,19 @@ def seed_images():
     )
     aus_2 = Image(
         listing_id=31,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
     )
     aus_3 = Image(
         listing_id=31,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
     )
     aus_4 = Image(
         listing_id=31,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
     )
     aus_5 = Image(
         listing_id=31,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
     )
     # Austin listing 9
     aus_1 = Image(
@@ -657,19 +657,19 @@ def seed_images():
     )
     aus_2 = Image(
         listing_id=32,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
     )
     aus_3 = Image(
         listing_id=32,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
     )
     aus_4 = Image(
         listing_id=32,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
     )
     aus_5 = Image(
         listing_id=32,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
     )
     # Austin listing 10
     aus_1 = Image(
@@ -678,19 +678,19 @@ def seed_images():
     )
     aus_2 = Image(
         listing_id=33,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus2-min.jpg=index?1'
     )
     aus_3 = Image(
         listing_id=33,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus3-min.jpg=index?2'
     )
     aus_4 = Image(
         listing_id=33,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus4-min.jpg=index?3'
     )
     aus_5 = Image(
         listing_id=33,
-        url=''
+        url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
     )
 
     db.session.add(one)
