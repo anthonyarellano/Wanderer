@@ -693,6 +693,217 @@ def seed_images():
         url='https://tonesbucket.s3.amazonaws.com/aus5-min.jpg=index?4'
     )
 
+    # Los Angeles listing 1 -- -- --
+    los1_1 = Image(
+        listing_id=34,
+        url='https://tonesbucket.s3.amazonaws.com/cla1.jpg=index?0'
+    )
+    los1_2 = Image(
+        listing_id=34,
+        url='https://tonesbucket.s3.amazonaws.com/la2-min.jpg=index?1'
+    )
+    los1_3 = Image(
+        listing_id=34,
+        url='https://tonesbucket.s3.amazonaws.com/la3-min.jpg=index?2'
+    )
+    los1_4 = Image(
+        listing_id=34,
+        url='https://tonesbucket.s3.amazonaws.com/la4-min.jpg=index?3'
+    )
+    los1_5 = Image(
+        listing_id=34,
+        url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
+    )
+    # Los Angeles listing 2 -- -- --
+    los2_1 = Image(
+        listing_id=35,
+        url='https://tonesbucket.s3.amazonaws.com/cla2.jpg=index?0'
+    )
+    los2_2 = Image(
+        listing_id=35,
+        url='https://tonesbucket.s3.amazonaws.com/la2-min.jpg=index?1'
+    )
+    los2_3 = Image(
+        listing_id=35,
+        url='https://tonesbucket.s3.amazonaws.com/la3-min.jpg=index?2'
+    )
+    los2_4 = Image(
+        listing_id=35,
+        url='https://tonesbucket.s3.amazonaws.com/la4-min.jpg=index?3'
+    )
+    los2_5 = Image(
+        listing_id=35,
+        url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
+    )
+    # Los Angeles listing 3 -- -- --
+    los3_1 = Image(
+        listing_id=36,
+        url='https://tonesbucket.s3.amazonaws.com/cla3.jpg=index?0'
+    )
+    los3_2 = Image(
+        listing_id=36,
+        url='https://tonesbucket.s3.amazonaws.com/la2-min.jpg=index?1'
+    )
+    los3_3 = Image(
+        listing_id=36,
+        url='https://tonesbucket.s3.amazonaws.com/la3-min.jpg=index?2'
+    )
+    los3_4 = Image(
+        listing_id=36,
+        url='https://tonesbucket.s3.amazonaws.com/la4-min.jpg=index?3'
+    )
+    los3_5 = Image(
+        listing_id=36,
+        url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
+    )
+    # Los Angeles listing 4 -- -- --
+    los4_1 = Image(
+        listing_id=37,
+        url='https://tonesbucket.s3.amazonaws.com/cla4.jpg=index?0'
+    )
+    los4_2 = Image(
+        listing_id=37,
+        url='https://tonesbucket.s3.amazonaws.com/la2-min.jpg=index?1'
+    )
+    los4_3 = Image(
+        listing_id=37,
+        url='https://tonesbucket.s3.amazonaws.com/la3-min.jpg=index?2'
+    )
+    los4_4 = Image(
+        listing_id=37,
+        url='https://tonesbucket.s3.amazonaws.com/la4-min.jpg=index?3'
+    )
+    los4_5 = Image(
+        listing_id=37,
+        url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
+    )
+    # Los Angeles listing 5 -- -- --
+    los5_1 = Image(
+        listing_id=38,
+        url='https://tonesbucket.s3.amazonaws.com/cla5.jpg=index?0'
+    )
+    los5_2 = Image(
+        listing_id=38,
+        url='https://tonesbucket.s3.amazonaws.com/la2-min.jpg=index?1'
+    )
+    los5_3 = Image(
+        listing_id=38,
+        url='https://tonesbucket.s3.amazonaws.com/la3-min.jpg=index?2'
+    )
+    los5_4 = Image(
+        listing_id=38,
+        url='https://tonesbucket.s3.amazonaws.com/la4-min.jpg=index?3'
+    )
+    los5_5 = Image(
+        listing_id=38,
+        url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
+    )
+    # Los Angeles listing 6 -- -- --
+    los6_1 = Image(
+        listing_id=39,
+        url='https://tonesbucket.s3.amazonaws.com/cla6.jpg=index?0'
+    )
+    los6_2 = Image(
+        listing_id=39,
+        url='https://tonesbucket.s3.amazonaws.com/la2-min.jpg=index?1'
+    )
+    los6_3 = Image(
+        listing_id=39,
+        url='https://tonesbucket.s3.amazonaws.com/la3-min.jpg=index?2'
+    )
+    los6_4 = Image(
+        listing_id=39,
+        url='https://tonesbucket.s3.amazonaws.com/la4-min.jpg=index?3'
+    )
+    los6_5 = Image(
+        listing_id=39,
+        url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
+    )
+    # Los Angeles listing 7 -- -- --
+    los7_1 = Image(
+        listing_id=40,
+        url='https://tonesbucket.s3.amazonaws.com/cla7.jpg=index?0'
+    )
+    los7_2 = Image(
+        listing_id=40,
+        url='https://tonesbucket.s3.amazonaws.com/la2-min.jpg=index?1'
+    )
+    los7_3 = Image(
+        listing_id=40,
+        url='https://tonesbucket.s3.amazonaws.com/la3-min.jpg=index?2'
+    )
+    los7_4 = Image(
+        listing_id=40,
+        url='https://tonesbucket.s3.amazonaws.com/la4-min.jpg=index?3'
+    )
+    los7_5 = Image(
+        listing_id=40,
+        url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
+    )
+    # Los Angeles listing 8 -- -- --
+    los8_1 = Image(
+        listing_id=41,
+        url='https://tonesbucket.s3.amazonaws.com/cla8.jpg=index?0'
+    )
+    los8_2 = Image(
+        listing_id=41,
+        url='https://tonesbucket.s3.amazonaws.com/la2-min.jpg=index?1'
+    )
+    los8_3 = Image(
+        listing_id=41,
+        url='https://tonesbucket.s3.amazonaws.com/la3-min.jpg=index?2'
+    )
+    los8_4 = Image(
+        listing_id=41,
+        url='https://tonesbucket.s3.amazonaws.com/la4-min.jpg=index?3'
+    )
+    los8_5 = Image(
+        listing_id=41,
+        url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
+    )
+    # Los Angeles listing 9 -- -- --
+    los9_1 = Image(
+        listing_id=42,
+        url='https://tonesbucket.s3.amazonaws.com/cla9.jpg=index?0'
+    )
+    los9_2 = Image(
+        listing_id=42,
+        url='https://tonesbucket.s3.amazonaws.com/la2-min.jpg=index?1'
+    )
+    los9_3 = Image(
+        listing_id=42,
+        url='https://tonesbucket.s3.amazonaws.com/la3-min.jpg=index?2'
+    )
+    los9_4 = Image(
+        listing_id=42,
+        url='https://tonesbucket.s3.amazonaws.com/la4-min.jpg=index?3'
+    )
+    los9_5 = Image(
+        listing_id=42,
+        url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
+    )
+    # Los Angeles listing 10 -- -- --
+    los10_1 = Image(
+        listing_id=43,
+        url='https://tonesbucket.s3.amazonaws.com/cla10.jpg=index?0'
+    )
+    los10_2 = Image(
+        listing_id=43,
+        url='https://tonesbucket.s3.amazonaws.com/la2-min.jpg=index?1'
+    )
+    los10_3 = Image(
+        listing_id=43,
+        url='https://tonesbucket.s3.amazonaws.com/la3-min.jpg=index?2'
+    )
+    los10_4 = Image(
+        listing_id=43,
+        url='https://tonesbucket.s3.amazonaws.com/la4-min.jpg=index?3'
+    )
+    los10_5 = Image(
+        listing_id=43,
+        url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
+    )
+
     db.session.add(one)
     db.session.add(two)
     db.session.add(three)
@@ -890,6 +1101,66 @@ def seed_images():
     db.session.add(aus10_3)
     db.session.add(aus10_4)
     db.session.add(aus10_5)
+
+    db.session.add(los1_1)
+    db.session.add(los1_2)
+    db.session.add(los1_3)
+    db.session.add(los1_4)
+    db.session.add(los1_5)
+
+    db.session.add(los2_1)
+    db.session.add(los2_2)
+    db.session.add(los2_3)
+    db.session.add(los2_4)
+    db.session.add(los2_5)
+
+    db.session.add(los3_1)
+    db.session.add(los3_2)
+    db.session.add(los3_3)
+    db.session.add(los3_4)
+    db.session.add(los3_5)
+
+    db.session.add(los4_1)
+    db.session.add(los4_2)
+    db.session.add(los4_3)
+    db.session.add(los4_4)
+    db.session.add(los4_5)
+
+    db.session.add(los5_1)
+    db.session.add(los5_2)
+    db.session.add(los5_3)
+    db.session.add(los5_4)
+    db.session.add(los5_5)
+
+    db.session.add(los6_1)
+    db.session.add(los6_2)
+    db.session.add(los6_3)
+    db.session.add(los6_4)
+    db.session.add(los6_5)
+
+    db.session.add(los7_1)
+    db.session.add(los7_2)
+    db.session.add(los7_3)
+    db.session.add(los7_4)
+    db.session.add(los7_5)
+
+    db.session.add(los8_1)
+    db.session.add(los8_2)
+    db.session.add(los8_3)
+    db.session.add(los8_4)
+    db.session.add(los8_5)
+
+    db.session.add(los9_1)
+    db.session.add(los9_2)
+    db.session.add(los9_3)
+    db.session.add(los9_4)
+    db.session.add(los9_5)
+
+    db.session.add(los10_1)
+    db.session.add(los10_2)
+    db.session.add(los10_3)
+    db.session.add(los10_4)
+    db.session.add(los10_5)
 
     db.session.commit()
 
