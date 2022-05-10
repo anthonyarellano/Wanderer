@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { initMapScript } from "../Utils/GoogleMapsAPI/scriptLoading";
 import { useEffect, useState } from 'react';
 import SearchMap from "../SearchMap";
+import { searchListings } from "../../store/listings";
 
 const SearchResult = () => {
     const { searchTerm, lat, lng } = useParams();
@@ -10,7 +11,7 @@ const SearchResult = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // dispatch()
+        dispatch(searchListings(searchTerm))
         initMapScript()
             .then(() => setMapsLoaded(() => true));
     }, [])
@@ -28,7 +29,9 @@ const SearchResult = () => {
                     overflow: 'hidden'
                 }}>
                     {/* pass into search map information for creating markers */}
-                <SearchMap style={{width: "100%"}} lat={parseFloat(lat)} lng={parseFloat(lng)}/>
+                {mapsLoaded && (
+                    <SearchMap style={{width: "100%"}} lat={parseFloat(lat)} lng={parseFloat(lng)}/>
+                )}
             </div>
         </div>
     )

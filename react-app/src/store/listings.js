@@ -59,7 +59,7 @@ export const searchListings = (searchTerm) => async (dispatch) => {
     const response = await fetch(`/api/listings/search/${searchTerm}`);
     if (response.ok) {
         const listings = await response.json();
-        // dispatch()
+        dispatch(loadListings(listings));
         return listings;
     };
 };
