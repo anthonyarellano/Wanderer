@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { initMapScript } from "../Utils/GoogleMapsAPI/scriptLoading";
 import { useEffect, useState } from 'react';
-import SearchMap from "../SearchMap";
 import { searchListings } from "../../store/listings";
+import SearchMap from "../SearchMap";
 
 const SearchResult = () => {
     const { searchTerm, lat, lng } = useParams();
@@ -14,7 +14,7 @@ const SearchResult = () => {
         dispatch(searchListings(searchTerm))
         initMapScript()
             .then(() => setMapsLoaded(() => true));
-    }, [])
+    }, [dispatch, searchTerm])
 
     return (
         <div style={{ display: "flex" }}>
