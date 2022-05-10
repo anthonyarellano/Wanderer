@@ -67,7 +67,7 @@ const ListingNavBar = ({ listing, editEnable, setEditOn }) => {
     const [state, setState] = useState(null);
     const [country, setCountry] = useState(null);
     const [address, setAddress] = useState(null);
-    console.log("lat ", lat, "long: ", long, "city: ", city, "state: ", state, "country: ", country, "address: ", address);
+    
     // States for 'amenity' form
     const [wifi, setWifi] = useState(false);
     const [tv, setTv] = useState(false);
