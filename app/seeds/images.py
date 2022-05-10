@@ -714,7 +714,7 @@ def seed_images():
         listing_id=34,
         url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
     )
-    # Los Angeles listing 2 -- -- --
+    # Los Angeles listing 2
     los2_1 = Image(
         listing_id=35,
         url='https://tonesbucket.s3.amazonaws.com/cla2.jpg=index?0'
@@ -735,7 +735,7 @@ def seed_images():
         listing_id=35,
         url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
     )
-    # Los Angeles listing 3 -- -- --
+    # Los Angeles listing 3
     los3_1 = Image(
         listing_id=36,
         url='https://tonesbucket.s3.amazonaws.com/cla3.jpg=index?0'
@@ -756,7 +756,7 @@ def seed_images():
         listing_id=36,
         url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
     )
-    # Los Angeles listing 4 -- -- --
+    # Los Angeles listing 4
     los4_1 = Image(
         listing_id=37,
         url='https://tonesbucket.s3.amazonaws.com/cla4.jpg=index?0'
@@ -777,7 +777,7 @@ def seed_images():
         listing_id=37,
         url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
     )
-    # Los Angeles listing 5 -- -- --
+    # Los Angeles listing 5
     los5_1 = Image(
         listing_id=38,
         url='https://tonesbucket.s3.amazonaws.com/cla5.jpg=index?0'
@@ -798,7 +798,7 @@ def seed_images():
         listing_id=38,
         url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
     )
-    # Los Angeles listing 6 -- -- --
+    # Los Angeles listing 6
     los6_1 = Image(
         listing_id=39,
         url='https://tonesbucket.s3.amazonaws.com/cla6.jpg=index?0'
@@ -819,7 +819,7 @@ def seed_images():
         listing_id=39,
         url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
     )
-    # Los Angeles listing 7 -- -- --
+    # Los Angeles listing 7
     los7_1 = Image(
         listing_id=40,
         url='https://tonesbucket.s3.amazonaws.com/cla7.jpg=index?0'
@@ -840,7 +840,7 @@ def seed_images():
         listing_id=40,
         url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
     )
-    # Los Angeles listing 8 -- -- --
+    # Los Angeles listing 8
     los8_1 = Image(
         listing_id=41,
         url='https://tonesbucket.s3.amazonaws.com/cla8.jpg=index?0'
@@ -861,7 +861,7 @@ def seed_images():
         listing_id=41,
         url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
     )
-    # Los Angeles listing 9 -- -- --
+    # Los Angeles listing 9
     los9_1 = Image(
         listing_id=42,
         url='https://tonesbucket.s3.amazonaws.com/cla9.jpg=index?0'
@@ -882,7 +882,7 @@ def seed_images():
         listing_id=42,
         url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
     )
-    # Los Angeles listing 10 -- -- --
+    # Los Angeles listing 10
     los10_1 = Image(
         listing_id=43,
         url='https://tonesbucket.s3.amazonaws.com/cla10.jpg=index?0'
@@ -903,6 +903,218 @@ def seed_images():
         listing_id=43,
         url='https://tonesbucket.s3.amazonaws.com/la5-min.jpg=index?4'
     )
+
+    # Chicago listings 1 -- -- --
+    chi_1 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/cchi.jpg=index?0'
+    )
+    chi_2 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi2-min.jpg=index?1'
+    )
+    chi_3 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi3-min.jpg=index?2'
+    )
+    chi_4 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi4-min.jpg=index?3'
+    )
+    chi_5 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi5-min.jpg=index?4'
+    )
+    # Chicago listings 2 -- -- --
+    chi_1 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/cchi.jpg=index?0'
+    )
+    chi_2 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi2-min.jpg=index?1'
+    )
+    chi_3 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi3-min.jpg=index?2'
+    )
+    chi_4 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi4-min.jpg=index?3'
+    )
+    chi_5 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi5-min.jpg=index?4'
+    )
+    # Chicago listings 3 -- -- --
+    chi_1 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/cchi.jpg=index?0'
+    )
+    chi_2 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi2-min.jpg=index?1'
+    )
+    chi_3 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi3-min.jpg=index?2'
+    )
+    chi_4 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi4-min.jpg=index?3'
+    )
+    chi_5 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi5-min.jpg=index?4'
+    )
+    # Chicago listings 4 -- -- --
+    chi_1 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/cchi.jpg=index?0'
+    )
+    chi_2 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi2-min.jpg=index?1'
+    )
+    chi_3 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi3-min.jpg=index?2'
+    )
+    chi_4 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi4-min.jpg=index?3'
+    )
+    chi_5 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi5-min.jpg=index?4'
+    )
+    # Chicago listings 5 -- -- --
+    chi_1 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/cchi.jpg=index?0'
+    )
+    chi_2 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi2-min.jpg=index?1'
+    )
+    chi_3 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi3-min.jpg=index?2'
+    )
+    chi_4 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi4-min.jpg=index?3'
+    )
+    chi_5 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi5-min.jpg=index?4'
+    )
+    # Chicago listings 6 -- -- --
+    chi_1 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/cchi.jpg=index?0'
+    )
+    chi_2 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi2-min.jpg=index?1'
+    )
+    chi_3 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi3-min.jpg=index?2'
+    )
+    chi_4 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi4-min.jpg=index?3'
+    )
+    chi_5 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi5-min.jpg=index?4'
+    )
+    # Chicago listings 7 -- -- --
+    chi_1 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/cchi.jpg=index?0'
+    )
+    chi_2 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi2-min.jpg=index?1'
+    )
+    chi_3 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi3-min.jpg=index?2'
+    )
+    chi_4 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi4-min.jpg=index?3'
+    )
+    chi_5 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi5-min.jpg=index?4'
+    )
+    # Chicago listings 8 -- -- --
+    chi_1 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/cchi.jpg=index?0'
+    )
+    chi_2 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi2-min.jpg=index?1'
+    )
+    chi_3 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi3-min.jpg=index?2'
+    )
+    chi_4 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi4-min.jpg=index?3'
+    )
+    chi_5 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi5-min.jpg=index?4'
+    )
+    # Chicago listings 9 -- -- --
+    chi_1 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/cchi.jpg=index?0'
+    )
+    chi_2 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi2-min.jpg=index?1'
+    )
+    chi_3 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi3-min.jpg=index?2'
+    )
+    chi_4 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi4-min.jpg=index?3'
+    )
+    chi_5 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi5-min.jpg=index?4'
+    )
+    # Chicago listings 10 -- -- --
+    chi_1 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/cchi.jpg=index?0'
+    )
+    chi_2 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi2-min.jpg=index?1'
+    )
+    chi_3 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi3-min.jpg=index?2'
+    )
+    chi_4 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi4-min.jpg=index?3'
+    )
+    chi_5 = Image(
+        listing_id=,
+        url='https://tonesbucket.s3.amazonaws.com/chi5-min.jpg=index?4'
+    )
+
 
     db.session.add(one)
     db.session.add(two)
