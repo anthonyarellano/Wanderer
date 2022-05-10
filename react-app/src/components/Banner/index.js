@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
 import { useHistory, useLocation } from 'react-router-dom';
-import LoginModal from '../LoginModal';
 import { initMapScript } from '../Utils/GoogleMapsAPI/scriptLoading';
+import LoginModal from '../LoginModal';
 import './style/banner.css';
 
 

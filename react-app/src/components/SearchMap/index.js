@@ -9,19 +9,21 @@ const SearchMap = ({ lat, lng, style }) => {
     }
 
     return (
-        <GoogleMap  mapTypeId='satellite' center={center} zoom={18} mapContainerStyle={style ? { height: "90vh"} : {width: '1000px', height: "500px"}}>
-            <Marker
-                // generates a blank icon
-                icon={"data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="}
-                label={
-                    {
-                        // TODO string interpolated nightly cost
-                        text: ``,
-                        className: 'marker-label'
-                    }
-                }
-                position={center}/>
-        </GoogleMap>
+        <>
+                <GoogleMap mapTypeId='satellite' center={center} zoom={14} mapContainerStyle={style ? { height: "90vh" } : { width: '1000px', height: "500px" }}>
+                    <Marker
+                        // generates a blank icon
+                        icon={"data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="}
+                        label={
+                            {
+                                // TODO string interpolated nightly cost
+                                text: `$54`,
+                                className: 'marker-label'
+                            }
+                        }
+                        position={center} />
+                </GoogleMap>
+        </>
     )
 };
 

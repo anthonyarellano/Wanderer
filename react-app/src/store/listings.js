@@ -55,6 +55,15 @@ const removeListing = (listingId) => {
     };
 };
 
+export const searchListings = (searchTerm) => async (dispatch) => {
+    const response = await fetch(`/api/listings/search/${searchTerm}`);
+    if (response.ok) {
+        const listings = await response.json();
+        // dispatch()
+        return listings;
+    };
+};
+
 export const deleteListing = (listingId) => async (dispatch) => {
     const response = await fetch(`/api/listings/delete/${listingId}`, {
         method: "DELETE",
