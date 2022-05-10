@@ -22,11 +22,45 @@ export const Banner = () => {
 
     const searchInput = useRef(null)
 
+    const pullAddress = (place) => {
+        const address = {
+            city: "",
+            state: "",
+        }
+
+        if (!Array.isArray(place?.address_components)) {
+            return address;
+        }
+
+        address.lat = place?.geometry.location.lat();
+        address.long = place?.geometry.location.lng();
+
+        place.address_components.forEach(component => {
+            const types = component.types;
+            const value = component.long_name;
+
+            if (types.includes("locality")) {
+                address.city = value;
+            };
+
+            if (types.includes("administrative_area_level_1")) {
+                if (value === "New York") {
+                    address.city = "NY"
+                }
+                address.state = value;
+            };
+        })
+        return address;
+    }
+
     const onChangeAddress = (autocomplete) => {
         const location = autocomplete.getPlace();
-        // const locationInfo = pullAddress(location);
+        const locationInfo = pullAddress(location);
 
-        console.log(location);
+        if (locationInfo) {
+            setSearchTerm(`${locationInfo.city}-${locationInfo.state}`)
+
+        }
     }
 
     const initAutoComplete = () => {
@@ -146,7 +180,7 @@ export const Banner = () => {
                     <p className='banner-logo-text'>wanderer</p>
                 </div>
             </div>
-            <div>
+            <div className='banner-search-container'>
                 <input
                     ref={searchInput}
                     onChange={(e) => setSearchTerm(e.target.value)}
