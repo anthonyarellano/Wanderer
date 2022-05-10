@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
 import { useHistory, useLocation } from 'react-router-dom';
 import LoginModal from '../LoginModal';
+import { initMapScript } from '../Utils/GoogleMapsAPI/scriptLoading';
 import './style/banner.css';
 
 
@@ -12,11 +13,37 @@ export const Banner = () => {
     const [visible, setVisible] = useState(false);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [form, setForm] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
 
 
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
+
+    const searchInput = useRef(null)
+
+    const onChangeAddress = (autocomplete) => {
+        const location = autocomplete.getPlace();
+        // const locationInfo = pullAddress(location);
+
+        console.log(location);
+    }
+
+    const initAutoComplete = () => {
+        if (!searchInput.current) return;
+
+        const autocomplete = new window.google.maps.places.Autocomplete(searchInput.current, {
+            types: ['(cities)'],
+            componentRestrictions: {country: "us"}
+        });
+        autocomplete.setFields(["address_component", "geometry"]);
+        autocomplete.addListener("place_changed", () => onChangeAddress(autocomplete))
+    }
+
+    useEffect(() => {
+        initMapScript().then(() => initAutoComplete())
+        // eslint-disable-next-line
+    }, [])
 
     const openModal = () => {
         setIsOpen(true);
@@ -37,8 +64,12 @@ export const Banner = () => {
         await dispatch(logout());
     };
 
+    const handleSearch = () => {
+
+    }
+
     // conditionally render contents of user popout div according
-    // to authorization status of user 
+    // to authorization status of user
     let links;
     if (user) {
         links = (
@@ -117,9 +148,15 @@ export const Banner = () => {
             </div>
             <div>
                 <input
-                    value={'Search bar coming soon . . .'}
+                    ref={searchInput}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.keyCode === 13) {
+                            handleSearch(searchTerm)
+                        }
+                    }}
                     placeholder='Start your search'
-                    style={{ width: "500px" }}
+                    style={{ width: "500px"}}
                     className='banner-search-bar'
                     type="text">
                 </input>

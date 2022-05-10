@@ -11,10 +11,12 @@ const SearchMap = ({ lat, lng, style }) => {
     return (
         <GoogleMap  mapTypeId='satellite' center={center} zoom={18} mapContainerStyle={style ? { height: "90vh"} : {width: '1000px', height: "500px"}}>
             <Marker
+                // generates a blank icon
                 icon={"data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="}
                 label={
                     {
-                        text: "what!",
+                        // TODO string interpolated nightly cost
+                        text: ``,
                         className: 'marker-label'
                     }
                 }
