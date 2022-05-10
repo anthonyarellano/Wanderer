@@ -51,6 +51,9 @@ function App() {
         <ProtectedRoute path='/create-listing' exact={true} >
           <ListingForm />
         </ProtectedRoute>
+        <Route path='/s/:searchTerm/:lat/:lng' exact={true}>
+          <p>Hello</p>
+        </Route>
         <Route path='/' exact={true}>
           <SplashPage />
         </Route>

@@ -13,8 +13,6 @@ export const Banner = () => {
     const [visible, setVisible] = useState(false);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [form, setForm] = useState(null);
-    const [searchTerm, setSearchTerm] = useState("");
-
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -58,8 +56,8 @@ export const Banner = () => {
         const locationInfo = pullAddress(location);
 
         if (locationInfo) {
-            setSearchTerm(`${locationInfo.city}-${locationInfo.state}`)
-
+            const searchTerm = `${locationInfo.city.split(" ").join("=")}-${locationInfo.state.split(" ").join("=")}`
+            history.push(`/s/${searchTerm}/${locationInfo.lat}/${locationInfo.long}`)
         }
     }
 
@@ -98,9 +96,6 @@ export const Banner = () => {
         await dispatch(logout());
     };
 
-    const handleSearch = () => {
-
-    }
 
     // conditionally render contents of user popout div according
     // to authorization status of user
@@ -183,12 +178,6 @@ export const Banner = () => {
             <div className='banner-search-container'>
                 <input
                     ref={searchInput}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    onKeyDown={(e) => {
-                        if (e.keyCode === 13) {
-                            handleSearch(searchTerm)
-                        }
-                    }}
                     placeholder='Start your search'
                     style={{ width: "500px"}}
                     className='banner-search-bar'
