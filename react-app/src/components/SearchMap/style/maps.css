@@ -1,6 +1,14 @@
 .marker-label {
+    display: flex;
+    /* position: absolute; */
+    align-items: center;
+    justify-content: center;
     width: 45px;
-    height: 25px;
+    height: 30px;
     border-radius: 10px;
-    background-color: white;
+    background-color: #FFFFFF;
+    font-family: "CerealBd";
+    cursor: pointer;
+    /* z-index: 100000; */
+
 }

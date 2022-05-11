@@ -6,9 +6,7 @@ import { searchListings } from "../../store/listings";
 import SearchMap from "../SearchMap";
 
 const SearchResult = () => {
-    
     const storeListings = useSelector((state) => state.listings.listings);
-
     let listings;
     if (storeListings) {
         listings = Object.values(storeListings);
@@ -38,7 +36,12 @@ const SearchResult = () => {
                 }}>
                     {/* pass into search map information for creating markers */}
                 {mapsLoaded && (
-                    <SearchMap style={{width: "100%"}} lat={parseFloat(lat)} lng={parseFloat(lng)}/>
+                    <SearchMap
+                        style={{width: "100%"}}
+                        lat={parseFloat(lat)}
+                        lng={parseFloat(lng)}
+                        listings={listings}
+                    />
                 )}
             </div>
         </div>

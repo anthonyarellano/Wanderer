@@ -1,17 +1,30 @@
-import { GoogleMap, Marker } from '@react-google-maps/api';
+import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 import './style/maps.css';
 
-const SearchMap = ({ lat, lng, style }) => {
+const SearchMap = ({ lat, lng, style, listings }) => {
 
     const center = {
-        lat,
-        lng
+        lat: parseFloat(listings[0]?.latitude),
+        lng: parseFloat(listings[0]?.longitude)
     }
-
+    console.log(listings);
     return (
         <>
-                <GoogleMap mapTypeId='satellite' center={center} zoom={14} mapContainerStyle={style ? { height: "90vh" } : { width: '1000px', height: "500px" }}>
+            <GoogleMap mapTypeId='satellite' center={center} zoom={11} mapContainerStyle={style ? { height: "90vh" } : { width: '1000px', height: "500px" }}>
+                {listings?.map((listing) => (
                     <Marker
+                        // icon={"data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="}
+                        label={
+                            {
+                                text: `${listing?.price}`,
+                                className: 'marker-label',
+                                fontFamily: 'CerealBd'
+                            }
+                        }
+                        position={{ lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}
+                    />
+                ))}
+                {/* <Marker
                         // generates a blank icon
                         icon={"data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="}
                         label={
@@ -21,8 +34,8 @@ const SearchMap = ({ lat, lng, style }) => {
                                 className: 'marker-label'
                             }
                         }
-                        position={center} />
-                </GoogleMap>
+                        position={center} /> */}
+            </GoogleMap>
         </>
     )
 };
