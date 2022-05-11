@@ -10,7 +10,7 @@ const SearchMap = ({ style, listings }) => {
         lat: parseFloat(listings[0]?.latitude),
         lng: parseFloat(listings[0]?.longitude)
     }
-    console.log(listings);
+  
     return (
         <>
             <GoogleMap mapTypeId='satellite' center={center} zoom={11} mapContainerStyle={style ? { height: "90vh" } : { width: '1000px', height: "500px" }}>

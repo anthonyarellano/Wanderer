@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { initMapScript } from "../Utils/GoogleMapsAPI/scriptLoading";
 import { useEffect, useState } from 'react';
 import { searchListings } from "../../store/listings";
-import SearchResultCard from "./SearchResultCard";
 import ListingCard from "../ViewListings/ListingCard";
 import SearchMap from "../SearchMap";
 import './style/search-result.css'
