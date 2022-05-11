@@ -27,13 +27,19 @@ const SearchResult = () => {
     return (
         <div style={{ display: "flex" }}>
             <div className="search-result-container">
+                {listings.length === 0 && (
+                    <p
+                        style={{
+                            fontFamily: 'CerealBd'
+                        }}
+                        >No listings here yet . . .</p>
+                )}
                 {/* loop through listings to create cards */}
                 {listings?.map((listing) => (
                     <ListingCard listing={listing}/>
                 ))}
             </div>
             <div className="search-map-container">
-                    {/* pass into search map information for creating markers */}
                 {mapsLoaded && (
                     <SearchMap
                         style={{width: "100%"}}
