@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { initMapScript } from "../Utils/GoogleMapsAPI/scriptLoading";
 import { useEffect, useState } from 'react';
 import { searchListings } from "../../store/listings";
+import SearchResultCard from "./SearchResultCard";
+import ListingCard from "../ViewListings/ListingCard";
 import SearchMap from "../SearchMap";
+import './style/search-result.css'
 
 const SearchResult = () => {
     const storeListings = useSelector((state) => state.listings.listings);
@@ -24,16 +27,13 @@ const SearchResult = () => {
 
     return (
         <div style={{ display: "flex" }}>
-            <div style={{width: "45%"}}>
+            <div className="search-result-container">
                 {/* loop through listings to create cards */}
-                someting
+                {listings?.map((listing) => (
+                    <ListingCard listing={listing}/>
+                ))}
             </div>
-            <div
-                style={{
-                    width: "55%",
-                    height: "100%",
-                    overflow: 'hidden'
-                }}>
+            <div className="search-map-container">
                     {/* pass into search map information for creating markers */}
                 {mapsLoaded && (
                     <SearchMap

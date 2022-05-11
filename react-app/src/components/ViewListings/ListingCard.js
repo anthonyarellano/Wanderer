@@ -3,11 +3,11 @@ import ListingCarouselCard from './Sub-Components/ListingCarouselCard';
 
 const ListingCard = ({ listing }) => {
     return (
-        <div>
+        <div style={{width: '100%'}}>
             <Carousel
                 showThumbs={false}
                 showStatus={false}
-                width={"300px"}>
+                width={"100%"}>
                 {listing?.images?.map((image) => (
                     <ListingCarouselCard img={image} />
                 ))}
