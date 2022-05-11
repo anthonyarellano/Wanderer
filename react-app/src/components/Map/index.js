@@ -1,7 +1,7 @@
 import { GoogleMap, Marker } from '@react-google-maps/api';
 
 const Map = ({ lat, lng, style }) => {
-    
+
     const center = {
         lat,
         lng

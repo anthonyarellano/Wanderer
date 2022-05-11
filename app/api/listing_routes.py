@@ -22,6 +22,24 @@ def get_all_listings():
     return jsonify(listingList)
 
 
+@listing_routes.route('/search/<search_terms>')
+def search_listings(search_terms):
+    term_list = search_terms.split('-')
+    city_list = term_list[0].split('=')
+    state_list = term_list[1].split('=')
+    state = " ".join(state_list)
+    city = " ".join(city_list)
+
+    listingList = []
+    listings = Listing.query.filter(Listing.city == city, Listing.state == state).all()
+    if len(listings) == 0:
+        abort(404)
+    for listing in listings:
+        listingList.append(listing.to_dict_images())
+
+    return jsonify(listingList)
+
+
 @listing_routes.route('/<int:id>')
 def get_listing(id):
     # if "Authorization" not in request.headers.keys():

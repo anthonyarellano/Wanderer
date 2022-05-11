@@ -13,6 +13,7 @@ import TripPage from './components/TripPage';
 import HomePage from './components/HomePage';
 import ViewListings from './components/ViewListings';
 import SplashPage from './components/SplashPage';
+import SearchResult from './components/SearchResult';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -51,6 +52,9 @@ function App() {
         <ProtectedRoute path='/create-listing' exact={true} >
           <ListingForm />
         </ProtectedRoute>
+        <Route path='/s/:searchTerm/:lat/:lng' exact={true}>
+          <SearchResult />
+        </Route>
         <Route path='/' exact={true}>
           <SplashPage />
         </Route>

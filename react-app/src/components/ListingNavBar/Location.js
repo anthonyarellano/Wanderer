@@ -15,7 +15,7 @@ const Location = ({ locationFuncs, hasSubmitted, locationErrors }) => {
     const searchInput = useRef(null)
 
     const pullAddress = (place) => {
-        const address ={
+        const address = {
             city: "",
             state: "",
             zip: "",
@@ -71,7 +71,7 @@ const Location = ({ locationFuncs, hasSubmitted, locationErrors }) => {
     const onChangeAddress = (autocomplete) => {
         const location = autocomplete.getPlace();
         const locationInfo = pullAddress(location);
-  
+
         if (locationInfo) {
             setLat(locationInfo.lat);
             setLong(locationInfo.long);
