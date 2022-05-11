@@ -57,7 +57,7 @@ const removeListing = (listingId) => {
 
 export const searchListings = (searchTerm) => async (dispatch) => {
     const response = await fetch(`/api/listings/search/${searchTerm}`);
-    if (response.status == 404) {
+    if (response.status === 404) {
         dispatch(loadListings([]));
     };
     if (response.ok) {
