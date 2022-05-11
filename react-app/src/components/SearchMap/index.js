@@ -1,5 +1,6 @@
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 import { useState } from 'react';
+import ListingCard from '../ViewListings/ListingCard';
 import './style/maps.css';
 
 const SearchMap = ({ style, listings }) => {
@@ -34,7 +35,7 @@ const SearchMap = ({ style, listings }) => {
                             lat: parseFloat(selectedListing.latitude),
                             lng: parseFloat(selectedListing.longitude)
                         }}>
-                        <div>hello</div>
+                        <ListingCard listing={selectedListing}/>
                     </InfoWindow>
                 )}
             </GoogleMap>
