@@ -72,10 +72,10 @@ export const Banner = () => {
         autocomplete.addListener("place_changed", () => onChangeAddress(autocomplete))
     }
 
-    useEffect(() => {
-        initMapScript().then(() => initAutoComplete())
-        // eslint-disable-next-line
-    }, [])
+    initMapScript().then(() => initAutoComplete())
+    // useEffect(() => {
+    //     // eslint-disable-next-line
+    // }, [])
 
     const openModal = () => {
         setIsOpen(true);

@@ -1,11 +1,19 @@
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { initMapScript } from "../Utils/GoogleMapsAPI/scriptLoading";
 import { useEffect, useState } from 'react';
 import { searchListings } from "../../store/listings";
 import SearchMap from "../SearchMap";
 
 const SearchResult = () => {
+    
+    const storeListings = useSelector((state) => state.listings.listings);
+
+    let listings;
+    if (storeListings) {
+        listings = Object.values(storeListings);
+    }
+
     const { searchTerm, lat, lng } = useParams();
     const [mapsLoaded, setMapsLoaded] = useState(false);
     const dispatch = useDispatch();
