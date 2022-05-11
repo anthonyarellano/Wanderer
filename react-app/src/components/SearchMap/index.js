@@ -1,7 +1,9 @@
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
+import { useState } from 'react';
 import './style/maps.css';
 
-const SearchMap = ({ lat, lng, style, listings }) => {
+const SearchMap = ({ style, listings }) => {
+    const [selectedListing, setSelectedListing] = useState(null);
 
     const center = {
         lat: parseFloat(listings[0]?.latitude),
@@ -14,9 +16,10 @@ const SearchMap = ({ lat, lng, style, listings }) => {
                 {listings?.map((listing) => (
                     <Marker
                         icon={"https://tonesbucket.s3.amazonaws.com/pin3.png"}
+                        onClick={() => setSelectedListing(listing)}
                         label={
                             {
-                                text: `${listing?.price}`,
+                                text: `$${listing?.price}`,
                                 className: 'marker-label',
                                 fontFamily: 'CerealBd'
                             }
@@ -24,17 +27,16 @@ const SearchMap = ({ lat, lng, style, listings }) => {
                         position={{ lat: parseFloat(listing.latitude), lng: parseFloat(listing.longitude) }}
                     />
                 ))}
-                {/* <Marker
-                        // generates a blank icon
-                        icon={"data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="}
-                        label={
-                            {
-                                // TODO string interpolated nightly cost
-                                text: `$54`,
-                                className: 'marker-label'
-                            }
-                        }
-                        position={center} /> */}
+                {selectedListing && (
+                    <InfoWindow
+                        onCloseClick={() => setSelectedListing(null)}
+                        position={{
+                            lat: parseFloat(selectedListing.latitude),
+                            lng: parseFloat(selectedListing.longitude)
+                        }}>
+                        <div>hello</div>
+                    </InfoWindow>
+                )}
             </GoogleMap>
         </>
     )

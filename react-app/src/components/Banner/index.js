@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
 import { useHistory, useLocation } from 'react-router-dom';
