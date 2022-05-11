@@ -1,16 +1,21 @@
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import ListingCard from '../ViewListings/ListingCard';
 import './style/maps.css';
 
 const SearchMap = ({ style, listings }) => {
     const [selectedListing, setSelectedListing] = useState(null);
+    const {
+        lat,
+        lng
+    } = useParams()
 
     const center = {
-        lat: parseFloat(listings[0]?.latitude),
-        lng: parseFloat(listings[0]?.longitude)
+        lat: parseFloat(lat),
+        lng: parseFloat(lng)
     }
-  
+
     return (
         <>
             <GoogleMap mapTypeId='satellite' center={center} zoom={11} mapContainerStyle={style ? { height: "90vh" } : { width: '1000px', height: "500px" }}>
