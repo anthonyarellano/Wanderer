@@ -13,7 +13,7 @@ const SearchMap = ({ lat, lng, style, listings }) => {
             <GoogleMap mapTypeId='satellite' center={center} zoom={11} mapContainerStyle={style ? { height: "90vh" } : { width: '1000px', height: "500px" }}>
                 {listings?.map((listing) => (
                     <Marker
-                        // icon={"data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="}
+                        icon={"https://tonesbucket.s3.amazonaws.com/pin3.png"}
                         label={
                             {
                                 text: `${listing?.price}`,
