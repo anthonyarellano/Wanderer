@@ -20,12 +20,16 @@ const ViewListings = () => {
         // eslint-disable-next-line
     }, [dispatch]);
 
-    window.onscroll = () => {
-        if ((window.innerHeight + Math.ceil(window.pageYOffset)) >= document.body.offsetHeight) {
-            dispatch(getAllListings(pagToken, 15))
+    const loadMoreListings = () => {
+        dispatch(getAllListings(pagToken, 15))
                 .then(() => setPagToken((t) => t + 1));
-        };
     };
+    // window.onscroll = () => {
+    //     if ((window.innerHeight + Math.ceil(window.pageYOffset)) >= document.body.offsetHeight) {
+    //         dispatch(getAllListings(pagToken, 15))
+    //             .then(() => setPagToken((t) => t + 1));
+    //     };
+    // };
 
     return (
         <>
@@ -40,6 +44,11 @@ const ViewListings = () => {
                         </div>
                     ))}
                 </div>) : <img alt="loading" src={require('../LoadingModal/style/loader/Preloader_1.gif').default} />}
+            <div
+                className='load-listings'
+                onClick={loadMoreListings}>
+                    Load more listings
+            </div>
         </>
 
     )
