@@ -166,11 +166,11 @@ export const getUserListings = (userId) => async (dispatch) => {
     };
 };
 
-export const getAllListings = () => async (dispatch) => {
-    const response = await fetch(`/api/listings/`, {
+export const getAllListings = (pagToken, limit) => async (dispatch) => {
+    const response = await fetch(`/api/listings/${pagToken}/${limit}`, {
         headers: {
             // "Authorization": process.env.REACT_APP_BACKEND_API_KEY
-        }
+        },
     });
     if (response.ok) {
         const listings = await response.json();

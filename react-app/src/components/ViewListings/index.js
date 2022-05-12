@@ -7,10 +7,17 @@ import './style/view-listings.css';
 const ViewListings = () => {
     const listings = useSelector((state) => Object.values(state.listings.listings))
     const dispatch = useDispatch();
+
     const [loaded, setLoaded] = useState(false);
+    const [pagToken, setPagToken] = useState(0);
 
     useEffect(() => {
-        dispatch(getAllListings()).then(() => setLoaded(true))
+        dispatch(getAllListings(pagToken, 15))
+            .then(() => {
+                setLoaded(true);
+                setPagToken((t) => t + 1);
+            });
+    // eslint-disable-next-line
     }, [dispatch]);
 
     return (

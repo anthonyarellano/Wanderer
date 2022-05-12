@@ -14,12 +14,23 @@ def get_all_listings():
     #     if request.headers['Authorization'] != os.environ.get('API_KEY'):
     #         abort(403, description="Invalid API Key")
     listings = Listing.query.all()
-    listingList = []
+    listing_list = []
     if listings is None:
         abort(404)
     for listing in listings:
-        listingList.append(listing.to_dict_images())
-    return jsonify(listingList)
+        listing_list.append(listing.to_dict_images())
+    return jsonify(listing_list)
+
+
+@listing_routes.route('/<int:pag_token>/<int:limit>')
+def paginate_all_listings(pag_token, limit):
+    listings = Listing.query.offset(pag_token * limit).limit(15).all()
+    listing_list = []
+    if listings is None:
+        abort(404)
+    for listing in listings:
+        listing_list.append(listing.to_dict_images())
+    return jsonify(listing_list)
 
 
 @listing_routes.route('/search/<search_terms>')
