@@ -2,6 +2,7 @@ const ADD_ONE = 'listings/ADD_ONE';
 const SELECT_ONE = 'listings/SELECT_ONE';
 const LOAD_IMAGES = 'listings/LOAD_IMAGES';
 const LOAD_LISTINGS = 'listings/LOAD_LISTINGS';
+const PAGINATE_LOAD_LISTINGS = 'listings/PAGINATE_LOAD_LISTINGS';
 const UPDATE_ONE = 'listings/UPDATE_ONE';
 const DELETE_IMAGE = 'listings/DELETE_IMAGE';
 const DELETE_LISTING = 'listings/DELETE_LISTING';
@@ -30,6 +31,13 @@ const loadImages = (images) => {
 const loadListings = (listings) => {
     return {
         type: LOAD_LISTINGS,
+        listings
+    };
+};
+
+const paginateLoadListings = (listings) => {
+    return {
+        type: PAGINATE_LOAD_LISTINGS,
         listings
     };
 };
@@ -174,7 +182,7 @@ export const getAllListings = (pagToken, limit) => async (dispatch) => {
     });
     if (response.ok) {
         const listings = await response.json();
-        dispatch(loadListings(listings));
+        dispatch(paginateLoadListings(listings));
         return listings;
     };
 };
@@ -225,6 +233,13 @@ const listingReducer = (state = initialState, action) => {
         };
         case LOAD_LISTINGS: {
             const newState = {...state, listings: {}, images: {...state.images}, selected: {}};
+            action.listings.forEach((listing) => {
+                newState.listings[listing.id] = listing;
+            });
+            return newState;
+        };
+        case PAGINATE_LOAD_LISTINGS: {
+            const newState = {...state, listings: {...state.listings}, images: {...state.images}, selected: {}};
             action.listings.forEach((listing) => {
                 newState.listings[listing.id] = listing;
             });
