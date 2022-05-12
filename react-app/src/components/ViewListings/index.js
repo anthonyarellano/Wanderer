@@ -24,13 +24,7 @@ const ViewListings = () => {
         dispatch(getAllListings(pagToken, 15))
                 .then(() => setPagToken((t) => t + 1));
     };
-    // window.onscroll = () => {
-    //     if ((window.innerHeight + Math.ceil(window.pageYOffset)) >= document.body.offsetHeight) {
-    //         dispatch(getAllListings(pagToken, 15))
-    //             .then(() => setPagToken((t) => t + 1));
-    //     };
-    // };
-
+   
     return (
         <>
             {loaded ? (
