@@ -59,9 +59,10 @@ const ListingProfile = () => {
     if (images) mainImage = images[0];
     const secondaryImages = images?.slice(1, 5);
 
-    const myRef = useRef(null);
     const dispatch = useDispatch();
 
+    // ref created to allow window scroll to calendar
+    const myRef = useRef(null);
     const executeScroll = () => myRef.current.scrollIntoView();
 
     const openModal = () => {
@@ -85,6 +86,8 @@ const ListingProfile = () => {
         };
     };
 
+    // when listingId changes, chain load listings, images, reservations
+    // respectively.
     useEffect(() => {
         dispatch(getListing(listingId)).then(() => setLoaded1(true));
         dispatch(getImages(listingId)).then(() => setLoaded2(true));
@@ -206,11 +209,12 @@ const ListingProfile = () => {
                             <CustomCalendar funcs={calendarFuncs} ref={myRef} disabledDates={disabledDates}/>
                         </div>
 
+                        {/* Map location display */}
                         <div>
                             <p className='big-font sub-header'>
                                 Where you will be staying
                             </p>
-                            
+
                         </div>
 
                     </div>
