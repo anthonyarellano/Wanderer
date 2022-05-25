@@ -1,0 +1,19 @@
+import { GoogleMap, Marker } from '@react-google-maps/api';
+
+const ListingMap = ({ lat, lng, style }) => {
+
+    const center = {
+        lat,
+        lng
+    }
+
+    return (
+        <div style={{paddingBottom: '50px'}}>
+            <GoogleMap  mapTypeId='satellite' center={center} zoom={18} mapContainerStyle={style ? { height: "90vh"} : {width: '1000px', height: "500px"}}>
+                <Marker position={center}/>
+            </GoogleMap>
+        </div>
+    )
+};
+
+export default ListingMap;

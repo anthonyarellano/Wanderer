@@ -5,6 +5,7 @@ import { getListing, getImages, deleteImage } from '../../store/listings';
 import { formatDbDate } from '../Utils/formatDbDate';
 import { createDisabledRange } from '../Utils/createdDisabledRange';
 import { getReservations } from '../../store/reservations';
+import { initMapScript } from "../Utils/GoogleMapsAPI/scriptLoading";
 import ImageCard from './ImageCard';
 import Modal from 'react-modal';
 import AmenitiesCard from './AmenitiesCard';
@@ -14,6 +15,7 @@ import CustomCalendar from '../Calendar';
 import LoginModal from '../LoginModal';
 import './style/listing-profile.css';
 import './style/calendar.css';
+import ListingMap from '../ListingMap';
 
 const ListingProfile = () => {
     const user = useSelector((state) => state.session.user);
@@ -33,6 +35,7 @@ const ListingProfile = () => {
     const [loaded1, setLoaded1] = useState(false);
     const [loaded2, setLoaded2] = useState(false);
     const [loaded3, setLoaded3] = useState(false);
+    const [mapsLoaded, setMapsLoaded] = useState(false);
 
     const { listingId } = useParams();
     const history = useHistory();
@@ -93,6 +96,12 @@ const ListingProfile = () => {
         dispatch(getImages(listingId)).then(() => setLoaded2(true));
         dispatch(getReservations(listingId)).then(() => setLoaded3(true));
     }, [listingId, dispatch]);
+
+    // initialized google maps API script
+    useEffect(() => {
+        initMapScript()
+            .then(() => setMapsLoaded(() => true));
+    }, []);
 
     const handleUnavailable = (firstDate) => {
         let i = 0;
@@ -214,7 +223,9 @@ const ListingProfile = () => {
                             <p className='big-font sub-header'>
                                 Where you will be staying
                             </p>
-
+                            {mapsLoaded && 
+                                <ListingMap lat={listing?.latitude} lng={listing?.longitude} />
+                            }
                         </div>
 
                     </div>
