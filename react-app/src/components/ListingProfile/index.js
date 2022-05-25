@@ -75,7 +75,7 @@ const ListingProfile = () => {
     };
 
     // function for handling image deletion.
-    // frontend validation to ensure that a minimum of 5 images remain on the page. 
+    // frontend validation to ensure that a minimum of 5 images remain on the page.
     const handleImageDelete = async (image) => {
         if (images?.length > 5) {
             await dispatch(deleteImage(image));
@@ -206,7 +206,15 @@ const ListingProfile = () => {
                             <CustomCalendar funcs={calendarFuncs} ref={myRef} disabledDates={disabledDates}/>
                         </div>
 
+                        <div>
+                            <p className='big-font sub-header'>
+                                Where you will be staying
+                            </p>
+                            
+                        </div>
+
                     </div>
+
                     <BookingCard
                         funcs={{guests, setGuests, checkout, setCheckOut}}
                         endDate={endDate}
@@ -214,6 +222,7 @@ const ListingProfile = () => {
                         listing={listing}
                         executeScroll={executeScroll}
                     />
+
                 </div>
             </div> : <img alt="loading" src={require('../LoadingModal/style/loader/Preloader_1.gif').default}/>}
         </>
