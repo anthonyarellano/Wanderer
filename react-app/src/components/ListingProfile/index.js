@@ -5,6 +5,7 @@ import { getListing, getImages, deleteImage } from '../../store/listings';
 import { formatDbDate } from '../Utils/formatDbDate';
 import { createDisabledRange } from '../Utils/createdDisabledRange';
 import { getReservations } from '../../store/reservations';
+import { initMapScript } from "../Utils/GoogleMapsAPI/scriptLoading";
 import ImageCard from './ImageCard';
 import Modal from 'react-modal';
 import AmenitiesCard from './AmenitiesCard';
@@ -14,6 +15,7 @@ import CustomCalendar from '../Calendar';
 import LoginModal from '../LoginModal';
 import './style/listing-profile.css';
 import './style/calendar.css';
+import ListingMap from '../ListingMap';
 
 const ListingProfile = () => {
     const user = useSelector((state) => state.session.user);
@@ -33,6 +35,7 @@ const ListingProfile = () => {
     const [loaded1, setLoaded1] = useState(false);
     const [loaded2, setLoaded2] = useState(false);
     const [loaded3, setLoaded3] = useState(false);
+    const [mapsLoaded, setMapsLoaded] = useState(false);
 
     const { listingId } = useParams();
     const history = useHistory();
@@ -59,9 +62,10 @@ const ListingProfile = () => {
     if (images) mainImage = images[0];
     const secondaryImages = images?.slice(1, 5);
 
-    const myRef = useRef(null);
     const dispatch = useDispatch();
 
+    // ref created to allow window scroll to calendar
+    const myRef = useRef(null);
     const executeScroll = () => myRef.current.scrollIntoView();
 
     const openModal = () => {
@@ -75,7 +79,7 @@ const ListingProfile = () => {
     };
 
     // function for handling image deletion.
-    // frontend validation to ensure that a minimum of 5 images remain on the page. 
+    // frontend validation to ensure that a minimum of 5 images remain on the page.
     const handleImageDelete = async (image) => {
         if (images?.length > 5) {
             await dispatch(deleteImage(image));
@@ -85,11 +89,19 @@ const ListingProfile = () => {
         };
     };
 
+    // when listingId changes, chain load listings, images, reservations
+    // respectively.
     useEffect(() => {
         dispatch(getListing(listingId)).then(() => setLoaded1(true));
         dispatch(getImages(listingId)).then(() => setLoaded2(true));
         dispatch(getReservations(listingId)).then(() => setLoaded3(true));
     }, [listingId, dispatch]);
+
+    // initialized google maps API script
+    useEffect(() => {
+        initMapScript()
+            .then(() => setMapsLoaded(() => true));
+    }, []);
 
     const handleUnavailable = (firstDate) => {
         let i = 0;
@@ -206,7 +218,18 @@ const ListingProfile = () => {
                             <CustomCalendar funcs={calendarFuncs} ref={myRef} disabledDates={disabledDates}/>
                         </div>
 
+                        {/* Map location display */}
+                        <div>
+                            <p className='big-font sub-header'>
+                                Where you will be staying
+                            </p>
+                            {mapsLoaded && 
+                                <ListingMap lat={listing?.latitude} lng={listing?.longitude} />
+                            }
+                        </div>
+
                     </div>
+
                     <BookingCard
                         funcs={{guests, setGuests, checkout, setCheckOut}}
                         endDate={endDate}
@@ -214,6 +237,7 @@ const ListingProfile = () => {
                         listing={listing}
                         executeScroll={executeScroll}
                     />
+
                 </div>
             </div> : <img alt="loading" src={require('../LoadingModal/style/loader/Preloader_1.gif').default}/>}
         </>

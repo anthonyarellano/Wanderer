@@ -9,8 +9,12 @@ const ViewListings = () => {
     const dispatch = useDispatch();
 
     const [loaded, setLoaded] = useState(false);
+
+    // token for pagination of listing results
     const [pagToken, setPagToken] = useState(0);
 
+    // gets (15) listings, offset by current pagination (pag) token
+    // pag token increments on each call of loadMoreListings
     useEffect(() => {
         dispatch(getAllListings(pagToken, 15))
             .then(() => {
@@ -24,7 +28,7 @@ const ViewListings = () => {
         dispatch(getAllListings(pagToken, 15))
                 .then(() => setPagToken((t) => t + 1));
     };
-   
+
     return (
         <>
             {loaded ? (
